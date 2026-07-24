@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Direction C — Ledger (에디토리얼 그리드)</title>
+<style>
+  :root {
+    --bg: #fcfbf9;
+    --surface: #f4f2ee;
+    --ink: #17181a;
+    --ink-soft: #6b6e75;
+    --hairline: #e2dfd9;
+    --rule: #17181a;
+    --accent: #8a3033;         /* 딥 버건디 */
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo",
+            "Malgun Gothic", "Noto Sans KR", sans-serif;
+    --serif: "Noto Serif KR", Georgia, "Apple SD Gothic Neo", serif;
+  }
+  * { margin: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--ink); font-family: var(--sans); line-height: 1.7; font-size: 1rem; word-break: keep-all; overflow-wrap: anywhere; }
+  a { color: inherit; text-decoration: none; }
+  a:hover { color: var(--accent); }
+  .wrap { max-width: 66rem; margin: 0 auto; padding: 0 1.25rem; }
+
+  header.site { padding: 1.6rem 0 1rem; }
+  header.site .wrap { display: flex; align-items: flex-end; justify-content: space-between; border-bottom: 3px solid var(--rule); padding-bottom: .9rem; }
+  .wordmark { font-size: 2rem; font-weight: 800; letter-spacing: -.04em; }
+  .wordmark em { font-style: normal; color: var(--accent); }
+  nav.primary { display: flex; gap: 1.3rem; font-size: .9rem; font-weight: 600; }
+
+  /* hero: featured large, text-led */
+  .hero { display: grid; grid-template-columns: 1.4fr 1fr; gap: 2.5rem; padding: 2.6rem 0; border-bottom: 1px solid var(--hairline); }
+  .hero .kicker { font-size: .78rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+  .hero h1 { font-size: 2.3rem; line-height: 1.3; font-weight: 800; letter-spacing: -.02em; margin-top: .7rem; }
+  .hero p { color: var(--ink-soft); margin-top: 1rem; max-width: 34rem; }
+  .hero .meta { font-size: .85rem; color: var(--ink-soft); margin-top: 1.2rem; }
+  .hero .thumb { aspect-ratio: 4/3; background: linear-gradient(140deg, #d8cfc2, #b7aea0); border-radius: 2px; align-self: center; display:flex; align-items:center; justify-content:center; color:#7d7466; font-size:.8rem; }
+
+  /* lanes: 3-up grid */
+  .lanes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 2.2rem; padding: 2.2rem 0; }
+  .lane h3 { font-size: .82rem; letter-spacing: .14em; text-transform: uppercase; border-bottom: 2px solid var(--rule); padding-bottom: .5rem; margin-bottom: 1rem; }
+  .lane h3 a { color: var(--accent); float: right; letter-spacing: 0; text-transform: none; font-weight: 500; }
+  .lane .item { padding: .8rem 0; border-bottom: 1px solid var(--hairline); }
+  .lane .item:last-child { border-bottom: 0; }
+  .lane .item h4 { font-size: .98rem; font-weight: 600; line-height: 1.5; }
+  .lane .item time { font-size: .8rem; color: var(--ink-soft); }
+
+  /* recent grid with selective thumbnails */
+  .recent { padding: 1.4rem 0 3rem; }
+  .recent > h2 { font-size: .82rem; letter-spacing: .14em; text-transform: uppercase; border-bottom: 2px solid var(--rule); padding-bottom: .5rem; margin-bottom: 1.4rem; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.8rem 2.2rem; }
+  .card { display: grid; grid-template-columns: 1fr 7.5rem; gap: 1.1rem; align-items: start; }
+  .card.no-thumb { grid-template-columns: 1fr; }
+  .card .thumb { aspect-ratio: 4/3; background: linear-gradient(140deg, #ccd4d0, #a8b5ae); border-radius: 2px; display:flex; align-items:center; justify-content:center; color:#6f7d76; font-size:.72rem; }
+  .card .cat { font-size: .78rem; color: var(--accent); font-weight: 700; }
+  .card h4 { font-size: 1.05rem; font-weight: 700; line-height: 1.45; margin-top: .2rem; }
+  .card p { font-size: .9rem; color: var(--ink-soft); margin-top: .35rem;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .card time { font-size: .8rem; color: var(--ink-soft); display: block; margin-top: .4rem; }
+
+  /* article demo */
+  .divider-label { background: var(--surface); text-align: center; font-size: .8rem; color: var(--ink-soft); padding: .5rem; letter-spacing: .1em; }
+  article.demo { padding: 3.5rem 0; }
+  article.demo .head { max-width: 46rem; margin: 0 auto; text-align: center; }
+  article.demo .kicker { font-size: .78rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+  article.demo h1 { font-size: 2.1rem; line-height: 1.35; font-weight: 800; letter-spacing: -.02em; margin-top: .8rem; }
+  article.demo .byline { color: var(--ink-soft); font-size: .87rem; margin-top: 1rem; }
+  article.demo .body { max-width: 42rem; margin: 2.4rem auto 0; border-top: 1px solid var(--hairline); padding-top: 2.2rem; font-size: 1.05rem; }
+  article.demo .body p + p { margin-top: 1.3em; }
+  article.demo .body h2 { font-size: 1.3rem; margin: 2em 0 .7em; }
+  article.demo .body h2::before { content: "¶ "; color: var(--accent); }
+  article.demo pre { margin: 1.5em 0; padding: 1.1em 1.2em; overflow-x: auto; background: #1b1c1e; color: #e4e2dd; font-size: .87rem; line-height: 1.6; border-radius: 4px; }
+  article.demo blockquote { margin: 1.6em 0; padding-left: 1.3em; border-left: 3px solid var(--accent); font-family: var(--serif); font-size: 1.1rem; color: #3d3f44; }
+
+  footer.site { border-top: 3px solid var(--rule); padding: 2rem 0 3rem; font-size: .85rem; color: var(--ink-soft); }
+  footer.site .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+
+  @media (max-width: 52rem) {
+    .hero { grid-template-columns: 1fr; }
+    .hero .thumb { display: none; }
+    .lanes { grid-template-columns: 1fr; gap: 2rem; }
+    .grid { grid-template-columns: 1fr; }
+    .wordmark { font-size: 1.5rem; }
+    nav.primary { gap: .9rem; font-size: .85rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <span class="wordmark">swarea<em>.</em></span>
+    <nav class="primary">
+      <a href="#">글</a><a href="#">기록</a><a href="#">태그</a><a href="#">소개</a><a href="#">검색</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div>
+      <span class="kicker">Featured · Data</span>
+      <h1><a href="#">재택근무 1년,<br>데이터로 돌아보기</a></h1>
+      <p>1년 동안 쌓인 업무 로그와 커밋 기록을 정리해 보니, 막연히 느끼던 것과 실제 패턴은 꽤 달랐다. 시간대별 집중도, 회의가 생산성에 미친 영향, 그리고 기록이 습관이 되기까지.</p>
+      <div class="meta">2025.06.02 · 12 min</div>
+    </div>
+    <div class="thumb">대표 이미지</div>
+  </section>
+
+  <section class="lanes">
+    <div class="lane">
+      <h3>Programming <a href="#">→</a></h3>
+      <div class="item"><h4><a href="#">TypeScript 프로젝트에서 런타임 검증이 필요한 순간들</a></h4><time>2025.06.28</time></div>
+      <div class="item"><h4><a href="#">아주 긴 제목이 들어와도 레이아웃이 무너지지 않는지 확인하는 매우 긴 예시 제목입니다</a></h4><time>2025.05.11</time></div>
+    </div>
+    <div class="lane">
+      <h3>Career &amp; Abroad <a href="#">→</a></h3>
+      <div class="item"><h4><a href="#">해외 취업 준비 로그 #3 — 영어 이력서를 다시 쓰며 배운 것</a></h4><time>2025.06.15</time></div>
+      <div class="item"><h4><a href="#">기술 면접 영어 표현 노트</a></h4><time>2025.04.20</time></div>
+    </div>
+    <div class="lane">
+      <h3>Faith <a href="#">→</a></h3>
+      <div class="item"><h4><a href="#">시편 23편 묵상 — 부족함이 없으리로다</a></h4><time>2025.05.30</time></div>
+      <div class="item"><h4><a href="#">일과 소명에 대한 짧은 생각</a></h4><time>2025.03.09</time></div>
+    </div>
+  </section>
+
+  <section class="recent">
+    <h2>Recent</h2>
+    <div class="grid">
+      <div class="card">
+        <div>
+          <span class="cat">Programming/TypeScript</span>
+          <h4><a href="#">TypeScript 프로젝트에서 런타임 검증이 필요한 순간들</a></h4>
+          <p>경계에서 한 번 검증하면 내부 코드는 타입을 신뢰할 수 있게 된다. 런타임 검증 라이브러리를 도입하는 기준.</p>
+          <time>2025.06.28</time>
+        </div>
+        <div class="thumb">thumb</div>
+      </div>
+      <div class="card no-thumb">
+        <div>
+          <span class="cat">Faith</span>
+          <h4><a href="#">시편 23편 묵상 — 부족함이 없으리로다</a></h4>
+          <p>썸네일이 없는 글도 완성도 있게 보여야 한다. 이미지 없이 타이포그래피만으로 자리를 잡는 카드.</p>
+          <time>2025.05.30</time>
+        </div>
+      </div>
+      <div class="card">
+        <div>
+          <span class="cat">Career</span>
+          <h4><a href="#">해외 취업 준비 로그 #3 — 영어 이력서를 다시 쓰며 배운 것</a></h4>
+          <p>한국식 이력서와 영문 레주메는 형식이 아니라 화법이 다르다.</p>
+          <time>2025.06.15</time>
+        </div>
+        <div class="thumb">thumb</div>
+      </div>
+      <div class="card no-thumb">
+        <div>
+          <span class="cat">Learning</span>
+          <h4><a href="#">A very long English identifier LongTitlesAndOverflowBehaviorInListLayouts should not break the grid</a></h4>
+          <time>2025.05.02</time>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="divider-label">— 아래는 글 상세 화면 데모 —</div>
+
+<article class="demo wrap">
+  <div class="head">
+    <span class="kicker">Programming / TypeScript</span>
+    <h1>TypeScript 프로젝트에서 런타임 검증이 필요한 순간들</h1>
+    <div class="byline">2025.06.28 · swarea · 댓글 4</div>
+  </div>
+  <div class="body">
+    <p>TypeScript는 컴파일 시점의 타입만 검증한다. API 응답, 폼 입력, URL 파라미터처럼 <em>런타임에 들어오는 데이터</em>는 타입 시스템의 보호 밖에 있다.</p>
+    <blockquote>경계에서 검증하고, 내부에서는 신뢰한다.</blockquote>
+    <h2>스키마를 코드로 선언하기</h2>
+    <p>응답 스키마를 선언하면 타입까지 함께 얻는다. 검증 로직과 타입 정의가 갈라질 수 없다는 것이 핵심 장점이다.</p>
+    <pre><code>const User = z.object({
+  id: z.number(),
+  name: z.string().min(1),
+  email: z.string().email(),
+});</code></pre>
+  </div>
+</article>
+
+<footer class="site">
+  <div class="wrap">
+    <span>© swarea</span>
+    <span><a href="#">RSS</a> · <a href="#">GitHub</a> · <a href="#">소개</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
