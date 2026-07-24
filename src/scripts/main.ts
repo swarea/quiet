@@ -1,0 +1,37 @@
+// Entry point. Each module guards for its own targets and fails independently,
+// so one missing feature never blocks the rest or the page content.
+import { initTheme } from "./modules/theme";
+import { initDrawer } from "./modules/drawer";
+import { initCategory } from "./modules/category";
+import { initCodeCopy } from "./modules/code-copy";
+import { initToc } from "./modules/toc";
+import { initScroll } from "./modules/scroll";
+import { initReveal } from "./modules/reveal";
+import { initSearchShortcut } from "./modules/search";
+
+const boot = (): void => {
+  const steps = [
+    initTheme,
+    initDrawer,
+    initCategory,
+    initCodeCopy,
+    initToc,
+    initScroll,
+    initReveal,
+    initSearchShortcut,
+  ];
+  for (const step of steps) {
+    try {
+      step();
+    } catch (err) {
+      // Isolate failures: log and continue so the rest still initializes.
+      console.error("[swarea] module failed:", err);
+    }
+  }
+};
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", boot);
+} else {
+  boot();
+}

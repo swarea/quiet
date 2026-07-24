@@ -1,0 +1,21 @@
+{% macro postRow(p) %}
+<a class="sw-post-row" href="{{ p.url }}">
+  <time>{{ p.date }}</time>
+  <div>
+    <span class="cat">{{ p.category }}</span>
+    <h4>{{ p.title }}</h4>
+    {% if p.summary %}<p>{{ p.summary }}</p>{% endif %}
+  </div>
+</a>
+{% endmacro %}
+
+{% macro comment(c) %}
+<div class="sw-comment{% if c.reply %} reply{% endif %}">
+  <div class="av" aria-hidden="true">{{ c.initial }}</div>
+  <div>
+    <div><span class="who">{{ c.name }}</span><span class="when">{{ c.date }}</span></div>
+    <div class="txt">{{ c.body }}</div>
+    <div class="act"><button type="button">수정/삭제</button>{% if not c.reply %}<button type="button">답글</button>{% endif %}</div>
+  </div>
+</div>
+{% endmacro %}
