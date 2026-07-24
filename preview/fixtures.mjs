@@ -200,6 +200,27 @@ export const article = {
 
     <figure class="sw-fig"><div class="ph">그림 1. 검증 경계 다이어그램</div><figcaption>신뢰 경계는 코드 안이 아니라 시스템의 가장자리에 둔다.</figcaption></figure>
 
+    <h3>에디터가 내보내는 형태</h3>
+    <p>아래 블록들은 티스토리 에디터가 실제로 만들어내는 마크업이다. 프레임과 복사 버튼, 가로 스크롤 상자는 런타임에 덧입혀진다. <a href="https://example.com" target="_blank">새 탭으로 열리는 링크</a>도 포함한다.</p>
+
+    <pre data-ke-language="javascript"><code>// 에디터가 만든 코드 블록: 프레임 없이 pre 하나로 나온다
+const parsed = User.safeParse(await res.json());
+if (!parsed.success) throw new Error("계약이 깨졌습니다: " + parsed.error.message);</code></pre>
+
+    <table>
+      <thead><tr><th>필드</th><th>타입</th><th>필수</th><th>비고</th><th>기본값</th><th>도입 버전</th></tr></thead>
+      <tbody>
+        <tr><td>id</td><td>number</td><td>예</td><td>서버 발급</td><td>—</td><td>0.1.0</td></tr>
+        <tr><td>name</td><td>string</td><td>예</td><td>1자 이상</td><td>—</td><td>0.1.0</td></tr>
+        <tr><td>email</td><td>string</td><td>아니오</td><td>형식 검증</td><td>null</td><td>0.2.0</td></tr>
+      </tbody>
+    </table>
+
+    <figure class="imageblock alignCenter">
+      <span class="ph" style="display:block;aspect-ratio:16/9;background:linear-gradient(135deg,#e4e2dd,#cdd4d0);border-radius:10px"></span>
+      <figcaption>에디터가 붙이는 이미지 캡션</figcaption>
+    </figure>
+
     <p>긴 코드 줄이나 URL도 본문 폭을 넘기지 않는다. 예를 들어 <code>https://example.com/api/v2/users?fields=id,name,email&amp;include=profile,settings&amp;sort=-createdAt</code> 같은 경우, 인라인 코드는 줄바꿈되고 코드 블록은 가로 스크롤된다.</p>
   `,
 };

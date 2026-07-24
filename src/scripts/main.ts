@@ -11,6 +11,7 @@ import { initSearchShortcut } from "./modules/search";
 import { initPrune } from "./modules/prune";
 import { initNamecard } from "./modules/comments";
 import { initLayout } from "./modules/layout";
+import { initContent } from "./modules/content";
 
 const boot = (): void => {
   const steps = [
@@ -18,6 +19,7 @@ const boot = (): void => {
     initTheme,
     initDrawer,
     initCategory,
+    initContent,
     initCodeCopy,
     initToc,
     initScroll,

@@ -111,3 +111,16 @@ figure.sw-fig figcaption{text-align:center; font-size:.8rem; color:var(--muted);
 .sw-comment .act{margin-top:.45rem; display:flex; gap:.85rem; font-size:.76rem;}
 .sw-comment .act button{color:var(--muted); transition:color .15s;} .sw-comment .act button:hover{color:var(--accent);}
 .sw-comment.reply{margin-left:2.6rem; border-left:2px solid var(--line); padding-left:1rem;}
+
+/* A post with its own thumbnail gets it as the header backdrop, layered over
+   the gradient. The scrim keeps the centred title legible on any image. */
+.sw-article-head .cover-photo{background-size:cover; background-position:center; opacity:1;}
+/* The scrim alone carries the contrast, so the title needs no text shadow. */
+.sw-article-head .cover-photo::after{content:""; position:absolute; inset:0;
+  background:linear-gradient(180deg, transparent, var(--paper));
+  background:linear-gradient(180deg, color-mix(in srgb,var(--paper) 55%, transparent), var(--paper));}
+
+/* Notices listed above the post list: a plain row, no repeated section chrome. */
+.sw-notice-row{padding-top:1.4rem;}
+.sw-notice-row .sw-post-row{border-bottom:0;}
+.sw-notice-row .cat{color:var(--warm);}

@@ -208,7 +208,7 @@
       <!-- ---------- NOTICE ---------- -->
       <s_notice_rep>
         <s_index_article_rep>
-          <div class="sw-wrap sw-recent">
+          <div class="sw-wrap sw-notice-row">
             <a class="sw-post-row" href="[##_notice_rep_link_##]">
               <time>[##_notice_rep_date_##]</time>
               <div>
@@ -240,7 +240,13 @@
         <s_permalink_article_rep>
           <article>
             <header class="sw-article-head">
-              <s_article_rep_thumbnail><div class="cover" aria-hidden="true"></div></s_article_rep_thumbnail>
+              <!-- Gradient always renders; when the post has its own image it
+                   layers on top, so no unverified conditional tag is needed. -->
+              <div class="cover" aria-hidden="true"></div>
+              <s_article_rep_thumbnail>
+                <div class="cover cover-photo" aria-hidden="true"
+                     style="background-image:url('[##_article_rep_thumbnail_url_##]')"></div>
+              </s_article_rep_thumbnail>
               <div class="inner">
                 <a class="sw-crumb" href="[##_article_rep_category_link_##]">[##_article_rep_category_##]</a>
                 <h1>[##_article_rep_title_##]</h1>

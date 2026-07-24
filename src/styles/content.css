@@ -1,0 +1,98 @@
+/* Styling for the HTML the Tistory editor produces inside [##_article_rep_desc_##].
+   We do not control these element names or classes, so target the elements
+   themselves. Anything the editor emits has to look right without help. */
+
+/* ---- images and figures --------------------------------------------------- */
+.sw-article-body img{max-width:100%; height:auto; border-radius:var(--r-md);}
+.sw-article-body figure{margin:1.9em 0;}
+.sw-article-body figure img{margin-inline:auto;}
+.sw-article-body figcaption{text-align:center; font-size:.82rem; color:var(--muted); margin-top:.6rem; line-height:1.6;}
+/* The editor's alignment classes. */
+.sw-article-body figure.alignLeft{margin-inline:0 auto;}
+.sw-article-body figure.alignRight{margin-inline:auto 0;}
+.sw-article-body .imageblock{text-align:center;}
+
+/* ---- embeds --------------------------------------------------------------- */
+.sw-article-body iframe,
+.sw-article-body video{max-width:100%; border-radius:var(--r-md);}
+.sw-article-body figure.videoblock iframe{width:100%; aspect-ratio:16/9; height:auto;}
+
+/* ---- code ----------------------------------------------------------------- */
+/* Bare <pre> from the editor is upgraded at runtime into .sw-code, which owns
+   the frame. These rules cover the code text itself either way, and stand alone
+   if the script never runs. */
+.sw-article-body pre{
+  margin:1.8em 0; padding:1.05rem 1.15rem; overflow-x:auto;
+  background:#0f1420; color:#d7dee8; border-radius:var(--r-md);
+  font-family:var(--mono); font-size:.86rem; line-height:1.74;
+  -webkit-overflow-scrolling:touch;
+}
+.sw-code pre{margin:0; border-radius:0;}
+.sw-article-body pre code{
+  font-family:inherit; font-size:inherit; color:inherit;
+  background:none; border:0; padding:0; white-space:pre;
+}
+
+/* ---- tables --------------------------------------------------------------- */
+/* Wrapped at runtime in .sw-tbl-wrap for horizontal scroll; these rules make a
+   bare table presentable on its own and stop it forcing the page sideways. */
+.sw-article-body table{
+  border-collapse:collapse; width:100%; max-width:100%;
+  font-size:.92rem; margin:1.8em 0;
+}
+.sw-tbl-wrap > table{margin:0;}
+.sw-article-body th,.sw-article-body td{
+  text-align:left; padding:.62rem .9rem; border:1px solid var(--line);
+  overflow-wrap:anywhere;
+}
+.sw-article-body th{
+  background:var(--surface-2); font-weight:600; font-size:.8rem;
+  color:var(--ink-2); letter-spacing:.02em;
+}
+.sw-article-body tbody tr{transition:background .15s;}
+.sw-article-body tbody tr:hover{background:var(--surface-2);}
+
+/* ---- editor quote variants ------------------------------------------------ */
+.sw-article-body blockquote p{margin:.4em 0;}
+.sw-article-body blockquote cite{display:block; margin-top:.5em; font-size:.85rem; font-style:normal; color:var(--muted); font-family:var(--sans);}
+
+/* ---- link / file blocks the editor inserts -------------------------------- */
+.sw-article-body .link_wrap,
+.sw-article-body figure.fileblock{
+  display:block; border:1px solid var(--line); border-radius:var(--r-md);
+  background:var(--surface); padding:.9rem 1.1rem; margin:1.5em 0;
+}
+.sw-article-body figure.fileblock a{text-decoration:none;}
+.sw-article-body .link_title,.sw-article-body figure.fileblock .name{font-weight:600; color:var(--ink);}
+.sw-article-body .link_url,.sw-article-body figure.fileblock .size{font-size:.82rem; color:var(--muted);}
+
+/* Editor spacer paragraphs are common and would otherwise stack blank gaps. */
+.sw-article-body p:empty{margin:0;}
+.sw-article-body p > br:only-child{display:none;}
+
+/* ---- print ----------------------------------------------------------------
+   A reading-first blog should produce a clean sheet of paper: content only,
+   ink on white, and link destinations spelled out since they cannot be
+   clicked. Everything that only makes sense on screen is dropped. */
+@media print {
+  :root{
+    --paper:#fff; --surface:#fff; --surface-2:#f4f4f4;
+    --ink:#000; --ink-2:#222; --muted:#444; --faint:#666;
+    --line:#ccc; --line-strong:#999; --accent:#000; --accent-wash:#f0f0f0;
+  }
+  .sw-rail,.sw-scrim,.sw-topbar,.sw-dock,.sw-toc,.sw-skip,#sw-progress,
+  .sw-site-foot,.sw-paging,.sw-cbox,.container_postbtn,.menu_toolbar,
+  .tt_box_namecard,.sw-code .copy{display:none !important;}
+  .sw-shell{display:block;}
+  .sw-content{min-height:0;}
+  .sw-article-head .cover{display:none;}
+  .sw-article-head{border-bottom:1px solid #ccc;}
+  .sw-article-head .inner{padding:0 0 1rem;}
+  .sw-article-body,.sw-article-foot,.sw-comments{max-width:none; padding:0;}
+  .sw-article-body{font-size:11pt; line-height:1.6;}
+  .sw-article-body pre{background:#f4f4f4; color:#000; border:1px solid #ccc; white-space:pre-wrap;}
+  /* Spell out destinations, but not for in-page or javascript links. */
+  .sw-article-body a[href^="http"]::after{content:" (" attr(href) ")"; font-size:.85em; color:#555; word-break:break-all;}
+  .sw-article-body h2,.sw-article-body h3{break-after:avoid;}
+  .sw-article-body figure,.sw-article-body pre,.sw-tbl-wrap{break-inside:avoid;}
+}

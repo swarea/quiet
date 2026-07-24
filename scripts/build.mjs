@@ -16,7 +16,7 @@ const outDir = join(root, "preview", "dist");
 const serve = process.argv.includes("--serve");
 
 // Order matters: tokens first, then base, then component layers.
-const STYLE_ORDER = ["tokens", "base", "layout", "home", "article", "states", "tistory"];
+const STYLE_ORDER = ["tokens", "base", "layout", "home", "article", "states", "tistory", "content"];
 const distDir = join(root, "dist");
 
 // Without explicit targets Lightning CSS emits modern media range syntax
