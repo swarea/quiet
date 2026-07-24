@@ -210,6 +210,41 @@ try {
   fail("skin variables used", e.message);
 }
 
+// 10. Compiled CSS stays readable to the browsers we support.
+//     Without targets Lightning CSS emits `width<=960px`, which Safari below
+//     16.4 ignores outright, silently disabling every responsive rule. And a
+//     declaration whose only value is color-mix() is dropped whole by browsers
+//     without support, so each one needs a plain value ahead of it.
+try {
+  const css = await readFile(join(root, "dist", "style.css"), "utf8").catch(() => null);
+  if (css === null) {
+    ran.push("css browser support (skipped: no dist, run npm run build)");
+  } else {
+    const problems = [];
+    const modernRange = css.match(/@media\s*\([a-z-]*width\s*[<>]=?/g);
+    if (modernRange) problems.push(`modern media range syntax (${modernRange.length}x)`);
+
+    // Every rule containing color-mix must declare the same property twice.
+    for (const rule of css.match(/[^{}]*\{[^{}]*color-mix[^{}]*\}/g) ?? []) {
+      const body = rule.slice(rule.indexOf("{") + 1, -1);
+      const props = body.split(";").filter(Boolean).map((d) => d.split(":")[0].trim());
+      const mixed = body
+        .split(";")
+        .filter((d) => d.includes("color-mix"))
+        .map((d) => d.split(":")[0].trim());
+      for (const p of mixed) {
+        if (props.filter((x) => x === p).length < 2) {
+          problems.push(`color-mix without fallback: ${p} in ${rule.slice(0, 40)}`);
+        }
+      }
+    }
+    if (problems.length) fail("css browser support", problems.slice(0, 4).join("; "));
+    else ok("css browser support");
+  }
+} catch (e) {
+  fail("css browser support", e.message);
+}
+
 // Report.
 if (!ran.length) {
   console.log("skipped: no applicable checks");

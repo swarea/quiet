@@ -19,6 +19,19 @@ const serve = process.argv.includes("--serve");
 const STYLE_ORDER = ["tokens", "base", "layout", "home", "article", "states", "tistory"];
 const distDir = join(root, "dist");
 
+// Without explicit targets Lightning CSS emits modern media range syntax
+// (`width<=960px`), which Safari below 16.4 and Chrome below 104 ignore
+// outright — every responsive rule would silently stop applying there.
+// Encoding is major << 16 | minor << 8 | patch.
+const TARGETS = {
+  chrome: 100 << 16,
+  edge: 100 << 16,
+  firefox: 100 << 16,
+  safari: 15 << 16,
+  ios_saf: 15 << 16,
+  samsung: 16 << 16,
+};
+
 async function buildCss() {
   const parts = [];
   for (const name of STYLE_ORDER) {
@@ -28,6 +41,7 @@ async function buildCss() {
     filename: "styles.css",
     code: Buffer.from(parts.join("\n")),
     minify: true,
+    targets: TARGETS,
   });
   return code;
 }

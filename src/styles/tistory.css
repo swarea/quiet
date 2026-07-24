@@ -101,3 +101,9 @@
    dock also lives. Lift the dock clear of it when that toolbar is present. */
 .sw-shell-has-tt-toolbar ~ .sw-dock,
 body.sw-tt-toolbar .sw-dock{bottom:4.6rem;}
+
+/* Tistory grades tag popularity with cloud1..cloud5 classes. We keep the chips
+   a uniform size for scanability, so carry the signal in weight instead. */
+.sw-tagcloud a.cloud1,.sw-tagcloud a.cloud2{color:var(--muted);}
+.sw-tagcloud a.cloud4{font-weight:600;}
+.sw-tagcloud a.cloud5{font-weight:700; border-color:var(--line-strong);}

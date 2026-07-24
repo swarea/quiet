@@ -13,6 +13,7 @@
 .sw-featured p{color:var(--muted); margin-top:.75rem; font-size:.95rem;}
 .sw-featured .meta{margin-top:1.1rem; font-family:var(--mono); font-size:.75rem; color:var(--faint); display:flex; gap:.8rem;}
 .sw-featured .cover{position:relative; overflow:hidden; border-radius:var(--r-lg); border:1px solid var(--line); min-height:210px; display:grid; place-items:center; color:var(--faint); font-family:var(--mono); font-size:.72rem;
+    background:var(--surface-2);
     background:radial-gradient(120% 120% at 80% 12%, color-mix(in srgb,var(--accent) 30%, transparent), transparent 60%),
     linear-gradient(150deg,var(--surface-2),color-mix(in srgb,var(--accent) 12%, var(--surface-2)));}
 .sw-featured .cover::after{content:""; position:absolute; inset:0; background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.14) 50%,transparent 70%); transform:translateX(-120%);}

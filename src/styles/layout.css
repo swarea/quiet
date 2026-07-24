@@ -61,7 +61,7 @@
 .sw-icon-btn:hover{background:var(--surface-2); color:var(--ink); border-color:var(--line);}
 
 /* topbar (mobile) */
-.sw-topbar{display:none; position:sticky; top:0; z-index:40; height:var(--header-h); align-items:center; gap:.6rem; padding:0 1rem; background:color-mix(in srgb,var(--surface) 86%, transparent); backdrop-filter:saturate(1.4) blur(10px); border-bottom:1px solid var(--line);}
+.sw-topbar{display:none; position:sticky; top:0; z-index:40; height:var(--header-h); align-items:center; gap:.6rem; padding:0 1rem; background:var(--surface); background:color-mix(in srgb,var(--surface) 86%, transparent); backdrop-filter:saturate(1.4) blur(10px); border-bottom:1px solid var(--line);}
 .sw-topbar .name{font-weight:700; font-size:.95rem;}
 .sw-topbar .spacer{flex:1;}
 @media (max-width:960px){

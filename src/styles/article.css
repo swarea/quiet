@@ -1,6 +1,7 @@
 /* Article: header, body typography, callout, code, table, figure, TOC, footer bits. */
 .sw-article-head{position:relative; border-bottom:1px solid var(--line); overflow:hidden;}
 .sw-article-head .cover{position:absolute; inset:0; opacity:.9;
+    background:var(--surface-2);
     background:radial-gradient(90% 120% at 85% 0%, color-mix(in srgb,var(--accent) 26%, transparent), transparent 55%),
     linear-gradient(180deg,var(--surface-2), var(--paper));}
 .sw-article-head .inner{position:relative; max-width:calc(var(--read) + 4rem); margin:0 auto; padding:3.6rem 2rem 2.1rem; text-align:center;}
@@ -19,7 +20,7 @@
 .sw-article-body h3{font-size:1.2rem; margin:1.9em 0 .6em; scroll-margin-top:72px;}
 .sw-article-body h2 .anchor,.sw-article-body h3 .anchor{opacity:0; color:var(--faint); margin-left:.4rem; font-weight:400; transition:opacity .15s;}
 .sw-article-body h2:hover .anchor,.sw-article-body h3:hover .anchor{opacity:1;}
-.sw-article-body a:not(.anchor){color:var(--accent); text-decoration:underline; text-underline-offset:2px; text-decoration-color:color-mix(in srgb,var(--accent) 40%, transparent); transition:text-decoration-color .15s;}
+.sw-article-body a:not(.anchor){color:var(--accent); text-decoration:underline; text-underline-offset:2px; text-decoration-color:var(--accent); text-decoration-color:color-mix(in srgb,var(--accent) 40%, transparent); transition:text-decoration-color .15s;}
 .sw-article-body a:not(.anchor):hover{text-decoration-color:var(--accent);}
 .sw-article-body strong{font-weight:700;}
 .sw-article-body em{font-style:italic; color:var(--ink-2);}
@@ -53,7 +54,7 @@ table.sw-data tbody tr:hover{background:var(--surface-2);}
 table.sw-data td.num{font-family:var(--mono); font-variant-numeric:tabular-nums; text-align:right; color:var(--ink-2);}
 
 figure.sw-fig{margin:1.9em 0;}
-figure.sw-fig .ph{border-radius:var(--r-md); border:1px solid var(--line); background:linear-gradient(135deg,var(--surface-2),color-mix(in srgb,var(--accent) 10%,var(--surface-2))); aspect-ratio:16/9; display:grid; place-items:center; color:var(--faint); font-family:var(--mono); font-size:.74rem;}
+figure.sw-fig .ph{border-radius:var(--r-md); border:1px solid var(--line); background:var(--surface-2); background:linear-gradient(135deg,var(--surface-2),color-mix(in srgb,var(--accent) 10%,var(--surface-2))); aspect-ratio:16/9; display:grid; place-items:center; color:var(--faint); font-family:var(--mono); font-size:.74rem;}
 figure.sw-fig figcaption{text-align:center; font-size:.8rem; color:var(--muted); margin-top:.6rem;}
 
 .sw-toc{position:fixed; top:0; height:100vh; display:flex; align-items:center; width:13.5rem;
@@ -94,7 +95,7 @@ figure.sw-fig figcaption{text-align:center; font-size:.8rem; color:var(--muted);
 
 .sw-comments{max-width:var(--read); margin:0 auto; padding:1.5rem 2rem 3.2rem;}
 .sw-cbox{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); padding:1rem; margin:1rem 0 2rem; transition:border-color .18s, box-shadow .18s;}
-.sw-cbox:focus-within{border-color:color-mix(in srgb, var(--accent) 45%, var(--line));}
+.sw-cbox:focus-within{border-color:var(--line-strong); border-color:color-mix(in srgb, var(--accent) 45%, var(--line));}
 .sw-cbox textarea{width:100%; border:0; background:none; outline:none; color:var(--ink); font:inherit; resize:vertical; min-height:76px;}
 .sw-cbox .cfields{display:flex; gap:.6rem; align-items:center; margin-top:.7rem; padding-top:.7rem; border-top:1px solid var(--line); flex-wrap:wrap;}
 .sw-cbox .cfields input{background:var(--surface-2); border:1px solid var(--line); border-radius:var(--r-sm); padding:.38rem .55rem; font-size:.8rem; color:var(--ink); outline:none; transition:border-color .15s;}
