@@ -62,7 +62,25 @@ function initTistoryTree(): void {
   });
 }
 
+// Tistory labels the root of the tree "분류 전체보기". Sitting under a heading
+// that already says Categories, "분류" just repeats itself. Rename the text node
+// only, leaving the count and any badge Tistory appended untouched.
+function shortenRootLabel(): void {
+  const root = document.querySelector(".sw-cat-tistory");
+  if (!root) return;
+  root.querySelectorAll("a").forEach((a) => {
+    a.childNodes.forEach((node) => {
+      if (node.nodeType !== Node.TEXT_NODE) return;
+      const text = node.textContent ?? "";
+      if (text.includes("분류 전체보기")) {
+        node.textContent = text.replace("분류 전체보기", "전체보기");
+      }
+    });
+  });
+}
+
 export function initCategory(): void {
+  shortenRootLabel();
   initMockTree();
   initTistoryTree();
 }

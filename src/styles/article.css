@@ -128,11 +128,13 @@ figure.sw-fig figcaption{text-align:center; font-size:.8rem; color:var(--muted);
 
 /* A post with its own thumbnail gets it as the header backdrop, layered over
    the gradient. The scrim keeps the centred title legible on any image. */
-.sw-article-head .cover-photo{background-size:cover; background-position:center; opacity:1;}
-/* The scrim alone carries the contrast, so the title needs no text shadow. */
+/* The post's own image sits behind the title as a quiet tint, not a hero
+   photo: at full strength it dominated the header and gave the whole page a
+   colour cast, which fights the restraint the rest of the skin is built on. */
+.sw-article-head .cover-photo{background-size:cover; background-position:center; opacity:.3;}
 .sw-article-head .cover-photo::after{content:""; position:absolute; inset:0;
   background:linear-gradient(180deg, transparent, var(--paper));
-  background:linear-gradient(180deg, color-mix(in srgb,var(--paper) 55%, transparent), var(--paper));}
+  background:linear-gradient(180deg, color-mix(in srgb,var(--paper) 40%, transparent), var(--paper));}
 
 /* Notices listed above the post list: a plain row, no repeated section chrome. */
 .sw-notice-row{padding-top:1.4rem;}
