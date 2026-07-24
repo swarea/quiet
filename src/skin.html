@@ -269,7 +269,10 @@
             <s_rp>
               <section class="sw-comments" aria-label="댓글">
                 <s_rp_input_form>
-                  <form class="sw-cbox" onsubmit="return false">
+                  <!-- Tistory replaces this <form> element with its own, dropping
+                       any class on it, so the styling hook lives on an inner div. -->
+                  <form onsubmit="return false">
+                   <div class="sw-cbox">
                     <label class="sw-sr" for="sw-rp-text">댓글 입력</label>
                     <textarea id="sw-rp-text" name="[##_rp_input_comment_##]" placeholder="댓글을 남겨주세요"></textarea>
                     <div class="cfields">
@@ -284,6 +287,7 @@
                       <label class="sw-secret" for="sw-rp-secret"><input id="sw-rp-secret" type="checkbox" name="[##_rp_input_is_secret_##]">비밀글</label>
                       <button type="button" class="submit" onclick="[##_rp_onclick_submit_##]">등록</button>
                     </div>
+                   </div>
                   </form>
                 </s_rp_input_form>
 
@@ -415,7 +419,8 @@
           </header>
           <section class="sw-comments" aria-label="방명록">
             <s_guest_input_form>
-              <form class="sw-cbox" onsubmit="return false">
+              <form onsubmit="return false">
+               <div class="sw-cbox">
                 <label class="sw-sr" for="sw-gb-text">방명록 입력</label>
                 <textarea id="sw-gb-text" name="[##_guest_textarea_body_##]" placeholder="방명록을 남겨주세요"></textarea>
                 <div class="cfields">
@@ -430,6 +435,7 @@
                   <label class="sw-secret" for="sw-gb-secret"><input id="sw-gb-secret" type="checkbox" name="[##_guest_input_is_secret_##]">비밀글</label>
                   <button type="button" class="submit" onclick="[##_guest_onclick_submit_##]">등록</button>
                 </div>
+               </div>
               </form>
             </s_guest_input_form>
 

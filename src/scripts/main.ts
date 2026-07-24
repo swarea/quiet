@@ -8,6 +8,7 @@ import { initToc } from "./modules/toc";
 import { initScroll } from "./modules/scroll";
 import { initReveal } from "./modules/reveal";
 import { initSearchShortcut } from "./modules/search";
+import { initPrune } from "./modules/prune";
 
 const boot = (): void => {
   const steps = [
@@ -19,6 +20,7 @@ const boot = (): void => {
     initScroll,
     initReveal,
     initSearchShortcut,
+    initPrune,
   ];
   for (const step of steps) {
     try {
