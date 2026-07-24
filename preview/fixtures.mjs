@@ -39,15 +39,15 @@ const recent = [
   {
     date: "06.15",
     category: "Career",
-    title: "해외 취업 준비 로그 #3 — 영어 이력서를 다시 쓰며 배운 것",
+    title: "해외 취업 준비 로그 #3: 영어 이력서를 다시 쓰며 배운 것",
     summary:
-      "한국식 이력서와 영문 레주메는 형식이 아니라 화법이 다르다. 성과를 숫자로 말하는 연습, 동사 선택이 남기는 인상.",
+      "한국식 이력서와 영문 레주메는 형식이 아니라 화법이 다르다. 성과를 숫자로 말하는 연습, 그리고 동사 선택이 남기는 인상.",
     url: "/article",
   },
   {
     date: "05.30",
     category: "Daily / 묵상",
-    title: "시편 23편 — 부족함이 없으리로다",
+    title: "시편 23편: 부족함이 없으리로다",
     summary: "",
     url: "/article",
   },
@@ -65,7 +65,7 @@ export const home = {
   headline:
     "배우고 만든 것을, 오래 남기려 기록합니다.<br>기술과 데이터, 그리고 삶과 믿음에 대해.",
   subtitle:
-    "Notes on software, data, career abroad, and faith — written in Korean and English, kept for the long run.",
+    "Notes on software, data, career abroad, and faith. Written in Korean and English, kept for the long run.",
   featured: {
     category: "Data · 회고",
     title: "재택근무 1년, 데이터로 돌아보기",
@@ -182,9 +182,9 @@ export const article = {
     <h2>도입 기준</h2>
     <p>모든 값을 검증할 필요는 없다. 아래 경계에서 가장 값을 한다.</p>
     <ul>
-      <li>외부 API 응답 — 통제할 수 없는 계약</li>
-      <li>사용자 입력 — 폼, 쿼리스트링, 업로드</li>
-      <li>저장소 경계 — localStorage, 설정 파일</li>
+      <li>외부 API 응답: 통제할 수 없는 계약</li>
+      <li>사용자 입력: 폼, 쿼리스트링, 업로드</li>
+      <li>저장소 경계: localStorage, 설정 파일</li>
     </ul>
 
     <div class="sw-tbl-wrap">
@@ -198,14 +198,34 @@ export const article = {
       </table>
     </div>
 
-    <figure class="sw-fig"><div class="ph">그림 1 — 검증 경계 다이어그램</div><figcaption>신뢰 경계는 코드 안이 아니라 시스템의 가장자리에 둔다.</figcaption></figure>
+    <figure class="sw-fig"><div class="ph">그림 1. 검증 경계 다이어그램</div><figcaption>신뢰 경계는 코드 안이 아니라 시스템의 가장자리에 둔다.</figcaption></figure>
 
-    <p>긴 코드 줄이나 URL도 본문 폭을 넘기지 않는다. 예: <code>https://example.com/api/v2/users?fields=id,name,email&amp;include=profile,settings&amp;sort=-createdAt</code> — 인라인 코드는 줄바꿈되고, 코드 블록은 가로 스크롤된다.</p>
+    <p>긴 코드 줄이나 URL도 본문 폭을 넘기지 않는다. 예를 들어 <code>https://example.com/api/v2/users?fields=id,name,email&amp;include=profile,settings&amp;sort=-createdAt</code> 같은 경우, 인라인 코드는 줄바꿈되고 코드 블록은 가로 스크롤된다.</p>
   `,
 };
+
+export const tags = [
+  { name: "typescript", count: 42 },
+  { name: "javascript", count: 55 },
+  { name: "python", count: 31 },
+  { name: "데이터분석", count: 24 },
+  { name: "런타임검증", count: 6 },
+  { name: "zod", count: 4 },
+  { name: "상태관리", count: 9 },
+  { name: "해외취업", count: 12 },
+  { name: "영어", count: 18 },
+  { name: "회고", count: 15 },
+  { name: "묵상", count: 11 },
+  { name: "일상", count: 8 },
+  { name: "problem-solving", count: 85 },
+  { name: "알고리즘", count: 40 },
+  { name: "커리어", count: 14 },
+  { name: "productivity", count: 7 },
+];
 
 export const pages = [
   { name: "index", view: "views/home.njk", title: "Home", data: { home } },
   { name: "list", view: "views/list.njk", title: "Programming", data: { list } },
   { name: "article", view: "views/article.njk", title: article.title, data: { article } },
+  { name: "tag", view: "views/tag.njk", title: "태그", data: { tags } },
 ];
