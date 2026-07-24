@@ -1,0 +1,44 @@
+# Roadmap
+
+Milestones are release-based. A milestone contains only the issues committed to
+that release. Criteria below are completion gates, not implementation specs —
+details live in issues.
+
+## 0.1.0 — Foundation
+
+- product goals and clean-room principles documented
+- design direction chosen from three distinct proposals (recorded)
+- repository governance: CONTRIBUTING, issue/PR templates
+- build architecture decided (ADR-0001) and scaffolded
+- local mock preview renders at least: home, one list, one article page
+- base design tokens (light/dark, same semantic names)
+- single validation gate (`scripts/check.*`) wired into lean CI
+- **Done when:** clean clone installs and builds; ≥3 mock pages render on
+  mobile + desktop; basic a11y smoke passes; everything not yet verified on
+  real Tistory is explicitly marked as such.
+
+## 0.2.0 — Tistory functional
+
+- real `skin.html`, `style.css`, `index.xml` with all major substitution
+  variables: covers, lists, article, search, tag, notice, page, protected,
+  comments, guestbook, sidebar, paging
+- installable ZIP with official preview images
+- **Done when:** uploaded to a *test* blog; core screens smoke-tested there;
+  no token corruption; install/rollback documented.
+
+## 0.5.0 — Beta
+
+- dark mode, auto TOC, reading progress, code copy, related posts
+- responsive & accessibility refinement; performance budget measured and set
+- visual regression tests; browser matrix pass
+- **Done when:** KR/EN mixed content, keyboard nav, mobile screens, and dark
+  mode verified on the test blog; known limitations documented.
+
+## 1.0.0 — Stable
+
+- GitHub Release with ZIP, checksums, final preview images
+- README install/config/upgrade/rollback guides; changelog; license +
+  third-party notices
+- **Done when:** installable from the release ZIP alone; test-blog
+  verification complete; production-switch checklist (including revert path)
+  written; no secrets; no known critical defects.
