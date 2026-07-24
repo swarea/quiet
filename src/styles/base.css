@@ -16,6 +16,9 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 img{max-width:100%; display:block;}
 
 .sw-sr{position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); border:0;}
+.sw-skip{position:fixed; top:.5rem; left:.5rem; z-index:70; transform:translateY(-160%); background:var(--surface); color:var(--ink); border:1px solid var(--accent); border-radius:var(--r-sm); padding:.5rem .9rem; font-size:.85rem; font-weight:600; transition:transform .18s var(--ease);}
+.sw-skip:focus{transform:none;}
+#sw-main:focus{outline:none;}
 .sw-eyebrow{font-family:var(--mono); font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); font-weight:600;}
 .sw-section-tag{display:flex; align-items:baseline; justify-content:space-between; margin-bottom:1.15rem;}
 .sw-section-tag h2{font-size:.72rem; font-family:var(--mono); letter-spacing:.16em; text-transform:uppercase; color:var(--muted); font-weight:600;}

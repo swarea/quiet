@@ -12,11 +12,12 @@
   </script>
 </head>
 <body>
+  <a class="sw-skip" href="#sw-main">본문으로 건너뛰기</a>
   <div id="sw-progress"></div>
   <div class="sw-shell">
     {% include "partials/sidebar.njk" %}
     <div class="sw-scrim" id="sw-scrim" hidden></div>
-    <div class="sw-content">
+    <div class="sw-content" id="sw-main" tabindex="-1">
       {% include "partials/topbar.njk" %}
       {% block main %}{% endblock %}
       {% include "partials/footer.njk" %}
