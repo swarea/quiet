@@ -56,17 +56,29 @@ figure.sw-fig{margin:1.9em 0;}
 figure.sw-fig .ph{border-radius:var(--r-md); border:1px solid var(--line); background:linear-gradient(135deg,var(--surface-2),color-mix(in srgb,var(--accent) 10%,var(--surface-2))); aspect-ratio:16/9; display:grid; place-items:center; color:var(--faint); font-family:var(--mono); font-size:.74rem;}
 figure.sw-fig figcaption{text-align:center; font-size:.8rem; color:var(--muted); margin-top:.6rem;}
 
-.sw-toc{position:fixed; top:0; height:100vh; display:flex; align-items:center; width:13.5rem;
-    left:calc((var(--rail) + 100vw + var(--read)) / 2 + 1.75rem);}
-.sw-toc-inner{max-height:72vh; overflow-y:auto; width:100%; scrollbar-width:none;}
-.sw-toc-inner::-webkit-scrollbar{display:none;}
-.sw-toc h4{font-family:var(--mono); font-size:.64rem; letter-spacing:.16em; text-transform:uppercase; color:var(--faint); margin-bottom:.75rem; padding-left:.9rem;}
-.sw-toc ol{list-style:none; margin:0; padding:0; border-left:1px solid var(--line);}
-.sw-toc li a{display:block; font-size:.8rem; color:var(--muted); padding:.3rem .9rem; border-left:2px solid transparent; margin-left:-1px; line-height:1.4; transition:color .18s, border-color .18s;}
-.sw-toc li a:hover{color:var(--ink);}
-.sw-toc li a.active{color:var(--accent); border-left-color:var(--accent); font-weight:600;}
-.sw-toc li.h3 a{padding-left:1.7rem; font-size:.76rem;}
-@media (max-width:1740px){ .sw-toc{display:none;} }
+/* TOC sits in a right rail beside the reading column on wide screens. */
+.sw-toc-rail{display:none;}
+.sw-toc-inner{width:100%;}
+.sw-toc-rail h4{font-family:var(--mono); font-size:.64rem; letter-spacing:.16em; text-transform:uppercase; color:var(--faint); margin-bottom:.75rem; padding-left:.9rem;}
+.sw-toc-rail ol{list-style:none; margin:0; padding:0; border-left:1px solid var(--line);}
+.sw-toc-rail li a{display:block; font-size:.8rem; color:var(--muted); padding:.3rem .9rem; border-left:2px solid transparent; margin-left:-1px; line-height:1.4; transition:color .18s, border-color .18s;}
+.sw-toc-rail li a:hover{color:var(--ink);}
+.sw-toc-rail li a.active{color:var(--accent); border-left-color:var(--accent); font-weight:600;}
+.sw-toc-rail li.h3 a{padding-left:1.7rem; font-size:.76rem;}
+
+/* Reading band: reading column + TOC rail centered together, so the column is
+   anchored toward the left instead of floating dead-center on wide screens. */
+.sw-article-shell{max-width:var(--read); margin:0 auto;}
+@media (min-width:1480px){
+  .sw-article-shell{max-width:calc(var(--read) + 17rem); display:grid; grid-template-columns:minmax(0,var(--read)) 14rem; gap:3rem; align-items:start; justify-content:center;}
+  .sw-article-shell.sw-no-toc{grid-template-columns:minmax(0,var(--read));}
+  .sw-article-col{min-width:0;}
+  .sw-article-col > .sw-article-body,
+  .sw-article-col > .sw-article-foot,
+  .sw-article-col > .sw-comments{max-width:none; margin-inline:0;}
+  .sw-toc-rail{display:block; position:sticky; top:2rem; align-self:start; max-height:calc(100vh - 4rem); overflow-y:auto; scrollbar-width:none;}
+  .sw-toc-rail::-webkit-scrollbar{display:none;}
+}
 
 .sw-article-foot{max-width:var(--read); margin:0 auto; padding:1.5rem 2rem 0;}
 @media (max-width:640px){ .sw-article-foot,.sw-comments{padding-inline:1.15rem;} }
