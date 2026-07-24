@@ -1,110 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Tistory skin metadata and user-configurable settings.
-  WARNING: changing this file resets a blog's saved skin settings. Keep
-  variable names stable across versions; treat renames as breaking changes.
-  The exact <default> element set and cover schema still need validation on a
-  test blog before release (see docs/tistory-spec.md).
+  Tistory skin metadata and settings.
+  Element names follow the official skin guide exactly; do not invent elements,
+  Tistory rejects the file outright. Changing this file resets a blog's saved
+  skin settings, so keep variable names stable across versions.
 -->
 <skin>
   <information>
     <name>swarea</name>
     <version>0.2.0</version>
-    <description>조용하고 전문적인, 읽기 우선 개인 개발 블로그 스킨. 원본 독립 구현.</description>
-    <author>swarea</author>
-    <homepage>https://github.com/swarea/tistory-skin</homepage>
-    <license>미정 / undecided</license>
+    <description>
+      <![CDATA[조용하고 전문적인, 읽기 우선 개인 블로그 스킨입니다.]]>
+    </description>
+    <license>
+      <![CDATA[사용 조건 미정.]]>
+    </license>
   </information>
-
   <author>
     <name>swarea</name>
     <homepage>https://github.com/swarea</homepage>
     <email></email>
   </author>
-
   <default>
     <recentEntries>5</recentEntries>
     <recentComments>5</recentComments>
     <recentTrackbacks>0</recentTrackbacks>
-    <commentValue>댓글</commentValue>
-    <commentDefaultValue></commentDefaultValue>
-    <trackbackValue>트랙백</trackbackValue>
-    <recentNotice>3</recentNotice>
     <itemsOnGuestbook>10</itemsOnGuestbook>
     <tagsInCloud>30</tagsInCloud>
     <sortInCloud>3</sortInCloud>
     <expandComment>1</expandComment>
     <expandTrackback>0</expandTrackback>
-    <lengthOfList>44</lengthOfList>
     <lengthOfRecentNotice>28</lengthOfRecentNotice>
-    <lengthOfRecentComment>28</lengthOfRecentComment>
     <lengthOfRecentEntry>28</lengthOfRecentEntry>
+    <lengthOfRecentComment>30</lengthOfRecentComment>
+    <lengthOfRecentTrackback>30</lengthOfRecentTrackback>
+    <lengthOfLink>30</lengthOfLink>
     <showListOnCategory>1</showListOnCategory>
     <showListOnArchive>1</showListOnArchive>
+    <commentMessage>
+      <none>댓글이 없습니다.</none>
+      <single>댓글 &lt;span class="cnt"&gt;하나&lt;/span&gt; 달렸습니다.</single>
+    </commentMessage>
+    <trackbackMessage>
+      <none>트랙백이 없습니다.</none>
+      <single>트랙백이 &lt;span class="cnt"&gt;하나&lt;/span&gt; 달렸습니다.</single>
+    </trackbackMessage>
+    <tree>
+      <color>565b62</color>
+      <bgColor></bgColor>
+      <activeColor>38548c</activeColor>
+      <activeBgColor>eef1f7</activeBgColor>
+      <labelLength>28</labelLength>
+      <showValue>1</showValue>
+    </tree>
     <contentWidth>800</contentWidth>
-    <tree color="#565b62" bgColor="" activeColor="#38548c" activeBgColor="#eef1f7" labelLength="0" showValue="1" />
   </default>
-
   <cover>
-    <covers>
-      <![CDATA[
-        [
-          {
-            "type": "list",
-            "title": "최근 글",
-            "dataType": "RECENT",
-            "count": 6,
-            "listType": "list"
-          }
-        ]
-      ]]>
-    </covers>
-  </cover>
-
-  <variablegroup>
-    <variable>
-      <name>theme-default</name>
-      <label>기본 테마</label>
-      <type>SELECT</type>
-      <option>[{"name":"system","label":"시스템 설정 따름","value":"system"},{"name":"light","label":"라이트","value":"light"},{"name":"dark","label":"다크","value":"dark"}]</option>
-      <default>system</default>
-      <description>방문자의 시스템 설정을 따르거나 특정 테마로 고정합니다.</description>
-    </variable>
-    <variable>
-      <name>sidebar</name>
-      <label>사이드바 사용</label>
-      <type>BOOL</type>
-      <default>true</default>
-    </variable>
-    <variable>
-      <name>toc</name>
-      <label>목차 사용</label>
-      <type>BOOL</type>
-      <default>true</default>
-      <description>글에 제목(h2/h3)이 있을 때만 자동으로 표시됩니다.</description>
-    </variable>
-    <variable>
-      <name>reading-progress</name>
-      <label>읽기 진행률 표시</label>
-      <type>BOOL</type>
-      <default>true</default>
-    </variable>
-    <variable>
-      <name>related-posts</name>
-      <label>같은 카테고리의 다른 글 표시</label>
-      <type>BOOL</type>
-      <default>true</default>
-    </variable>
-  </variablegroup>
-
-  <liststyle>
-    <list>
+    <item>
       <name>list</name>
-      <label>리스트</label>
-    </list>
-    <list>
+      <label><![CDATA[리스트]]></label>
+      <description><![CDATA[글을 한 줄씩 목록으로 보여줍니다.]]></description>
+    </item>
+    <item>
       <name>grid</name>
-      <label>그리드</label>
-    </list>
-  </liststyle>
+      <label><![CDATA[주제 묶음]]></label>
+      <description><![CDATA[글을 카테고리별 묶음으로 보여줍니다.]]></description>
+    </item>
+  </cover>
+  <variables>
+    <variablegroup name="레이아웃">
+      <variable>
+        <name>sidebar</name>
+        <label><![CDATA[사이드바 사용]]></label>
+        <description><![CDATA[왼쪽 사이드바를 표시합니다.]]></description>
+        <type>BOOL</type>
+        <default>true</default>
+      </variable>
+      <variable>
+        <name>toc</name>
+        <label><![CDATA[목차 사용]]></label>
+        <description><![CDATA[글에 제목이 있을 때만 자동으로 표시됩니다.]]></description>
+        <type>BOOL</type>
+        <default>true</default>
+      </variable>
+      <variable>
+        <name>reading-progress</name>
+        <label><![CDATA[읽기 진행률 표시]]></label>
+        <description><![CDATA[화면 상단에 읽은 비율을 얇은 막대로 표시합니다.]]></description>
+        <type>BOOL</type>
+        <default>true</default>
+      </variable>
+      <variable>
+        <name>related-posts</name>
+        <label><![CDATA[관련 글 표시]]></label>
+        <description><![CDATA[글 하단에 같은 카테고리의 다른 글을 보여줍니다.]]></description>
+        <type>BOOL</type>
+        <default>true</default>
+      </variable>
+    </variablegroup>
+  </variables>
 </skin>

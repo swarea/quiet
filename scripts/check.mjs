@@ -161,6 +161,37 @@ try {
   fail("no duplicate ids", e.message);
 }
 
+// 8. index.xml uses only elements the official skin guide documents. Tistory
+//    rejects the whole file for an unknown element, so catch it here instead.
+const XML_ELEMENTS = new Set([
+  "skin", "information", "name", "version", "description", "license",
+  "author", "homepage", "email",
+  "default", "recentEntries", "recentComments", "recentTrackbacks",
+  "itemsOnGuestbook", "tagsInCloud", "sortInCloud", "expandComment",
+  "expandTrackback", "lengthOfRecentNotice", "lengthOfRecentEntry",
+  "lengthOfRecentComment", "lengthOfRecentTrackback", "lengthOfLink",
+  "showListOnCategory", "showListOnArchive", "commentMessage",
+  "trackbackMessage", "none", "single", "tree", "color", "bgColor",
+  "activeColor", "activeBgColor", "labelLength", "showValue", "contentWidth",
+  "cover", "item", "label",
+  "variables", "variablegroup", "variable", "type", "option",
+]);
+try {
+  const xml = await readFile(join(root, "src", "index.xml"), "utf8");
+  const stripped = xml
+    .replace(/<!\[CDATA\[[\s\S]*?\]\]>/g, "")
+    .replace(/<!--[\s\S]*?-->/g, "")
+    .replace(/<\?[\s\S]*?\?>/g, "");
+  const unknown = new Set();
+  for (const m of stripped.matchAll(/<\/?([a-zA-Z][a-zA-Z0-9]*)/g)) {
+    if (!XML_ELEMENTS.has(m[1])) unknown.add(m[1]);
+  }
+  if (unknown.size) fail("index.xml known elements", `unknown ${[...unknown].join(", ")}`);
+  else ok("index.xml known elements");
+} catch (e) {
+  fail("index.xml known elements", e.message);
+}
+
 // Report.
 if (!ran.length) {
   console.log("skipped: no applicable checks");
