@@ -217,7 +217,7 @@ if (!parsed.success) throw new Error("계약이 깨졌습니다: " + parsed.erro
     </table>
 
     <figure class="imageblock alignCenter">
-      <span class="ph" style="display:block;aspect-ratio:16/9;background:linear-gradient(135deg,#e4e2dd,#cdd4d0);border-radius:10px"></span>
+      <img src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='960' height='540'%3E%3Crect width='960' height='540' fill='%23dfe4e1'/%3E%3Ctext x='480' y='285' font-family='monospace' font-size='28' fill='%236b7078' text-anchor='middle'%3E960 %C3%97 540 sample%3C/text%3E%3C/svg%3E" alt="샘플 이미지">
       <figcaption>에디터가 붙이는 이미지 캡션</figcaption>
     </figure>
 

@@ -12,6 +12,7 @@ import { initPrune } from "./modules/prune";
 import { initNamecard } from "./modules/comments";
 import { initLayout } from "./modules/layout";
 import { initContent } from "./modules/content";
+import { initLightbox } from "./modules/lightbox";
 
 const boot = (): void => {
   const steps = [
@@ -21,6 +22,7 @@ const boot = (): void => {
     initCategory,
     initContent,
     initCodeCopy,
+    initLightbox,
     initToc,
     initScroll,
     initReveal,

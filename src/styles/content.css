@@ -149,3 +149,25 @@
 #sw-main .sw-article-body .hljs-deletion{color:#e88}
 #sw-main .sw-article-body .hljs-emphasis{font-style:italic;}
 #sw-main .sw-article-body .hljs-strong{font-weight:700;}
+
+/* ---- image lightbox -------------------------------------------------------
+   Added by script; without it images simply stay inline, so nothing here is
+   load-bearing for reading. */
+.sw-article-body img.sw-zoomable{cursor:zoom-in;}
+.sw-lightbox{
+  position:fixed; inset:0; z-index:80; display:none;
+  align-items:center; justify-content:center; padding:2rem;
+  background:rgba(10,12,16,.86);
+}
+.sw-lightbox.open{display:flex;}
+.sw-lightbox img{max-width:100%; max-height:100%; width:auto; height:auto; border-radius:var(--r-md); cursor:zoom-out;}
+.sw-lightbox .close{
+  position:absolute; top:1rem; right:1rem; width:40px; height:40px;
+  display:grid; place-items:center; border-radius:12px; color:#fff;
+  background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.2);
+}
+.sw-lightbox .close:hover{background:rgba(255,255,255,.22);}
+body.sw-lightbox-open{overflow:hidden;}
+@media (prefers-reduced-motion:no-preference){
+  .sw-lightbox.open img{animation:sw-rise .28s var(--ease) both;}
+}

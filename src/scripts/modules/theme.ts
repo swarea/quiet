@@ -18,9 +18,12 @@ function isDark(): boolean {
 }
 
 function paintIcons(): void {
-  const html = isDark() ? SUN : MOON;
+  const dark = isDark();
   document.querySelectorAll<HTMLElement>("[data-theme-toggle]").forEach((b) => {
-    b.innerHTML = html;
+    b.innerHTML = dark ? SUN : MOON;
+    // Name the button by what pressing it does, not by the state it is in —
+    // "테마 전환" alone tells a screen reader nothing about the outcome.
+    b.setAttribute("aria-label", dark ? "라이트 모드로 전환" : "다크 모드로 전환");
   });
 }
 
