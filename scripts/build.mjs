@@ -90,9 +90,28 @@ async function buildSkinPackage() {
   await writeFile(join(distDir, "style.css"), css);
   await writeFile(join(distDir, "images", "app.js"), js);
 
+  // Static assets (preview thumbnails, icons) ship alongside. Generate the
+  // previews once with scripts/make-previews.html and drop them in src/assets.
+  const assetDir = join(root, "src", "assets");
+  const copied = [];
+  try {
+    for (const name of await readdir(assetDir)) {
+      if (name.endsWith(".md")) continue; // notes for maintainers, not assets
+      await writeFile(join(distDir, name), await readFile(join(assetDir, name)));
+      copied.push(name);
+    }
+  } catch {
+    /* no assets yet */
+  }
+
   console.log("built tistory package → dist");
-  for (const f of ["skin.html", "index.xml", "style.css", "images/app.js"]) {
+  for (const f of ["skin.html", "index.xml", "style.css", "images/app.js", ...copied]) {
     console.log(`  ${f}`);
+  }
+  const previews = ["preview256.jpg", "preview560.jpg", "preview1600.jpg"];
+  const missing = previews.filter((p) => !copied.includes(p));
+  if (missing.length) {
+    console.log(`  note: no ${missing.join(", ")} — open scripts/make-previews.html to generate`);
   }
 }
 

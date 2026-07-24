@@ -1,0 +1,111 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>swarea skin — preview image generator</title>
+<!--
+  Tistory shows a skin thumbnail in the skin editor and skin list. It wants
+  preview256.jpg (256x192), preview560.jpg (560x420) and preview1600.jpg
+  (1600x1200). We have no image toolchain in the build, so the thumbnails are
+  drawn here with the canvas API and downloaded, then committed to src/assets/.
+
+  Open this file in a browser and press the button. Re-run it whenever the
+  skin's colours or layout change materially.
+-->
+<style>
+  body{font:15px/1.6 system-ui,sans-serif;margin:2rem;color:#191b1f}
+  button{font:inherit;font-weight:600;background:#38548c;color:#fff;border:0;border-radius:6px;padding:.6rem 1.1rem;cursor:pointer}
+  canvas{border:1px solid #e6e6e2;margin-top:1rem;max-width:100%}
+</style>
+<h1>Preview images</h1>
+<p>Generates the three JPEG thumbnails Tistory uses. Save them into <code>src/assets/</code>.</p>
+<button id="go" type="button">Generate and download</button>
+<div id="out"></div>
+<script>
+  const C = {
+    paper: "#f6f6f4", surface: "#ffffff", line: "#e6e6e2", wash: "#eef1f7",
+    ink: "#191b1f", muted: "#565b62", faint: "#6b7078", accent: "#38548c",
+  };
+
+  function roundRect(x, x1, y1, w1, h1, r) {
+    x.beginPath();
+    x.moveTo(x1 + r, y1);
+    x.arcTo(x1 + w1, y1, x1 + w1, y1 + h1, r);
+    x.arcTo(x1 + w1, y1 + h1, x1, y1 + h1, r);
+    x.arcTo(x1, y1 + h1, x1, y1, r);
+    x.arcTo(x1, y1, x1 + w1, y1, r);
+    x.closePath();
+  }
+
+  // Draws a flat abstraction of the skin: sidebar rail on the left, centred
+  // title, then hairline-separated post rows. Design coordinates assume a
+  // 560px wide canvas and scale from there.
+  function draw(w, h) {
+    const c = document.createElement("canvas");
+    c.width = w; c.height = h;
+    const x = c.getContext("2d");
+    const s = w / 560;
+    x.fillStyle = C.paper; x.fillRect(0, 0, w, h);
+
+    const railW = 150 * s;
+    x.fillStyle = C.surface; x.fillRect(0, 0, railW, h);
+    x.strokeStyle = C.line; x.lineWidth = Math.max(1, s);
+    x.beginPath(); x.moveTo(railW, 0); x.lineTo(railW, h); x.stroke();
+
+    x.fillStyle = C.accent; roundRect(x, 16 * s, 18 * s, 22 * s, 22 * s, 6 * s); x.fill();
+    x.fillStyle = C.ink; x.fillRect(46 * s, 22 * s, 62 * s, 6 * s);
+    x.fillStyle = C.faint; x.fillRect(46 * s, 33 * s, 46 * s, 4 * s);
+    x.fillStyle = "#efefec"; roundRect(x, 16 * s, 54 * s, railW - 32 * s, 18 * s, 5 * s); x.fill();
+
+    let y = 88 * s;
+    x.fillStyle = C.faint; x.fillRect(16 * s, y, 34 * s, 4 * s); y += 14 * s;
+    for (let i = 0; i < 6; i++) {
+      if (i === 0) {
+        x.fillStyle = C.wash; roundRect(x, 12 * s, y - 5 * s, railW - 24 * s, 16 * s, 4 * s); x.fill();
+        x.fillStyle = C.accent;
+      } else x.fillStyle = C.muted;
+      x.fillRect(16 * s, y, (i === 0 ? 66 : 52 + (i * 5) % 34) * s, 5 * s);
+      y += 20 * s;
+    }
+
+    const cx = railW + 40 * s;
+    x.fillStyle = C.ink; x.fillRect(cx + 90 * s, 40 * s, 150 * s, 13 * s);
+    x.fillStyle = C.faint; x.fillRect(cx + 118 * s, 62 * s, 94 * s, 5 * s);
+    x.strokeStyle = C.line;
+    x.beginPath(); x.moveTo(railW + 20 * s, 86 * s); x.lineTo(w - 20 * s, 86 * s); x.stroke();
+
+    y = 108 * s;
+    for (let i = 0; i < 3; i++) {
+      x.fillStyle = C.faint; x.fillRect(cx, y + 4 * s, 26 * s, 5 * s);
+      x.fillStyle = C.accent; x.fillRect(cx + 44 * s, y, 40 * s, 5 * s);
+      x.fillStyle = C.ink; x.fillRect(cx + 44 * s, y + 12 * s, (150 - i * 22) * s, 7 * s);
+      x.fillStyle = C.muted;
+      x.fillRect(cx + 44 * s, y + 26 * s, (210 - i * 30) * s, 4 * s);
+      x.fillRect(cx + 44 * s, y + 35 * s, (170 - i * 24) * s, 4 * s);
+      x.strokeStyle = C.line;
+      x.beginPath(); x.moveTo(cx, y + 52 * s); x.lineTo(w - 20 * s, y + 52 * s); x.stroke();
+      y += 68 * s;
+    }
+    return c;
+  }
+
+  const SIZES = [
+    ["preview256.jpg", 256, 192],
+    ["preview560.jpg", 560, 420],
+    ["preview1600.jpg", 1600, 1200],
+  ];
+
+  document.getElementById("go").addEventListener("click", () => {
+    const out = document.getElementById("out");
+    out.textContent = "";
+    for (const [name, w, h] of SIZES) {
+      const canvas = draw(w, h);
+      canvas.toBlob((blob) => {
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = name;
+        a.click();
+        setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+      }, "image/jpeg", 0.85);
+      if (w <= 560) out.appendChild(canvas);
+    }
+  });
+</script>

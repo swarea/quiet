@@ -13,8 +13,16 @@ reading-first. Built from scratch; not a derivative of any existing skin.
 npm install
 npm run preview   # build + serve the mock preview at http://localhost:4321
 npm run build     # build the mock preview into preview/dist
-npm run check     # validation gate (bundle, styles, required files, markers)
+npm run check     # validation gate (9 checks; see scripts/check.mjs)
 ```
+
+The build writes the installable Tistory package to `dist/`
+(`skin.html`, `index.xml`, `style.css`, `images/app.js`). Upload those four
+files in the blog's skin editor.
+
+Skin thumbnails are generated once by opening `scripts/make-previews.html` in a
+browser and pressing the button; drop the resulting JPEGs into `src/assets/` and
+every build packages them.
 
 ## Documents
 
