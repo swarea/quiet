@@ -66,9 +66,10 @@
 .sw-article-body .link_title,.sw-article-body figure.fileblock .name{font-weight:600; color:var(--ink);}
 .sw-article-body .link_url,.sw-article-body figure.fileblock .size{font-size:.82rem; color:var(--muted);}
 
-/* Editor spacer paragraphs are common and would otherwise stack blank gaps. */
-.sw-article-body p:empty{margin:0;}
-.sw-article-body p > br:only-child{display:none;}
+/* Tistory zeroes <p> margins inside .tt_article_useless_p_margin on purpose:
+   the editor emits one paragraph per line and represents a blank line as its
+   own paragraph. Do not fight that, and never collapse those spacers — they
+   are the author's paragraph breaks. */
 
 /* ---- print ----------------------------------------------------------------
    A reading-first blog should produce a clean sheet of paper: content only,
@@ -96,3 +97,55 @@
   .sw-article-body h2,.sw-article-body h3{break-after:avoid;}
   .sw-article-body figure,.sw-article-body pre,.sw-tbl-wrap{break-inside:avoid;}
 }
+
+/* ---- surviving Tistory's own stylesheets ----------------------------------
+   Tistory loads content.css, index.css, uselessPMargin.css and others *after*
+   our style.css, and they reset heading weight and element spacing inside the
+   post body. Class-level selectors lose that cascade, so these carry the
+   layout id. Verified against a live post. */
+#sw-main .sw-article-body h1,
+#sw-main .sw-article-body h2,
+#sw-main .sw-article-body h3,
+#sw-main .sw-article-body h4,
+#sw-main .sw-article-body h5,
+#sw-main .sw-article-body h6{
+  color:var(--ink); font-weight:700; letter-spacing:-.01em; text-wrap:balance;
+}
+#sw-main .sw-article-body h1{font-size:1.75rem; line-height:1.35; margin:2.2em 0 .7em;}
+#sw-main .sw-article-body h2{font-size:1.5rem; line-height:1.4; margin:2.3em 0 .7em;}
+#sw-main .sw-article-body h3{font-size:1.2rem; line-height:1.45; margin:1.9em 0 .6em;}
+#sw-main .sw-article-body h4{font-size:1.06rem; line-height:1.5; margin:1.7em 0 .5em;}
+#sw-main .sw-article-body h5{font-size:.98rem; line-height:1.5; margin:1.5em 0 .45em; color:var(--ink-2);}
+#sw-main .sw-article-body h6{font-size:.9rem; line-height:1.5; margin:1.4em 0 .4em; color:var(--muted); letter-spacing:.02em;}
+#sw-main .sw-article-body b,
+#sw-main .sw-article-body strong{font-weight:700; color:var(--ink);}
+#sw-main .sw-article-body figure{margin:1.9em 0;}
+#sw-main .sw-article-body blockquote{margin:1.7em 0;}
+
+/* ---- syntax highlighting --------------------------------------------------
+   Tistory always loads the light `atom-one-light` highlight.js theme, which
+   drops a pale block inside our dark code frame and is unreadable in dark
+   mode. Neutralise its surface and restate the token colours to match the
+   frame, so highlighted code looks the same in both themes. */
+#sw-main .sw-article-body .hljs{background:none; color:#d7dee8; padding:0;}
+#sw-main .sw-article-body .hljs-comment,
+#sw-main .sw-article-body .hljs-quote{color:#6b7688; font-style:italic;}
+#sw-main .sw-article-body .hljs-keyword,
+#sw-main .sw-article-body .hljs-selector-tag,
+#sw-main .sw-article-body .hljs-literal,
+#sw-main .sw-article-body .hljs-type{color:#c493e8;}
+#sw-main .sw-article-body .hljs-string,
+#sw-main .sw-article-body .hljs-addition,
+#sw-main .sw-article-body .hljs-regexp{color:#8fd3a0;}
+#sw-main .sw-article-body .hljs-title,
+#sw-main .sw-article-body .hljs-function,
+#sw-main .sw-article-body .hljs-section,
+#sw-main .sw-article-body .hljs-name{color:#78b6f0;}
+#sw-main .sw-article-body .hljs-number,
+#sw-main .sw-article-body .hljs-built_in,
+#sw-main .sw-article-body .hljs-attr,
+#sw-main .sw-article-body .hljs-attribute,
+#sw-main .sw-article-body .hljs-variable{color:#e0a06a;}
+#sw-main .sw-article-body .hljs-deletion{color:#e88}
+#sw-main .sw-article-body .hljs-emphasis{font-style:italic;}
+#sw-main .sw-article-body .hljs-strong{font-weight:700;}
