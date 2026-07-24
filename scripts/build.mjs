@@ -16,7 +16,8 @@ const outDir = join(root, "preview", "dist");
 const serve = process.argv.includes("--serve");
 
 // Order matters: tokens first, then base, then component layers.
-const STYLE_ORDER = ["tokens", "base", "layout", "home", "article", "states"];
+const STYLE_ORDER = ["tokens", "base", "layout", "home", "article", "states", "tistory"];
+const distDir = join(root, "dist");
 
 async function buildCss() {
   const parts = [];
@@ -74,6 +75,27 @@ async function build() {
   for (const f of list) console.log(`  ${f}`);
 }
 
+// The installable Tistory package. skin.html and index.xml are copied
+// byte-identical so no substitution token or <s_*> tag can be altered.
+async function buildSkinPackage() {
+  await rm(distDir, { recursive: true, force: true });
+  await mkdir(join(distDir, "images"), { recursive: true });
+
+  const [css, js] = await Promise.all([buildCss(), buildJs()]);
+  const skin = await readFile(join(root, "src", "skin.html"));
+  const indexXml = await readFile(join(root, "src", "index.xml"));
+
+  await writeFile(join(distDir, "skin.html"), skin);
+  await writeFile(join(distDir, "index.xml"), indexXml);
+  await writeFile(join(distDir, "style.css"), css);
+  await writeFile(join(distDir, "images", "app.js"), js);
+
+  console.log("built tistory package → dist");
+  for (const f of ["skin.html", "index.xml", "style.css", "images/app.js"]) {
+    console.log(`  ${f}`);
+  }
+}
+
 const MIME = {
   ".html": "text/html; charset=utf-8",
   ".css": "text/css; charset=utf-8",
@@ -100,4 +122,5 @@ async function startServer() {
 }
 
 await build();
+await buildSkinPackage();
 if (serve) await startServer();

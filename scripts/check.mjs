@@ -42,7 +42,7 @@ try {
 
 // 2. CSS compiles without syntax errors.
 try {
-  const files = ["tokens", "base", "layout", "home", "article", "states"];
+  const files = ["tokens", "base", "layout", "home", "article", "states", "tistory"];
   const parts = [];
   for (const f of files) parts.push(await readFile(join(root, "src", "styles", `${f}.css`), "utf8"));
   transform({ filename: "check.css", code: Buffer.from(parts.join("\n")), minify: false });
@@ -82,6 +82,83 @@ try {
   else ok("no todo markers");
 } catch (e) {
   fail("no todo markers", e.message);
+}
+
+// 5. Tistory tokens and <s_*> tags survive the build byte-identical.
+const TOKEN = /\[##_[a-zA-Z0-9_-]+_##\]/g;
+const STAG = /<\/?s_[a-zA-Z0-9_]+/g;
+try {
+  const src = await readFile(join(root, "src", "skin.html"), "utf8");
+  let dist;
+  try {
+    dist = await readFile(join(root, "dist", "skin.html"), "utf8");
+  } catch {
+    dist = null;
+  }
+  if (dist === null) {
+    ran.push("token preservation (skipped: no dist, run npm run build)");
+  } else {
+    const count = (text, re) => {
+      const m = text.match(re) ?? [];
+      const out = new Map();
+      for (const x of m) out.set(x, (out.get(x) ?? 0) + 1);
+      return out;
+    };
+    const diff = (a, b, kind) => {
+      const bad = [];
+      for (const [k, v] of a) if ((b.get(k) ?? 0) !== v) bad.push(`${kind} ${k}`);
+      for (const k of b.keys()) if (!a.has(k)) bad.push(`${kind} ${k} (extra)`);
+      return bad;
+    };
+    const problems = [
+      ...diff(count(src, TOKEN), count(dist, TOKEN), "token"),
+      ...diff(count(src, STAG), count(dist, STAG), "tag"),
+    ];
+    if (problems.length) fail("token preservation", problems.slice(0, 5).join(", "));
+    else ok("token preservation");
+  }
+} catch (e) {
+  fail("token preservation", e.message);
+}
+
+// 6. index.xml is well-formed (tag balance, CDATA aware).
+try {
+  const xml = await readFile(join(root, "src", "index.xml"), "utf8");
+  const stripped = xml
+    .replace(/<!\[CDATA\[[\s\S]*?\]\]>/g, "")
+    .replace(/<!--[\s\S]*?-->/g, "")
+    .replace(/<\?[\s\S]*?\?>/g, "");
+  const stack = [];
+  let bad = null;
+  for (const m of stripped.matchAll(/<(\/?)([a-zA-Z0-9_:-]+)[^>]*?(\/?)>/g)) {
+    const [, closing, name, selfClose] = m;
+    if (selfClose) continue;
+    if (closing) {
+      if (stack.pop() !== name) { bad = `unbalanced </${name}>`; break; }
+    } else stack.push(name);
+  }
+  if (!bad && stack.length) bad = `unclosed <${stack[stack.length - 1]}>`;
+  if (bad) fail("index.xml well-formed", bad);
+  else ok("index.xml well-formed");
+} catch (e) {
+  fail("index.xml well-formed", e.message);
+}
+
+// 7. No duplicate static HTML ids in skin.html (ids containing a token are
+//    generated per item by Tistory and are excluded).
+try {
+  const src = await readFile(join(root, "src", "skin.html"), "utf8");
+  const seen = new Map();
+  for (const m of src.matchAll(/\sid="([^"]+)"/g)) {
+    const id = m[1];
+    if (id.includes("[##_")) continue;
+    seen.set(id, (seen.get(id) ?? 0) + 1);
+  }
+  const dupes = [...seen.entries()].filter(([, n]) => n > 1).map(([id]) => id);
+  if (dupes.length) fail("no duplicate ids", dupes.join(", "));
+  else ok("no duplicate ids");
+} catch (e) {
+  fail("no duplicate ids", e.message);
 }
 
 // Report.

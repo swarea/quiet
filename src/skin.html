@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>[##_page_title_##]</title>
+  <link rel="alternate" type="application/rss+xml" title="[##_title_##]" href="[##_rss_url_##]">
+  <link rel="stylesheet" href="./style.css">
+  <script>
+    /* Resolve the theme before first paint so the page never flashes. */
+    (function () {
+      try {
+        var pref = "[##_var_theme-default_##]";
+        var stored = localStorage.getItem("sw-theme");
+        var dark;
+        if (pref === "dark" || pref === "light") dark = pref === "dark";
+        if (stored) dark = stored === "dark";
+        if (dark === undefined) dark = matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+      } catch (e) {}
+    })();
+  </script>
+</head>
+
+<body id="[##_body_id_##]">
+<s_t3>
+  <a class="sw-skip" href="#sw-main">본문으로 건너뛰기</a>
+  <s_if_var_reading-progress><div id="sw-progress"></div></s_if_var_reading-progress>
+
+  <div class="sw-shell">
+
+    <!-- ============ SIDEBAR ============ -->
+    <aside class="sw-rail" id="sw-rail" aria-label="블로그 내비게이션">
+      <div class="sw-brand">
+        <a href="[##_blog_link_##]"><img class="sw-avatar" src="[##_image_##]" width="42" height="42" alt=""></a>
+        <div>
+          <div class="name"><a href="[##_blog_link_##]">[##_title_##]</a></div>
+          <div class="tag">[##_desc_##]</div>
+        </div>
+      </div>
+
+      <s_sidebar>
+        <s_sidebar_element>
+          <s_search>
+            <form class="sw-search" role="search" onsubmit="return false">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+              <label class="sw-sr" for="sw-search-input">검색</label>
+              <input id="sw-search-input" name="[##_search_name_##]" value="[##_search_text_##]" placeholder="검색" autocomplete="off"
+                     onkeypress="if (event.keyCode == 13) { [##_search_onclick_submit_##] }">
+              <kbd>/</kbd>
+            </form>
+          </s_search>
+        </s_sidebar_element>
+
+        <s_sidebar_element>
+          <div class="sw-counts">
+            <span>전체 <b>[##_count_total_##]</b></span>
+            <span>오늘 <b>[##_count_today_##]</b></span>
+            <span>어제 <b>[##_count_yesterday_##]</b></span>
+          </div>
+        </s_sidebar_element>
+
+        <s_sidebar_element>
+          <nav aria-label="카테고리">
+            <div class="sw-nav-label">Categories</div>
+            <div class="sw-cat-tistory">[##_category_list_##]</div>
+          </nav>
+        </s_sidebar_element>
+
+        <s_sidebar_element>
+          <nav aria-label="블로그 메뉴">
+            <div class="sw-nav-label">Menu</div>
+            <div class="sw-menu-tistory">[##_blog_menu_##]</div>
+          </nav>
+        </s_sidebar_element>
+
+        <s_sidebar_element>
+          <s_rct_notice>
+            <nav aria-label="공지사항">
+              <div class="sw-nav-label">Notice</div>
+              <ul class="sw-side-list">
+                <s_rct_notice_rep>
+                  <li><a href="[##_notice_rep_link_##]">[##_notice_rep_title_##]</a></li>
+                </s_rct_notice_rep>
+              </ul>
+            </nav>
+          </s_rct_notice>
+        </s_sidebar_element>
+
+        <s_sidebar_element>
+          <nav aria-label="인기 글">
+            <div class="sw-nav-label">Popular</div>
+            <ul class="sw-side-list">
+              <s_rctps_popular_rep>
+                <li><a href="[##_rctps_rep_link_##]">[##_rctps_rep_title_##]</a><time>[##_rctps_rep_simple_date_##]</time></li>
+              </s_rctps_popular_rep>
+            </ul>
+          </nav>
+        </s_sidebar_element>
+
+        <s_sidebar_element>
+          <nav aria-label="최근 글">
+            <div class="sw-nav-label">Recent</div>
+            <ul class="sw-side-list">
+              <s_rctps_rep>
+                <li><a href="[##_rctps_rep_link_##]">[##_rctps_rep_title_##]</a><time>[##_rctps_rep_simple_date_##]</time></li>
+              </s_rctps_rep>
+            </ul>
+          </nav>
+        </s_sidebar_element>
+
+        <s_sidebar_element>
+          <nav aria-label="최근 댓글">
+            <div class="sw-nav-label">Comments</div>
+            <ul class="sw-side-list">
+              <s_rctrp_rep>
+                <li><a href="[##_rctrp_rep_link_##]">[##_rctrp_rep_desc_##]</a><span class="by">[##_rctrp_rep_name_##]</span></li>
+              </s_rctrp_rep>
+            </ul>
+          </nav>
+        </s_sidebar_element>
+
+        <s_sidebar_element>
+          <nav aria-label="태그">
+            <div class="sw-nav-label">Tags</div>
+            <div class="sw-taglabel">
+              <s_random_tags>
+                <a class="[##_tag_class_##]" href="[##_tag_link_##]">[##_tag_name_##]</a>
+              </s_random_tags>
+            </div>
+          </nav>
+        </s_sidebar_element>
+      </s_sidebar>
+
+      <div class="sw-rail-foot">
+        <span>© [##_title_##]</span>
+        <span class="links">
+          <a class="sw-icon-btn" href="[##_rss_url_##]" aria-label="RSS"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        </span>
+      </div>
+    </aside>
+    <div class="sw-scrim" id="sw-scrim" hidden></div>
+
+    <!-- ============ CONTENT ============ -->
+    <div class="sw-content" id="sw-main" tabindex="-1">
+      <div class="sw-topbar">
+        <button class="sw-icon-btn" id="sw-menu-btn" type="button" aria-label="메뉴 열기" aria-expanded="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+        <span class="name">[##_title_##]</span>
+        <span class="spacer"></span>
+        <button class="sw-icon-btn" type="button" data-theme-toggle aria-label="테마 전환"></button>
+      </div>
+
+      <!-- ---------- HOME COVERS ---------- -->
+      <s_cover_group>
+        <s_cover_rep>
+          <s_cover name="list">
+            <section class="sw-wrap sw-recent" aria-label="[##_cover_title_##]">
+              <div class="sw-section-tag"><h2>[##_cover_title_##]</h2></div>
+              <s_cover_item>
+                <a class="sw-post-row" href="[##_cover_item_url_##]">
+                  <s_cover_item_article_info>
+                    <time>[##_cover_item_simple_date_##]</time>
+                    <div>
+                      <span class="cat">[##_cover_item_category_##]</span>
+                      <h4>[##_cover_item_title_##]</h4>
+                      <p>[##_cover_item_summary_##]</p>
+                    </div>
+                  </s_cover_item_article_info>
+                  <s_cover_item_not_article_info>
+                    <time></time>
+                    <div>
+                      <h4>[##_cover_item_title_##]</h4>
+                      <p>[##_cover_item_summary_##]</p>
+                    </div>
+                  </s_cover_item_not_article_info>
+                </a>
+              </s_cover_item>
+            </section>
+          </s_cover>
+
+          <s_cover name="grid">
+            <section class="sw-wrap sw-topics" aria-label="[##_cover_title_##]">
+              <div class="sw-section-tag"><h2>[##_cover_title_##]</h2></div>
+              <div class="sw-lanes">
+                <s_cover_item>
+                  <div class="sw-lane">
+                    <s_cover_item_article_info>
+                      <h3>[##_cover_item_category_##]</h3>
+                      <a class="item" href="[##_cover_item_url_##]">[##_cover_item_title_##]</a>
+                    </s_cover_item_article_info>
+                    <s_cover_item_not_article_info>
+                      <a class="item" href="[##_cover_item_url_##]">[##_cover_item_title_##]</a>
+                    </s_cover_item_not_article_info>
+                  </div>
+                </s_cover_item>
+              </div>
+            </section>
+          </s_cover>
+        </s_cover_rep>
+      </s_cover_group>
+
+      <!-- ---------- NOTICE ---------- -->
+      <s_notice_rep>
+        <s_index_article_rep>
+          <div class="sw-wrap sw-recent">
+            <a class="sw-post-row" href="[##_notice_rep_link_##]">
+              <time>[##_notice_rep_date_##]</time>
+              <div>
+                <span class="cat">공지</span>
+                <h4>[##_notice_rep_title_##]</h4>
+                <p>[##_notice_rep_summary_##]</p>
+              </div>
+            </a>
+          </div>
+        </s_index_article_rep>
+
+        <s_permalink_article_rep>
+          <article>
+            <header class="sw-article-head">
+              <div class="cover" aria-hidden="true"></div>
+              <div class="inner">
+                <span class="sw-crumb">공지</span>
+                <h1>[##_notice_rep_title_##]</h1>
+                <div class="sw-byline"><span>[##_notice_rep_date_##]</span></div>
+              </div>
+            </header>
+            <div class="sw-article-body">[##_notice_rep_desc_##]</div>
+          </article>
+        </s_permalink_article_rep>
+      </s_notice_rep>
+
+      <!-- ---------- ARTICLE / PAGE / PROTECTED ---------- -->
+      <s_article_rep>
+        <s_permalink_article_rep>
+          <article>
+            <header class="sw-article-head">
+              <s_article_rep_thumbnail><div class="cover" aria-hidden="true"></div></s_article_rep_thumbnail>
+              <div class="inner">
+                <a class="sw-crumb" href="[##_article_rep_category_link_##]">[##_article_rep_category_##]</a>
+                <h1>[##_article_rep_title_##]</h1>
+                <div class="sw-byline">
+                  <span>[##_article_rep_date_##]</span>
+                  <span class="admin"><s_ad_div><a href="[##_s_ad_m_link_##]">수정</a> · <a href="#" onclick="[##_s_ad_d_onclick_##]">삭제</a> · <a href="#" onclick="[##_s_ad_s2_onclick_##]">[##_s_ad_s1_label_##]</a></s_ad_div></span>
+                </div>
+              </div>
+            </header>
+
+            <div class="sw-article-body">[##_article_rep_desc_##]</div>
+
+            <div class="sw-article-foot">
+              <s_tag_label><div class="sw-taglabel">[##_tag_label_rep_##]</div></s_tag_label>
+
+              <div class="sw-author">
+                <img class="sw-avatar" src="[##_image_##]" width="52" height="52" alt="">
+                <div><div class="n">[##_blogger_##]</div><div class="b">[##_desc_##]</div></div>
+              </div>
+
+              <s_if_var_related-posts>
+                <s_article_related>
+                  <div class="sw-related">
+                    <div class="sw-section-tag"><h2>'[##_article_rep_category_##]' 카테고리의 다른 글</h2></div>
+                    <ul>
+                      <s_article_related_rep>
+                        <li><a href="[##_article_related_rep_link_##]"><span>[##_article_related_rep_title_##]</span></a></li>
+                      </s_article_related_rep>
+                    </ul>
+                  </div>
+                </s_article_related>
+              </s_if_var_related-posts>
+            </div>
+
+            <!-- comments -->
+            <s_rp>
+              <section class="sw-comments" aria-label="댓글">
+                <s_rp_input_form>
+                  <form class="sw-cbox" onsubmit="return false">
+                    <label class="sw-sr" for="sw-rp-text">댓글 입력</label>
+                    <textarea id="sw-rp-text" name="[##_rp_input_comment_##]" placeholder="댓글을 남겨주세요"></textarea>
+                    <div class="cfields">
+                      <s_rp_member>
+                        <s_rp_guest>
+                          <label class="sw-sr" for="sw-rp-name">이름</label>
+                          <input id="sw-rp-name" name="[##_rp_input_name_##]" value="[##_guest_name_##]" placeholder="이름" autocomplete="name">
+                          <label class="sw-sr" for="sw-rp-pw">비밀번호</label>
+                          <input id="sw-rp-pw" type="password" maxlength="8" name="[##_rp_input_password_##]" value="[##_guest_password_##]" placeholder="비밀번호" autocomplete="off">
+                        </s_rp_guest>
+                      </s_rp_member>
+                      <label class="sw-secret" for="sw-rp-secret"><input id="sw-rp-secret" type="checkbox" name="[##_rp_input_is_secret_##]">비밀글</label>
+                      <button type="button" class="submit" onclick="[##_rp_onclick_submit_##]">등록</button>
+                    </div>
+                  </form>
+                </s_rp_input_form>
+
+                <s_rp_container>
+                  <s_rp_rep>
+                    <div class="sw-comment [##_rp_rep_class_##]" id="[##_rp_rep_id_##]">
+                      <div class="av" aria-hidden="true"><img src="[##_rp_rep_logo_##]" width="38" height="38" alt=""></div>
+                      <div>
+                        <div><span class="who">[##_rp_rep_name_##]</span><span class="when">[##_rp_rep_date_##]</span></div>
+                        <div class="txt">[##_rp_rep_desc_##]</div>
+                        <div class="act">
+                          <button type="button" onclick="[##_rp_rep_onclick_delete_##]">수정/삭제</button>
+                          <button type="button" onclick="[##_rp_rep_onclick_reply_##]">답글</button>
+                        </div>
+                      </div>
+                    </div>
+                    <s_rp2_container>
+                      <s_rp2_rep>
+                        <div class="sw-comment reply [##_rp_rep_class_##]" id="[##_rp_rep_id_##]">
+                          <div class="av" aria-hidden="true"><img src="[##_rp_rep_logo_##]" width="38" height="38" alt=""></div>
+                          <div>
+                            <div><span class="who">[##_rp_rep_name_##]</span><span class="when">[##_rp_rep_date_##]</span></div>
+                            <div class="txt">[##_rp_rep_desc_##]</div>
+                            <div class="act"><button type="button" onclick="[##_rp_rep_onclick_delete_##]">수정/삭제</button></div>
+                          </div>
+                        </div>
+                      </s_rp2_rep>
+                    </s_rp2_container>
+                  </s_rp_rep>
+                </s_rp_container>
+              </section>
+            </s_rp>
+          </article>
+        </s_permalink_article_rep>
+
+        <!-- static page -->
+        <s_page_rep>
+          <article>
+            <header class="sw-article-head">
+              <div class="cover" aria-hidden="true"></div>
+              <div class="inner"><h1>[##_article_rep_title_##]</h1></div>
+            </header>
+            <div class="sw-article-body">[##_article_rep_desc_##]</div>
+            <div class="sw-article-foot"></div>
+          </article>
+        </s_page_rep>
+
+        <!-- protected post -->
+        <s_article_protected>
+          <s_permalink_article_rep>
+            <main class="sw-protected">
+              <div class="lock" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div>
+              <h1>보호되어 있는 글입니다</h1>
+              <p>내용을 보시려면 비밀번호를 입력하세요.</p>
+              <form onsubmit="return false">
+                <label for="[##_article_password_##]">비밀번호</label>
+                <input id="[##_article_password_##]" name="[##_article_password_##]" type="password" maxlength="16" placeholder="비밀번호"
+                       onkeydown="if (event.keyCode == 13) [##_article_dissolve_##]">
+                <button type="button" onclick="[##_article_dissolve_##]">확인</button>
+              </form>
+            </main>
+          </s_permalink_article_rep>
+        </s_article_protected>
+      </s_article_rep>
+
+      <!-- ---------- TAG INDEX ---------- -->
+      <s_tag>
+        <main>
+          <header class="sw-article-head">
+            <div class="cover" aria-hidden="true"></div>
+            <div class="inner"><h1>태그</h1></div>
+          </header>
+          <div class="sw-wrap">
+            <section class="sw-tagcloud" aria-label="태그 목록">
+              <ul>
+                <s_tag_rep>
+                  <li><a class="[##_tag_class_##]" href="[##_tag_link_##]"><span class="name">[##_tag_name_##]</span></a></li>
+                </s_tag_rep>
+              </ul>
+            </section>
+          </div>
+        </main>
+      </s_tag>
+
+      <!-- ---------- LIST (category / search / archive) ---------- -->
+      <s_list>
+        <main>
+          <header class="sw-article-head">
+            <s_list_image><div class="cover" aria-hidden="true"></div></s_list_image>
+            <div class="inner">
+              <h1>[##_list_conform_##]</h1>
+              <div class="sw-byline"><span>[##_list_description_##]</span></div>
+            </div>
+          </header>
+          <div class="sw-wrap">
+            <section class="sw-recent" aria-label="글 목록">
+              <s_list_rep>
+                <a class="sw-post-row" href="[##_list_rep_link_##]">
+                  <time>[##_list_rep_regdate_##]</time>
+                  <div>
+                    <span class="cat">[##_list_rep_category_##]</span>
+                    <h4>[##_list_rep_title_##]</h4>
+                    <p>[##_list_rep_summary_##]</p>
+                  </div>
+                </a>
+              </s_list_rep>
+            </section>
+          </div>
+        </main>
+      </s_list>
+
+      <!-- ---------- PAGING ---------- -->
+      <s_paging>
+        <nav class="sw-paging" aria-label="페이지">
+          <a class="edge [##_no_more_prev_##]" [##_prev_page_##] aria-label="이전 페이지">‹</a>
+          <s_paging_rep>
+            <a [##_paging_rep_link_##]>[##_paging_rep_link_num_##]</a>
+          </s_paging_rep>
+          <a class="edge [##_no_more_next_##]" [##_next_page_##] aria-label="다음 페이지">›</a>
+        </nav>
+      </s_paging>
+
+      <!-- ---------- GUESTBOOK ---------- -->
+      <s_guest>
+        <main>
+          <header class="sw-article-head">
+            <div class="cover" aria-hidden="true"></div>
+            <div class="inner"><h1>방명록</h1></div>
+          </header>
+          <section class="sw-comments" aria-label="방명록">
+            <s_guest_input_form>
+              <form class="sw-cbox" onsubmit="return false">
+                <label class="sw-sr" for="sw-gb-text">방명록 입력</label>
+                <textarea id="sw-gb-text" name="[##_guest_textarea_body_##]" placeholder="방명록을 남겨주세요"></textarea>
+                <div class="cfields">
+                  <s_guest_member>
+                    <s_guest_form>
+                      <label class="sw-sr" for="sw-gb-name">이름</label>
+                      <input id="sw-gb-name" name="[##_guest_input_name_##]" value="[##_guest_name_##]" placeholder="이름" autocomplete="name">
+                      <label class="sw-sr" for="sw-gb-pw">비밀번호</label>
+                      <input id="sw-gb-pw" type="password" maxlength="8" name="[##_guest_input_password_##]" value="[##_guest_password_##]" placeholder="비밀번호" autocomplete="off">
+                    </s_guest_form>
+                  </s_guest_member>
+                  <label class="sw-secret" for="sw-gb-secret"><input id="sw-gb-secret" type="checkbox" name="[##_guest_input_is_secret_##]">비밀글</label>
+                  <button type="button" class="submit" onclick="[##_guest_onclick_submit_##]">등록</button>
+                </div>
+              </form>
+            </s_guest_input_form>
+
+            <s_guest_container>
+              <s_guest_rep>
+                <div class="sw-comment [##_guest_rep_class_##]" id="[##_guest_rep_id_##]">
+                  <div class="av" aria-hidden="true"><img src="[##_guest_rep_logo_##]" width="38" height="38" alt=""></div>
+                  <div>
+                    <div><span class="who">[##_guest_rep_name_##]</span><span class="when">[##_guest_rep_date_##]</span></div>
+                    <div class="txt">[##_guest_rep_desc_##]</div>
+                    <div class="act">
+                      <button type="button" onclick="[##_guest_rep_onclick_delete_##]">수정/삭제</button>
+                      <button type="button" onclick="[##_guest_rep_onclick_reply_##]">답글</button>
+                    </div>
+                  </div>
+                </div>
+                <s_guest_reply_container>
+                  <s_guest_reply_rep>
+                    <div class="sw-comment reply [##_guest_rep_class_##]" id="[##_guest_rep_id_##]">
+                      <div class="av" aria-hidden="true"><img src="[##_guest_rep_logo_##]" width="38" height="38" alt=""></div>
+                      <div>
+                        <div><span class="who">[##_guest_rep_name_##]</span><span class="when">[##_guest_rep_date_##]</span></div>
+                        <div class="txt">[##_guest_rep_desc_##]</div>
+                        <div class="act"><button type="button" onclick="[##_guest_rep_onclick_delete_##]">수정/삭제</button></div>
+                      </div>
+                    </div>
+                  </s_guest_reply_rep>
+                </s_guest_reply_container>
+              </s_guest_rep>
+            </s_guest_container>
+          </section>
+        </main>
+      </s_guest>
+
+      <footer class="sw-site-foot">
+        <div class="sw-wrap">
+          <span>[##_title_##]</span>
+          <span><a href="[##_rss_url_##]">RSS</a></span>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <div class="sw-dock">
+    <button type="button" data-theme-toggle aria-label="테마 전환"></button>
+    <button type="button" class="totop" id="sw-totop" aria-label="맨 위로"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg></button>
+  </div>
+</s_t3>
+<script src="./images/app.js" defer></script>
+</body>
+</html>
