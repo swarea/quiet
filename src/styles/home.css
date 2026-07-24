@@ -53,3 +53,22 @@
 .sw-tagcloud a .name{overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
 .sw-tagcloud a .n{font-family:var(--mono); font-size:.74rem; color:var(--faint); flex:none;}
 .sw-tagcloud a:hover .n{color:var(--accent);}
+
+/* Optional row thumbnail. Tistory only emits it when the post has one, so the
+   row has to look finished either way. Where :has() is available the image
+   takes a third column; without it the image drops under the text rather than
+   landing beside the date. */
+.sw-post-row .thumb{
+  grid-column:2; display:block; width:100%; max-width:9rem; aspect-ratio:4/3;
+  margin-top:.6rem; border-radius:var(--r-sm); overflow:hidden;
+  background:var(--surface-2); border:1px solid var(--line);
+}
+.sw-post-row .thumb img{width:100%; height:100%; object-fit:cover; border-radius:0;}
+@supports selector(:has(*)) {
+  .sw-post-row:has(.thumb){grid-template-columns:5.5rem 1fr 9rem;}
+  .sw-post-row .thumb{grid-column:3; grid-row:1; margin-top:.2rem; max-width:none;}
+  @media (max-width:720px){
+    .sw-post-row:has(.thumb){grid-template-columns:1fr;}
+    .sw-post-row .thumb{grid-column:1; grid-row:auto; max-width:9rem; margin-top:.6rem;}
+  }
+}

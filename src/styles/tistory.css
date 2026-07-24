@@ -107,3 +107,20 @@ body.sw-tt-toolbar .sw-dock{bottom:4.6rem;}
 .sw-tagcloud a.cloud1,.sw-tagcloud a.cloud2{color:var(--muted);}
 .sw-tagcloud a.cloud4{font-weight:600;}
 .sw-tagcloud a.cloud5{font-weight:700; border-color:var(--line-strong);}
+
+/* Fold control added to Tistory's generated category tree. The button sits
+   beside the link rather than wrapping it, so the parent category stays
+   navigable and the control has its own accessible name. */
+.sw-cat-tistory li.has-sub{position:relative;}
+.sw-cat-tistory li.has-sub > a{padding-left:1.5rem;}
+.sw-cat-fold{position:absolute; left:0; top:.3rem; width:1.4rem; height:1.5rem; display:grid; place-items:center; color:var(--faint); border-radius:var(--r-sm);}
+.sw-cat-fold:hover{color:var(--accent); background:var(--surface-2);}
+.sw-cat-fold .twist{display:grid; place-items:center; transition:transform .2s var(--ease);}
+.sw-cat-fold .twist.open{transform:rotate(90deg);}
+/* The 0fr/1fr grid trick needs a single child; Tistory's <ul> has many <li>,
+   so collapse with max-height, which works regardless of item count. */
+.sw-sub-tt{overflow:hidden; max-height:0; opacity:0; transition:max-height .26s var(--ease), opacity .2s ease;}
+.sw-sub-tt.open{max-height:60rem; opacity:1;}
+/* The generated markup nests <li> straight into <ul>, so give the panel its
+   own scrollable box without breaking the indent guide. */
+.sw-cat-tistory .sw-sub-tt{margin:1px 0 3px .9rem; padding-left:.5rem; border-left:1px solid var(--line);}
