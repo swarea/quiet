@@ -192,6 +192,24 @@ try {
   fail("index.xml known elements", e.message);
 }
 
+// 9. Every skin variable declared in index.xml is actually used by skin.html.
+//    A setting that renders a toggle but changes nothing is worse than no
+//    setting, and it is invisible until someone flips it on a live blog.
+try {
+  const xml = await readFile(join(root, "src", "index.xml"), "utf8");
+  const skin = await readFile(join(root, "src", "skin.html"), "utf8");
+  const varsBlock = xml.match(/<variables>[\s\S]*?<\/variables>/)?.[0] ?? "";
+  const declared = [...varsBlock.matchAll(/<name>([^<]+)<\/name>/g)].map((m) => m[1].trim());
+  const unused = declared.filter((name) => {
+    const uses = [`[##_var_${name}_##]`, `<s_if_var_${name}>`, `<s_not_var_${name}>`];
+    return !uses.some((u) => skin.includes(u));
+  });
+  if (unused.length) fail("skin variables used", `declared but unused: ${unused.join(", ")}`);
+  else ok("skin variables used");
+} catch (e) {
+  fail("skin variables used", e.message);
+}
+
 // Report.
 if (!ran.length) {
   console.log("skipped: no applicable checks");

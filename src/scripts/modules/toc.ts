@@ -1,6 +1,8 @@
 // Build a table of contents from article headings and track the active section.
 // Preserves author-supplied ids; only generates ids where missing.
 export function initToc(): void {
+  // The skin setting can switch the table of contents off entirely.
+  if (document.getElementById("sw-toc-off")) return;
   // Class, not id: article, notice, and page blocks all use it, and only one
   // of them is ever rendered on a given page.
   const body = document.querySelector<HTMLElement>(".sw-article-body");

@@ -10,9 +10,11 @@ import { initReveal } from "./modules/reveal";
 import { initSearchShortcut } from "./modules/search";
 import { initPrune } from "./modules/prune";
 import { initComments, initNamecard } from "./modules/comments";
+import { initLayout } from "./modules/layout";
 
 const boot = (): void => {
   const steps = [
+    initLayout,
     initTheme,
     initDrawer,
     initCategory,

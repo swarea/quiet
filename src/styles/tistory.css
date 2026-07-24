@@ -57,11 +57,12 @@
 /* ---- Tistory's "new post" badge -------------------------------------------
    A fixed orange GIF we cannot recolour. Hide it and mark the row with a small
    accent dot instead, so the signal survives without the clashing colour. */
-.sw-cat-tistory img[alt="N"],
-.sw-post-row img[alt="N"],
-.sw-side-list img[alt="N"]{display:none;}
-.sw-cat-tistory a:has(img[alt="N"])::after,
-.sw-post-row h4:has(img[alt="N"])::after{
+/* The gif has no alt in list titles, so match it by source. */
+.sw-cat-tistory img[src*="new_ico"],
+.sw-post-row img[src*="new_ico"],
+.sw-side-list img[src*="new_ico"]{display:none;}
+.sw-cat-tistory a:has(img[src*="new_ico"])::after,
+.sw-post-row h4:has(img[src*="new_ico"])::after{
   content:""; display:inline-block; flex:none; width:5px; height:5px;
   border-radius:50%; background:var(--accent); margin-left:.45rem; vertical-align:middle;
 }
@@ -95,3 +96,8 @@
 /* Empty summaries and categories still render as elements; collapse them. */
 .sw-post-row p:empty,.sw-post-row .cat:empty{display:none;}
 .sw-post-row p img{display:none;}
+
+/* Tistory pins its own toolbar and subscribe bar to the bottom right, where our
+   dock also lives. Lift the dock clear of it when that toolbar is present. */
+.sw-shell-has-tt-toolbar ~ .sw-dock,
+body.sw-tt-toolbar .sw-dock{bottom:4.6rem;}

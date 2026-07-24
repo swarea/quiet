@@ -6,6 +6,13 @@
   <title>[##_page_title_##]</title>
   <link rel="alternate" type="application/rss+xml" title="[##_title_##]" href="[##_rss_url_##]">
   <link rel="stylesheet" href="./style.css">
+  <!-- Pretendard (SIL OFL 1.1), dynamic subset so only the glyph ranges in use
+       are fetched. Loaded non-blocking: if the CDN is slow or down the page
+       still renders immediately in the system stack. See THIRD-PARTY-NOTICES.md -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" media="print" onload="this.media='all'; this.onload=null"
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"></noscript>
   <script>
     /* Resolve the theme before first paint so the page never flashes. */
     (function () {
@@ -20,12 +27,14 @@
 
 <body id="[##_body_id_##]">
 <s_t3>
+  <s_not_var_toc><span id="sw-toc-off" hidden></span></s_not_var_toc>
   <a class="sw-skip" href="#sw-main">본문으로 건너뛰기</a>
   <s_if_var_reading-progress><div id="sw-progress"></div></s_if_var_reading-progress>
 
   <div class="sw-shell">
 
     <!-- ============ SIDEBAR ============ -->
+    <s_if_var_sidebar>
     <aside class="sw-rail" id="sw-rail" aria-label="블로그 내비게이션">
       <div class="sw-brand">
         <a href="[##_blog_link_##]"><img class="sw-avatar" src="[##_image_##]" width="42" height="42" alt=""></a>
@@ -136,6 +145,7 @@
       </div>
     </aside>
     <div class="sw-scrim" id="sw-scrim" hidden></div>
+    </s_if_var_sidebar>
 
     <!-- ============ CONTENT ============ -->
     <div class="sw-content" id="sw-main" tabindex="-1">
