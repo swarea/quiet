@@ -1,0 +1,39 @@
+name: Decision
+description: A product or technical judgment that blocks work
+labels: ["type:decision"]
+body:
+  - type: textarea
+    id: decision-needed
+    attributes:
+      label: Decision needed
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+    validations:
+      required: true
+  - type: textarea
+    id: options
+    attributes:
+      label: Options
+    validations:
+      required: true
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Constraints
+  - type: textarea
+    id: recommendation
+    attributes:
+      label: Recommendation
+  - type: textarea
+    id: consequences
+    attributes:
+      label: Consequences
+  - type: textarea
+    id: decision
+    attributes:
+      label: Decision
+      description: Filled when closed; escalate to an ADR if architecturally long-lived
