@@ -223,9 +223,49 @@ export const tags = [
   { name: "productivity", count: 7 },
 ];
 
+export const search = { query: "런타임 검증", results: recent.slice(0, 2) };
+export const searchEmpty = { query: "존재하지않는검색어", results: [] };
+
+export const aboutPage = {
+  title: "소개",
+  body: `
+    <p>안녕하세요. <strong>swarea</strong>입니다. 기술과 데이터를 기록하고, 해외 개발자 취업을 준비하고 있습니다. 이 블로그는 개발과 데이터, 커리어, 그리고 신앙에 대한 오래된 기록을 남기는 공간입니다.</p>
+    <h2>다루는 주제</h2>
+    <ul>
+      <li>개발과 기술 학습, 개인 프로젝트의 시행착오</li>
+      <li>데이터에 기반한 분석과 회고</li>
+      <li>해외 취업 준비와 영어 학습</li>
+      <li>커리어와 삶, 신앙과 말씀 묵상</li>
+    </ul>
+    <h2>연락</h2>
+    <p>제안이나 문의는 <a href="https://github.com/swarea">GitHub</a>으로 남겨주세요.</p>
+  `,
+};
+
+const guestbook = [
+  {
+    initial: "H",
+    name: "hyeon",
+    date: "2026.06.20 10:11",
+    body: "글 잘 읽고 있습니다. 특히 데이터 회고 시리즈가 인상 깊었어요.",
+  },
+  {
+    initial: "s",
+    name: "swarea",
+    date: "2026.06.20 12:03",
+    body: "감사합니다. 앞으로도 꾸준히 남겨보겠습니다.",
+    reply: true,
+  },
+];
+
 export const pages = [
   { name: "index", view: "views/home.njk", title: "Home", data: { home } },
   { name: "list", view: "views/list.njk", title: "Programming", data: { list } },
   { name: "article", view: "views/article.njk", title: article.title, data: { article } },
   { name: "tag", view: "views/tag.njk", title: "태그", data: { tags } },
+  { name: "search", view: "views/search.njk", title: "검색", data: { search } },
+  { name: "search-empty", view: "views/search.njk", title: "검색", data: { search: searchEmpty } },
+  { name: "protected", view: "views/protected.njk", title: "보호된 글", data: {} },
+  { name: "guestbook", view: "views/guestbook.njk", title: "방명록", data: { guestbook } },
+  { name: "about", view: "views/page.njk", title: "소개", data: { page: aboutPage } },
 ];

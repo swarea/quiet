@@ -1,0 +1,25 @@
+{% extends "layout.njk" %}
+{% import "macros.njk" as m %}
+{% block main %}
+<main id="sw-guestbook">
+  <header class="sw-article-head">
+    <div class="cover" aria-hidden="true"></div>
+    <div class="inner">
+      <a class="sw-crumb" href="/">swarea</a>
+      <h1>방명록</h1>
+    </div>
+  </header>
+  <section class="sw-comments" aria-label="방명록">
+    <form class="sw-cbox" onsubmit="return false">
+      <label class="sw-sr" for="sw-guest-text">방명록 입력</label>
+      <textarea id="sw-guest-text" placeholder="방명록을 남겨주세요"></textarea>
+      <div class="cfields">
+        <label class="sw-sr" for="sw-guest-name">이름</label><input id="sw-guest-name" placeholder="이름" autocomplete="name">
+        <label class="sw-sr" for="sw-guest-pw">비밀번호</label><input id="sw-guest-pw" type="password" placeholder="비밀번호" autocomplete="off">
+        <button type="submit" class="submit">등록</button>
+      </div>
+    </form>
+    {% for c in guestbook %}{{ m.comment(c) }}{% endfor %}
+  </section>
+</main>
+{% endblock %}

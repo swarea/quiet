@@ -42,7 +42,7 @@ try {
 
 // 2. CSS compiles without syntax errors.
 try {
-  const files = ["tokens", "base", "layout", "home", "article"];
+  const files = ["tokens", "base", "layout", "home", "article", "states"];
   const parts = [];
   for (const f of files) parts.push(await readFile(join(root, "src", "styles", `${f}.css`), "utf8"));
   transform({ filename: "check.css", code: Buffer.from(parts.join("\n")), minify: false });
