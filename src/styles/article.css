@@ -94,14 +94,15 @@ figure.sw-fig figcaption{text-align:center; font-size:.8rem; color:var(--muted);
 
 .sw-comments{max-width:var(--read); margin:0 auto; padding:1.5rem 2rem 3.2rem;}
 .sw-cbox{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); padding:1rem; margin:1rem 0 2rem; transition:border-color .18s, box-shadow .18s;}
-.sw-cbox:focus-within{border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-wash);}
+.sw-cbox:focus-within{border-color:color-mix(in srgb, var(--accent) 45%, var(--line));}
 .sw-cbox textarea{width:100%; border:0; background:none; outline:none; color:var(--ink); font:inherit; resize:vertical; min-height:76px;}
 .sw-cbox .cfields{display:flex; gap:.6rem; align-items:center; margin-top:.7rem; padding-top:.7rem; border-top:1px solid var(--line); flex-wrap:wrap;}
 .sw-cbox .cfields input{background:var(--surface-2); border:1px solid var(--line); border-radius:var(--r-sm); padding:.38rem .55rem; font-size:.8rem; color:var(--ink); outline:none; transition:border-color .15s;}
 .sw-cbox .cfields input:focus{border-color:var(--accent);}
 .sw-cbox .submit{margin-left:auto; background:var(--accent); color:#fff; border-radius:var(--r-sm); padding:.48rem 1.1rem; font-size:.85rem; font-weight:600; transition:background .15s, transform .15s var(--ease);}
 .sw-cbox .submit:hover{background:var(--accent-ink); transform:translateY(-1px);}
-.sw-comment{display:flex; gap:.85rem; padding:1.15rem 0; border-bottom:1px solid var(--line);}
+.sw-comment{display:flex; gap:.85rem; padding:1.15rem 0; border-bottom:1px solid var(--line); scroll-margin-top:2rem;}
+.sw-comment:last-child{border-bottom:0;}
 .sw-comment .av{width:38px; height:38px; border-radius:11px; flex:none; background:var(--surface-2); border:1px solid var(--line); display:grid; place-items:center; color:var(--muted); font-weight:600; font-size:.85rem;}
 .sw-comment .who{font-weight:600; font-size:.86rem;}
 .sw-comment .when{font-family:var(--mono); font-size:.72rem; color:var(--faint); margin-left:.5rem;}

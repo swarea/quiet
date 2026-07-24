@@ -53,3 +53,45 @@
 /* Tistory wraps post content in these; keep our typography applying inside. */
 .sw-article-body .contents_style,
 .sw-article-body .tt_article_useless_p_margin{font-size:inherit; line-height:inherit; color:inherit;}
+
+/* ---- Tistory's "new post" badge -------------------------------------------
+   A fixed orange GIF we cannot recolour. Hide it and mark the row with a small
+   accent dot instead, so the signal survives without the clashing colour. */
+.sw-cat-tistory img[alt="N"],
+.sw-post-row img[alt="N"],
+.sw-side-list img[alt="N"]{display:none;}
+.sw-cat-tistory a:has(img[alt="N"])::after,
+.sw-post-row h4:has(img[alt="N"])::after{
+  content:""; display:inline-block; flex:none; width:5px; height:5px;
+  border-radius:50%; background:var(--accent); margin-left:.45rem; vertical-align:middle;
+}
+
+/* ---- Name card Tistory appends after the article --------------------------
+   Restyled to match our author block; it carries the real subscribe button. */
+.tt_box_namecard{display:flex; align-items:center; gap:1rem; padding:1.5rem 0; margin:1.6rem 0; border-block:1px solid var(--line); background:none;}
+.tt_box_namecard .tt_cont{order:2; flex:1; min-width:0; display:flex; flex-direction:column; align-items:flex-start; gap:.15rem;}
+.tt_box_namecard .tt_tit_cont{font-weight:700; font-size:1rem; color:var(--ink);}
+.tt_box_namecard .tt_tit_cont:hover{color:var(--accent);}
+.tt_box_namecard .tt_desc{font-size:.86rem; color:var(--muted);}
+.tt_box_namecard .tt_wrap_thumb{order:1; flex:none;}
+.tt_box_namecard .tt_thumb_g{display:block; width:52px; height:52px; border-radius:14px; background-size:cover; background-position:center; border:1px solid var(--line);}
+.tt_box_namecard .tt_btn_subscribe{margin-top:.55rem; display:inline-flex; align-items:center; gap:.3rem; font-size:.78rem; font-weight:600; color:var(--accent); background:var(--surface); border:1px solid var(--line); border-radius:999px; padding:.32rem .85rem; transition:border-color .15s, background .15s;}
+.tt_box_namecard .tt_btn_subscribe:hover{border-color:var(--accent); background:var(--accent-wash);}
+.tt_box_namecard .tt_ico_cross{display:none;}
+
+/* ---- Comment details ------------------------------------------------------ */
+/* The profile chip duplicates the author link next to it. */
+.sw-comment .who .tistoryProfileLayerTrigger{display:none;}
+/* Mark the blog owner's own comments. */
+.sw-comment.rp_admin .who::after{
+  content:"글쓴이"; margin-left:.45rem; padding:.1rem .4rem; border-radius:999px;
+  font-size:.66rem; font-weight:600; color:var(--accent); background:var(--accent-wash);
+  vertical-align:middle;
+}
+/* A comment reached by its anchor keeps a quiet marker after Tistory's flash. */
+.sw-comment:target{background:var(--accent-wash); border-radius:var(--r-md); padding-inline:.9rem; margin-inline:-.9rem;}
+
+/* ---- List rows fed by Tistory --------------------------------------------- */
+/* Empty summaries and categories still render as elements; collapse them. */
+.sw-post-row p:empty,.sw-post-row .cat:empty{display:none;}
+.sw-post-row p img{display:none;}
