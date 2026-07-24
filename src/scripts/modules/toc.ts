@@ -1,17 +1,14 @@
-// Build a table of contents from article headings into the right rail and track
-// the active section. Preserves author-supplied ids; only generates missing ones.
+// Build a table of contents from article headings and track the active section.
+// Preserves author-supplied ids; only generates ids where missing.
 export function initToc(): void {
   const body = document.getElementById("sw-article-body");
   if (!body) return;
-  const slot = document.getElementById("sw-toc-slot");
   const heads = body.querySelectorAll<HTMLElement>("h2, h3");
+  if (!heads.length) return;
 
-  // No headings: collapse the reading band to a single column, no TOC.
-  if (!heads.length) {
-    document.querySelector(".sw-article-shell")?.classList.add("sw-no-toc");
-    return;
-  }
-  if (!slot) return;
+  const nav = document.createElement("nav");
+  nav.className = "sw-toc";
+  nav.setAttribute("aria-label", "목차");
 
   const used = new Set<string>();
   const items: string[] = [];
@@ -29,22 +26,23 @@ export function initToc(): void {
       h.id = id;
     }
     used.add(h.id);
-    const label = h.textContent ?? "";
     const anchor = document.createElement("a");
     anchor.className = "anchor";
     anchor.href = `#${h.id}`;
     anchor.textContent = "#";
     anchor.setAttribute("aria-hidden", "true");
+    const label = h.textContent ?? "";
     h.appendChild(anchor);
     items.push(
       `<li class="${h.tagName === "H3" ? "h3" : "h2"}"><a href="#${h.id}">${label}</a></li>`,
     );
   });
 
-  slot.innerHTML = `<div class="sw-toc-inner"><h4>On this page</h4><ol>${items.join("")}</ol></div>`;
+  nav.innerHTML = `<div class="sw-toc-inner"><h4>On this page</h4><ol>${items.join("")}</ol></div>`;
+  document.body.appendChild(nav);
 
   const links = new Map<string, HTMLElement>();
-  slot.querySelectorAll<HTMLElement>('a[href^="#"]').forEach((l) => {
+  nav.querySelectorAll<HTMLElement>('a[href^="#"]').forEach((l) => {
     links.set((l.getAttribute("href") ?? "").slice(1), l);
   });
 
