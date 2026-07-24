@@ -55,17 +55,13 @@
 .sw-article-body .tt_article_useless_p_margin{font-size:inherit; line-height:inherit; color:inherit;}
 
 /* ---- Tistory's "new post" badge -------------------------------------------
-   A fixed orange GIF we cannot recolour. Hide it and mark the row with a small
-   accent dot instead, so the signal survives without the clashing colour. */
-/* The gif has no alt in list titles, so match it by source. */
+   An orange GIF we cannot recolour, so it is hidden. We previously replaced it
+   with an accent dot, but an unlabelled dot beside a title or category says
+   nothing to the reader — it was decoration pretending to be information.
+   The dates in the row already tell you what is recent. */
 .sw-cat-tistory img[src*="new_ico"],
 .sw-post-row img[src*="new_ico"],
 .sw-side-list img[src*="new_ico"]{display:none;}
-.sw-cat-tistory a:has(img[src*="new_ico"])::after,
-.sw-post-row h4:has(img[src*="new_ico"])::after{
-  content:""; display:inline-block; flex:none; width:5px; height:5px;
-  border-radius:50%; background:var(--accent); margin-left:.45rem; vertical-align:middle;
-}
 
 /* ---- Name card Tistory appends after the article --------------------------
    Restyled to match our author block; it carries the real subscribe button. */

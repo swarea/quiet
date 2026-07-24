@@ -20,7 +20,20 @@ function escape(text: string): string {
   return el.innerHTML;
 }
 
+// Tistory prints a clock time instead of a date for posts published today, so a
+// list can read "16:03:03" beside dated entries. Say what it means instead.
+function humaniseTodayStamps(): void {
+  document.querySelectorAll<HTMLElement>(".sw-post-row time, .sw-side-list time").forEach((el) => {
+    const text = (el.textContent ?? "").trim();
+    if (!/^\d{1,2}:\d{2}(:\d{2})?$/.test(text)) return;
+    el.dateTime = text;
+    el.title = text;
+    el.textContent = "오늘";
+  });
+}
+
 export function initPrune(): void {
+  humaniseTodayStamps();
   // Sidebar sections whose list rendered no real links.
   document.querySelectorAll<HTMLElement>(".sw-rail nav").forEach((nav) => {
     const links = Array.from(nav.querySelectorAll("a")).filter(
