@@ -1,0 +1,19 @@
+{
+  "name": "tistory-skin",
+  "version": "0.1.0",
+  "description": "An original, reading-first Tistory skin by swarea",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "build:preview": "node scripts/build.mjs --preview",
+    "preview": "node scripts/build.mjs --preview --serve",
+    "check": "node scripts/check.mjs"
+  },
+  "license": "SEE LICENSE (undecided)",
+  "devDependencies": {
+    "esbuild": "^0.25.0",
+    "lightningcss": "^1.27.0",
+    "nunjucks": "^3.2.4"
+  }
+}
