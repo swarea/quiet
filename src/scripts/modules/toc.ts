@@ -61,4 +61,46 @@ export function initToc(): void {
     { rootMargin: "-10% 0px -70% 0px", threshold: 0 },
   );
   heads.forEach((h) => obs.observe(h));
+
+  addPanelToggle(nav, links);
+}
+
+// Narrow screens have no room for the rail, so the same list opens as a panel
+// from the dock. Without this the contents simply vanished below 1600px, which
+// is where most readers are.
+const LIST_ICON =
+  '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>';
+
+function addPanelToggle(nav: HTMLElement, links: Map<string, HTMLElement>): void {
+  const dock = document.querySelector(".sw-dock");
+  if (!dock) return;
+
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "toc-btn";
+  btn.innerHTML = LIST_ICON;
+  btn.setAttribute("aria-label", "목차 열기");
+  btn.setAttribute("aria-expanded", "false");
+  dock.prepend(btn);
+
+  const setOpen = (open: boolean): void => {
+    nav.classList.toggle("open", open);
+    btn.setAttribute("aria-expanded", String(open));
+    btn.setAttribute("aria-label", open ? "목차 닫기" : "목차 열기");
+    if (open) nav.querySelector<HTMLElement>("a")?.focus();
+  };
+
+  btn.addEventListener("click", () => setOpen(!nav.classList.contains("open")));
+  links.forEach((l) => l.addEventListener("click", () => setOpen(false)));
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && nav.classList.contains("open")) {
+      setOpen(false);
+      btn.focus();
+    }
+  });
+  document.addEventListener("click", (e) => {
+    if (!nav.classList.contains("open")) return;
+    const t = e.target as Node;
+    if (!nav.contains(t) && !btn.contains(t)) setOpen(false);
+  });
 }

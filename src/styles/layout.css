@@ -91,3 +91,7 @@
 /* Sidebar turned off in skin settings: the shell collapses to one column. */
 .sw-shell.sw-no-sidebar{grid-template-columns:1fr;}
 .sw-shell.sw-no-sidebar .sw-topbar{display:flex;}
+
+/* Contents button lives in the dock and only matters where the rail cannot. */
+.sw-dock .toc-btn{display:none;}
+@media (max-width:1600px){ .sw-dock .toc-btn{display:grid;} }

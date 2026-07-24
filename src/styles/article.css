@@ -67,7 +67,21 @@ figure.sw-fig figcaption{text-align:center; font-size:.8rem; color:var(--muted);
 .sw-toc li a:hover{color:var(--ink);}
 .sw-toc li a.active{color:var(--accent); border-left-color:var(--accent); font-weight:600;}
 .sw-toc li.h3 a{padding-left:1.7rem; font-size:.76rem;}
-@media (max-width:1600px){ .sw-toc{display:none;} }
+/* Below the width that fits a rail, the contents become a panel opened from
+   the dock, rather than disappearing. Most readers are on a phone, and a long
+   article is exactly where they need it. */
+@media (max-width:1600px){
+  .sw-toc{
+    position:fixed; inset:0 0 0 auto; width:min(21rem,86vw); height:100dvh;
+    display:block; padding:1.5rem 1.2rem; overflow-y:auto; z-index:55;
+    background:var(--surface); border-left:1px solid var(--line);
+    box-shadow:var(--shadow-lg); transform:translateX(102%);
+    transition:transform .26s var(--ease); visibility:hidden;
+  }
+  .sw-toc.open{transform:none; visibility:visible;}
+  .sw-toc-inner{max-height:none;}
+  .sw-toc h4{padding-left:0; margin-bottom:1rem;}
+}
 
 .sw-article-foot{max-width:var(--read); margin:0 auto; padding:1.5rem 2rem 0;}
 @media (max-width:640px){ .sw-article-foot,.sw-comments{padding-inline:1.15rem;} }
