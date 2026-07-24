@@ -3,9 +3,18 @@
 An original Tistory skin by [swarea](https://github.com/swarea) — quiet, modern,
 reading-first. Built from scratch; not a derivative of any existing skin.
 
-> **Status: pre-0.1.0 foundation.** Nothing here is installable yet, and
-> nothing has been verified on a real Tistory blog. See
-> [docs/roadmap.md](docs/roadmap.md) for milestones.
+> **Status: 0.1.0 foundation in progress.** The design direction is chosen and
+> implemented as a mock preview; nothing is packaged for or verified on a real
+> Tistory blog yet (that is 0.2.0). See [docs/roadmap.md](docs/roadmap.md).
+
+## Develop
+
+```bash
+npm install
+npm run preview   # build + serve the mock preview at http://localhost:4321
+npm run build     # build the mock preview into preview/dist
+npm run check     # validation gate (bundle, styles, required files, markers)
+```
 
 ## Documents
 
