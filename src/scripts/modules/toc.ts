@@ -81,7 +81,11 @@ function addPanelToggle(nav: HTMLElement, links: Map<string, HTMLElement>): void
   btn.innerHTML = LIST_ICON;
   btn.setAttribute("aria-label", "목차 열기");
   btn.setAttribute("aria-expanded", "false");
-  dock.prepend(btn);
+  // Below back-to-top, above the theme toggle: only back-to-top comes and goes
+  // during a read, so it stays at the head of the column.
+  const theme = dock.querySelector("[data-theme-toggle]");
+  if (theme) dock.insertBefore(btn, theme);
+  else dock.append(btn);
 
   const setOpen = (open: boolean): void => {
     nav.classList.toggle("open", open);
