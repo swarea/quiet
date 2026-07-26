@@ -95,10 +95,16 @@
 .sw-dock .toc-btn{display:none;}
 @media (max-width:1600px){ .sw-dock .toc-btn{display:grid;} }
 
-/* One footer per page. The rail carries it wherever the rail is visible, since
-   it stays on screen instead of waiting at the end of a long article. Where
-   there is no rail — narrow screens, or the sidebar switched off — the content
-   footer takes over, so a page is never left without one. */
+/* Exactly one footer, at every width and in both sidebar states.
+   Wide with a rail: the rail carries it, since it stays on screen instead of
+   waiting at the end of a long article, and the content footer stands down.
+   Narrow: the rail is a drawer that can be opened alongside the page, so its
+   footer would sit next to the content footer; the page keeps the footer and
+   the drawer drops it, leaving the drawer purely for navigation.
+   No rail at all: the content footer is the only one left. */
 .sw-site-foot{display:none;}
 .sw-shell.sw-no-sidebar .sw-site-foot{display:block;}
-@media (max-width:960px){ .sw-site-foot{display:block;} }
+@media (max-width:960px){
+  .sw-site-foot{display:block;}
+  .sw-rail-foot{display:none;}
+}
