@@ -135,3 +135,9 @@
    demoted treatment. */
 .sw-cat-tistory .sw-cat-root > ul{margin:0; padding-left:0; border-left:0;}
 .sw-cat-tistory .sw-cat-root > ul > li > a{font-size:.9rem; color:var(--ink-2); font-weight:600;}
+
+/* Tistory wraps our comment section in a div of its own, which the rule above
+   already constrains to the reading column. The section then applied the same
+   inset a second time, leaving the comment box 64px narrower than the related
+   list and the name card directly above it. */
+.sw-article-foot ~ div .sw-comments{max-width:none; padding-inline:0;}
