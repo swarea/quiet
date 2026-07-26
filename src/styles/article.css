@@ -140,3 +140,8 @@ figure.sw-fig figcaption{text-align:center; font-size:.8rem; color:var(--muted);
 .sw-notice-row{padding-top:1.4rem;}
 .sw-notice-row .sw-post-row{border-bottom:0;}
 .sw-notice-row .cat{color:var(--warm);}
+
+/* A category or search description is a Korean sentence, not metadata, so it
+   belongs in the body face rather than the monospace byline treatment. */
+.sw-lede{margin-top:.9rem; font-size:.95rem; color:var(--muted); text-wrap:balance;}
+.sw-lede:empty{display:none;}

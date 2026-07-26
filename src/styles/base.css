@@ -21,7 +21,12 @@ img{max-width:100%; display:block;}
 #sw-main:focus{outline:none;}
 .sw-eyebrow{font-family:var(--mono); font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); font-weight:600;}
 .sw-section-tag{display:flex; align-items:baseline; justify-content:space-between; margin-bottom:1.15rem;}
-.sw-section-tag h2{font-size:.72rem; font-family:var(--mono); letter-spacing:.16em; text-transform:uppercase; color:var(--muted); font-weight:600;}
+/* Section headings carry real Korean sentences on a live blog — a category
+   name, "댓글 4", a cover title. Monospace with wide tracking pulls Hangul
+   syllables apart into unreadable specks, so these stay in the body face.
+   The uppercase micro-label treatment is kept for .sw-nav-label, whose text
+   we author ourselves and is always Latin. */
+.sw-section-tag h2{font-size:.86rem; font-weight:600; color:var(--ink-2); letter-spacing:-.005em;}
 .sw-section-tag a{font-size:.8rem; color:var(--accent); transition:opacity .15s;}
 .sw-section-tag a:hover{opacity:.7;}
 
