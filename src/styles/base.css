@@ -15,6 +15,12 @@ button{font:inherit; color:inherit; background:none; border:0; margin:0; padding
 ::selection{background:var(--accent-wash); background:color-mix(in srgb, var(--accent) 22%, transparent);}
 img{max-width:100%; display:block;}
 
+/* Our icon set is drawn for round caps and joins. Left at the SVG default of
+   butt, a zero-length segment paints nothing at all — the three bullets in the
+   list icon vanished, dragging the painted shape ~1.8px right of the button's
+   centre — and mitred joins push the chevron's apex past its own box. */
+svg[fill="none"][stroke="currentColor"]{stroke-linecap:round; stroke-linejoin:round;}
+
 .sw-sr{position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); border:0;}
 .sw-skip{position:fixed; top:.5rem; left:.5rem; z-index:70; transform:translateY(-160%); background:var(--surface); color:var(--ink); border:1px solid var(--accent); border-radius:var(--r-sm); padding:.5rem .9rem; font-size:.85rem; font-weight:600; transition:transform .18s var(--ease);}
 .sw-skip:focus{transform:none;}
