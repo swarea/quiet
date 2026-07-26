@@ -94,3 +94,11 @@
 /* Contents button lives in the dock and only matters where the rail cannot. */
 .sw-dock .toc-btn{display:none;}
 @media (max-width:1600px){ .sw-dock .toc-btn{display:grid;} }
+
+/* One footer per page. The rail carries it wherever the rail is visible, since
+   it stays on screen instead of waiting at the end of a long article. Where
+   there is no rail — narrow screens, or the sidebar switched off — the content
+   footer takes over, so a page is never left without one. */
+.sw-site-foot{display:none;}
+.sw-shell.sw-no-sidebar .sw-site-foot{display:block;}
+@media (max-width:960px){ .sw-site-foot{display:block;} }
