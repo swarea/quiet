@@ -127,3 +127,11 @@
 /* The generated markup nests <li> straight into <ul>, so give the panel its
    own scrollable box without breaking the indent guide. */
 .sw-cat-tistory .sw-sub-tt{margin:1px 0 3px .9rem; padding-left:.5rem; border-left:1px solid var(--line);}
+
+/* Tistory hangs every category off its "all posts" entry, which made the real
+   categories render as an indented, muted sub-branch of a heading — the
+   hierarchy upside down. That list is the top level: no indent, no guide line,
+   and the same weight as the entry above it. Genuine sub-categories keep the
+   demoted treatment. */
+.sw-cat-tistory .sw-cat-root > ul{margin:0; padding-left:0; border-left:0;}
+.sw-cat-tistory .sw-cat-root > ul > li > a{font-size:.9rem; color:var(--ink-2); font-weight:600;}
