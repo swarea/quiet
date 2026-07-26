@@ -98,10 +98,9 @@
 .sw-post-row p:empty,.sw-post-row .cat:empty{display:none;}
 .sw-post-row p img{display:none;}
 
-/* Tistory pins its own toolbar and subscribe bar to the bottom right, where our
-   dock also lives. Lift the dock clear of it when that toolbar is present. */
-.sw-shell-has-tt-toolbar ~ .sw-dock,
-body.sw-tt-toolbar .sw-dock{bottom:4.6rem;}
+/* Tistory pins a subscribe bar to the bottom right, where our dock also lives.
+   The clearance is measured in layout.ts and applied through --dock-lift, so a
+   fixed guess is no longer needed here. */
 
 /* Tistory grades tag popularity with cloud1..cloud5 classes. We keep the chips
    a uniform size for scanability, so carry the signal in weight instead. */

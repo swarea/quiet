@@ -73,7 +73,9 @@
 .sw-site-foot a{transition:color .15s;} .sw-site-foot a:hover{color:var(--accent);}
 
 /* floating dock */
-.sw-dock{position:fixed; right:1.1rem; bottom:1.1rem; z-index:35; display:flex; flex-direction:column; gap:.5rem;}
+/* Sits above Tistory's fixed subscribe bar when there is one; --dock-lift is
+   measured at runtime, so with no bar the dock keeps its own margin. */
+.sw-dock{position:fixed; right:1.1rem; bottom:var(--dock-lift, 1.1rem); z-index:35; display:flex; flex-direction:column; gap:.5rem; transition:bottom .2s var(--ease);}
 .sw-dock button{width:40px; height:40px; border-radius:12px; background:var(--surface); border:1px solid var(--line); color:var(--muted); display:grid; place-items:center; box-shadow:var(--shadow); transition:color .15s, border-color .15s, transform .15s var(--ease);}
 .sw-dock button:hover{color:var(--accent); border-color:var(--accent); transform:translateY(-2px);}
 .sw-dock .totop{opacity:0; visibility:hidden; transform:translateY(8px);}
@@ -89,3 +91,8 @@
 /* Contents button lives in the dock and only matters where the rail cannot. */
 .sw-dock .toc-btn{display:none;}
 @media (max-width:1600px){ .sw-dock .toc-btn{display:grid;} }
+
+/* Where the topbar is showing it already carries a theme toggle, so the dock
+   must not offer a second one right below it. */
+@media (max-width:960px){ .sw-dock [data-theme-toggle]{display:none;} }
+.sw-shell.sw-no-sidebar ~ .sw-dock [data-theme-toggle]{display:none;}
