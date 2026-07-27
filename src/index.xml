@@ -100,7 +100,7 @@
         <label><![CDATA[이전·다음 글 표시]]></label>
         <description><![CDATA[글 하단에 바로 앞뒤 순서의 글로 이동하는 링크를 보여줍니다.]]></description>
         <type>BOOL</type>
-        <default>true</default>
+        <default>false</default>
       </variable>
       <variable>
         <name>related-posts</name>

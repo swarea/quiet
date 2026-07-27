@@ -65,7 +65,7 @@
 /* The colophon sits under the blog's own footer and stays below it in weight:
    the blog's name is the subject of this column, and the skin is a footnote to
    it. Muted until hovered, so it reads as a signature rather than a badge. */
-.sw-colophon{padding:.55rem var(--rail-inset) 0; font-size:.68rem; color:var(--faint);
+.sw-colophon{margin:0; font-size:.7rem; color:var(--faint);
   display:flex; gap:.28rem; letter-spacing:.01em;}
 .sw-colophon a{color:var(--faint); transition:color .15s;}
 .sw-colophon a:first-child{font-weight:600;}
