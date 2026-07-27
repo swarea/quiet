@@ -178,10 +178,11 @@
 .sw-cat-fold:hover{color:var(--accent); background:var(--surface-2);}
 .sw-cat-fold .twist{display:grid; place-items:center; transition:transform .2s var(--ease);}
 .sw-cat-fold .twist.open{transform:rotate(90deg);}
-/* The 0fr/1fr grid trick needs a single child; Tistory's <ul> has many <li>,
-   so collapse with max-height, which works regardless of item count. */
-.sw-sub-tt{overflow:hidden; max-height:0; opacity:0; transition:max-height .26s var(--ease), opacity .2s ease;}
-.sw-sub-tt.open{max-height:60rem; opacity:1;}
+/* The height itself is set inline from the measured panel; this only supplies
+   the collapsed default and the timing. Easing is the standard accelerate-then-
+   settle curve rather than our snappier one, which overshoots on a short travel. */
+.sw-sub-tt{overflow:hidden; max-height:0; transition:max-height .24s cubic-bezier(.4,0,.2,1);}
+.sw-sub-tt.open{max-height:none;}
 /* The generated markup nests <li> straight into <ul>, so give the panel its
    own scrollable box without breaking the indent guide. */
 .sw-cat-tistory .sw-sub-tt{margin:1px 0 3px .9rem; padding-left:.5rem; border-left:1px solid var(--line);}
@@ -208,8 +209,8 @@
 
    Gated on .sw-js, set by the head script before the first paint, so with
    scripts off nothing is hidden behind a control that will never appear. */
-html.sw-js .sw-cat-tistory ul ul ul{max-height:0; opacity:0;}
-html.sw-js .sw-cat-tistory ul ul ul.open{max-height:60rem; opacity:1;}
+html.sw-js .sw-cat-tistory ul ul ul{max-height:0;}
+html.sw-js .sw-cat-tistory ul ul ul.open{max-height:none;}
 @supports selector(:has(*)) {
   html.sw-js .sw-rail nav:not(:has(a)){display:none;}
 }

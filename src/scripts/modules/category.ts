@@ -35,11 +35,51 @@ function saveExpanded(set: Set<string>): void {
   }
 }
 
-function setOpen(sub: HTMLElement, btn: HTMLElement, label: string, open: boolean): void {
+// Animating max-height to a fixed ceiling is what makes an accordion feel
+// wrong: with a 960px ceiling over a branch only 79px tall, the panel reaches
+// full height 21ms into a 260ms run and then idles, and closing idles first and
+// snaps at the very end. Measuring the panel and animating to its real height
+// makes the motion match the distance actually travelled.
+function setOpen(
+  sub: HTMLElement,
+  btn: HTMLElement,
+  label: string,
+  open: boolean,
+  animate = true,
+): void {
   sub.classList.toggle("open", open);
   btn.querySelector(".twist")?.classList.toggle("open", open);
   btn.setAttribute("aria-expanded", String(open));
   btn.setAttribute("aria-label", `${label} 하위 카테고리 ${open ? "접기" : "펼치기"}`);
+
+  if (!animate) {
+    // Initial state: land there directly, with no motion on page load.
+    sub.style.transition = "none";
+    sub.style.maxHeight = open ? "none" : "0px";
+    requestAnimationFrame(() => sub.style.removeProperty("transition"));
+    return;
+  }
+
+  if (open) {
+    sub.style.maxHeight = `${sub.scrollHeight}px`;
+    // Release the cap afterwards so a nested branch opening later is not
+    // clipped by a height measured before it existed.
+    sub.addEventListener(
+      "transitionend",
+      (e) => {
+        if (e.propertyName === "max-height" && sub.classList.contains("open")) {
+          sub.style.maxHeight = "none";
+        }
+      },
+      { once: true },
+    );
+  } else {
+    // Coming from "none" there is no start value to animate from, so pin the
+    // current height for a frame first.
+    sub.style.maxHeight = `${sub.scrollHeight}px`;
+    void sub.offsetHeight;
+    sub.style.maxHeight = "0px";
+  }
 }
 
 // Our own markup in the mock preview.
@@ -95,7 +135,7 @@ function initTistoryTree(): void {
     const holdsCurrentPage = Array.from(sub.querySelectorAll("a")).some(
       (a) => decodeURIComponent(a.getAttribute("href") ?? "") === here,
     );
-    setOpen(sub, btn, label, expanded.has(href) || holdsCurrentPage);
+    setOpen(sub, btn, label, expanded.has(href) || holdsCurrentPage, false);
 
     btn.addEventListener("click", () => {
       const open = !sub.classList.contains("open");
