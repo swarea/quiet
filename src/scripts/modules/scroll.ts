@@ -1,7 +1,7 @@
 // Reading progress bar + back-to-top button, throttled with rAF.
 export function initScroll(): void {
-  const bar = document.getElementById("sw-progress");
-  const totop = document.getElementById("sw-totop");
+  const bar = document.getElementById("quiet-progress");
+  const totop = document.getElementById("quiet-totop");
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   if (totop) {

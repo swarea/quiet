@@ -17,7 +17,7 @@ const CHEVRON =
   '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>';
 // Renamed alongside the flip from "which are closed" to "which are open", so
 // a reader with the old list stored does not get the inverse of it.
-const STORE_KEY = "sw-cat-open";
+const STORE_KEY = "quiet-cat-open";
 
 function loadExpanded(): Set<string> {
   try {
@@ -85,7 +85,7 @@ function setOpen(
 // Our own markup in the mock preview.
 function initMockTree(): void {
   document.querySelectorAll<HTMLElement>("[data-cat-toggle]").forEach((btn) => {
-    const sub = btn.parentElement?.querySelector<HTMLElement>(".sw-sub");
+    const sub = btn.parentElement?.querySelector<HTMLElement>(".quiet-sub");
     if (!sub) return;
     btn.addEventListener("click", () => {
       const open = !sub.classList.contains("open");
@@ -98,7 +98,7 @@ function initMockTree(): void {
 
 // Tistory's generated tree.
 function initTistoryTree(): void {
-  const root = document.querySelector<HTMLElement>(".sw-cat-tistory");
+  const root = document.querySelector<HTMLElement>(".quiet-cat-tistory");
   const topList = root?.querySelector<HTMLElement>(":scope > ul");
   if (!root || !topList) return;
 
@@ -116,18 +116,18 @@ function initTistoryTree(): void {
     if (li.parentElement === topList && /\/category\/?$/.test(href)) {
       // Marked so the stylesheet can treat its children as the top level
       // rather than as an indented branch.
-      li.classList.add("sw-cat-root");
+      li.classList.add("quiet-cat-root");
       return;
     }
 
     const label = (link.textContent ?? "").trim();
     const btn = document.createElement("button");
     btn.type = "button";
-    btn.className = "sw-cat-fold";
+    btn.className = "quiet-cat-fold";
     btn.innerHTML = `<span class="twist">${CHEVRON}</span>`;
 
     li.classList.add("has-sub");
-    sub.classList.add("sw-sub-tt");
+    sub.classList.add("quiet-sub-tt");
     link.before(btn);
 
     // Open if the reader opened it before, or if the page they are on lives
@@ -147,23 +147,8 @@ function initTistoryTree(): void {
   });
 }
 
-// Tistory labels the root of the tree "All posts". Sitting under a heading
-// that already says Categories, "Category" just repeats itself. Rename the text node
-// only, leaving the count and any badge Tistory appended untouched.
-function shortenRootLabel(): void {
-  document.querySelectorAll(".sw-cat-tistory a").forEach((a) => {
-    a.childNodes.forEach((node) => {
-      if (node.nodeType !== Node.TEXT_NODE) return;
-      const text = node.textContent ?? "";
-      if (text.includes("All posts")) {
-        node.textContent = text.replace("All posts", "All posts");
-      }
-    });
-  });
-}
 
 export function initCategory(): void {
-  shortenRootLabel();
   initMockTree();
   initTistoryTree();
 }

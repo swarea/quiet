@@ -7,7 +7,7 @@ const DOCK_GAP = 12; // breathing room between the dock and Tistory's bar
 // blog title, so measure it rather than guessing a clearance. Re-measured on
 // resize because the bar reflows with the viewport.
 function liftDockAboveTistoryBar(): void {
-  const dock = document.querySelector<HTMLElement>(".sw-dock");
+  const dock = document.querySelector<HTMLElement>(".quiet-dock");
   if (!dock) return;
 
   const apply = (): void => {
@@ -37,9 +37,9 @@ function liftDockAboveTistoryBar(): void {
 }
 
 export function initLayout(): void {
-  const shell = document.querySelector<HTMLElement>(".sw-shell");
-  if (shell && !document.getElementById("sw-rail")) {
-    shell.classList.add("sw-no-sidebar");
+  const shell = document.querySelector<HTMLElement>(".quiet-shell");
+  if (shell && !document.getElementById("quiet-rail")) {
+    shell.classList.add("quiet-no-sidebar");
   }
   liftDockAboveTistoryBar();
 }

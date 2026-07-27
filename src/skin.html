@@ -15,14 +15,14 @@
   <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"></noscript>
   <script>
     /* Runs before the first paint. Resolving the theme here keeps the page from
-       flashing, and the sw-js marker lets the stylesheet start the category
+       flashing, and the quiet-js marker lets the stylesheet start the category
        tree already folded — otherwise it paints open and visibly snaps shut a
        moment later, on every navigation. Without scripts the marker is absent
        and everything stays expanded and reachable. */
     (function () {
-      document.documentElement.classList.add("sw-js");
+      document.documentElement.classList.add("quiet-js");
       try {
-        var stored = localStorage.getItem("sw-theme");
+        var stored = localStorage.getItem("quiet-theme");
         var dark = stored ? stored === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
         document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
       } catch (e) {}
@@ -32,18 +32,18 @@
 
 <body id="[##_body_id_##]">
 <s_t3>
-  <s_not_var_toc><span id="sw-toc-off" hidden></span></s_not_var_toc>
-  <a class="sw-skip" href="#sw-main">Skip to content</a>
-  <s_if_var_reading-progress><div id="sw-progress"></div></s_if_var_reading-progress>
+  <s_not_var_toc><span id="quiet-toc-off" hidden></span></s_not_var_toc>
+  <a class="quiet-skip" href="#quiet-main">Skip to content</a>
+  <s_if_var_reading-progress><div id="quiet-progress"></div></s_if_var_reading-progress>
 
-  <div class="sw-shell">
+  <div class="quiet-shell">
 
     <!-- ============ SIDEBAR ============ -->
     <s_if_var_sidebar>
-    <aside class="sw-rail" id="sw-rail" aria-label="Blog navigation">
-      <div class="sw-brand">
-        <a href="[##_blog_link_##]"><img class="sw-avatar" src="[##_image_##]" width="42" height="42" alt=""></a>
-        <div class="sw-brand-text">
+    <aside class="quiet-rail" id="quiet-rail" aria-label="Blog navigation">
+      <div class="quiet-brand">
+        <a href="[##_blog_link_##]"><img class="quiet-avatar" src="[##_image_##]" width="42" height="42" alt=""></a>
+        <div class="quiet-brand-text">
           <div class="name"><a href="[##_blog_link_##]">[##_title_##]</a></div>
           <div class="tag">[##_blogger_##]</div>
         </div>
@@ -52,10 +52,10 @@
       <s_sidebar>
         <s_sidebar_element>
           <s_search>
-            <form class="sw-search" role="search" onsubmit="return false">
+            <form class="quiet-search" role="search" onsubmit="return false">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-              <label class="sw-sr" for="sw-search-input">Search</label>
-              <input id="sw-search-input" name="[##_search_name_##]" value="[##_search_text_##]" placeholder="Search" autocomplete="off"
+              <label class="quiet-sr" for="quiet-search-input">Search</label>
+              <input id="quiet-search-input" name="[##_search_name_##]" value="[##_search_text_##]" placeholder="Search" autocomplete="off"
                      onkeypress="if (event.keyCode == 13) { [##_search_onclick_submit_##] }">
               <kbd>/</kbd>
             </form>
@@ -63,7 +63,7 @@
         </s_sidebar_element>
 
         <s_sidebar_element>
-          <div class="sw-counts">
+          <div class="quiet-counts">
             <span>Total <b>[##_count_total_##]</b></span>
             <span>Today <b>[##_count_today_##]</b></span>
             <span>Yesterday <b>[##_count_yesterday_##]</b></span>
@@ -72,23 +72,23 @@
 
         <s_sidebar_element>
           <nav lang="en" aria-label="Categories">
-            <div class="sw-nav-label">Categories</div>
-            <div class="sw-cat-tistory" lang="ko">[##_category_list_##]</div>
+            <div class="quiet-nav-label">Categories</div>
+            <div class="quiet-cat-tistory" lang="ko">[##_category_list_##]</div>
           </nav>
         </s_sidebar_element>
 
         <s_sidebar_element>
           <nav lang="en" aria-label="Blog menu">
-            <div class="sw-nav-label">Menu</div>
-            <div class="sw-menu-tistory" lang="ko">[##_blog_menu_##]</div>
+            <div class="quiet-nav-label">Menu</div>
+            <div class="quiet-menu-tistory" lang="ko">[##_blog_menu_##]</div>
           </nav>
         </s_sidebar_element>
 
         <s_sidebar_element>
           <s_rct_notice>
             <nav lang="en" aria-label="Notices">
-              <div class="sw-nav-label">Notice</div>
-              <ul class="sw-side-list" lang="ko">
+              <div class="quiet-nav-label">Notice</div>
+              <ul class="quiet-side-list" lang="ko">
                 <s_rct_notice_rep>
                   <li><a href="[##_notice_rep_link_##]">[##_notice_rep_title_##]</a></li>
                 </s_rct_notice_rep>
@@ -99,8 +99,8 @@
 
         <s_sidebar_element>
           <nav lang="en" aria-label="Popular posts">
-            <div class="sw-nav-label">Popular</div>
-            <ul class="sw-side-list" lang="ko">
+            <div class="quiet-nav-label">Popular</div>
+            <ul class="quiet-side-list" lang="ko">
               <s_rctps_popular_rep>
                 <li><a href="[##_rctps_rep_link_##]">[##_rctps_rep_title_##]</a></li>
               </s_rctps_popular_rep>
@@ -110,8 +110,8 @@
 
         <s_sidebar_element>
           <nav lang="en" aria-label="Recent posts">
-            <div class="sw-nav-label">Recent</div>
-            <ul class="sw-side-list" lang="ko">
+            <div class="quiet-nav-label">Recent</div>
+            <ul class="quiet-side-list" lang="ko">
               <s_rctps_rep>
                 <li><a href="[##_rctps_rep_link_##]">[##_rctps_rep_title_##]</a></li>
               </s_rctps_rep>
@@ -121,8 +121,8 @@
 
         <s_sidebar_element>
           <nav lang="en" aria-label="Recent comments">
-            <div class="sw-nav-label">Comments</div>
-            <ul class="sw-side-list" lang="ko">
+            <div class="quiet-nav-label">Comments</div>
+            <ul class="quiet-side-list" lang="ko">
               <s_rctrp_rep>
                 <li><a href="[##_rctrp_rep_link_##]">[##_rctrp_rep_desc_##]</a></li>
               </s_rctrp_rep>
@@ -139,24 +139,24 @@
            Under MIT this credit is a courtesy, not a term: nothing obliges a
            blogger to keep it, and the readme says so. The skin's name leads to
            where the skin can be had, the author's name to the author. -->
-      <div class="sw-rail-foot">
-        <p class="sw-colophon" lang="en">
+      <div class="quiet-rail-foot">
+        <p class="quiet-colophon" lang="en">
           <a href="https://github.com/swarea/quiet" rel="noopener">Quiet</a>
           <span>by</span>
           <a href="https://blog.swarea.com" rel="noopener">Isaac Lee</a>
         </p>
         <span class="links">
-          <a class="sw-icon-btn" href="[##_rss_url_##]" aria-label="RSS"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+          <a class="quiet-icon-btn" href="[##_rss_url_##]" aria-label="RSS"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1.5" fill="currentColor" stroke="none"/></svg></a>
         </span>
       </div>
     </aside>
-    <div class="sw-scrim" id="sw-scrim" hidden></div>
+    <div class="quiet-scrim" id="quiet-scrim" hidden></div>
     </s_if_var_sidebar>
 
     <!-- ============ CONTENT ============ -->
-    <div class="sw-content" id="sw-main" tabindex="-1">
-      <div class="sw-topbar">
-        <button class="sw-icon-btn" id="sw-menu-btn" type="button" aria-label="Open menu" aria-expanded="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+    <div class="quiet-content" id="quiet-main" tabindex="-1">
+      <div class="quiet-topbar">
+        <button class="quiet-icon-btn" id="quiet-menu-btn" type="button" aria-label="Open menu" aria-expanded="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
         <span class="name">[##_title_##]</span>
         <span class="spacer"></span>
       </div>
@@ -165,10 +165,10 @@
       <s_cover_group>
         <s_cover_rep>
           <s_cover name="list">
-            <section class="sw-wrap sw-recent" aria-label="[##_cover_title_##]">
-              <div class="sw-section-tag"><h2>[##_cover_title_##]</h2></div>
+            <section class="quiet-wrap quiet-recent" aria-label="[##_cover_title_##]">
+              <div class="quiet-section-tag"><h2>[##_cover_title_##]</h2></div>
               <s_cover_item>
-                <a class="sw-post-row" href="[##_cover_item_url_##]">
+                <a class="quiet-post-row" href="[##_cover_item_url_##]">
                   <s_cover_item_article_info>
                     <time>[##_cover_item_simple_date_##]</time>
                     <div>
@@ -195,10 +195,10 @@
                Every word and image here comes from the blogger's own posts and
                their cover configuration; nothing is written into the skin. -->
           <s_cover name="featured">
-            <section class="sw-wrap sw-featured-set" aria-label="[##_cover_title_##]">
-              <div class="sw-section-tag"><h2>[##_cover_title_##]</h2></div>
+            <section class="quiet-wrap quiet-featured-set" aria-label="[##_cover_title_##]">
+              <div class="quiet-section-tag"><h2>[##_cover_title_##]</h2></div>
               <s_cover_item>
-                <a class="sw-feature" href="[##_cover_item_url_##]">
+                <a class="quiet-feature" href="[##_cover_item_url_##]">
                   <s_cover_item_article_info>
                     <s_cover_item_thumbnail>
                       <span class="shot"><img src="[##_cover_item_thumbnail_##]" alt="" loading="lazy"></span>
@@ -222,11 +222,11 @@
           </s_cover>
 
           <s_cover name="grid">
-            <section class="sw-wrap sw-topics" aria-label="[##_cover_title_##]">
-              <div class="sw-section-tag"><h2>[##_cover_title_##]</h2></div>
-              <div class="sw-lanes">
+            <section class="quiet-wrap quiet-topics" aria-label="[##_cover_title_##]">
+              <div class="quiet-section-tag"><h2>[##_cover_title_##]</h2></div>
+              <div class="quiet-lanes">
                 <s_cover_item>
-                  <div class="sw-lane">
+                  <div class="quiet-lane">
                     <s_cover_item_article_info>
                       <h3>[##_cover_item_category_##]</h3>
                       <a class="item" href="[##_cover_item_url_##]">[##_cover_item_title_##]</a>
@@ -245,8 +245,8 @@
       <!-- ---------- NOTICE ---------- -->
       <s_notice_rep>
         <s_index_article_rep>
-          <div class="sw-wrap sw-notice-row">
-            <a class="sw-post-row" href="[##_notice_rep_link_##]">
+          <div class="quiet-wrap quiet-notice-row">
+            <a class="quiet-post-row" href="[##_notice_rep_link_##]">
               <time>[##_notice_rep_date_##]</time>
               <div>
                 <span class="cat">Notice</span>
@@ -259,15 +259,15 @@
 
         <s_permalink_article_rep>
           <article>
-            <header class="sw-article-head">
+            <header class="quiet-article-head">
               <div class="cover" aria-hidden="true"></div>
               <div class="inner">
-                <span class="sw-crumb">Notice</span>
+                <span class="quiet-crumb">Notice</span>
                 <h1>[##_notice_rep_title_##]</h1>
-                <div class="sw-byline"><span>[##_notice_rep_date_##]</span></div>
+                <div class="quiet-byline"><span>[##_notice_rep_date_##]</span></div>
               </div>
             </header>
-            <div class="sw-article-body">[##_notice_rep_desc_##]</div>
+            <div class="quiet-article-body">[##_notice_rep_desc_##]</div>
           </article>
         </s_permalink_article_rep>
       </s_notice_rep>
@@ -276,7 +276,7 @@
       <s_article_rep>
         <s_permalink_article_rep>
           <article>
-            <header class="sw-article-head">
+            <header class="quiet-article-head">
               <!-- Gradient always renders; when the post has its own image it
                    layers on top, so no unverified conditional tag is needed. -->
               <div class="cover" aria-hidden="true"></div>
@@ -285,24 +285,24 @@
                      style="background-image:url('[##_article_rep_thumbnail_url_##]')"></div>
               </s_article_rep_thumbnail>
               <div class="inner">
-                <a class="sw-crumb" href="[##_article_rep_category_link_##]">[##_article_rep_category_##]</a>
+                <a class="quiet-crumb" href="[##_article_rep_category_link_##]">[##_article_rep_category_##]</a>
                 <h1>[##_article_rep_title_##]</h1>
-                <div class="sw-byline">
+                <div class="quiet-byline">
                   <span>[##_article_rep_date_##]</span>
                   <span class="admin"><s_ad_div><a href="[##_s_ad_m_link_##]">Edit</a> · <a href="#" onclick="[##_s_ad_d_onclick_##]">Delete</a> · <a href="#" onclick="[##_s_ad_s2_onclick_##]">[##_s_ad_s1_label_##]</a></s_ad_div></span>
                 </div>
               </div>
             </header>
 
-            <div class="sw-article-body">[##_article_rep_desc_##]</div>
+            <div class="quiet-article-body">[##_article_rep_desc_##]</div>
 
-            <div class="sw-article-foot">
-              <s_tag_label><div class="sw-taglabel">[##_tag_label_rep_##]</div></s_tag_label>
+            <div class="quiet-article-foot">
+              <s_tag_label><div class="quiet-taglabel">[##_tag_label_rep_##]</div></s_tag_label>
 
               <s_if_var_related-posts>
                 <s_article_related>
-                  <div class="sw-related">
-                    <div class="sw-section-tag"><h2>More in '[##_article_rep_category_##]'</h2></div>
+                  <div class="quiet-related">
+                    <div class="quiet-section-tag"><h2>More in '[##_article_rep_category_##]'</h2></div>
                     <ul>
                       <s_article_related_rep>
                         <li><a href="[##_article_related_rep_link_##]"><span>[##_article_related_rep_title_##]</span></a></li>
@@ -318,7 +318,7 @@
                    only when there is a post there, so a first or last post
                    simply shows one arm. -->
               <s_if_var_prev-next>
-                <nav class="sw-adjacent" aria-label="Adjacent posts" lang="en">
+                <nav class="quiet-adjacent" aria-label="Adjacent posts" lang="en">
                   <s_article_prev>
                     <a class="prev" href="[##_article_prev_link_##]" rel="prev">
                       <span class="dir">Previous</span>
@@ -334,32 +334,32 @@
                 </nav>
               </s_if_var_prev-next>
 
-              <div class="sw-author">
-                <img class="sw-avatar" src="[##_image_##]" width="52" height="52" alt="">
+              <div class="quiet-author">
+                <img class="quiet-avatar" src="[##_image_##]" width="52" height="52" alt="">
                 <div><div class="n">[##_blogger_##]</div><div class="b">[##_desc_##]</div></div>
               </div>
             </div>
 
             <!-- comments -->
             <s_rp>
-              <section class="sw-comments" aria-label="Comments">
+              <section class="quiet-comments" aria-label="Comments">
                 <s_rp_input_form>
                   <!-- Tistory replaces this <form> element with its own, dropping
                        any class on it, so the styling hook lives on an inner div. -->
                   <form onsubmit="return false">
-                   <div class="sw-cbox" lang="en">
-                    <label class="sw-sr" for="sw-rp-text">Write a comment</label>
-                    <textarea id="sw-rp-text" name="[##_rp_input_comment_##]" placeholder="Leave a comment"></textarea>
+                   <div class="quiet-cbox" lang="en">
+                    <label class="quiet-sr" for="quiet-rp-text">Write a comment</label>
+                    <textarea id="quiet-rp-text" name="[##_rp_input_comment_##]" placeholder="Leave a comment"></textarea>
                     <div class="cfields">
                       <s_rp_member>
                         <s_rp_guest>
-                          <label class="sw-sr" for="sw-rp-name">Name</label>
-                          <input id="sw-rp-name" name="[##_rp_input_name_##]" value="[##_guest_name_##]" placeholder="Name" autocomplete="name">
-                          <label class="sw-sr" for="sw-rp-pw">Password</label>
-                          <input id="sw-rp-pw" type="password" maxlength="8" name="[##_rp_input_password_##]" value="[##_guest_password_##]" placeholder="Password" autocomplete="off">
+                          <label class="quiet-sr" for="quiet-rp-name">Name</label>
+                          <input id="quiet-rp-name" name="[##_rp_input_name_##]" value="[##_guest_name_##]" placeholder="Name" autocomplete="name">
+                          <label class="quiet-sr" for="quiet-rp-pw">Password</label>
+                          <input id="quiet-rp-pw" type="password" maxlength="8" name="[##_rp_input_password_##]" value="[##_guest_password_##]" placeholder="Password" autocomplete="off">
                         </s_rp_guest>
                       </s_rp_member>
-                      <label class="sw-secret" for="sw-rp-secret"><input id="sw-rp-secret" type="checkbox" name="[##_rp_input_is_secret_##]">Private</label>
+                      <label class="quiet-secret" for="quiet-rp-secret"><input id="quiet-rp-secret" type="checkbox" name="[##_rp_input_is_secret_##]">Private</label>
                       <button type="button" class="submit" onclick="[##_rp_onclick_submit_##]">Post</button>
                     </div>
                    </div>
@@ -368,7 +368,7 @@
 
                 <s_rp_container>
                   <s_rp_rep>
-                    <div class="sw-comment [##_rp_rep_class_##]" id="[##_rp_rep_id_##]" activecommentbackground="rgba(56,84,140,.16)">
+                    <div class="quiet-comment [##_rp_rep_class_##]" id="[##_rp_rep_id_##]" activecommentbackground="rgba(56,84,140,.16)">
                       <div class="av" aria-hidden="true"><img src="[##_rp_rep_logo_##]" width="38" height="38" alt=""></div>
                       <div>
                         <div><span class="who">[##_rp_rep_name_##]</span><span class="when">[##_rp_rep_date_##]</span></div>
@@ -381,7 +381,7 @@
                     </div>
                     <s_rp2_container>
                       <s_rp2_rep>
-                        <div class="sw-comment reply [##_rp_rep_class_##]" id="[##_rp_rep_id_##]" activecommentbackground="rgba(56,84,140,.16)">
+                        <div class="quiet-comment reply [##_rp_rep_class_##]" id="[##_rp_rep_id_##]" activecommentbackground="rgba(56,84,140,.16)">
                           <div class="av" aria-hidden="true"><img src="[##_rp_rep_logo_##]" width="38" height="38" alt=""></div>
                           <div>
                             <div><span class="who">[##_rp_rep_name_##]</span><span class="when">[##_rp_rep_date_##]</span></div>
@@ -401,19 +401,19 @@
         <!-- static page -->
         <s_page_rep>
           <article>
-            <header class="sw-article-head">
+            <header class="quiet-article-head">
               <div class="cover" aria-hidden="true"></div>
               <div class="inner"><h1>[##_article_rep_title_##]</h1></div>
             </header>
-            <div class="sw-article-body">[##_article_rep_desc_##]</div>
-            <div class="sw-article-foot"></div>
+            <div class="quiet-article-body">[##_article_rep_desc_##]</div>
+            <div class="quiet-article-foot"></div>
           </article>
         </s_page_rep>
 
         <!-- protected post -->
         <s_article_protected>
           <s_permalink_article_rep>
-            <main class="sw-protected" lang="en">
+            <main class="quiet-protected" lang="en">
               <div class="lock" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div>
               <h1>This post is protected</h1>
               <p>Enter the password to read this post.</p>
@@ -431,12 +431,12 @@
       <!-- ---------- TAG INDEX ---------- -->
       <s_tag>
         <main>
-          <header class="sw-article-head">
+          <header class="quiet-article-head">
             <div class="cover" aria-hidden="true"></div>
             <div class="inner"><h1>Tags</h1></div>
           </header>
-          <div class="sw-wrap">
-            <section class="sw-tagcloud" aria-label="Tags">
+          <div class="quiet-wrap">
+            <section class="quiet-tagcloud" aria-label="Tags">
               <ul>
                 <s_tag_rep>
                   <li><a class="[##_tag_class_##]" href="[##_tag_link_##]"><span class="name">[##_tag_name_##]</span></a></li>
@@ -450,17 +450,17 @@
       <!-- ---------- LIST (category / search / archive) ---------- -->
       <s_list>
         <main>
-          <header class="sw-article-head">
+          <header class="quiet-article-head">
             <s_list_image><div class="cover" aria-hidden="true"></div></s_list_image>
             <div class="inner">
               <h1>[##_list_conform_##]</h1>
-              <p class="sw-lede">[##_list_description_##]</p>
+              <p class="quiet-lede">[##_list_description_##]</p>
             </div>
           </header>
-          <div class="sw-wrap">
-            <section class="sw-recent" aria-label="Posts">
+          <div class="quiet-wrap">
+            <section class="quiet-recent" aria-label="Posts">
               <s_list_rep>
-                <a class="sw-post-row" href="[##_list_rep_link_##]">
+                <a class="quiet-post-row" href="[##_list_rep_link_##]">
                   <time>[##_list_rep_regdate_##]</time>
                   <div>
                     <span class="cat">[##_list_rep_category_##]</span>
@@ -477,7 +477,7 @@
 
       <!-- ---------- PAGING ---------- -->
       <s_paging>
-        <nav class="sw-paging" aria-label="Pagination">
+        <nav class="quiet-paging" aria-label="Pagination">
           <a class="edge [##_no_more_prev_##]" [##_prev_page_##] aria-label="Previous page">‹</a>
           <s_paging_rep>
             <a [##_paging_rep_link_##]>[##_paging_rep_link_num_##]</a>
@@ -489,26 +489,26 @@
       <!-- ---------- GUESTBOOK ---------- -->
       <s_guest>
         <main>
-          <header class="sw-article-head">
+          <header class="quiet-article-head">
             <div class="cover" aria-hidden="true"></div>
             <div class="inner"><h1>Guestbook</h1></div>
           </header>
-          <section class="sw-comments" aria-label="Guestbook">
+          <section class="quiet-comments" aria-label="Guestbook">
             <s_guest_input_form>
               <form onsubmit="return false">
-               <div class="sw-cbox" lang="en">
-                <label class="sw-sr" for="sw-gb-text">Write a guestbook entry</label>
-                <textarea id="sw-gb-text" name="[##_guest_textarea_body_##]" placeholder="Leave a message"></textarea>
+               <div class="quiet-cbox" lang="en">
+                <label class="quiet-sr" for="quiet-gb-text">Write a guestbook entry</label>
+                <textarea id="quiet-gb-text" name="[##_guest_textarea_body_##]" placeholder="Leave a message"></textarea>
                 <div class="cfields">
                   <s_guest_member>
                     <s_guest_form>
-                      <label class="sw-sr" for="sw-gb-name">Name</label>
-                      <input id="sw-gb-name" name="[##_guest_input_name_##]" value="[##_guest_name_##]" placeholder="Name" autocomplete="name">
-                      <label class="sw-sr" for="sw-gb-pw">Password</label>
-                      <input id="sw-gb-pw" type="password" maxlength="8" name="[##_guest_input_password_##]" value="[##_guest_password_##]" placeholder="Password" autocomplete="off">
+                      <label class="quiet-sr" for="quiet-gb-name">Name</label>
+                      <input id="quiet-gb-name" name="[##_guest_input_name_##]" value="[##_guest_name_##]" placeholder="Name" autocomplete="name">
+                      <label class="quiet-sr" for="quiet-gb-pw">Password</label>
+                      <input id="quiet-gb-pw" type="password" maxlength="8" name="[##_guest_input_password_##]" value="[##_guest_password_##]" placeholder="Password" autocomplete="off">
                     </s_guest_form>
                   </s_guest_member>
-                  <label class="sw-secret" for="sw-gb-secret"><input id="sw-gb-secret" type="checkbox" name="[##_guest_input_is_secret_##]">Private</label>
+                  <label class="quiet-secret" for="quiet-gb-secret"><input id="quiet-gb-secret" type="checkbox" name="[##_guest_input_is_secret_##]">Private</label>
                   <button type="button" class="submit" onclick="[##_guest_onclick_submit_##]">Post</button>
                 </div>
                </div>
@@ -517,7 +517,7 @@
 
             <s_guest_container>
               <s_guest_rep>
-                <div class="sw-comment [##_guest_rep_class_##]" id="[##_guest_rep_id_##]" activecommentbackground="rgba(56,84,140,.16)">
+                <div class="quiet-comment [##_guest_rep_class_##]" id="[##_guest_rep_id_##]" activecommentbackground="rgba(56,84,140,.16)">
                   <div class="av" aria-hidden="true"><img src="[##_guest_rep_logo_##]" width="38" height="38" alt=""></div>
                   <div>
                     <div><span class="who">[##_guest_rep_name_##]</span><span class="when">[##_guest_rep_date_##]</span></div>
@@ -530,7 +530,7 @@
                 </div>
                 <s_guest_reply_container>
                   <s_guest_reply_rep>
-                    <div class="sw-comment reply [##_guest_rep_class_##]" id="[##_guest_rep_id_##]" activecommentbackground="rgba(56,84,140,.16)">
+                    <div class="quiet-comment reply [##_guest_rep_class_##]" id="[##_guest_rep_id_##]" activecommentbackground="rgba(56,84,140,.16)">
                       <div class="av" aria-hidden="true"><img src="[##_guest_rep_logo_##]" width="38" height="38" alt=""></div>
                       <div>
                         <div><span class="who">[##_guest_rep_name_##]</span><span class="when">[##_guest_rep_date_##]</span></div>
@@ -546,8 +546,8 @@
         </main>
       </s_guest>
 
-      <footer class="sw-site-foot">
-        <div class="sw-wrap">
+      <footer class="quiet-site-foot">
+        <div class="quiet-wrap">
           <span>[##_title_##]</span>
           <span><a href="[##_rss_url_##]">RSS</a></span>
         </div>
@@ -555,8 +555,8 @@
     </div>
   </div>
 
-  <div class="sw-dock" lang="en">
-    <button type="button" class="totop" id="sw-totop" aria-label="Back to top"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg></button>
+  <div class="quiet-dock" lang="en">
+    <button type="button" class="totop" id="quiet-totop" aria-label="Back to top"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg></button>
     <button type="button" data-theme-toggle aria-label="Toggle theme"></button>
   </div>
 </s_t3>

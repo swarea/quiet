@@ -4,9 +4,9 @@ const FOCUSABLE =
   'a[href],button:not([disabled]),input:not([disabled]),[tabindex]:not([tabindex="-1"])';
 
 export function initDrawer(): void {
-  const rail = document.getElementById("sw-rail");
-  const scrim = document.getElementById("sw-scrim");
-  const btn = document.getElementById("sw-menu-btn");
+  const rail = document.getElementById("quiet-rail");
+  const scrim = document.getElementById("quiet-scrim");
+  const btn = document.getElementById("quiet-menu-btn");
   if (!rail || !scrim || !btn) return;
 
   let lastFocus: HTMLElement | null = null;

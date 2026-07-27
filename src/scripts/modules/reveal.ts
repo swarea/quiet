@@ -1,10 +1,10 @@
-// Reveal .sw-reveal blocks as they scroll into view, once each.
+// Reveal .quiet-reveal blocks as they scroll into view, once each.
 //
 // The hidden starting state is applied here rather than in the stylesheet: if
 // this script never runs, the content must still be visible. Respects reduced
 // motion by leaving everything alone.
 export function initReveal(): void {
-  const els = document.querySelectorAll<HTMLElement>(".sw-reveal");
+  const els = document.querySelectorAll<HTMLElement>(".quiet-reveal");
   if (!els.length) return;
   if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 

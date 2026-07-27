@@ -13,7 +13,7 @@
 // straight back.
 
 const THRESHOLD = 4.5; // WCAG AA for body text
-const ORIGINAL = "swInk";
+const ORIGINAL = "quietInk";
 
 function channel(value: number): number {
   const c = value / 255;
@@ -68,7 +68,7 @@ function coloured(root: ParentNode): HTMLElement[] {
 }
 
 export function initInk(): void {
-  const body = document.querySelector<HTMLElement>(".sw-article-body");
+  const body = document.querySelector<HTMLElement>(".quiet-article-body");
   if (!body) return;
   const targets = coloured(body);
   if (!targets.length) return;

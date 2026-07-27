@@ -31,7 +31,7 @@ the deliverable is one HTML file.
 - **Mock preview:** the same Nunjucks components render preview pages with
   fixture data (a tiny resolver replaces `[##_..._##]` tokens from fixtures),
   served statically. Mock preview never counts as Tistory verification.
-- **Class scoping:** all skin classes use the `sw-` prefix to avoid collisions
+- **Class scoping:** all skin classes use the `quiet-` prefix to avoid collisions
   with Tistory-injected markup and plugins.
 - `dist/` is git-ignored; installable output comes from CI artifacts and
   release ZIPs. `package-lock.json` is committed.

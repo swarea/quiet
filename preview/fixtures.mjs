@@ -152,7 +152,7 @@ export const article = {
   body: `
     <p>TypeScript는 컴파일 시점의 타입만 검증한다. API 응답, 폼 입력, URL 파라미터처럼 <em>런타임에 들어오는 데이터</em>는 타입 시스템의 보호 밖에 있다. 경계에서 한 번 제대로 검증하면, 그 안쪽 코드는 비로소 타입을 신뢰할 수 있게 된다.</p>
 
-    <div class="sw-callout">
+    <div class="quiet-callout">
       <div class="head"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>Note</div>
       <p>이 글은 라이브러리 자체보다 <strong>어디에 검증을 두어야 하는가</strong>에 집중한다. 코드는 Zod 기준이지만 개념은 다른 검증 도구에도 그대로 적용된다.</p>
     </div>
@@ -165,7 +165,7 @@ export const article = {
     <h2>스키마를 코드로 선언하기</h2>
     <p>응답 스키마를 선언하면 검증과 타입을 <strong>한 곳에서</strong> 얻는다. 문서와 구현이 어긋나는 고전적인 문제가 구조적으로 사라진다.</p>
 
-    <div class="sw-code">
+    <div class="quiet-code">
       <div class="bar"><span class="lang">typescript</span><button class="copy" type="button" data-copy><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>복사</span></button></div>
 <pre><code><span class="t-k">import</span> { z } <span class="t-k">from</span> <span class="t-s">"zod"</span>;
 
@@ -188,8 +188,8 @@ export const article = {
       <li>저장소 경계: localStorage, 설정 파일</li>
     </ul>
 
-    <div class="sw-tbl-wrap">
-      <table class="sw-data">
+    <div class="quiet-tbl-wrap">
+      <table class="quiet-data">
         <thead><tr><th>경계</th><th>검증 위치</th><th class="num">비용</th><th class="num">효용</th></tr></thead>
         <tbody>
           <tr><td>API 응답</td><td>fetch 래퍼</td><td class="num">낮음</td><td class="num">높음</td></tr>
@@ -199,7 +199,7 @@ export const article = {
       </table>
     </div>
 
-    <figure class="sw-fig"><div class="ph">그림 1. 검증 경계 다이어그램</div><figcaption>신뢰 경계는 코드 안이 아니라 시스템의 가장자리에 둔다.</figcaption></figure>
+    <figure class="quiet-fig"><div class="ph">그림 1. 검증 경계 다이어그램</div><figcaption>신뢰 경계는 코드 안이 아니라 시스템의 가장자리에 둔다.</figcaption></figure>
 
     <h3>에디터가 내보내는 형태</h3>
     <p>아래 블록들은 티스토리 에디터가 실제로 만들어내는 마크업이다. 프레임과 복사 버튼, 가로 스크롤 상자는 런타임에 덧입혀진다. <a href="https://example.com" target="_blank">새 탭으로 열리는 링크</a>도 포함한다.</p>

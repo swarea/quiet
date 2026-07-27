@@ -21,42 +21,42 @@ img{max-width:100%; display:block;}
    centre — and mitred joins push the chevron's apex past its own box. */
 svg[fill="none"][stroke="currentColor"]{stroke-linecap:round; stroke-linejoin:round;}
 
-.sw-sr{position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); border:0;}
-.sw-skip{position:fixed; top:.5rem; left:.5rem; z-index:70; transform:translateY(-160%); background:var(--surface); color:var(--ink); border:1px solid var(--accent); border-radius:var(--r-sm); padding:.5rem .9rem; font-size:.85rem; font-weight:600; transition:transform .18s var(--ease);}
-.sw-skip:focus{transform:none;}
-#sw-main:focus{outline:none;}
-.sw-eyebrow{font-family:var(--mono); font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); font-weight:600;}
-.sw-section-tag{display:flex; align-items:baseline; justify-content:space-between; margin-bottom:1.15rem;}
+.quiet-sr{position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); border:0;}
+.quiet-skip{position:fixed; top:.5rem; left:.5rem; z-index:70; transform:translateY(-160%); background:var(--surface); color:var(--ink); border:1px solid var(--accent); border-radius:var(--r-sm); padding:.5rem .9rem; font-size:.85rem; font-weight:600; transition:transform .18s var(--ease);}
+.quiet-skip:focus{transform:none;}
+#quiet-main:focus{outline:none;}
+.quiet-eyebrow{font-family:var(--mono); font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); font-weight:600;}
+.quiet-section-tag{display:flex; align-items:baseline; justify-content:space-between; margin-bottom:1.15rem;}
 /* Section headings carry real Korean sentences on a live blog — a category
    name, "댓글 4", a cover title. Monospace with wide tracking pulls Hangul
    syllables apart into unreadable specks, so these stay in the body face.
-   The uppercase micro-label treatment is kept for .sw-nav-label, whose text
+   The uppercase micro-label treatment is kept for .quiet-nav-label, whose text
    we author ourselves and is always Latin. */
-.sw-section-tag h2{font-size:.86rem; font-weight:600; color:var(--ink-2); letter-spacing:-.005em;}
-.sw-section-tag a{font-size:.8rem; color:var(--accent); transition:opacity .15s;}
-.sw-section-tag a:hover{opacity:.7;}
+.quiet-section-tag h2{font-size:.86rem; font-weight:600; color:var(--ink-2); letter-spacing:-.005em;}
+.quiet-section-tag a{font-size:.8rem; color:var(--accent); transition:opacity .15s;}
+.quiet-section-tag a:hover{opacity:.7;}
 
-.sw-wrap{max-width:var(--wide); margin:0 auto; padding:0 2rem;}
-@media (max-width:640px){ .sw-wrap{padding:0 1.15rem;} }
+.quiet-wrap{max-width:var(--wide); margin:0 auto; padding:0 2rem;}
+@media (max-width:640px){ .quiet-wrap{padding:0 1.15rem;} }
 
 /* motion primitives */
-@keyframes sw-rise{from{opacity:0; transform:translateY(16px);} to{opacity:1; transform:none;}}
-@keyframes sw-fadein{from{opacity:0;} to{opacity:1;}}
+@keyframes quiet-rise{from{opacity:0; transform:translateY(16px);} to{opacity:1; transform:none;}}
+@keyframes quiet-fadein{from{opacity:0;} to{opacity:1;}}
 /* Deliberately NOT hidden here. The reveal script sets the hidden state itself,
    so if the script never runs the section is simply visible instead of stuck
    at opacity 0 forever. */
-.sw-reveal.in{animation:sw-rise .7s var(--ease) both;}
-.sw-load > *{opacity:0; animation:sw-rise .7s var(--ease) both;}
-.sw-load > *:nth-child(1){animation-delay:.06s;}
-.sw-load > *:nth-child(2){animation-delay:.16s;}
-.sw-load > *:nth-child(3){animation-delay:.26s;}
+.quiet-reveal.in{animation:quiet-rise .7s var(--ease) both;}
+.quiet-load > *{opacity:0; animation:quiet-rise .7s var(--ease) both;}
+.quiet-load > *:nth-child(1){animation-delay:.06s;}
+.quiet-load > *:nth-child(2){animation-delay:.16s;}
+.quiet-load > *:nth-child(3){animation-delay:.26s;}
 
-#sw-progress{position:fixed; top:0; left:0; height:2px; width:0; background:var(--accent); z-index:60; transition:width .12s linear;}
+#quiet-progress{position:fixed; top:0; left:0; height:2px; width:0; background:var(--accent); z-index:60; transition:width .12s linear;}
 
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto;}
   *{animation:none!important; transition:none!important;}
-  .sw-reveal,.sw-load > *{opacity:1!important; transform:none!important;}
+  .quiet-reveal,.quiet-load > *{opacity:1!important; transform:none!important;}
 }
 
 /* ---- scrollbars -----------------------------------------------------------

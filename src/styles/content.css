@@ -3,68 +3,68 @@
    themselves. Anything the editor emits has to look right without help. */
 
 /* ---- images and figures --------------------------------------------------- */
-.sw-article-body img{max-width:100%; height:auto; border-radius:var(--r-md);}
-.sw-article-body figure{margin:1.9em 0;}
-.sw-article-body figure img{margin-inline:auto;}
-.sw-article-body figcaption{text-align:center; font-size:.82rem; color:var(--muted); margin-top:.6rem; line-height:1.6;}
+.quiet-article-body img{max-width:100%; height:auto; border-radius:var(--r-md);}
+.quiet-article-body figure{margin:1.9em 0;}
+.quiet-article-body figure img{margin-inline:auto;}
+.quiet-article-body figcaption{text-align:center; font-size:.82rem; color:var(--muted); margin-top:.6rem; line-height:1.6;}
 /* The editor's alignment classes. */
-.sw-article-body figure.alignLeft{margin-inline:0 auto;}
-.sw-article-body figure.alignRight{margin-inline:auto 0;}
-.sw-article-body .imageblock{text-align:center;}
+.quiet-article-body figure.alignLeft{margin-inline:0 auto;}
+.quiet-article-body figure.alignRight{margin-inline:auto 0;}
+.quiet-article-body .imageblock{text-align:center;}
 
 /* ---- embeds --------------------------------------------------------------- */
-.sw-article-body iframe,
-.sw-article-body video{max-width:100%; border-radius:var(--r-md);}
-.sw-article-body figure.videoblock iframe{width:100%; aspect-ratio:16/9; height:auto;}
+.quiet-article-body iframe,
+.quiet-article-body video{max-width:100%; border-radius:var(--r-md);}
+.quiet-article-body figure.videoblock iframe{width:100%; aspect-ratio:16/9; height:auto;}
 
 /* ---- code ----------------------------------------------------------------- */
-/* Bare <pre> from the editor is upgraded at runtime into .sw-code, which owns
+/* Bare <pre> from the editor is upgraded at runtime into .quiet-code, which owns
    the frame. These rules cover the code text itself either way, and stand alone
    if the script never runs. */
-.sw-article-body pre{
+.quiet-article-body pre{
   margin:1.8em 0; padding:1.05rem 1.15rem; overflow-x:auto;
   background:#0f1420; color:#d7dee8; border-radius:var(--r-md);
   font-family:var(--mono); font-size:.86rem; line-height:1.74;
   -webkit-overflow-scrolling:touch;
 }
-.sw-code pre{margin:0; border-radius:0;}
-.sw-article-body pre code{
+.quiet-code pre{margin:0; border-radius:0;}
+.quiet-article-body pre code{
   font-family:inherit; font-size:inherit; color:inherit;
   background:none; border:0; padding:0; white-space:pre;
 }
 
 /* ---- tables --------------------------------------------------------------- */
-/* Wrapped at runtime in .sw-tbl-wrap for horizontal scroll; these rules make a
+/* Wrapped at runtime in .quiet-tbl-wrap for horizontal scroll; these rules make a
    bare table presentable on its own and stop it forcing the page sideways. */
-.sw-article-body table{
+.quiet-article-body table{
   border-collapse:collapse; width:100%; max-width:100%;
   font-size:.92rem; margin:1.8em 0;
 }
-.sw-tbl-wrap > table{margin:0;}
-.sw-article-body th,.sw-article-body td{
+.quiet-tbl-wrap > table{margin:0;}
+.quiet-article-body th,.quiet-article-body td{
   text-align:left; padding:.62rem .9rem; border:1px solid var(--line);
   overflow-wrap:anywhere;
 }
-.sw-article-body th{
+.quiet-article-body th{
   background:var(--surface-2); font-weight:600; font-size:.8rem;
   color:var(--ink-2); letter-spacing:.02em;
 }
-.sw-article-body tbody tr{transition:background .15s;}
-.sw-article-body tbody tr:hover{background:var(--surface-2);}
+.quiet-article-body tbody tr{transition:background .15s;}
+.quiet-article-body tbody tr:hover{background:var(--surface-2);}
 
 /* ---- editor quote variants ------------------------------------------------ */
-.sw-article-body blockquote p{margin:.4em 0;}
-.sw-article-body blockquote cite{display:block; margin-top:.5em; font-size:.85rem; font-style:normal; color:var(--muted); font-family:var(--sans);}
+.quiet-article-body blockquote p{margin:.4em 0;}
+.quiet-article-body blockquote cite{display:block; margin-top:.5em; font-size:.85rem; font-style:normal; color:var(--muted); font-family:var(--sans);}
 
 /* ---- link / file blocks the editor inserts -------------------------------- */
-.sw-article-body .link_wrap,
-.sw-article-body figure.fileblock{
+.quiet-article-body .link_wrap,
+.quiet-article-body figure.fileblock{
   display:block; border:1px solid var(--line); border-radius:var(--r-md);
   background:var(--surface); padding:.9rem 1.1rem; margin:1.5em 0;
 }
-.sw-article-body figure.fileblock a{text-decoration:none;}
-.sw-article-body .link_title,.sw-article-body figure.fileblock .name{font-weight:600; color:var(--ink);}
-.sw-article-body .link_url,.sw-article-body figure.fileblock .size{font-size:.82rem; color:var(--muted);}
+.quiet-article-body figure.fileblock a{text-decoration:none;}
+.quiet-article-body .link_title,.quiet-article-body figure.fileblock .name{font-weight:600; color:var(--ink);}
+.quiet-article-body .link_url,.quiet-article-body figure.fileblock .size{font-size:.82rem; color:var(--muted);}
 
 /* Tistory zeroes <p> margins inside .tt_article_useless_p_margin on purpose:
    the editor emits one paragraph per line and represents a blank line as its
@@ -81,21 +81,21 @@
     --ink:#000; --ink-2:#222; --muted:#444; --faint:#666;
     --line:#ccc; --line-strong:#999; --accent:#000; --accent-wash:#f0f0f0;
   }
-  .sw-rail,.sw-scrim,.sw-topbar,.sw-dock,.sw-toc,.sw-skip,#sw-progress,
-  .sw-site-foot,.sw-paging,.sw-cbox,.container_postbtn,.menu_toolbar,
-  .tt_box_namecard,.sw-code .copy{display:none !important;}
-  .sw-shell{display:block;}
-  .sw-content{min-height:0;}
-  .sw-article-head .cover{display:none;}
-  .sw-article-head{border-bottom:1px solid #ccc;}
-  .sw-article-head .inner{padding:0 0 1rem;}
-  .sw-article-body,.sw-article-foot,.sw-comments{max-width:none; padding:0;}
-  .sw-article-body{font-size:11pt; line-height:1.6;}
-  .sw-article-body pre{background:#f4f4f4; color:#000; border:1px solid #ccc; white-space:pre-wrap;}
+  .quiet-rail,.quiet-scrim,.quiet-topbar,.quiet-dock,.quiet-toc,.quiet-skip,#quiet-progress,
+  .quiet-site-foot,.quiet-paging,.quiet-cbox,.container_postbtn,.menu_toolbar,
+  .tt_box_namecard,.quiet-code .copy{display:none !important;}
+  .quiet-shell{display:block;}
+  .quiet-content{min-height:0;}
+  .quiet-article-head .cover{display:none;}
+  .quiet-article-head{border-bottom:1px solid #ccc;}
+  .quiet-article-head .inner{padding:0 0 1rem;}
+  .quiet-article-body,.quiet-article-foot,.quiet-comments{max-width:none; padding:0;}
+  .quiet-article-body{font-size:11pt; line-height:1.6;}
+  .quiet-article-body pre{background:#f4f4f4; color:#000; border:1px solid #ccc; white-space:pre-wrap;}
   /* Spell out destinations, but not for in-page or javascript links. */
-  .sw-article-body a[href^="http"]::after{content:" (" attr(href) ")"; font-size:.85em; color:#555; word-break:break-all;}
-  .sw-article-body h2,.sw-article-body h3{break-after:avoid;}
-  .sw-article-body figure,.sw-article-body pre,.sw-tbl-wrap{break-inside:avoid;}
+  .quiet-article-body a[href^="http"]::after{content:" (" attr(href) ")"; font-size:.85em; color:#555; word-break:break-all;}
+  .quiet-article-body h2,.quiet-article-body h3{break-after:avoid;}
+  .quiet-article-body figure,.quiet-article-body pre,.quiet-tbl-wrap{break-inside:avoid;}
 }
 
 /* ---- surviving Tistory's own stylesheets ----------------------------------
@@ -103,71 +103,71 @@
    our style.css, and they reset heading weight and element spacing inside the
    post body. Class-level selectors lose that cascade, so these carry the
    layout id. Verified against a live post. */
-#sw-main .sw-article-body h1,
-#sw-main .sw-article-body h2,
-#sw-main .sw-article-body h3,
-#sw-main .sw-article-body h4,
-#sw-main .sw-article-body h5,
-#sw-main .sw-article-body h6{
+#quiet-main .quiet-article-body h1,
+#quiet-main .quiet-article-body h2,
+#quiet-main .quiet-article-body h3,
+#quiet-main .quiet-article-body h4,
+#quiet-main .quiet-article-body h5,
+#quiet-main .quiet-article-body h6{
   color:var(--ink); font-weight:700; letter-spacing:-.01em; text-wrap:balance;
 }
-#sw-main .sw-article-body h1{font-size:1.75rem; line-height:1.35; margin:2.2em 0 .7em;}
-#sw-main .sw-article-body h2{font-size:1.5rem; line-height:1.4; margin:2.3em 0 .7em;}
-#sw-main .sw-article-body h3{font-size:1.2rem; line-height:1.45; margin:1.9em 0 .6em;}
-#sw-main .sw-article-body h4{font-size:1.06rem; line-height:1.5; margin:1.7em 0 .5em;}
-#sw-main .sw-article-body h5{font-size:.98rem; line-height:1.5; margin:1.5em 0 .45em; color:var(--ink-2);}
-#sw-main .sw-article-body h6{font-size:.9rem; line-height:1.5; margin:1.4em 0 .4em; color:var(--muted); letter-spacing:.02em;}
-#sw-main .sw-article-body b,
-#sw-main .sw-article-body strong{font-weight:700; color:var(--ink);}
-#sw-main .sw-article-body figure{margin:1.9em 0;}
-#sw-main .sw-article-body blockquote{margin:1.7em 0;}
+#quiet-main .quiet-article-body h1{font-size:1.75rem; line-height:1.35; margin:2.2em 0 .7em;}
+#quiet-main .quiet-article-body h2{font-size:1.5rem; line-height:1.4; margin:2.3em 0 .7em;}
+#quiet-main .quiet-article-body h3{font-size:1.2rem; line-height:1.45; margin:1.9em 0 .6em;}
+#quiet-main .quiet-article-body h4{font-size:1.06rem; line-height:1.5; margin:1.7em 0 .5em;}
+#quiet-main .quiet-article-body h5{font-size:.98rem; line-height:1.5; margin:1.5em 0 .45em; color:var(--ink-2);}
+#quiet-main .quiet-article-body h6{font-size:.9rem; line-height:1.5; margin:1.4em 0 .4em; color:var(--muted); letter-spacing:.02em;}
+#quiet-main .quiet-article-body b,
+#quiet-main .quiet-article-body strong{font-weight:700; color:var(--ink);}
+#quiet-main .quiet-article-body figure{margin:1.9em 0;}
+#quiet-main .quiet-article-body blockquote{margin:1.7em 0;}
 
 /* ---- syntax highlighting --------------------------------------------------
    Tistory always loads the light `atom-one-light` highlight.js theme, which
    drops a pale block inside our dark code frame and is unreadable in dark
    mode. Neutralise its surface and restate the token colours to match the
    frame, so highlighted code looks the same in both themes. */
-#sw-main .sw-article-body .hljs{background:none; color:#d7dee8; padding:0;}
-#sw-main .sw-article-body .hljs-comment,
-#sw-main .sw-article-body .hljs-quote{color:#6b7688; font-style:italic;}
-#sw-main .sw-article-body .hljs-keyword,
-#sw-main .sw-article-body .hljs-selector-tag,
-#sw-main .sw-article-body .hljs-literal,
-#sw-main .sw-article-body .hljs-type{color:#c493e8;}
-#sw-main .sw-article-body .hljs-string,
-#sw-main .sw-article-body .hljs-addition,
-#sw-main .sw-article-body .hljs-regexp{color:#8fd3a0;}
-#sw-main .sw-article-body .hljs-title,
-#sw-main .sw-article-body .hljs-function,
-#sw-main .sw-article-body .hljs-section,
-#sw-main .sw-article-body .hljs-name{color:#78b6f0;}
-#sw-main .sw-article-body .hljs-number,
-#sw-main .sw-article-body .hljs-built_in,
-#sw-main .sw-article-body .hljs-attr,
-#sw-main .sw-article-body .hljs-attribute,
-#sw-main .sw-article-body .hljs-variable{color:#e0a06a;}
-#sw-main .sw-article-body .hljs-deletion{color:#e88}
-#sw-main .sw-article-body .hljs-emphasis{font-style:italic;}
-#sw-main .sw-article-body .hljs-strong{font-weight:700;}
+#quiet-main .quiet-article-body .hljs{background:none; color:#d7dee8; padding:0;}
+#quiet-main .quiet-article-body .hljs-comment,
+#quiet-main .quiet-article-body .hljs-quote{color:#6b7688; font-style:italic;}
+#quiet-main .quiet-article-body .hljs-keyword,
+#quiet-main .quiet-article-body .hljs-selector-tag,
+#quiet-main .quiet-article-body .hljs-literal,
+#quiet-main .quiet-article-body .hljs-type{color:#c493e8;}
+#quiet-main .quiet-article-body .hljs-string,
+#quiet-main .quiet-article-body .hljs-addition,
+#quiet-main .quiet-article-body .hljs-regexp{color:#8fd3a0;}
+#quiet-main .quiet-article-body .hljs-title,
+#quiet-main .quiet-article-body .hljs-function,
+#quiet-main .quiet-article-body .hljs-section,
+#quiet-main .quiet-article-body .hljs-name{color:#78b6f0;}
+#quiet-main .quiet-article-body .hljs-number,
+#quiet-main .quiet-article-body .hljs-built_in,
+#quiet-main .quiet-article-body .hljs-attr,
+#quiet-main .quiet-article-body .hljs-attribute,
+#quiet-main .quiet-article-body .hljs-variable{color:#e0a06a;}
+#quiet-main .quiet-article-body .hljs-deletion{color:#e88}
+#quiet-main .quiet-article-body .hljs-emphasis{font-style:italic;}
+#quiet-main .quiet-article-body .hljs-strong{font-weight:700;}
 
 /* ---- image lightbox -------------------------------------------------------
    Added by script; without it images simply stay inline, so nothing here is
    load-bearing for reading. */
-.sw-article-body img.sw-zoomable{cursor:zoom-in;}
-.sw-lightbox{
+.quiet-article-body img.quiet-zoomable{cursor:zoom-in;}
+.quiet-lightbox{
   position:fixed; inset:0; z-index:80; display:none;
   align-items:center; justify-content:center; padding:2rem;
   background:rgba(10,12,16,.86);
 }
-.sw-lightbox.open{display:flex;}
-.sw-lightbox img{max-width:100%; max-height:100%; width:auto; height:auto; border-radius:var(--r-md); cursor:zoom-out;}
-.sw-lightbox .close{
+.quiet-lightbox.open{display:flex;}
+.quiet-lightbox img{max-width:100%; max-height:100%; width:auto; height:auto; border-radius:var(--r-md); cursor:zoom-out;}
+.quiet-lightbox .close{
   position:absolute; top:1rem; right:1rem; width:40px; height:40px;
   display:grid; place-items:center; border-radius:12px; color:#fff;
   background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.2);
 }
-.sw-lightbox .close:hover{background:rgba(255,255,255,.22);}
-body.sw-lightbox-open{overflow:hidden;}
+.quiet-lightbox .close:hover{background:rgba(255,255,255,.22);}
+body.quiet-lightbox-open{overflow:hidden;}
 @media (prefers-reduced-motion:no-preference){
-  .sw-lightbox.open img{animation:sw-rise .28s var(--ease) both;}
+  .quiet-lightbox.open img{animation:quiet-rise .28s var(--ease) both;}
 }

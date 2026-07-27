@@ -2,49 +2,49 @@
 {% import "macros.njk" as m %}
 {% block main %}
 {% set a = article %}
-<article id="sw-article">
-  <header class="sw-article-head">
+<article id="quiet-article">
+  <header class="quiet-article-head">
     <div class="cover" aria-hidden="true"></div>
     <div class="inner">
-      <a class="sw-crumb" href="{{ a.categoryUrl }}">{{ a.crumb }}</a>
+      <a class="quiet-crumb" href="{{ a.categoryUrl }}">{{ a.crumb }}</a>
       <h1>{{ a.title }}</h1>
-      <div class="sw-byline">
+      <div class="quiet-byline">
         <span>{{ a.date }}</span><span>{{ a.readtime }}</span><span>Comments {{ a.comments }}</span>
         <span class="admin"><a href="#">Edit</a> · <a href="#">Delete</a></span>
       </div>
     </div>
   </header>
 
-  <div class="sw-article-body">
+  <div class="quiet-article-body">
     {{ a.body | safe }}
   </div>
 
-  <div class="sw-article-foot">
-    <div class="sw-tags">
+  <div class="quiet-article-foot">
+    <div class="quiet-tags">
       {% for t in a.tags %}<a href="/tag/{{ t }}">#{{ t }}</a>{% endfor %}
     </div>
 
-    <div class="sw-related">
-      <div class="sw-section-tag"><h2>More in '{{ a.categoryName }}'</h2></div>
+    <div class="quiet-related">
+      <div class="quiet-section-tag"><h2>More in '{{ a.categoryName }}'</h2></div>
       <ul>
         {% for r in a.related %}<li><a href="{{ r.url }}"><span>{{ r.title }}</span><time>{{ r.date }}</time></a></li>{% endfor %}
       </ul>
     </div>
 
-    <div class="sw-author">
-      <div class="sw-monogram" aria-hidden="true">{{ site.initial }}</div>
+    <div class="quiet-author">
+      <div class="quiet-monogram" aria-hidden="true">{{ site.initial }}</div>
       <div><div class="n">{{ site.name }}</div><div class="b">{{ site.bio }}</div></div>
     </div>
   </div>
 
-  <section class="sw-comments" aria-label="Comments">
-    <div class="sw-section-tag"><h2>Comments {{ a.comments }}</h2></div>
-    <form class="sw-cbox" onsubmit="return false">
-      <label class="sw-sr" for="sw-comment">Write a comment</label>
-      <textarea id="sw-comment" placeholder="Leave a comment"></textarea>
+  <section class="quiet-comments" aria-label="Comments">
+    <div class="quiet-section-tag"><h2>Comments {{ a.comments }}</h2></div>
+    <form class="quiet-cbox" onsubmit="return false">
+      <label class="quiet-sr" for="quiet-comment">Write a comment</label>
+      <textarea id="quiet-comment" placeholder="Leave a comment"></textarea>
       <div class="cfields">
-        <label class="sw-sr" for="sw-cname">Name</label><input id="sw-cname" placeholder="Name" autocomplete="name">
-        <label class="sw-sr" for="sw-cpw">Password</label><input id="sw-cpw" type="password" placeholder="Password" autocomplete="off">
+        <label class="quiet-sr" for="quiet-cname">Name</label><input id="quiet-cname" placeholder="Name" autocomplete="name">
+        <label class="quiet-sr" for="quiet-cpw">Password</label><input id="quiet-cpw" type="password" placeholder="Password" autocomplete="off">
         <button type="submit" class="submit">Post</button>
       </div>
     </form>

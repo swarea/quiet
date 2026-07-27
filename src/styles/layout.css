@@ -1,12 +1,12 @@
 /* App shell, sidebar, mobile drawer, topbar, footer, floating dock. */
-.sw-shell{display:grid; grid-template-columns:var(--rail) 1fr; min-height:100vh;}
-@media (max-width:960px){ .sw-shell{grid-template-columns:1fr;} }
+.quiet-shell{display:grid; grid-template-columns:var(--rail) 1fr; min-height:100vh;}
+@media (max-width:960px){ .quiet-shell{grid-template-columns:1fr;} }
 /* Fill the viewport so the footer sits at the bottom on short pages. */
-.sw-content{min-width:0; min-height:100vh; display:flex; flex-direction:column;}
-.sw-site-foot{margin-top:auto;}
+.quiet-content{min-width:0; min-height:100vh; display:flex; flex-direction:column;}
+.quiet-site-foot{margin-top:auto;}
 
 /* sidebar */
-.sw-rail{
+.quiet-rail{
   position:sticky; top:0; align-self:start; height:100vh; overflow-y:auto; scrollbar-gutter:stable;
   background:var(--surface); border-right:1px solid var(--line);
   display:flex; flex-direction:column; gap:1.5rem; padding:1.6rem 1.25rem 1.25rem;
@@ -17,106 +17,106 @@
    categories down the rail, and top-align the avatar so it sits beside the
    title rather than floating in the middle of a tall block. min-width:0 lets
    the column shrink, without which the clamp never engages inside a flex row. */
-.sw-brand{display:flex; align-items:flex-start; gap:.7rem;}
-.sw-brand-text{min-width:0;}
-.sw-brand .name,.sw-brand .tag{
+.quiet-brand{display:flex; align-items:flex-start; gap:.7rem;}
+.quiet-brand-text{min-width:0;}
+.quiet-brand .name,.quiet-brand .tag{
   display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
 }
-.sw-monogram{width:42px; height:42px; border-radius:11px; background:linear-gradient(150deg,var(--accent),var(--accent-ink)); color:var(--on-accent); display:grid; place-items:center; font-family:var(--serif); font-weight:700; font-size:1.15rem; flex:none; box-shadow:var(--shadow);}
-.sw-brand .name{font-weight:700; font-size:1.02rem; letter-spacing:-.01em;}
-.sw-brand .tag{font-size:.74rem; color:var(--muted); margin-top:1px;}
+.quiet-monogram{width:42px; height:42px; border-radius:11px; background:linear-gradient(150deg,var(--accent),var(--accent-ink)); color:var(--on-accent); display:grid; place-items:center; font-family:var(--serif); font-weight:700; font-size:1.15rem; flex:none; box-shadow:var(--shadow);}
+.quiet-brand .name{font-weight:700; font-size:1.02rem; letter-spacing:-.01em;}
+.quiet-brand .tag{font-size:.74rem; color:var(--muted); margin-top:1px;}
 
-.sw-search{display:flex; align-items:center; gap:.5rem; background:var(--surface-2); border:1px solid var(--line); border-radius:var(--r-md); padding:.5rem var(--rail-inset); color:var(--muted); transition:border-color .18s, box-shadow .18s;}
-.sw-search:focus-within{border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-wash);}
-.sw-search input{border:0; background:none; outline:none; color:var(--ink); font-size:.86rem; width:100%;}
-.sw-search svg{flex:none;}
-.sw-search kbd{font-family:var(--mono); font-size:.66rem; color:var(--faint); border:1px solid var(--line-strong); border-radius:4px; padding:0 .3rem; background:var(--surface);}
+.quiet-search{display:flex; align-items:center; gap:.5rem; background:var(--surface-2); border:1px solid var(--line); border-radius:var(--r-md); padding:.5rem var(--rail-inset); color:var(--muted); transition:border-color .18s, box-shadow .18s;}
+.quiet-search:focus-within{border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-wash);}
+.quiet-search input{border:0; background:none; outline:none; color:var(--ink); font-size:.86rem; width:100%;}
+.quiet-search svg{flex:none;}
+.quiet-search kbd{font-family:var(--mono); font-size:.66rem; color:var(--faint); border:1px solid var(--line-strong); border-radius:4px; padding:0 .3rem; background:var(--surface);}
 
-.sw-counts{display:grid; grid-template-columns:repeat(3,1fr); gap:.6rem; padding-inline:var(--rail-inset);}
-.sw-counts > span{display:flex; flex-direction:column; font-size:.68rem; color:var(--muted); letter-spacing:.02em;}
-.sw-counts b{color:var(--ink-2); font-size:.92rem; font-family:var(--mono); font-weight:600; margin-top:2px; font-variant-numeric:tabular-nums;}
+.quiet-counts{display:grid; grid-template-columns:repeat(3,1fr); gap:.6rem; padding-inline:var(--rail-inset);}
+.quiet-counts > span{display:flex; flex-direction:column; font-size:.68rem; color:var(--muted); letter-spacing:.02em;}
+.quiet-counts b{color:var(--ink-2); font-size:.92rem; font-family:var(--mono); font-weight:600; margin-top:2px; font-variant-numeric:tabular-nums;}
 
-.sw-nav-label{font-family:var(--mono); font-size:.64rem; letter-spacing:.16em; text-transform:uppercase; color:var(--faint); padding-inline:var(--rail-inset); margin-bottom:.4rem;}
-.sw-cat{display:flex; flex-direction:column; gap:1px;}
-.sw-cat-row{width:100%; text-align:left; display:flex; align-items:center; gap:.35rem; padding:.42rem .5rem; border-radius:var(--r-sm); font-size:.9rem; color:var(--ink-2); transition:background .15s, color .15s;}
-.sw-cat-row:hover{background:var(--surface-2); color:var(--ink);}
-.sw-cat-row.active{background:var(--accent-wash); color:var(--accent); font-weight:600;}
-.sw-cat-row .twist{flex:none; width:16px; height:16px; display:grid; place-items:center; color:var(--faint); transition:transform .2s var(--ease);}
-.sw-cat-row .twist.open{transform:rotate(90deg);}
-.sw-cat-row .label{flex:1;}
-.sw-cat-row .n{font-family:var(--mono); font-size:.72rem; color:var(--faint); font-variant-numeric:tabular-nums;}
-.sw-cat-row.active .n{color:var(--accent);}
-.sw-sub{display:grid; grid-template-rows:0fr; opacity:0; margin-left:.9rem; padding-left:.5rem; border-left:1px solid var(--line); transition:grid-template-rows .24s var(--ease), opacity .24s ease;}
-.sw-sub.open{grid-template-rows:1fr; opacity:1; margin-block:1px 3px;}
-.sw-sub-inner{overflow:hidden; min-height:0; display:flex; flex-direction:column; gap:1px;}
-.sw-sub a{padding:.34rem .5rem; border-radius:var(--r-sm); font-size:.84rem; color:var(--muted); display:flex; justify-content:space-between; gap:.5rem;}
-.sw-sub a:hover{background:var(--surface-2); color:var(--ink);}
-.sw-sub a .n{font-family:var(--mono); font-size:.72rem; color:var(--faint);}
+.quiet-nav-label{font-family:var(--mono); font-size:.64rem; letter-spacing:.16em; text-transform:uppercase; color:var(--faint); padding-inline:var(--rail-inset); margin-bottom:.4rem;}
+.quiet-cat{display:flex; flex-direction:column; gap:1px;}
+.quiet-cat-row{width:100%; text-align:left; display:flex; align-items:center; gap:.35rem; padding:.42rem .5rem; border-radius:var(--r-sm); font-size:.9rem; color:var(--ink-2); transition:background .15s, color .15s;}
+.quiet-cat-row:hover{background:var(--surface-2); color:var(--ink);}
+.quiet-cat-row.active{background:var(--accent-wash); color:var(--accent); font-weight:600;}
+.quiet-cat-row .twist{flex:none; width:16px; height:16px; display:grid; place-items:center; color:var(--faint); transition:transform .2s var(--ease);}
+.quiet-cat-row .twist.open{transform:rotate(90deg);}
+.quiet-cat-row .label{flex:1;}
+.quiet-cat-row .n{font-family:var(--mono); font-size:.72rem; color:var(--faint); font-variant-numeric:tabular-nums;}
+.quiet-cat-row.active .n{color:var(--accent);}
+.quiet-sub{display:grid; grid-template-rows:0fr; opacity:0; margin-left:.9rem; padding-left:.5rem; border-left:1px solid var(--line); transition:grid-template-rows .24s var(--ease), opacity .24s ease;}
+.quiet-sub.open{grid-template-rows:1fr; opacity:1; margin-block:1px 3px;}
+.quiet-sub-inner{overflow:hidden; min-height:0; display:flex; flex-direction:column; gap:1px;}
+.quiet-sub a{padding:.34rem .5rem; border-radius:var(--r-sm); font-size:.84rem; color:var(--muted); display:flex; justify-content:space-between; gap:.5rem;}
+.quiet-sub a:hover{background:var(--surface-2); color:var(--ink);}
+.quiet-sub a .n{font-family:var(--mono); font-size:.72rem; color:var(--faint);}
 
-.sw-menu{display:flex; flex-direction:column; gap:1px;}
-.sw-menu a{display:flex; align-items:center; gap:.6rem; padding:.42rem .5rem; border-radius:var(--r-sm); font-size:.88rem; color:var(--ink-2); transition:background .15s, color .15s;}
-.sw-menu a:hover{background:var(--surface-2); color:var(--ink);}
-.sw-menu a:hover svg{color:var(--accent);}
-.sw-menu svg{color:var(--faint); flex:none; transition:color .15s;}
+.quiet-menu{display:flex; flex-direction:column; gap:1px;}
+.quiet-menu a{display:flex; align-items:center; gap:.6rem; padding:.42rem .5rem; border-radius:var(--r-sm); font-size:.88rem; color:var(--ink-2); transition:background .15s, color .15s;}
+.quiet-menu a:hover{background:var(--surface-2); color:var(--ink);}
+.quiet-menu a:hover svg{color:var(--accent);}
+.quiet-menu svg{color:var(--faint); flex:none; transition:color .15s;}
 
-.sw-rail-foot{margin-top:auto; padding:1rem var(--rail-inset) 0; border-top:1px solid var(--line); display:flex; align-items:center; justify-content:space-between; font-size:.72rem; color:var(--muted);}
-.sw-rail-foot .links{display:flex; gap:.4rem;}
+.quiet-rail-foot{margin-top:auto; padding:1rem var(--rail-inset) 0; border-top:1px solid var(--line); display:flex; align-items:center; justify-content:space-between; font-size:.72rem; color:var(--muted);}
+.quiet-rail-foot .links{display:flex; gap:.4rem;}
 
 /* The colophon sits under the blog's own footer and stays below it in weight:
    the blog's name is the subject of this column, and the skin is a footnote to
    it. Muted until hovered, so it reads as a signature rather than a badge. */
-.sw-colophon{margin:0; font-size:.7rem; color:var(--faint);
+.quiet-colophon{margin:0; font-size:.7rem; color:var(--faint);
   display:flex; gap:.28rem; letter-spacing:.01em;}
-.sw-colophon a{color:var(--faint); transition:color .15s;}
-.sw-colophon a:first-child{font-weight:600;}
-.sw-colophon a:hover{color:var(--accent);}
-.sw-icon-btn{width:30px; height:30px; border-radius:8px; display:grid; place-items:center; color:var(--muted); border:1px solid transparent; transition:background .15s, color .15s, border-color .15s;}
-.sw-icon-btn:hover{background:var(--surface-2); color:var(--ink); border-color:var(--line);}
+.quiet-colophon a{color:var(--faint); transition:color .15s;}
+.quiet-colophon a:first-child{font-weight:600;}
+.quiet-colophon a:hover{color:var(--accent);}
+.quiet-icon-btn{width:30px; height:30px; border-radius:8px; display:grid; place-items:center; color:var(--muted); border:1px solid transparent; transition:background .15s, color .15s, border-color .15s;}
+.quiet-icon-btn:hover{background:var(--surface-2); color:var(--ink); border-color:var(--line);}
 
 /* topbar (mobile) */
-.sw-topbar{display:none; position:sticky; top:0; z-index:40; height:var(--header-h); align-items:center; gap:.6rem; padding:0 1rem; background:var(--surface); background:color-mix(in srgb,var(--surface) 86%, transparent); backdrop-filter:saturate(1.4) blur(10px); border-bottom:1px solid var(--line);}
-.sw-topbar .name{font-weight:700; font-size:.95rem; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
-.sw-topbar .spacer{flex:1;}
+.quiet-topbar{display:none; position:sticky; top:0; z-index:40; height:var(--header-h); align-items:center; gap:.6rem; padding:0 1rem; background:var(--surface); background:color-mix(in srgb,var(--surface) 86%, transparent); backdrop-filter:saturate(1.4) blur(10px); border-bottom:1px solid var(--line);}
+.quiet-topbar .name{font-weight:700; font-size:.95rem; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+.quiet-topbar .spacer{flex:1;}
 @media (max-width:960px){
-  .sw-rail{position:fixed; inset:0 auto 0 0; z-index:50; width:min(86vw,320px); transform:translateX(-102%); transition:transform .26s var(--ease); box-shadow:var(--shadow-lg); animation:none;}
-  .sw-rail.open{transform:none;}
-  .sw-topbar{display:flex;}
-  .sw-scrim{position:fixed; inset:0; background:rgba(10,12,16,.44); backdrop-filter:blur(2px); z-index:45; opacity:0; visibility:hidden; transition:opacity .24s;}
-  .sw-scrim.open{opacity:1; visibility:visible;}
+  .quiet-rail{position:fixed; inset:0 auto 0 0; z-index:50; width:min(86vw,320px); transform:translateX(-102%); transition:transform .26s var(--ease); box-shadow:var(--shadow-lg); animation:none;}
+  .quiet-rail.open{transform:none;}
+  .quiet-topbar{display:flex;}
+  .quiet-scrim{position:fixed; inset:0; background:rgba(10,12,16,.44); backdrop-filter:blur(2px); z-index:45; opacity:0; visibility:hidden; transition:opacity .24s;}
+  .quiet-scrim.open{opacity:1; visibility:visible;}
 }
 
 /* footer */
-.sw-site-foot{border-top:1px solid var(--line); background:var(--surface);}
-.sw-site-foot .sw-wrap{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; padding-block:1.6rem; font-size:.8rem; color:var(--muted);}
-.sw-site-foot a{transition:color .15s;} .sw-site-foot a:hover{color:var(--accent);}
+.quiet-site-foot{border-top:1px solid var(--line); background:var(--surface);}
+.quiet-site-foot .quiet-wrap{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; padding-block:1.6rem; font-size:.8rem; color:var(--muted);}
+.quiet-site-foot a{transition:color .15s;} .quiet-site-foot a:hover{color:var(--accent);}
 
 /* floating dock */
 /* Sits above Tistory's fixed subscribe bar when there is one; --dock-lift is
    measured at runtime, so with no bar the dock keeps its own margin. */
-.sw-dock{position:fixed; right:1.1rem; bottom:var(--dock-lift, 1.1rem); z-index:35; display:flex; flex-direction:column; gap:.5rem; transition:bottom .2s var(--ease);}
-.sw-dock button{width:40px; height:40px; border-radius:12px; background:var(--surface); border:1px solid var(--line); color:var(--muted); display:grid; place-items:center; box-shadow:var(--shadow); transition:color .15s, border-color .15s, transform .15s var(--ease);}
-.sw-dock button:hover{color:var(--accent); border-color:var(--accent); transform:translateY(-2px);}
+.quiet-dock{position:fixed; right:1.1rem; bottom:var(--dock-lift, 1.1rem); z-index:35; display:flex; flex-direction:column; gap:.5rem; transition:bottom .2s var(--ease);}
+.quiet-dock button{width:40px; height:40px; border-radius:12px; background:var(--surface); border:1px solid var(--line); color:var(--muted); display:grid; place-items:center; box-shadow:var(--shadow); transition:color .15s, border-color .15s, transform .15s var(--ease);}
+.quiet-dock button:hover{color:var(--accent); border-color:var(--accent); transform:translateY(-2px);}
 /* Taken out of flow entirely when hidden: keeping it laid out left a blank
    slot under the other buttons. It is first in the column, so appearing and
    disappearing never moves them. */
-.sw-dock .totop{display:none;}
-.sw-dock .totop.show{display:grid;}
+.quiet-dock .totop{display:none;}
+.quiet-dock .totop.show{display:grid;}
 
 /* prototype-only divider */
-.sw-proto-note{background:var(--surface-2); border-block:1px solid var(--line); text-align:center; font-family:var(--mono); font-size:.72rem; letter-spacing:.1em; color:var(--muted); padding:.55rem;}
+.quiet-proto-note{background:var(--surface-2); border-block:1px solid var(--line); text-align:center; font-family:var(--mono); font-size:.72rem; letter-spacing:.1em; color:var(--muted); padding:.55rem;}
 
 /* Sidebar turned off in skin settings: the shell collapses to one column. */
-.sw-shell.sw-no-sidebar{grid-template-columns:1fr;}
-.sw-shell.sw-no-sidebar .sw-topbar{display:flex;}
+.quiet-shell.quiet-no-sidebar{grid-template-columns:1fr;}
+.quiet-shell.quiet-no-sidebar .quiet-topbar{display:flex;}
 
 /* Contents button lives in the dock and only matters where the rail cannot. */
-.sw-dock .toc-btn{display:none;}
-@media (max-width:1600px){ .sw-dock .toc-btn{display:grid;} }
+.quiet-dock .toc-btn{display:none;}
+@media (max-width:1600px){ .quiet-dock .toc-btn{display:grid;} }
 
 /* Exactly one footer, and the rail holds it: there it stays on screen instead
    of waiting at the end of a long article, and on narrow screens it travels
    with the drawer rather than being duplicated beside it. The content footer
    only steps in when the sidebar is switched off and no rail exists to hold
    it, so a page is never left without one. */
-.sw-site-foot{display:none;}
-.sw-shell.sw-no-sidebar .sw-site-foot{display:block;}
+.quiet-site-foot{display:none;}
+.quiet-shell.quiet-no-sidebar .quiet-site-foot{display:block;}

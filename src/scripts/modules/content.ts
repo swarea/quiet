@@ -16,10 +16,10 @@ function languageOf(pre: HTMLElement): string {
 
 function frameCodeBlocks(body: HTMLElement): void {
   body.querySelectorAll<HTMLElement>("pre").forEach((pre) => {
-    if (pre.closest(".sw-code")) return; // already framed
+    if (pre.closest(".quiet-code")) return; // already framed
 
     const frame = document.createElement("div");
-    frame.className = "sw-code";
+    frame.className = "quiet-code";
     const bar = document.createElement("div");
     bar.className = "bar";
 
@@ -42,9 +42,9 @@ function frameCodeBlocks(body: HTMLElement): void {
 // A wide table must scroll inside its own box, never take the page sideways.
 function wrapTables(body: HTMLElement): void {
   body.querySelectorAll<HTMLTableElement>("table").forEach((table) => {
-    if (table.closest(".sw-tbl-wrap")) return;
+    if (table.closest(".quiet-tbl-wrap")) return;
     const wrap = document.createElement("div");
-    wrap.className = "sw-tbl-wrap";
+    wrap.className = "quiet-tbl-wrap";
     table.parentNode?.insertBefore(wrap, table);
     wrap.appendChild(table);
   });
@@ -61,7 +61,7 @@ function secureExternalLinks(body: HTMLElement): void {
 }
 
 export function initContent(): void {
-  const body = document.querySelector<HTMLElement>(".sw-article-body");
+  const body = document.querySelector<HTMLElement>(".quiet-article-body");
   if (!body) return;
   frameCodeBlocks(body);
   wrapTables(body);

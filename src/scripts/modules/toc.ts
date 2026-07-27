@@ -2,16 +2,16 @@
 // Preserves author-supplied ids; only generates ids where missing.
 export function initToc(): void {
   // The skin setting can switch the table of contents off entirely.
-  if (document.getElementById("sw-toc-off")) return;
+  if (document.getElementById("quiet-toc-off")) return;
   // Class, not id: article, notice, and page blocks all use it, and only one
   // of them is ever rendered on a given page.
-  const body = document.querySelector<HTMLElement>(".sw-article-body");
+  const body = document.querySelector<HTMLElement>(".quiet-article-body");
   if (!body) return;
   const heads = body.querySelectorAll<HTMLElement>("h2, h3");
   if (!heads.length) return;
 
   const nav = document.createElement("nav");
-  nav.className = "sw-toc";
+  nav.className = "quiet-toc";
   nav.setAttribute("aria-label", "Contents");
 
   const used = new Set<string>();
@@ -42,7 +42,7 @@ export function initToc(): void {
     );
   });
 
-  nav.innerHTML = `<div class="sw-toc-inner"><h4>On this page</h4><ol>${items.join("")}</ol></div>`;
+  nav.innerHTML = `<div class="quiet-toc-inner"><h4>On this page</h4><ol>${items.join("")}</ol></div>`;
   document.body.appendChild(nav);
 
   const links = new Map<string, HTMLElement>();
@@ -72,7 +72,7 @@ const LIST_ICON =
   '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>';
 
 function addPanelToggle(nav: HTMLElement, links: Map<string, HTMLElement>): void {
-  const dock = document.querySelector(".sw-dock");
+  const dock = document.querySelector(".quiet-dock");
   if (!dock) return;
 
   const btn = document.createElement("button");

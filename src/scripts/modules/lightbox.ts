@@ -13,7 +13,7 @@ let lastFocus: HTMLElement | null = null;
 
 function build(): HTMLElement {
   const el = document.createElement("div");
-  el.className = "sw-lightbox";
+  el.className = "quiet-lightbox";
   el.setAttribute("role", "dialog");
   el.setAttribute("aria-modal", "true");
   el.setAttribute("aria-label", "View image");
@@ -31,7 +31,7 @@ function build(): HTMLElement {
 function close(): void {
   if (!overlay) return;
   overlay.classList.remove("open");
-  document.body.classList.remove("sw-lightbox-open");
+  document.body.classList.remove("quiet-lightbox-open");
   lastFocus?.focus();
   lastFocus = null;
 }
@@ -44,17 +44,17 @@ function open(img: HTMLImageElement): void {
   full.alt = img.alt;
   lastFocus = document.activeElement as HTMLElement | null;
   overlay.classList.add("open");
-  document.body.classList.add("sw-lightbox-open");
+  document.body.classList.add("quiet-lightbox-open");
   overlay.querySelector<HTMLElement>(".close")?.focus();
 }
 
 export function initLightbox(): void {
-  const body = document.querySelector<HTMLElement>(".sw-article-body");
+  const body = document.querySelector<HTMLElement>(".quiet-article-body");
   if (!body) return;
 
   body.querySelectorAll<HTMLImageElement>("img").forEach((img) => {
     if (img.closest("a")) return; // author linked it deliberately
-    img.classList.add("sw-zoomable");
+    img.classList.add("quiet-zoomable");
     img.addEventListener("click", () => open(img));
   });
 

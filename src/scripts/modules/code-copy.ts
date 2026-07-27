@@ -2,7 +2,7 @@
 export function initCodeCopy(): void {
   document.querySelectorAll<HTMLElement>("[data-copy]").forEach((btn) => {
     btn.addEventListener("click", () => {
-      const block = btn.closest(".sw-code");
+      const block = btn.closest(".quiet-code");
       const pre = block?.querySelector("pre");
       if (!pre) return;
       const label = btn.querySelector("span");

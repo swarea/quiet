@@ -21,22 +21,22 @@ function labelOf(original: HTMLElement): string {
 }
 
 export function initSubscribe(): void {
-  const host = document.querySelector<HTMLElement>(".sw-author");
+  const host = document.querySelector<HTMLElement>(".quiet-author");
   const original = document.querySelector<HTMLElement>(
     ".container_postbtn .btn_menu_toolbar.btn_subscription",
   );
-  if (!host || !original || host.querySelector(".sw-subscribe")) return;
+  if (!host || !original || host.querySelector(".quiet-subscribe")) return;
 
   const button = document.createElement("button");
   button.type = "button";
-  button.className = "sw-subscribe";
+  button.className = "quiet-subscribe";
   button.lang = "en";
   button.textContent = labelOf(original);
   button.addEventListener("click", () => original.click());
   host.appendChild(button);
 
   // Only now is it safe to take the original out of the layout.
-  document.querySelector(".container_postbtn")?.classList.add("sw-sub-moved");
+  document.querySelector(".container_postbtn")?.classList.add("quiet-sub-moved");
 
   // Subscribing flips the original's label; keep ours saying the same thing.
   if (typeof MutationObserver === "undefined") return;

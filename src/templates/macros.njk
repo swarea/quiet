@@ -1,5 +1,5 @@
 {% macro postRow(p) %}
-<a class="sw-post-row" href="{{ p.url }}">
+<a class="quiet-post-row" href="{{ p.url }}">
   <time>{{ p.date }}</time>
   <div>
     <span class="cat">{{ p.category }}</span>
@@ -10,7 +10,7 @@
 {% endmacro %}
 
 {% macro comment(c) %}
-<div class="sw-comment{% if c.reply %} reply{% endif %}">
+<div class="quiet-comment{% if c.reply %} reply{% endif %}">
   <div class="av" aria-hidden="true">{{ c.initial }}</div>
   <div>
     <div><span class="who">{{ c.name }}</span><span class="when">{{ c.date }}</span></div>

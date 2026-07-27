@@ -85,7 +85,7 @@ function relabel(root: ParentNode): void {
 // visibility toggle, so it arrives in Korean beside "Edit" and "Delete".
 function relabelBylineAdmin(): void {
   const MAP: Record<string, string> = { "보호": "Protect", "공개": "Publish", "발행": "Publish" };
-  document.querySelectorAll<HTMLElement>(".sw-byline .admin a").forEach((link) => {
+  document.querySelectorAll<HTMLElement>(".quiet-byline .admin a").forEach((link) => {
     const text = (link.textContent ?? "").trim();
     const next = MAP[text];
     if (next) link.textContent = next;
@@ -95,13 +95,13 @@ function relabelBylineAdmin(): void {
 // Tistory writes this in place of a category name when a post has none, so it
 // turns up in a list row beside categories the author did name.
 function renameUncategorised(): void {
-  document.querySelectorAll<HTMLElement>(".sw-post-row .cat, .sw-crumb").forEach((el) => {
+  document.querySelectorAll<HTMLElement>(".quiet-post-row .cat, .quiet-crumb").forEach((el) => {
     if ((el.textContent ?? "").trim() === "카테고리 없음") el.textContent = "Uncategorised";
   });
 }
 
 function renameAllPosts(): void {
-  document.querySelectorAll<HTMLAnchorElement>(".sw-cat-tistory a").forEach((link) => {
+  document.querySelectorAll<HTMLAnchorElement>(".quiet-cat-tistory a").forEach((link) => {
     if (!/\/category\/?$/.test(link.getAttribute("href") ?? "")) return;
     const text = (link.textContent ?? "").trim();
     const next = text.replace(/^분류\s*전체보기|^전체보기/, "All posts");

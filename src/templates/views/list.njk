@@ -1,20 +1,20 @@
 {% extends "layout.njk" %}
 {% import "macros.njk" as m %}
 {% block main %}
-<main id="sw-list">
-  <header class="sw-article-head">
+<main id="quiet-list">
+  <header class="quiet-article-head">
     <div class="cover" aria-hidden="true"></div>
     <div class="inner">
-      <a class="sw-crumb" href="/">category</a>
+      <a class="quiet-crumb" href="/">category</a>
       <h1>{{ list.title }}</h1>
-      <div class="sw-byline"><span>{{ list.count }} posts</span></div>
+      <div class="quiet-byline"><span>{{ list.count }} posts</span></div>
     </div>
   </header>
-  <div class="sw-wrap" style="padding-top:2rem;padding-bottom:2rem;">
-    <section class="sw-recent" style="border-top:0;padding-top:0;" aria-label="Posts">
+  <div class="quiet-wrap" style="padding-top:2rem;padding-bottom:2rem;">
+    <section class="quiet-recent" style="border-top:0;padding-top:0;" aria-label="Posts">
       {% for p in list.posts %}{{ m.postRow(p) }}{% endfor %}
     </section>
-    <nav class="sw-paging" aria-label="Pagination">
+    <nav class="quiet-paging" aria-label="Pagination">
       <span class="off" aria-hidden="true">‹</span>
       <a class="cur" href="#" aria-current="page">1</a>
       <a href="#">2</a>
