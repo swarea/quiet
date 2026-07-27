@@ -94,7 +94,7 @@
   background:var(--surface); box-shadow:var(--shadow);
   transition:border-color .15s, background .15s, color .15s;
 }
-.sw-article-body .btn_subscription .txt_state{font-size:.8rem; font-weight:600; color:var(--ink-2);}
+.sw-article-body .btn_subscription .txt_state{font-size:.8rem; font-weight:600; color:var(--accent);}
 .sw-article-body .btn_subscription:hover{border-color:var(--accent); background:var(--accent-wash);}
 .sw-article-body .btn_subscription:hover .txt_state{color:var(--accent);}
 .sw-article-body .ico_postbtn{filter:var(--tt-icon-filter);}
@@ -164,9 +164,14 @@
 .sw-post-row p:empty,.sw-post-row .cat:empty{display:none;}
 .sw-post-row p img{display:none;}
 
-/* Tistory pins a subscribe bar to the bottom right, where our dock also lives.
-   The clearance is measured in layout.ts and applied through --dock-lift, so a
-   fixed guess is no longer needed here. */
+/* Subscribing is offered twice on an article — once at the end of the post,
+   once in the bar Tistory pins to the bottom right — and only once anywhere
+   else, where the pinned bar is the sole route. So the bar stands down on
+   articles, where the end of the post is the better moment to ask anyway, and
+   stays everywhere else. It also frees the corner our dock shares with it:
+   the clearance is measured in layout.ts, so with the bar gone the dock
+   settles back to its own margin on its own. */
+body#tt-body-page .menu_toolbar.toolbar_rb{display:none;}
 
 /* Tistory grades tag popularity with cloud1..cloud5 classes. We keep the chips
    a uniform size for scanability, so carry the signal in weight instead. */

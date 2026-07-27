@@ -88,7 +88,10 @@ figure.sw-fig figcaption{text-align:center; font-size:.8rem; color:var(--muted);
 .sw-tags{display:flex; flex-wrap:wrap; gap:.5rem; margin:0 0 var(--block-gap);}
 .sw-tags a{font-size:.78rem; color:var(--ink-2); background:var(--surface-2); border:1px solid var(--line); border-radius:999px; padding:.3rem .75rem; transition:border-color .15s, color .15s, transform .15s var(--ease);}
 .sw-tags a:hover{border-color:var(--accent); color:var(--accent); transform:translateY(-1px);}
-.sw-author{display:flex; gap:1rem; align-items:center; padding:1.5rem 0; border-block:1px solid var(--line); margin:var(--block-gap) 0;}
+/* Bounded by hairlines top and bottom, so the room inside them is what makes
+   it feel settled rather than pinched. Matches the gap between blocks, so
+   the rhythm inside the rules agrees with the rhythm outside. */
+.sw-author{display:flex; gap:1rem; align-items:center; padding:var(--block-gap) 0; border-block:1px solid var(--line); margin:var(--block-gap) 0;}
 .sw-author .sw-monogram{width:52px; height:52px; font-size:1.4rem; border-radius:14px;}
 .sw-author .n{font-weight:700;}
 .sw-author .b{font-size:.86rem; color:var(--muted); margin-top:.2rem;}
