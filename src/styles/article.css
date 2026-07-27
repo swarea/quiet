@@ -168,15 +168,22 @@ figure.quiet-fig figcaption{text-align:center; font-size:.8rem; color:var(--mute
   transition:background .15s;
 }
 .quiet-cbox .submit:hover{background:var(--accent-ink);}
-.quiet-comment{display:flex; gap:.85rem; padding:1.15rem 0; border-bottom:1px solid var(--line); scroll-margin-top:2rem;}
-.quiet-comment:last-child{border-bottom:0;}
+/* A line belongs between one conversation and the next, not between somebody
+   and the answer they were given. Comments and replies arrive as flat siblings,
+   so the line is drawn above each new top-level comment instead of below every
+   comment: a reply then stays attached to what it replies to. */
+.quiet-comment{display:flex; gap:.85rem; padding:1.15rem 0; scroll-margin-top:2rem;}
+.quiet-comment ~ .quiet-comment:not(.reply){border-top:1px solid var(--line);}
 .quiet-comment .av{width:38px; height:38px; border-radius:11px; flex:none; background:var(--surface-2); border:1px solid var(--line); display:grid; place-items:center; color:var(--muted); font-weight:600; font-size:.85rem;}
 .quiet-comment .who{font-weight:600; font-size:.86rem;}
 .quiet-comment .when{font-family:var(--mono); font-size:.72rem; color:var(--faint); margin-left:.5rem;}
 .quiet-comment .txt{font-size:.94rem; color:var(--ink-2); margin-top:.3rem;}
 .quiet-comment .act{margin-top:.45rem; display:flex; gap:.85rem; font-size:.76rem;}
 .quiet-comment .act button{color:var(--muted); transition:color .15s;} .quiet-comment .act button:hover{color:var(--accent);}
-.quiet-comment.reply{margin-left:2.6rem; border-left:2px solid var(--line); padding-left:1rem;}
+/* A reply is indented to where the comment above it starts speaking: its avatar
+   lands in the same column as the parent's words. That relationship says
+   "answering this" on its own, so the bracket that used to say it is gone. */
+.quiet-comment.reply{margin-left:3.2rem;}
 
 /* A post with its own thumbnail gets it as the header backdrop, layered over
    the gradient. The scrim keeps the centred title legible on any image. */
