@@ -1,19 +1,41 @@
-/* Design tokens — semantic names shared by light and dark.
-   Change values here, never hard-code colors in components. */
-:root {
-  --paper:#fbfbfa; --surface:#ffffff; --surface-2:#f2f2f0;
-  --ink:#191b1f; --ink-2:#3f434a; --muted:#565b62; --faint:#6b7078;
-  --line:#ebebe8; --line-strong:#dcdcd7;
-  --accent:#38548c; --accent-ink:#2a4170; --accent-wash:#eef1f7; --on-accent:#ffffff;
-  --warm:#a9793c;
-  --ccl-filter:none;
-  color-scheme:light;
+/* Design tokens.
+   Components never name a colour; they name a role, and the role is bound to a
+   palette here.
 
+   The two palettes are written once each, as `--light-*` and `--dark-*`. What
+   follows only binds a role to one of them, which is the part that has to be
+   repeated: an explicit toggle has to beat the operating system's preference in
+   both directions, and CSS gives no way to say that in a single rule. Because
+   the bindings are mechanical, a missing one is a mechanical mistake, and the
+   validation gate fails on it. Values themselves cannot drift apart, because
+   there is only one of each.
+
+   Everything after the palettes is shared by both themes. */
+:root{
+  /* ---- light palette ---- */
+  --light-paper:#fbfbfa; --light-surface:#ffffff; --light-surface-2:#f2f2f0;
+  --light-ink:#191b1f; --light-ink-2:#3f434a; --light-muted:#565b62; --light-faint:#6b7078;
+  --light-line:#ebebe8; --light-line-strong:#dcdcd7;
+  --light-accent:#38548c; --light-accent-ink:#2a4170; --light-accent-wash:#eef1f7;
+  --light-on-accent:#ffffff; --light-warm:#8d632f;
+  --light-ccl-filter:none;
+  --light-shadow:0 1px 2px rgba(20,22,28,.04), 0 6px 22px -12px rgba(20,22,28,.14);
+  --light-shadow-lg:0 2px 6px rgba(20,22,28,.05), 0 20px 48px -22px rgba(20,22,28,.28);
+
+  /* ---- dark palette ---- */
+  --dark-paper:#101216; --dark-surface:#171a20; --dark-surface-2:#1e222a;
+  --dark-ink:#e8e9ec; --dark-ink-2:#c3c7cd; --dark-muted:#969ba3; --dark-faint:#868b94;
+  --dark-line:#262a31; --dark-line-strong:#333842;
+  --dark-accent:#90a8e0; --dark-accent-ink:#a9bdec; --dark-accent-wash:#1b2233;
+  --dark-on-accent:#101216; --dark-warm:#cda56a;
+  --dark-ccl-filter:invert(1) brightness(1.6);
+  --dark-shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 30px -14px rgba(0,0,0,.6);
+  --dark-shadow-lg:0 2px 6px rgba(0,0,0,.4), 0 24px 60px -24px rgba(0,0,0,.75);
+
+  /* ---- not themed ---- */
   --block-gap:2rem;
   --rail:288px; --rail-inset:.5rem; --read:50rem; --wide:64rem; --header-h:56px;
   --r-sm:6px; --r-md:10px; --r-lg:14px;
-  --shadow:0 1px 2px rgba(20,22,28,.04), 0 6px 22px -12px rgba(20,22,28,.14);
-  --shadow-lg:0 2px 6px rgba(20,22,28,.05), 0 20px 48px -22px rgba(20,22,28,.28);
   --ease:cubic-bezier(.2,.7,.2,1);
 
   --sans:"Pretendard Variable","Pretendard",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Segoe UI",Roboto,"Malgun Gothic","Noto Sans KR",sans-serif;
@@ -21,36 +43,40 @@
   --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono","D2Coding",monospace;
 }
 
-/* Dark theme: OS preference is the default signal. */
+/* Light is the resting state, so it binds unconditionally. */
+:root{
+  --paper:var(--light-paper); --surface:var(--light-surface); --surface-2:var(--light-surface-2);
+  --ink:var(--light-ink); --ink-2:var(--light-ink-2); --muted:var(--light-muted); --faint:var(--light-faint);
+  --line:var(--light-line); --line-strong:var(--light-line-strong);
+  --accent:var(--light-accent); --accent-ink:var(--light-accent-ink); --accent-wash:var(--light-accent-wash);
+  --on-accent:var(--light-on-accent); --warm:var(--light-warm);
+  --ccl-filter:var(--light-ccl-filter);
+  --shadow:var(--light-shadow); --shadow-lg:var(--light-shadow-lg);
+  color-scheme:light;
+}
+
+/* The reader's operating system asks for dark, and they have not said otherwise. */
 @media (prefers-color-scheme:dark){
-  :root{
-    --paper:#101216; --surface:#171a20; --surface-2:#1e222a;
-    --ink:#e8e9ec; --ink-2:#c3c7cd; --muted:#969ba3; --faint:#868b94;
-    --line:#262a31; --line-strong:#333842;
-    --accent:#90a8e0; --accent-ink:#a9bdec; --accent-wash:#1b2233; --warm:#cda56a; --on-accent:#101216;
-    --ccl-filter:invert(1) brightness(1.6);
+  :root:not([data-theme="light"]){
+    --paper:var(--dark-paper); --surface:var(--dark-surface); --surface-2:var(--dark-surface-2);
+    --ink:var(--dark-ink); --ink-2:var(--dark-ink-2); --muted:var(--dark-muted); --faint:var(--dark-faint);
+    --line:var(--dark-line); --line-strong:var(--dark-line-strong);
+    --accent:var(--dark-accent); --accent-ink:var(--dark-accent-ink); --accent-wash:var(--dark-accent-wash);
+    --on-accent:var(--dark-on-accent); --warm:var(--dark-warm);
+    --ccl-filter:var(--dark-ccl-filter);
+    --shadow:var(--dark-shadow); --shadow-lg:var(--dark-shadow-lg);
     color-scheme:dark;
-    --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 30px -14px rgba(0,0,0,.6);
-    --shadow-lg:0 2px 6px rgba(0,0,0,.4), 0 24px 60px -24px rgba(0,0,0,.75);
   }
 }
 
-/* Explicit toggle wins over the media query in both directions. */
-:root[data-theme="light"]{
-  --paper:#fbfbfa; --surface:#ffffff; --surface-2:#f2f2f0;
-  --ink:#191b1f; --ink-2:#3f434a; --muted:#565b62; --faint:#6b7078;
-  --line:#ebebe8; --line-strong:#dcdcd7;
-  --accent:#38548c; --accent-ink:#2a4170; --accent-wash:#eef1f7; --on-accent:#ffffff; --warm:#a9793c; --ccl-filter:none; color-scheme:light;
-  --shadow:0 1px 2px rgba(20,22,28,.04), 0 6px 22px -12px rgba(20,22,28,.14);
-  --shadow-lg:0 2px 6px rgba(20,22,28,.05), 0 20px 48px -22px rgba(20,22,28,.28);
-}
+/* The reader said so themselves, whatever their operating system prefers. */
 :root[data-theme="dark"]{
-  --paper:#101216; --surface:#171a20; --surface-2:#1e222a;
-  --ink:#e8e9ec; --ink-2:#c3c7cd; --muted:#969ba3; --faint:#868b94;
-  --line:#262a31; --line-strong:#333842;
-  --accent:#90a8e0; --accent-ink:#a9bdec; --accent-wash:#1b2233; --warm:#cda56a; --on-accent:#101216;
-    --ccl-filter:invert(1) brightness(1.6);
-    color-scheme:dark;
-  --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 30px -14px rgba(0,0,0,.6);
-  --shadow-lg:0 2px 6px rgba(0,0,0,.4), 0 24px 60px -24px rgba(0,0,0,.75);
+  --paper:var(--dark-paper); --surface:var(--dark-surface); --surface-2:var(--dark-surface-2);
+  --ink:var(--dark-ink); --ink-2:var(--dark-ink-2); --muted:var(--dark-muted); --faint:var(--dark-faint);
+  --line:var(--dark-line); --line-strong:var(--dark-line-strong);
+  --accent:var(--dark-accent); --accent-ink:var(--dark-accent-ink); --accent-wash:var(--dark-accent-wash);
+  --on-accent:var(--dark-on-accent); --warm:var(--dark-warm);
+  --ccl-filter:var(--dark-ccl-filter);
+  --shadow:var(--dark-shadow); --shadow-lg:var(--dark-shadow-lg);
+  color-scheme:dark;
 }

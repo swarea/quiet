@@ -6,6 +6,7 @@ import { dirname, join } from "node:path";
 import { readFile, readdir, stat } from "node:fs/promises";
 import esbuild from "esbuild";
 import { transform } from "lightningcss";
+import { readTheme, parseColour, contrast } from "./theme.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
@@ -302,6 +303,62 @@ try {
   else ok("no ephemeral links");
 } catch (e) {
   fail("no ephemeral links", e.message);
+}
+
+// Every role must be bound in both themes. The bindings are the one part of the
+// token sheet that is written more than once, because an explicit toggle has to
+// beat the operating system's preference in both directions and CSS gives no
+// way to say that in a single rule. A role bound in one place and forgotten in
+// another is exactly how --ccl-filter went missing from the light toggle.
+try {
+  const theme = await readTheme();
+  const problems = [];
+  const lightRoles = new Set(Object.keys(theme.bindings.light ?? {}));
+  if (!lightRoles.size) problems.push("no light bindings found");
+  for (const block of theme.bindings.dark) {
+    const darkRoles = new Set(Object.keys(block.map));
+    for (const role of lightRoles) if (!darkRoles.has(role)) problems.push(`${block.selector} never binds ${role}`);
+    for (const role of darkRoles) if (!lightRoles.has(role)) problems.push(`${role} is bound only in ${block.selector}`);
+  }
+  for (const [role, ref] of Object.entries({ ...(theme.bindings.light ?? {}) })) {
+    if (theme.palette[ref] === undefined) problems.push(`${role} points at ${ref}, which no palette defines`);
+  }
+  if (problems.length) fail("theme bindings", problems.slice(0, 3).join("; "));
+  else ok("theme bindings");
+} catch (e) {
+  fail("theme bindings", e.message);
+}
+
+// Colours that meet on screen must stay apart in both themes. White on the
+// accent measured 2.37 in dark and shipped in 0.2.0; nothing here was watching.
+// The pairs are listed rather than discovered, because only the design knows
+// which foreground is ever laid on which ground.
+const PAIRS = [
+  ["--ink", "--paper"], ["--ink", "--surface"], ["--ink", "--surface-2"],
+  ["--ink-2", "--paper"], ["--ink-2", "--surface"],
+  ["--muted", "--paper"], ["--muted", "--surface"], ["--muted", "--surface-2"],
+  ["--faint", "--paper"], ["--faint", "--surface"],
+  ["--accent", "--paper"], ["--accent", "--surface"], ["--accent", "--accent-wash"],
+  ["--on-accent", "--accent"],
+  ["--warm", "--paper"],
+];
+const AA = 4.5;
+try {
+  const theme = await readTheme();
+  const failures = [];
+  for (const [fg, bg] of PAIRS) {
+    for (const mode of ["light", "dark"]) {
+      const a = parseColour(theme[mode][fg]);
+      const b = parseColour(theme[mode][bg]);
+      if (!a || !b) { failures.push(`${mode}: ${fg} or ${bg} is not a colour`); continue; }
+      const ratio = contrast(a, b);
+      if (ratio < AA) failures.push(`${mode}: ${fg} on ${bg} is ${ratio.toFixed(2)}, needs ${AA}`);
+    }
+  }
+  if (failures.length) fail("colour contrast", failures.slice(0, 3).join("; "));
+  else ok("colour contrast");
+} catch (e) {
+  fail("colour contrast", e.message);
 }
 
 // Report.
