@@ -9,3 +9,6 @@ dist/
 Thumbs.db
 test-results/
 playwright-report/
+
+# Release archives are built from a tag, never committed.
+release/

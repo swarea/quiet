@@ -44,7 +44,7 @@ What the package contains:
 | `style.css` | compiled stylesheet |
 | `index.xml` | skin metadata, covers, and settings |
 | `images/app.js` | progressive enhancement bundle |
-| `preview*.jpg`, `images/*.gif` | thumbnails shown in the skin list |
+| `preview.gif`, `preview*.jpg` | thumbnails shown in the skin list |
 
 ### Blog settings this skin expects
 
@@ -87,7 +87,13 @@ npm install
 npm run preview   # build + serve the mock preview at http://localhost:4321
 npm run build     # build the mock preview and the installable package
 npm run check     # validation gate (see scripts/check.mjs)
+npm run release   # gate + build + versioned archive in release/
 ```
+
+`npm run release` refuses a dirty working tree, refuses a package missing any
+file the skin spec requires, and writes a reproducible archive with its SHA-256
+— the same inputs always produce the same bytes, so the checksum identifies the
+build rather than the moment it was made.
 
 `npm run build` writes the installable package to `dist/`. The mock preview is a
 local stand-in for Tistory, useful for layout work — a pass there is not a pass

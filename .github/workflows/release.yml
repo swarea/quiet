@@ -1,0 +1,28 @@
+# Cut a release from a tag. The tag is the only trigger: a release should be a
+# commit someone can check out, never a local working tree.
+name: release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      # Runs the gate, builds, verifies the package is complete, and writes the
+      # archive plus its checksum. Any of those failing fails the release.
+      - run: npm run release
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" release/*.zip release/*.sha256 --generate-notes
