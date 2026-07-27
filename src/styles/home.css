@@ -75,3 +75,29 @@
     .sw-post-row .thumb{grid-column:1; grid-row:auto; max-width:9rem; margin-top:.6rem;}
   }
 }
+
+/* The featured cover. Cards are wide rather than tall so a row of two reads as
+   a shelf rather than as a gallery, and so a post with no thumbnail still fills
+   its card instead of leaving a hole. */
+.sw-featured-set .sw-feature{
+  display:grid; grid-template-columns:1fr; gap:0;
+  border:1px solid var(--line); border-radius:var(--r-md);
+  background:var(--surface); overflow:hidden;
+  transition:border-color .15s, transform .15s var(--ease);
+}
+.sw-featured-set{display:grid; gap:1rem;}
+@media (min-width:46rem){
+  .sw-featured-set{grid-template-columns:repeat(2,1fr); align-items:start;}
+  .sw-featured-set .sw-section-tag{grid-column:1 / -1;}
+}
+.sw-feature:hover{border-color:var(--line-strong); transform:translateY(-2px);}
+.sw-feature .shot{display:block; aspect-ratio:16/9; background:var(--surface-2);}
+.sw-feature .shot img{width:100%; height:100%; object-fit:cover; display:block;}
+.sw-feature .txt{display:block; padding:1.1rem 1.15rem 1.25rem;}
+.sw-feature .cat{display:block; font-size:.72rem; font-weight:600; letter-spacing:.04em;
+  text-transform:uppercase; color:var(--accent); margin-bottom:.4rem;}
+.sw-feature strong{display:block; font-size:1.05rem; line-height:1.4; color:var(--ink);}
+.sw-feature .sum{display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
+  overflow:hidden; margin-top:.4rem; font-size:.88rem; line-height:1.6; color:var(--muted);}
+.sw-feature time{display:block; margin-top:.7rem; font-family:var(--mono);
+  font-size:.72rem; color:var(--faint);}
