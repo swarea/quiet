@@ -67,7 +67,23 @@ function relabel(root: ParentNode): void {
   });
 }
 
+// Tistory names the first entry of the category tree "분류 전체보기". It is
+// Tistory's wording rather than a category the author named, and in a sidebar
+// whose own labels are English it is the one Korean phrase left that is not the
+// author's writing. Tistory appends the post count, which is the useful half,
+// so only the phrase itself is replaced.
+function renameAllPosts(): void {
+  document.querySelectorAll<HTMLAnchorElement>(".sw-cat-tistory a").forEach((link) => {
+    if (!/\/category\/?$/.test(link.getAttribute("href") ?? "")) return;
+    const text = (link.textContent ?? "").trim();
+    const next = text.replace(/^분류\s*전체보기|^전체보기/, "All posts");
+    if (next !== text) link.textContent = next;
+  });
+}
+
 export function initRelabel(): void {
+  renameAllPosts();
+
   const roots = document.querySelectorAll<HTMLElement>(ROOTS);
   if (!roots.length) return;
 
