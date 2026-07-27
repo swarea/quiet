@@ -125,3 +125,13 @@ body#tt-body-index .quiet-intro ~ .quiet-list-head{display:none;}
   grid-column:1 / -1; display:flex; gap:1.2rem; align-items:flex-start;
 }
 .quiet-post-row > .quiet-row-plain > .txt{flex:1; min-width:0;}
+/* A row's thumbnail is capped by the grid column it sits in, and the rule that
+   puts it there lifts its own max-width because the column already does the
+   job. This item has no column, so the cap has to be stated again: without it
+   the image takes the width and the title wraps a character at a time. */
+.quiet-post-row > .quiet-row-plain > .thumb{
+  flex:none; width:9rem; max-width:9rem; margin-top:0;
+}
+@media (max-width:720px){
+  .quiet-post-row > .quiet-row-plain{flex-direction:column;}
+}

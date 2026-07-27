@@ -201,6 +201,13 @@
       </div>
 
       <!-- ---------- HOME COVERS ---------- -->
+      <!-- Wrapped in <main> for the same two reasons every other page block is.
+           The content column is a flex column, and `.quiet-wrap` centres itself
+           with auto inline margins; inside a flex parent those absorb the free
+           space instead of centring a stretched box, so a cover collapsed to the
+           width of its own words. And a home page built from covers was the one
+           page with no main landmark at all. -->
+      <main>
       <s_cover_group>
         <s_cover_rep>
           <s_cover name="list">
@@ -298,6 +305,7 @@
           </s_cover>
         </s_cover_rep>
       </s_cover_group>
+      </main>
 
       <!-- ---------- NOTICE ---------- -->
       <s_notice_rep>
