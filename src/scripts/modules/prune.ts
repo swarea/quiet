@@ -6,13 +6,16 @@ const EMPTY_GLYPH =
 
 // Tistory stamps the page type on <body>, which is the only reliable signal for
 // wording the message correctly.
-const MESSAGES: Record<string, [string, string]> = {
+// A second line only earns its place when it tells the reader what to do next.
+// Promising that a category will fill up is not ours to promise, and telling a
+// reader that posts appear once published is addressed to the wrong person.
+const MESSAGES: Record<string, [string, string?]> = {
   "tt-body-search": ["검색 결과가 없습니다", "다른 검색어로 다시 시도해 보세요."],
-  "tt-body-category": ["이 카테고리에는 아직 글이 없습니다", "곧 채워질 예정입니다."],
-  "tt-body-tag": ["이 태그를 붙인 글이 없습니다", "다른 태그를 살펴보세요."],
-  "tt-body-archive": ["이 기간에 쓴 글이 없습니다", "다른 기간을 골라보세요."],
+  "tt-body-category": ["이 카테고리에는 아직 글이 없습니다"],
+  "tt-body-tag": ["이 태그를 붙인 글이 없습니다"],
+  "tt-body-archive": ["이 기간에 쓴 글이 없습니다"],
 };
-const DEFAULT_MESSAGE: [string, string] = ["아직 글이 없습니다", "글을 발행하면 이곳에 표시됩니다."];
+const DEFAULT_MESSAGE: [string, string?] = ["아직 글이 없습니다"];
 
 function escape(text: string): string {
   const el = document.createElement("span");
@@ -50,7 +53,8 @@ export function initPrune(): void {
     box.className = "sw-empty";
     box.innerHTML =
       `<div class="glyph" aria-hidden="true">${EMPTY_GLYPH}</div>` +
-      `<h2>${escape(heading)}</h2><p>${escape(detail)}</p>`;
+      `<h2>${escape(heading)}</h2>` +
+      (detail ? `<p>${escape(detail)}</p>` : "");
     list.appendChild(box);
   });
 }

@@ -194,3 +194,17 @@
    inset a second time, leaving the comment box 64px narrower than the related
    list and the name card directly above it. */
 .sw-article-foot ~ div .sw-comments{max-width:none; padding-inline:0;}
+
+/* ---- avoid a visible re-layout on every navigation -------------------------
+   Tistory serves a full page load per click, so anything the script changes
+   after the first paint is seen as a flicker. These two were the worst: the
+   tree painted fully open and snapped shut, and empty sidebar sections painted
+   their labels and vanished. Both now start in their final state.
+
+   Gated on .sw-js, set by the head script before the first paint, so with
+   scripts off nothing is hidden behind a control that will never appear. */
+html.sw-js .sw-cat-tistory ul ul ul{max-height:0; opacity:0;}
+html.sw-js .sw-cat-tistory ul ul ul.open{max-height:60rem; opacity:1;}
+@supports selector(:has(*)) {
+  html.sw-js .sw-rail nav:not(:has(a)){display:none;}
+}

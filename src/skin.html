@@ -14,8 +14,13 @@
         href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"></noscript>
   <script>
-    /* Resolve the theme before first paint so the page never flashes. */
+    /* Runs before the first paint. Resolving the theme here keeps the page from
+       flashing, and the sw-js marker lets the stylesheet start the category
+       tree already folded — otherwise it paints open and visibly snaps shut a
+       moment later, on every navigation. Without scripts the marker is absent
+       and everything stays expanded and reachable. */
     (function () {
+      document.documentElement.classList.add("sw-js");
       try {
         var stored = localStorage.getItem("sw-theme");
         var dark = stored ? stored === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
