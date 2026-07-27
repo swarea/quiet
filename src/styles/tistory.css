@@ -97,13 +97,16 @@
 
 /* Tistory groups these into a bordered capsule with a hairline divider. The
    grouping is right — they are all tools for the article just read — so it is
-   kept and redrawn in our own materials. Subscribe is deliberately not in here;
+   kept and redrawn in our own materials — outline only, no fill and no shadow,
+   so it sits in the page rather than floating above it. A raised white pill
+   reads as product UI, which is the wrong register for a blog you read.
+   Subscribe is deliberately not in here;
    it is not a tool for this post but a standing commitment to the author, and
    it is moved to the block that introduces them. */
 .sw-article-body .container_postbtn .postbtn_like{
   float:none; display:inline-flex; align-items:center; gap:.1rem;
   padding:.25rem; border:1px solid var(--line); border-radius:999px;
-  background:var(--surface); box-shadow:var(--shadow);
+  background:none; box-shadow:none;
 }
 .sw-article-body .container_postbtn .postbtn_like .ico_bar{display:none;}
 /* The like control nests its icon and count inside another div, so the gap

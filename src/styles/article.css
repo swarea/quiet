@@ -96,25 +96,39 @@ figure.sw-fig figcaption{text-align:center; font-size:.8rem; color:var(--muted);
 .sw-author{display:flex; gap:1rem; align-items:center; padding:1.75rem 1.5rem; margin:var(--block-gap) 0;
   background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md);}
 /* The one thing on this page asking the reader for something ongoing, sitting
-   where the blog has just introduced itself. It is allowed to look like a
-   button — the quiet ghost treatment that suits a row of tools would read as
-   nothing at all here. */
+   where the blog has just introduced itself.
+
+   It deliberately does not swap its colours on hover. Inverting means the label
+   travels from the accent to the page colour while the fill travels the other
+   way, and halfway through they meet: measured across that transition, contrast
+   bottoms out at 1.06 in light and 1.10 in dark — the word disappears on every
+   hover. Here the label stays the same colour throughout and only the frame and
+   the wash move, so the worst moment is still perfectly readable. */
 .sw-subscribe{
+  display:inline-flex; align-items:center; gap:.45rem;
   flex:none; margin-left:auto; align-self:center;
-  padding:.6rem 1.1rem; border:1px solid var(--accent);
-  border-radius:999px; background:var(--accent-wash); color:var(--accent);
+  padding:.55rem 1rem .55rem .85rem;
+  border:1px solid var(--line-strong); border-radius:999px;
+  background:none; color:var(--ink-2);
   font:inherit; font-size:.85rem; font-weight:600; line-height:1;
   cursor:pointer; white-space:nowrap;
-  transition:background .15s, color .15s, transform .1s;
+  transition:border-color .15s, color .15s, background-color .15s, transform .1s;
 }
-.sw-subscribe:hover{background:var(--accent); color:var(--paper);}
+.sw-subscribe::before{
+  content:""; width:.85rem; height:.85rem; flex:none;
+  background-color:currentColor;
+  -webkit-mask:var(--sw-plus) center/contain no-repeat;
+          mask:var(--sw-plus) center/contain no-repeat;
+  --sw-plus:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M12 5v14M5 12h14'/%3E%3C/svg%3E");
+}
+.sw-subscribe:hover{border-color:var(--accent); color:var(--accent); background-color:var(--accent-wash);}
 .sw-subscribe:active{transform:scale(.96);}
 .sw-subscribe:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
 
 @media (max-width:30rem){
   /* The bio and the button stop fitting on one line long before the panel does. */
   .sw-author{flex-wrap:wrap;}
-  .sw-subscribe{margin-left:0; width:100%; text-align:center;}
+  .sw-subscribe{margin-left:0; width:100%; justify-content:center;}
 }
 .sw-author .sw-monogram{width:52px; height:52px; font-size:1.4rem; border-radius:14px;}
 .sw-author .n{font-weight:700;}
@@ -144,8 +158,16 @@ figure.sw-fig figcaption{text-align:center; font-size:.8rem; color:var(--muted);
 .sw-cbox .cfields{display:flex; gap:.6rem; align-items:center; margin-top:.7rem; padding-top:.7rem; border-top:1px solid var(--line); flex-wrap:wrap;}
 .sw-cbox .cfields input{background:var(--surface-2); border:1px solid var(--line); border-radius:var(--r-sm); padding:.38rem .55rem; font-size:.8rem; color:var(--ink); outline:none; transition:border-color .15s;}
 .sw-cbox .cfields input:focus{border-color:var(--accent);}
-.sw-cbox .submit{margin-left:auto; background:var(--accent); color:#fff; border-radius:var(--r-sm); padding:.48rem 1.1rem; font-size:.85rem; font-weight:600; transition:background .15s, transform .15s var(--ease);}
-.sw-cbox .submit:hover{background:var(--accent-ink); transform:translateY(-1px);}
+/* Posting a comment is the form's commit action, so it stays solid — but a
+   filled block this size dominated a box whose real content is the text you
+   type. Smaller, and it lifts on hover instead of shouting at rest. */
+.sw-cbox .submit{
+  margin-left:auto; padding:.4rem .85rem;
+  border-radius:var(--r-sm); background:var(--accent); color:#fff;
+  font-size:.8rem; font-weight:600; line-height:1.35;
+  transition:background .15s;
+}
+.sw-cbox .submit:hover{background:var(--accent-ink);}
 .sw-comment{display:flex; gap:.85rem; padding:1.15rem 0; border-bottom:1px solid var(--line); scroll-margin-top:2rem;}
 .sw-comment:last-child{border-bottom:0;}
 .sw-comment .av{width:38px; height:38px; border-radius:11px; flex:none; background:var(--surface-2); border:1px solid var(--line); display:grid; place-items:center; color:var(--muted); font-weight:600; font-size:.85rem;}
