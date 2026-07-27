@@ -338,7 +338,11 @@ body#tt-body-page .menu_toolbar.toolbar_rb{display:none;}
    and the same weight as the entry above it. Genuine sub-categories keep the
    demoted treatment. */
 .quiet-cat-tistory .quiet-cat-root > ul{margin:0; padding-left:0; border-left:0;}
-.quiet-cat-tistory .quiet-cat-root > ul > li > a{font-size:.9rem; color:var(--ink-2);}
+/* Only the size is restored. The colour used to be restated here to undo the
+   sub-category demotion, and it outranked the hover rule at (0,2,3) against
+   (0,2,2), so the top level was the one part of the sidebar that neither
+   rested with the others nor answered a pointer. */
+.quiet-cat-tistory .quiet-cat-root > ul > li > a{font-size:.9rem;}
 
 /* Tistory wraps our comment section in a div of its own, which the rule above
    already constrains to the reading column. The section then applied the same
