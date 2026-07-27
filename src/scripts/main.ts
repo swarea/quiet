@@ -12,6 +12,7 @@ import { initPrune } from "./modules/prune";
 import { initLayout } from "./modules/layout";
 import { initConfirmOnce } from "./modules/confirm-once";
 import { initContent } from "./modules/content";
+import { initInk } from "./modules/ink";
 import { initLightbox } from "./modules/lightbox";
 import { initRelabel } from "./modules/relabel";
 import { initSubscribe } from "./modules/subscribe";
@@ -24,6 +25,7 @@ const boot = (): void => {
     initDrawer,
     initCategory,
     initContent,
+    initInk,
     initCodeCopy,
     initLightbox,
     initToc,

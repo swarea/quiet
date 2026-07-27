@@ -14,7 +14,13 @@
 
 // Longest first, so "URL 복사" is not half-eaten by a shorter entry.
 const PHRASES: ReadonlyArray<readonly [string, string]> = [
+  ["동일조건변경허락", "ShareAlike"],
+  ["비공개로 변경", "Make private"],
   ["카카오톡 공유", "Share on KakaoTalk"],
+  ["공개로 변경", "Make public"],
+  ["저작자표시", "Attribution"],
+  ["변경금지", "NoDerivatives"],
+  ["비영리", "NonCommercial"],
   ["페이스북 공유", "Share on Facebook"],
   ["게시글 관리", "Post options"],
   ["트위터 공유", "Share on X"],
@@ -24,6 +30,9 @@ const PHRASES: ReadonlyArray<readonly [string, string]> = [
   ["구독하기", "Subscribe"],
   ["구독중", "Subscribed"],
   ["좋아요", "Like"],
+  ["수정", "Edit"],
+  ["삭제", "Delete"],
+  ["신고", "Report"],
   ["공감", "Like"],
 ];
 
@@ -83,6 +92,14 @@ function relabelBylineAdmin(): void {
   });
 }
 
+// Tistory writes this in place of a category name when a post has none, so it
+// turns up in a list row beside categories the author did name.
+function renameUncategorised(): void {
+  document.querySelectorAll<HTMLElement>(".sw-post-row .cat, .sw-crumb").forEach((el) => {
+    if ((el.textContent ?? "").trim() === "카테고리 없음") el.textContent = "Uncategorised";
+  });
+}
+
 function renameAllPosts(): void {
   document.querySelectorAll<HTMLAnchorElement>(".sw-cat-tistory a").forEach((link) => {
     if (!/\/category\/?$/.test(link.getAttribute("href") ?? "")) return;
@@ -94,6 +111,7 @@ function renameAllPosts(): void {
 
 export function initRelabel(): void {
   renameAllPosts();
+  renameUncategorised();
   relabelBylineAdmin();
 
   const roots = document.querySelectorAll<HTMLElement>(ROOTS);

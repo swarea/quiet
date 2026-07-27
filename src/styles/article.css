@@ -217,3 +217,9 @@ figure.sw-fig figcaption{text-align:center; font-size:.8rem; color:var(--muted);
 .sw-adjacent .ttl{font-size:.9rem; line-height:1.45; color:var(--ink-2);
   display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;}
 .sw-adjacent a:hover .ttl{color:var(--accent);}
+
+/* On an article the comment section inherits its space from the block above it.
+   The guestbook has no block above it, so the write box met the page header
+   with nothing between them. A block owns the space above it, so it is given
+   here rather than taken from the header. */
+body#tt-body-guestbook .sw-comments{margin-top:var(--block-gap);}
