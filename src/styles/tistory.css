@@ -4,15 +4,20 @@
 
 /* [##_category_list_##] renders nested <ul><li><a>. */
 .sw-cat-tistory ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:1px;}
-/* The left gutter belongs to the fold control. It has to live in this rule:
-   set separately it lost to this shorthand on specificity, which left the
-   chevron sitting on top of the first letter and swallowing its own clicks. */
-.sw-cat-tistory li a{display:flex; align-items:center; justify-content:space-between; gap:.4rem; padding:.5rem .5rem .5rem 1.9rem; border-radius:var(--r-sm); font-size:.9rem; color:var(--ink-2); transition:background .15s, color .15s;}
+/* Label and count read as one phrase on the left, with the fold control at the
+   far end of the row. A left-hand chevron is the file-tree convention and suits
+   deep structures, but it forces every row to reserve a gutter for it, which
+   pushed the categories out of line with the rest of the rail and left a ragged
+   gap between each label and its count. The gutter here is on the right, where
+   it costs nothing: labels start on the same line as the menu and the lists,
+   and the count sits against the name it belongs to. It also has to live in
+   this rule, since set separately it loses to the shorthand on specificity. */
+.sw-cat-tistory li a{display:flex; align-items:center; gap:.35rem; padding:.5rem 2rem .5rem .5rem; border-radius:var(--r-sm); font-size:.9rem; color:var(--ink-2); transition:background .15s, color .15s;}
 .sw-cat-tistory li a:hover{background:var(--surface-2); color:var(--ink);}
 .sw-cat-tistory li a.link_tit,.sw-cat-tistory > ul > li > a{font-weight:600;}
 .sw-cat-tistory li ul{margin:1px 0 3px .9rem; padding-left:.5rem; border-left:1px solid var(--line);}
 .sw-cat-tistory li ul a{font-size:.84rem; color:var(--muted); font-weight:400;}
-.sw-cat-tistory .c_cnt,.sw-cat-tistory .cnt{font-family:var(--mono); font-size:.72rem; color:var(--faint); font-variant-numeric:tabular-nums;}
+.sw-cat-tistory .c_cnt,.sw-cat-tistory .cnt{flex:none; font-family:var(--mono); font-size:.72rem; color:var(--faint); font-variant-numeric:tabular-nums;}
 
 /* [##_blog_menu_##] renders <ul><li><a>. */
 .sw-menu-tistory ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:1px;}
@@ -169,7 +174,7 @@
 .sw-cat-tistory li{position:relative;}
 /* Sized to the row rather than to the glyph, so it is comfortable to hit and
    sits wholly inside the gutter the row reserves for it. */
-.sw-cat-fold{position:absolute; left:.15rem; top:.15rem; width:1.6rem; height:2.05rem; display:grid; place-items:center; color:var(--faint); border-radius:var(--r-sm); transition:color .15s, background .15s;}
+.sw-cat-fold{position:absolute; right:.15rem; top:.15rem; width:1.6rem; height:2.05rem; display:grid; place-items:center; color:var(--faint); border-radius:var(--r-sm); transition:color .15s, background .15s;}
 .sw-cat-fold:hover{color:var(--accent); background:var(--surface-2);}
 .sw-cat-fold .twist{display:grid; place-items:center; transition:transform .2s var(--ease);}
 .sw-cat-fold .twist.open{transform:rotate(90deg);}
