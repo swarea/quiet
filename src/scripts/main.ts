@@ -36,6 +36,10 @@ const boot = (): void => {
     initRelabel,
     initSubscribe,
   ];
+  // Tell the stylesheet the bundle is here. Rules that hide something reachable
+  // only by script are gated on the marker this confirms.
+  document.documentElement.setAttribute("data-quiet-ready", "");
+
   for (const step of steps) {
     try {
       step();

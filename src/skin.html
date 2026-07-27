@@ -54,6 +54,17 @@
           root.style.setProperty("--on-accent", (L + 0.05) / 0.05 > 1.05 / (L + 0.05) ? "#101216" : "#ffffff");
         }
       } catch (e) {}
+
+      /* The marker above is set here so the category tree can be folded before
+         the first paint. It says scripting is enabled, which is not the same as
+         the bundle having arrived: if that request fails, the tree stays folded
+         and the narrow-screen sidebar stays off the edge, both with nothing left
+         to open them. The bundle confirms itself on boot; if it has not by the
+         time the page has finished loading, the marker goes and the layout
+         returns to the one that needs no scripting. */
+      addEventListener("load", function () {
+        if (!root.hasAttribute("data-quiet-ready")) root.classList.remove("quiet-js");
+      });
     })();
   </script>
 </head>
