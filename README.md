@@ -1,8 +1,10 @@
 # Quiet
 
-Quiet is a Tistory skin for writing you want taken seriously. Restrained
-typography, light and dark drawn separately rather than one inverted into the
-other, and no feature that stops working when scripting does.
+Quiet is a Tistory skin. The reading column is 50rem, light and dark are
+designed separately rather than one inverted into the other, and Tistory's own
+comment box, post toolbar and share panel are restyled to match the rest of the
+page. Scripting adds the contents rail, category folding, code copying and image
+zoom; reading, menus, categories, search, paging and comments work without it.
 
 Built from scratch by [swarea](https://github.com/swarea). Not a derivative of
 any existing skin, and not affiliated with Tistory or Kakao.
