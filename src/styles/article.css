@@ -106,10 +106,13 @@ figure.sw-fig figcaption{text-align:center; font-size:.8rem; color:var(--muted);
 .sw-prevnext .next{text-align:right;}
 @media (max-width:560px){ .sw-prevnext{grid-template-columns:1fr;} }
 .sw-related{margin:var(--block-gap) 0;}
-.sw-related ul{list-style:none; margin:.6rem 0 0; padding:0;}
+/* The label was set smaller and lighter than the titles it introduces, so a
+   section read as weaker than its own contents. It leads now. */
+.sw-related .sw-section-tag h2{font-size:.95rem; font-weight:700; color:var(--ink-2);}
+.sw-related ul{list-style:none; margin:.7rem 0 0; padding:0;}
 .sw-related li{border-bottom:1px solid var(--line);}
 .sw-related li:last-child{border-bottom:0;}
-.sw-related a{display:flex; justify-content:space-between; gap:1rem; padding:.68rem .2rem; font-size:.92rem; transition:color .15s, padding-left .15s var(--ease);}
+.sw-related a{display:flex; justify-content:space-between; gap:1rem; padding:.68rem .2rem; font-size:.9rem; color:var(--ink-2); transition:color .15s, padding-left .15s var(--ease);}
 .sw-related a:hover{color:var(--accent); padding-left:.5rem;}
 .sw-related time{font-family:var(--mono); font-size:.74rem; color:var(--faint); white-space:nowrap;}
 

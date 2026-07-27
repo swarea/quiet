@@ -68,35 +68,31 @@
   display:flex; justify-content:center; align-items:center; flex-wrap:wrap;
   gap:.5rem; margin:var(--block-gap) 0 0; padding:0;
 }
-/* The group reads as one control strip: a soft pill holding the actions, with
-   each button getting its own room and its own hover rather than the whole
-   strip lighting up. Tistory zeroes the font size on the wrappers to hide
-   labels, so sizes are restated where text should show. */
+/* A row of quiet actions, not two capsules competing for the eye. Everything
+   here is secondary to the article that just ended, so every control carries
+   the same weight — including subscribing, which had been picked out in the
+   accent and shouted against a design built on restraint. The accent is left
+   for hover, where it answers a deliberate move rather than announcing itself. */
+.sw-article-body .container_postbtn{
+  display:flex; justify-content:center; align-items:center; flex-wrap:wrap;
+  gap:.15rem; margin:var(--block-gap) 0 0; padding:0;
+}
 .sw-article-body .postbtn_like{
   display:inline-flex; align-items:center; gap:.15rem;
-  padding:.25rem .45rem; border:1px solid var(--line); border-radius:999px;
-  background:var(--surface); box-shadow:var(--shadow);
+  border:0; border-radius:0; background:none; box-shadow:none; padding:0;
 }
 .sw-article-body .postbtn_like .wrap_btn{display:inline-flex; align-items:center;}
-.sw-article-body .btn_post{
-  display:inline-flex; align-items:center; gap:.35rem;
-  padding:.38rem .6rem; border-radius:999px; color:var(--muted);
-  transition:background .15s, color .15s;
-}
-.sw-article-body .btn_post:hover{background:var(--surface-2); color:var(--accent);}
-.sw-article-body .txt_like{font-size:.8rem; font-weight:600; color:inherit;}
-
-/* Subscribing is the one thing here worth inviting, so it carries the accent
-   while the rest stay quiet. */
+.sw-article-body .btn_post,
 .sw-article-body .btn_subscription{
-  display:inline-flex; align-items:center; justify-content:center;
-  padding:.5rem 1.05rem; border:1px solid var(--line); border-radius:999px;
-  background:var(--surface); box-shadow:var(--shadow);
-  transition:border-color .15s, background .15s, color .15s;
+  display:inline-flex; align-items:center; justify-content:center; gap:.4rem;
+  min-height:2.25rem; padding:.45rem .8rem;
+  border:0; border-radius:var(--r-sm); background:none; box-shadow:none;
+  color:var(--muted); transition:background .15s, color .15s;
 }
-.sw-article-body .btn_subscription .txt_state{font-size:.8rem; font-weight:600; color:var(--accent);}
-.sw-article-body .btn_subscription:hover{border-color:var(--accent); background:var(--accent-wash);}
-.sw-article-body .btn_subscription:hover .txt_state{color:var(--accent);}
+.sw-article-body .btn_post:hover,
+.sw-article-body .btn_subscription:hover{background:var(--surface-2); color:var(--accent);}
+.sw-article-body .txt_like,
+.sw-article-body .btn_subscription .txt_state{font-size:.8rem; font-weight:600; color:inherit;}
 .sw-article-body .ico_postbtn{filter:var(--tt-icon-filter);}
 /* The share and manage flyouts are Tistory's own panels; only the surface and
    edge need to follow the theme so they do not glare in dark mode. */
