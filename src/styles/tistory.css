@@ -12,9 +12,20 @@
    it costs nothing: labels start on the same line as the menu and the lists,
    and the count sits against the name it belongs to. It also has to live in
    this rule, since set separately it loses to the shorthand on specificity. */
-.quiet-cat-tistory li a{display:flex; align-items:center; gap:.35rem; padding:.5rem 2rem .5rem .5rem; border-radius:var(--r-sm); font-size:.9rem; color:var(--ink-2); transition:background .15s, color .15s;}
+.quiet-cat-tistory li a{display:flex; align-items:center; gap:.35rem; padding:.5rem 2rem .5rem .5rem; border-radius:var(--r-sm); font-size:.9rem; color:var(--muted); transition:color .15s;}
 .quiet-cat-tistory li ul{margin:1px 0 3px .9rem; padding-left:.5rem; border-left:1px solid var(--line);}
 .quiet-cat-tistory li ul a{font-size:.84rem; color:var(--muted); font-weight:400;}
+
+/* Hovering darkens rather than colours. The move is inside the neutral scale,
+   so it spends nothing the accent is saving for links in prose, and it moves no
+   letter, which is what made weight read as a jolt. Everything rests a step
+   back; the one under the pointer steps forward. */
+.quiet-cat-tistory li a:hover,
+.quiet-cat-tistory li a:focus-visible,
+.quiet-menu-tistory li a:hover,
+.quiet-menu-tistory li a:focus-visible,
+.quiet-side-list li a:hover,
+.quiet-side-list li a:focus-visible{color:var(--ink);}
 
 /* The entry for the page being read is still marked, but not drawn differently.
    Two things already say where you are: the branch holding this page opens
@@ -29,15 +40,15 @@
 
 /* [##_blog_menu_##] renders <ul><li><a>. */
 .quiet-menu-tistory ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:1px;}
-.quiet-menu-tistory li a{display:block; padding:.42rem .5rem; border-radius:var(--r-sm); font-size:.88rem; color:var(--ink-2); transition:background .15s, color .15s;}
+.quiet-menu-tistory li a{display:block; padding:.42rem .5rem; border-radius:var(--r-sm); font-size:.88rem; color:var(--muted); transition:color .15s;}
 
 /* [##_tag_label_rep_##] joins the anchors with a literal ", " between them,
    which shows up as loose commas between the chips. Collapsing the container's
    font size hides the separator without deleting it, so a screen reader still
    hears a list rather than one run-on phrase; each chip restores its own size. */
 .quiet-taglabel{font-size:0;}
-.quiet-taglabel a{display:inline-block; font-size:.78rem; color:var(--ink-2); background:var(--surface-2); border:1px solid var(--line); border-radius:999px; padding:.3rem .75rem; margin:0 .4rem .4rem 0; transition:border-color .15s, color .15s;}
-.quiet-taglabel a:hover{border-color:var(--accent); color:var(--accent);}
+.quiet-taglabel a{display:inline-block; font-size:.78rem; color:var(--muted); background:var(--surface-2); border:1px solid var(--line); border-radius:999px; padding:.3rem .75rem; margin:0 .4rem .4rem 0; transition:border-color .15s, color .15s;}
+.quiet-taglabel a:hover,.quiet-taglabel a:focus-visible{border-color:var(--line-strong); color:var(--ink);}
 
 /* Subscribe button rendered into Tistory's toolbar slot. */
 .quiet-subscribe{display:inline-flex; align-items:center; gap:.35rem; font-size:.78rem; font-weight:600; color:var(--accent); border:1px solid var(--line); background:var(--surface); border-radius:999px; padding:.32rem .8rem; transition:border-color .15s, background .15s;}
@@ -60,7 +71,7 @@
    entry is the link and nothing else competes with it. */
 .quiet-side-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column;}
 .quiet-side-list li{font-size:.85rem;}
-.quiet-side-list li a{display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; padding:.36rem var(--rail-inset); border-radius:var(--r-sm); color:var(--ink-2); transition:background .15s, color .15s;}
+.quiet-side-list li a{display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; padding:.36rem var(--rail-inset); border-radius:var(--r-sm); color:var(--muted); transition:color .15s;}
 
 /* Blocks Tistory injects into the article: the like/share/stat toolbar inside
    the post body, and the subscribe/profile cards appended after our footer
@@ -256,8 +267,8 @@
    spacing comes from the flex gap alone. */
 .tt_box_namecard{display:flex; align-items:center; gap:1rem; min-height:0; padding:1.5rem 0; margin:var(--block-gap) 0; border-block:1px solid var(--line); background:none;}
 .tt_box_namecard .tt_cont{order:2; flex:1; min-width:0; padding:0; display:flex; flex-direction:column; align-items:flex-start; gap:.15rem;}
-.tt_box_namecard .tt_tit_cont{font-weight:700; font-size:1rem; color:var(--ink);}
-.tt_box_namecard .tt_tit_cont:hover{color:var(--accent);}
+.tt_box_namecard .tt_tit_cont{font-weight:700; font-size:1rem; color:var(--ink-2); transition:color .15s;}
+.tt_box_namecard .tt_tit_cont:hover,.tt_box_namecard .tt_tit_cont:focus-visible{color:var(--ink);}
 .tt_box_namecard .tt_desc{font-size:.86rem; color:var(--muted); padding:0;}
 .tt_box_namecard .tt_wrap_thumb{order:1; flex:none; margin:0;}
 .tt_box_namecard .tt_thumb_g{display:block; width:52px; height:52px; border-radius:14px; background-size:cover; background-position:center; border:1px solid var(--line);}

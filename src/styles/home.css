@@ -4,43 +4,24 @@
 .quiet-intro h1{font-size:clamp(1.55rem,3.2vw,2.15rem); line-height:1.42; font-weight:700; letter-spacing:-.015em; text-wrap:balance; max-width:38rem;}
 .quiet-intro p{margin-top:.9rem; color:var(--muted); font-size:1rem; max-width:34rem;}
 
-.quiet-featured{display:grid; grid-template-columns:1.3fr 1fr; gap:2rem; align-items:stretch; padding:1.6rem 0 2.4rem; border-top:1px solid var(--line);}
-.quiet-featured .txt{display:flex; flex-direction:column; justify-content:center; padding:.4rem 0;}
-.quiet-featured .cat{color:var(--accent); font-size:.78rem; font-weight:600;}
-.quiet-featured h3{font-size:1.6rem; line-height:1.34; letter-spacing:-.015em; margin-top:.5rem; text-wrap:balance;}
-.quiet-featured h3 a{transition:color .15s;}
-.quiet-featured h3 a:hover{color:var(--accent);}
-.quiet-featured p{color:var(--muted); margin-top:.75rem; font-size:.95rem;}
-.quiet-featured .meta{margin-top:1.1rem; font-family:var(--mono); font-size:.75rem; color:var(--faint); display:flex; gap:.8rem;}
-.quiet-featured .cover{position:relative; overflow:hidden; border-radius:var(--r-lg); border:1px solid var(--line); min-height:210px; display:grid; place-items:center; color:var(--faint); font-family:var(--mono); font-size:.72rem;
-    background:var(--surface-2);
-    background:radial-gradient(120% 120% at 80% 12%, color-mix(in srgb,var(--accent) 30%, transparent), transparent 60%),
-    linear-gradient(150deg,var(--surface-2),color-mix(in srgb,var(--accent) 12%, var(--surface-2)));}
-.quiet-featured .cover::after{content:""; position:absolute; inset:0; background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.14) 50%,transparent 70%); transform:translateX(-120%);}
-.quiet-featured:hover .cover::after{transition:transform 1.1s var(--ease); transform:translateX(120%);}
-
 .quiet-recent{padding:2.2rem 0;}
 /* A line above a section is only a separator when there is a section above it.
    Under a page header there is already one, and the two landed on the same pixel
    and read as a single thicker rule. Covers stack directly in <main>, so that is
    where the separator belongs. */
 main > .quiet-wrap + .quiet-wrap{border-top:1px solid var(--line);}
-/* Hover stays quiet: a soft tint and the title picking up the accent. The row
-   used to lift into a white card with a shadow and an accent bar, which read as
-   the layout jumping rather than as a link responding. */
 /* Hovering a row lifts its words rather than painting a panel behind them. The
    fill was the largest area of colour on a page built from hairlines, and it
    was the reason for a chain of corrections: it needed a radius, the radius
    disagreed with the divider, the divider had to be inset to avoid it. None of
    that is needed once the row answers with its own text.
 
-   Nothing answers a hover. A fill was the largest area of colour on a page made
-   of hairlines; a colour spent the accent on every row a pointer crossed; a
-   heavier weight left the letters resettling inside a box that had not moved,
-   which reads as a jolt rather than as emphasis; an underline was louder than
-   the row it marked. Four attempts refused for reasons that agree with each
-   other is the design saying it does not want to speak here. The pointer says
-   the row is a link, and a keyboard still gets its focus ring. */
+   The title rests a step back and steps forward under the pointer, the same
+   move the sidebar makes. Earlier attempts each spent something: a fill was the
+   largest area of colour on a page made of hairlines, the accent is saved for
+   links in prose, a heavier weight left the letters resettling inside a box
+   that had not moved, and an underline was louder than the row it marked.
+   Darkening within the neutral scale spends none of them. */
 .quiet-post-row{position:relative; display:grid; grid-template-columns:5.5rem 1fr; gap:1.4rem; padding:1.05rem .9rem;}
 /* The divider is drawn rather than bordered. A border follows the corner radius
    the hover fill needs, so the line curved away at both ends; a line of its own
@@ -52,15 +33,16 @@ main > .quiet-wrap + .quiet-wrap{border-top:1px solid var(--line);}
 .quiet-post-row:last-child::after{display:none;}
 .quiet-post-row time{font-family:var(--mono); font-size:.76rem; color:var(--faint); padding-top:.25rem; white-space:nowrap;}
 .quiet-post-row .cat{display:block; font-size:.75rem; color:var(--accent); font-weight:600; margin-bottom:.18rem;}
-.quiet-post-row h2{font-size:1.05rem; font-weight:600; line-height:1.5;}
+.quiet-post-row h2{font-size:1.05rem; font-weight:600; line-height:1.5; color:var(--ink-2); transition:color .15s;}
+.quiet-post-row:hover h2,.quiet-post-row:focus-visible h2{color:var(--ink);}
 .quiet-post-row p{color:var(--muted); font-size:.86rem; margin-top:.32rem; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;}
 
 .quiet-topics{padding:2.2rem 0 3.2rem; border-top:1px solid var(--line);}
 .quiet-lanes{display:grid; grid-template-columns:repeat(3,1fr); gap:1.6rem 2.2rem;}
 .quiet-lane h3{font-size:.92rem; font-weight:700; display:flex; align-items:center; gap:.5rem; padding-bottom:.6rem; margin-bottom:.6rem; border-bottom:1px solid var(--line-strong);}
 .quiet-lane h3::before{content:""; width:7px; height:7px; border-radius:2px; background:var(--accent); flex:none;}
-.quiet-lane a.item{display:block; font-size:.88rem; color:var(--ink-2); padding:.36rem 0; transition:color .15s, transform .15s var(--ease);}
-.quiet-lane a.item:hover{color:var(--accent); transform:translateX(3px);}
+.quiet-lane a.item{display:block; font-size:.88rem; color:var(--muted); padding:.36rem 0; transition:color .15s;}
+.quiet-lane a.item:hover,.quiet-lane a.item:focus-visible{color:var(--ink);}
 
 @media (max-width:720px){
   .quiet-featured{grid-template-columns:1fr;}
@@ -73,11 +55,10 @@ main > .quiet-wrap + .quiet-wrap{border-top:1px solid var(--line);}
 /* Tag index — uniform chips with counts, not a random-size cloud. */
 .quiet-tagcloud{padding:2.2rem 0 3rem;}
 .quiet-tagcloud ul{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(auto-fill,minmax(11rem,1fr)); gap:.6rem;}
-.quiet-tagcloud a{display:flex; align-items:center; justify-content:space-between; gap:.6rem; padding:.6rem .85rem; border:1px solid var(--line); border-radius:var(--r-md); background:var(--surface); font-size:.9rem; color:var(--ink-2); transition:border-color .15s, color .15s, transform .15s var(--ease);}
-.quiet-tagcloud a:hover{border-color:var(--accent); color:var(--accent); transform:translateY(-1px);}
+.quiet-tagcloud a{display:flex; align-items:center; justify-content:space-between; gap:.6rem; padding:.6rem .85rem; border:1px solid var(--line); border-radius:var(--r-md); background:var(--surface); font-size:.9rem; color:var(--muted); transition:border-color .15s, color .15s;}
+.quiet-tagcloud a:hover,.quiet-tagcloud a:focus-visible{border-color:var(--line-strong); color:var(--ink);}
 .quiet-tagcloud a .name{overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
 .quiet-tagcloud a .n{font-family:var(--mono); font-size:.74rem; color:var(--faint); flex:none;}
-.quiet-tagcloud a:hover .n{color:var(--accent);}
 
 /* Optional row thumbnail. Tistory only emits it when the post has one, so the
    row has to look finished either way. Where :has() is available the image
@@ -105,14 +86,14 @@ main > .quiet-wrap + .quiet-wrap{border-top:1px solid var(--line);}
   display:grid; grid-template-columns:1fr; gap:0;
   border:1px solid var(--line); border-radius:var(--r-md);
   background:var(--surface); overflow:hidden;
-  transition:border-color .15s, transform .15s var(--ease);
+  transition:border-color .15s;
 }
 .quiet-featured-set{display:grid; gap:1rem;}
 @media (min-width:46rem){
   .quiet-featured-set{grid-template-columns:repeat(2,1fr); align-items:start;}
   .quiet-featured-set .quiet-section-tag{grid-column:1 / -1;}
 }
-.quiet-feature:hover{border-color:var(--line-strong); transform:translateY(-2px);}
+.quiet-feature:hover{border-color:var(--line-strong);}
 .quiet-feature .shot{display:block; aspect-ratio:16/9; background:var(--surface-2);}
 .quiet-feature .shot img{width:100%; height:100%; object-fit:cover; display:block;}
 .quiet-feature .txt{display:block; padding:1.1rem 1.15rem 1.25rem;}

@@ -118,8 +118,8 @@
 /* Sits above Tistory's fixed subscribe bar when there is one; --dock-lift is
    measured at runtime, so with no bar the dock keeps its own margin. */
 .quiet-dock{position:fixed; right:1.1rem; bottom:var(--dock-lift, 1.1rem); z-index:35; display:flex; flex-direction:column; gap:.5rem; transition:bottom .2s var(--ease);}
-.quiet-dock button{width:40px; height:40px; border-radius:12px; background:var(--surface); border:1px solid var(--line); color:var(--muted); display:grid; place-items:center; box-shadow:var(--shadow); transition:color .15s, border-color .15s, transform .15s var(--ease);}
-.quiet-dock button:hover{color:var(--accent); border-color:var(--accent); transform:translateY(-2px);}
+.quiet-dock button{width:40px; height:40px; border-radius:12px; background:var(--surface); border:1px solid var(--line); color:var(--muted); display:grid; place-items:center; box-shadow:var(--shadow); transition:color .15s, border-color .15s;}
+.quiet-dock button:hover{color:var(--accent); border-color:var(--accent);}
 /* Taken out of flow entirely when hidden: keeping it laid out left a blank
    slot under the other buttons. It is first in the column, so appearing and
    disappearing never moves them. */
