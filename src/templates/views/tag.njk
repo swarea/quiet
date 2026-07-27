@@ -5,12 +5,12 @@
     <div class="cover" aria-hidden="true"></div>
     <div class="inner">
       <a class="sw-crumb" href="/">swarea</a>
-      <h1>태그</h1>
-      <div class="sw-byline"><span>{{ tags.length }}개의 태그</span></div>
+      <h1>Tags</h1>
+      <div class="sw-byline"><span>{{ tags.length }} tags</span></div>
     </div>
   </header>
   <div class="sw-wrap">
-    <section class="sw-tagcloud" aria-label="태그 목록">
+    <section class="sw-tagcloud" aria-label="Tags">
       <ul>
         {% for t in tags %}
         <li><a href="/tag/{{ t.name }}"><span class="name">{{ t.name }}</span><span class="n">{{ t.count }}</span></a></li>

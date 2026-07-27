@@ -33,14 +33,14 @@
 <body id="[##_body_id_##]">
 <s_t3>
   <s_not_var_toc><span id="sw-toc-off" hidden></span></s_not_var_toc>
-  <a class="sw-skip" href="#sw-main">본문으로 건너뛰기</a>
+  <a class="sw-skip" href="#sw-main">Skip to content</a>
   <s_if_var_reading-progress><div id="sw-progress"></div></s_if_var_reading-progress>
 
   <div class="sw-shell">
 
     <!-- ============ SIDEBAR ============ -->
     <s_if_var_sidebar>
-    <aside class="sw-rail" id="sw-rail" aria-label="블로그 내비게이션">
+    <aside class="sw-rail" id="sw-rail" aria-label="Blog navigation">
       <div class="sw-brand">
         <a href="[##_blog_link_##]"><img class="sw-avatar" src="[##_image_##]" width="42" height="42" alt=""></a>
         <div class="sw-brand-text">
@@ -54,8 +54,8 @@
           <s_search>
             <form class="sw-search" role="search" onsubmit="return false">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-              <label class="sw-sr" for="sw-search-input">검색</label>
-              <input id="sw-search-input" name="[##_search_name_##]" value="[##_search_text_##]" placeholder="검색" autocomplete="off"
+              <label class="sw-sr" for="sw-search-input">Search</label>
+              <input id="sw-search-input" name="[##_search_name_##]" value="[##_search_text_##]" placeholder="Search" autocomplete="off"
                      onkeypress="if (event.keyCode == 13) { [##_search_onclick_submit_##] }">
               <kbd>/</kbd>
             </form>
@@ -64,31 +64,31 @@
 
         <s_sidebar_element>
           <div class="sw-counts">
-            <span>전체 <b>[##_count_total_##]</b></span>
-            <span>오늘 <b>[##_count_today_##]</b></span>
-            <span>어제 <b>[##_count_yesterday_##]</b></span>
+            <span>Total <b>[##_count_total_##]</b></span>
+            <span>Today <b>[##_count_today_##]</b></span>
+            <span>Yesterday <b>[##_count_yesterday_##]</b></span>
           </div>
         </s_sidebar_element>
 
         <s_sidebar_element>
-          <nav aria-label="카테고리">
+          <nav lang="en" aria-label="Categories">
             <div class="sw-nav-label">Categories</div>
-            <div class="sw-cat-tistory">[##_category_list_##]</div>
+            <div class="sw-cat-tistory" lang="ko">[##_category_list_##]</div>
           </nav>
         </s_sidebar_element>
 
         <s_sidebar_element>
-          <nav aria-label="블로그 메뉴">
+          <nav lang="en" aria-label="Blog menu">
             <div class="sw-nav-label">Menu</div>
-            <div class="sw-menu-tistory">[##_blog_menu_##]</div>
+            <div class="sw-menu-tistory" lang="ko">[##_blog_menu_##]</div>
           </nav>
         </s_sidebar_element>
 
         <s_sidebar_element>
           <s_rct_notice>
-            <nav aria-label="공지사항">
+            <nav lang="en" aria-label="Notices">
               <div class="sw-nav-label">Notice</div>
-              <ul class="sw-side-list">
+              <ul class="sw-side-list" lang="ko">
                 <s_rct_notice_rep>
                   <li><a href="[##_notice_rep_link_##]">[##_notice_rep_title_##]</a></li>
                 </s_rct_notice_rep>
@@ -98,9 +98,9 @@
         </s_sidebar_element>
 
         <s_sidebar_element>
-          <nav aria-label="인기 글">
+          <nav lang="en" aria-label="Popular posts">
             <div class="sw-nav-label">Popular</div>
-            <ul class="sw-side-list">
+            <ul class="sw-side-list" lang="ko">
               <s_rctps_popular_rep>
                 <li><a href="[##_rctps_rep_link_##]">[##_rctps_rep_title_##]</a></li>
               </s_rctps_popular_rep>
@@ -109,9 +109,9 @@
         </s_sidebar_element>
 
         <s_sidebar_element>
-          <nav aria-label="최근 글">
+          <nav lang="en" aria-label="Recent posts">
             <div class="sw-nav-label">Recent</div>
-            <ul class="sw-side-list">
+            <ul class="sw-side-list" lang="ko">
               <s_rctps_rep>
                 <li><a href="[##_rctps_rep_link_##]">[##_rctps_rep_title_##]</a></li>
               </s_rctps_rep>
@@ -120,9 +120,9 @@
         </s_sidebar_element>
 
         <s_sidebar_element>
-          <nav aria-label="최근 댓글">
+          <nav lang="en" aria-label="Recent comments">
             <div class="sw-nav-label">Comments</div>
-            <ul class="sw-side-list">
+            <ul class="sw-side-list" lang="ko">
               <s_rctrp_rep>
                 <li><a href="[##_rctrp_rep_link_##]">[##_rctrp_rep_desc_##]</a></li>
               </s_rctrp_rep>
@@ -145,7 +145,7 @@
     <!-- ============ CONTENT ============ -->
     <div class="sw-content" id="sw-main" tabindex="-1">
       <div class="sw-topbar">
-        <button class="sw-icon-btn" id="sw-menu-btn" type="button" aria-label="메뉴 열기" aria-expanded="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+        <button class="sw-icon-btn" id="sw-menu-btn" type="button" aria-label="Open menu" aria-expanded="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
         <span class="name">[##_title_##]</span>
         <span class="spacer"></span>
       </div>
@@ -207,7 +207,7 @@
             <a class="sw-post-row" href="[##_notice_rep_link_##]">
               <time>[##_notice_rep_date_##]</time>
               <div>
-                <span class="cat">공지</span>
+                <span class="cat">Notice</span>
                 <h4>[##_notice_rep_title_##]</h4>
                 <p>[##_notice_rep_summary_##]</p>
               </div>
@@ -220,7 +220,7 @@
             <header class="sw-article-head">
               <div class="cover" aria-hidden="true"></div>
               <div class="inner">
-                <span class="sw-crumb">공지</span>
+                <span class="sw-crumb">Notice</span>
                 <h1>[##_notice_rep_title_##]</h1>
                 <div class="sw-byline"><span>[##_notice_rep_date_##]</span></div>
               </div>
@@ -247,7 +247,7 @@
                 <h1>[##_article_rep_title_##]</h1>
                 <div class="sw-byline">
                   <span>[##_article_rep_date_##]</span>
-                  <span class="admin"><s_ad_div><a href="[##_s_ad_m_link_##]">수정</a> · <a href="#" onclick="[##_s_ad_d_onclick_##]">삭제</a> · <a href="#" onclick="[##_s_ad_s2_onclick_##]">[##_s_ad_s1_label_##]</a></s_ad_div></span>
+                  <span class="admin"><s_ad_div><a href="[##_s_ad_m_link_##]">Edit</a> · <a href="#" onclick="[##_s_ad_d_onclick_##]">Delete</a> · <a href="#" onclick="[##_s_ad_s2_onclick_##]">[##_s_ad_s1_label_##]</a></s_ad_div></span>
                 </div>
               </div>
             </header>
@@ -260,7 +260,7 @@
               <s_if_var_related-posts>
                 <s_article_related>
                   <div class="sw-related">
-                    <div class="sw-section-tag"><h2>'[##_article_rep_category_##]' 카테고리의 다른 글</h2></div>
+                    <div class="sw-section-tag"><h2>More in '[##_article_rep_category_##]'</h2></div>
                     <ul>
                       <s_article_related_rep>
                         <li><a href="[##_article_related_rep_link_##]"><span>[##_article_related_rep_title_##]</span></a></li>
@@ -278,25 +278,25 @@
 
             <!-- comments -->
             <s_rp>
-              <section class="sw-comments" aria-label="댓글">
+              <section class="sw-comments" aria-label="Comments">
                 <s_rp_input_form>
                   <!-- Tistory replaces this <form> element with its own, dropping
                        any class on it, so the styling hook lives on an inner div. -->
                   <form onsubmit="return false">
-                   <div class="sw-cbox">
-                    <label class="sw-sr" for="sw-rp-text">댓글 입력</label>
-                    <textarea id="sw-rp-text" name="[##_rp_input_comment_##]" placeholder="댓글을 남겨주세요"></textarea>
+                   <div class="sw-cbox" lang="en">
+                    <label class="sw-sr" for="sw-rp-text">Write a comment</label>
+                    <textarea id="sw-rp-text" name="[##_rp_input_comment_##]" placeholder="Leave a comment"></textarea>
                     <div class="cfields">
                       <s_rp_member>
                         <s_rp_guest>
-                          <label class="sw-sr" for="sw-rp-name">이름</label>
-                          <input id="sw-rp-name" name="[##_rp_input_name_##]" value="[##_guest_name_##]" placeholder="이름" autocomplete="name">
-                          <label class="sw-sr" for="sw-rp-pw">비밀번호</label>
-                          <input id="sw-rp-pw" type="password" maxlength="8" name="[##_rp_input_password_##]" value="[##_guest_password_##]" placeholder="비밀번호" autocomplete="off">
+                          <label class="sw-sr" for="sw-rp-name">Name</label>
+                          <input id="sw-rp-name" name="[##_rp_input_name_##]" value="[##_guest_name_##]" placeholder="Name" autocomplete="name">
+                          <label class="sw-sr" for="sw-rp-pw">Password</label>
+                          <input id="sw-rp-pw" type="password" maxlength="8" name="[##_rp_input_password_##]" value="[##_guest_password_##]" placeholder="Password" autocomplete="off">
                         </s_rp_guest>
                       </s_rp_member>
-                      <label class="sw-secret" for="sw-rp-secret"><input id="sw-rp-secret" type="checkbox" name="[##_rp_input_is_secret_##]">비밀글</label>
-                      <button type="button" class="submit" onclick="[##_rp_onclick_submit_##]">등록</button>
+                      <label class="sw-secret" for="sw-rp-secret"><input id="sw-rp-secret" type="checkbox" name="[##_rp_input_is_secret_##]">Private</label>
+                      <button type="button" class="submit" onclick="[##_rp_onclick_submit_##]">Post</button>
                     </div>
                    </div>
                   </form>
@@ -310,8 +310,8 @@
                         <div><span class="who">[##_rp_rep_name_##]</span><span class="when">[##_rp_rep_date_##]</span></div>
                         <div class="txt">[##_rp_rep_desc_##]</div>
                         <div class="act">
-                          <button type="button" onclick="[##_rp_rep_onclick_delete_##]">수정/삭제</button>
-                          <button type="button" onclick="[##_rp_rep_onclick_reply_##]">답글</button>
+                          <button type="button" onclick="[##_rp_rep_onclick_delete_##]">Edit / Delete</button>
+                          <button type="button" onclick="[##_rp_rep_onclick_reply_##]">Reply</button>
                         </div>
                       </div>
                     </div>
@@ -322,7 +322,7 @@
                           <div>
                             <div><span class="who">[##_rp_rep_name_##]</span><span class="when">[##_rp_rep_date_##]</span></div>
                             <div class="txt">[##_rp_rep_desc_##]</div>
-                            <div class="act"><button type="button" onclick="[##_rp_rep_onclick_delete_##]">수정/삭제</button></div>
+                            <div class="act"><button type="button" onclick="[##_rp_rep_onclick_delete_##]">Edit / Delete</button></div>
                           </div>
                         </div>
                       </s_rp2_rep>
@@ -349,15 +349,15 @@
         <!-- protected post -->
         <s_article_protected>
           <s_permalink_article_rep>
-            <main class="sw-protected">
+            <main class="sw-protected" lang="en">
               <div class="lock" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div>
-              <h1>보호되어 있는 글입니다</h1>
-              <p>내용을 보시려면 비밀번호를 입력하세요.</p>
+              <h1>This post is protected</h1>
+              <p>Enter the password to read this post.</p>
               <form onsubmit="return false">
-                <label for="[##_article_password_##]">비밀번호</label>
-                <input id="[##_article_password_##]" name="[##_article_password_##]" type="password" maxlength="16" placeholder="비밀번호"
+                <label for="[##_article_password_##]">Password</label>
+                <input id="[##_article_password_##]" name="[##_article_password_##]" type="password" maxlength="16" placeholder="Password"
                        onkeydown="if (event.keyCode == 13) [##_article_dissolve_##]">
-                <button type="button" onclick="[##_article_dissolve_##]">확인</button>
+                <button type="button" onclick="[##_article_dissolve_##]">Unlock</button>
               </form>
             </main>
           </s_permalink_article_rep>
@@ -369,10 +369,10 @@
         <main>
           <header class="sw-article-head">
             <div class="cover" aria-hidden="true"></div>
-            <div class="inner"><h1>태그</h1></div>
+            <div class="inner"><h1>Tags</h1></div>
           </header>
           <div class="sw-wrap">
-            <section class="sw-tagcloud" aria-label="태그 목록">
+            <section class="sw-tagcloud" aria-label="Tags">
               <ul>
                 <s_tag_rep>
                   <li><a class="[##_tag_class_##]" href="[##_tag_link_##]"><span class="name">[##_tag_name_##]</span></a></li>
@@ -394,7 +394,7 @@
             </div>
           </header>
           <div class="sw-wrap">
-            <section class="sw-recent" aria-label="글 목록">
+            <section class="sw-recent" aria-label="Posts">
               <s_list_rep>
                 <a class="sw-post-row" href="[##_list_rep_link_##]">
                   <time>[##_list_rep_regdate_##]</time>
@@ -413,12 +413,12 @@
 
       <!-- ---------- PAGING ---------- -->
       <s_paging>
-        <nav class="sw-paging" aria-label="페이지">
-          <a class="edge [##_no_more_prev_##]" [##_prev_page_##] aria-label="이전 페이지">‹</a>
+        <nav class="sw-paging" aria-label="Pagination">
+          <a class="edge [##_no_more_prev_##]" [##_prev_page_##] aria-label="Previous page">‹</a>
           <s_paging_rep>
             <a [##_paging_rep_link_##]>[##_paging_rep_link_num_##]</a>
           </s_paging_rep>
-          <a class="edge [##_no_more_next_##]" [##_next_page_##] aria-label="다음 페이지">›</a>
+          <a class="edge [##_no_more_next_##]" [##_next_page_##] aria-label="Next page">›</a>
         </nav>
       </s_paging>
 
@@ -427,25 +427,25 @@
         <main>
           <header class="sw-article-head">
             <div class="cover" aria-hidden="true"></div>
-            <div class="inner"><h1>방명록</h1></div>
+            <div class="inner"><h1>Guestbook</h1></div>
           </header>
-          <section class="sw-comments" aria-label="방명록">
+          <section class="sw-comments" aria-label="Guestbook">
             <s_guest_input_form>
               <form onsubmit="return false">
-               <div class="sw-cbox">
-                <label class="sw-sr" for="sw-gb-text">방명록 입력</label>
-                <textarea id="sw-gb-text" name="[##_guest_textarea_body_##]" placeholder="방명록을 남겨주세요"></textarea>
+               <div class="sw-cbox" lang="en">
+                <label class="sw-sr" for="sw-gb-text">Write a guestbook entry</label>
+                <textarea id="sw-gb-text" name="[##_guest_textarea_body_##]" placeholder="Leave a message"></textarea>
                 <div class="cfields">
                   <s_guest_member>
                     <s_guest_form>
-                      <label class="sw-sr" for="sw-gb-name">이름</label>
-                      <input id="sw-gb-name" name="[##_guest_input_name_##]" value="[##_guest_name_##]" placeholder="이름" autocomplete="name">
-                      <label class="sw-sr" for="sw-gb-pw">비밀번호</label>
-                      <input id="sw-gb-pw" type="password" maxlength="8" name="[##_guest_input_password_##]" value="[##_guest_password_##]" placeholder="비밀번호" autocomplete="off">
+                      <label class="sw-sr" for="sw-gb-name">Name</label>
+                      <input id="sw-gb-name" name="[##_guest_input_name_##]" value="[##_guest_name_##]" placeholder="Name" autocomplete="name">
+                      <label class="sw-sr" for="sw-gb-pw">Password</label>
+                      <input id="sw-gb-pw" type="password" maxlength="8" name="[##_guest_input_password_##]" value="[##_guest_password_##]" placeholder="Password" autocomplete="off">
                     </s_guest_form>
                   </s_guest_member>
-                  <label class="sw-secret" for="sw-gb-secret"><input id="sw-gb-secret" type="checkbox" name="[##_guest_input_is_secret_##]">비밀글</label>
-                  <button type="button" class="submit" onclick="[##_guest_onclick_submit_##]">등록</button>
+                  <label class="sw-secret" for="sw-gb-secret"><input id="sw-gb-secret" type="checkbox" name="[##_guest_input_is_secret_##]">Private</label>
+                  <button type="button" class="submit" onclick="[##_guest_onclick_submit_##]">Post</button>
                 </div>
                </div>
               </form>
@@ -459,8 +459,8 @@
                     <div><span class="who">[##_guest_rep_name_##]</span><span class="when">[##_guest_rep_date_##]</span></div>
                     <div class="txt">[##_guest_rep_desc_##]</div>
                     <div class="act">
-                      <button type="button" onclick="[##_guest_rep_onclick_delete_##]">수정/삭제</button>
-                      <button type="button" onclick="[##_guest_rep_onclick_reply_##]">답글</button>
+                      <button type="button" onclick="[##_guest_rep_onclick_delete_##]">Edit / Delete</button>
+                      <button type="button" onclick="[##_guest_rep_onclick_reply_##]">Reply</button>
                     </div>
                   </div>
                 </div>
@@ -471,7 +471,7 @@
                       <div>
                         <div><span class="who">[##_guest_rep_name_##]</span><span class="when">[##_guest_rep_date_##]</span></div>
                         <div class="txt">[##_guest_rep_desc_##]</div>
-                        <div class="act"><button type="button" onclick="[##_guest_rep_onclick_delete_##]">수정/삭제</button></div>
+                        <div class="act"><button type="button" onclick="[##_guest_rep_onclick_delete_##]">Edit / Delete</button></div>
                       </div>
                     </div>
                   </s_guest_reply_rep>
@@ -491,9 +491,9 @@
     </div>
   </div>
 
-  <div class="sw-dock">
-    <button type="button" class="totop" id="sw-totop" aria-label="맨 위로"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg></button>
-    <button type="button" data-theme-toggle aria-label="테마 전환"></button>
+  <div class="sw-dock" lang="en">
+    <button type="button" class="totop" id="sw-totop" aria-label="Back to top"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg></button>
+    <button type="button" data-theme-toggle aria-label="Toggle theme"></button>
   </div>
 </s_t3>
 <script src="./images/app.js" defer></script>

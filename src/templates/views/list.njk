@@ -7,14 +7,14 @@
     <div class="inner">
       <a class="sw-crumb" href="/">category</a>
       <h1>{{ list.title }}</h1>
-      <div class="sw-byline"><span>{{ list.count }}개의 글</span></div>
+      <div class="sw-byline"><span>{{ list.count }} posts</span></div>
     </div>
   </header>
   <div class="sw-wrap" style="padding-top:2rem;padding-bottom:2rem;">
-    <section class="sw-recent" style="border-top:0;padding-top:0;" aria-label="글 목록">
+    <section class="sw-recent" style="border-top:0;padding-top:0;" aria-label="Posts">
       {% for p in list.posts %}{{ m.postRow(p) }}{% endfor %}
     </section>
-    <nav class="sw-paging" aria-label="페이지">
+    <nav class="sw-paging" aria-label="Pagination">
       <span class="off" aria-hidden="true">‹</span>
       <a class="cur" href="#" aria-current="page">1</a>
       <a href="#">2</a>
@@ -22,7 +22,7 @@
       <a href="#">4</a>
       <span class="edge">…</span>
       <a href="#">18</a>
-      <a href="#" aria-label="다음 페이지">›</a>
+      <a href="#" aria-label="Next page">›</a>
     </nav>
   </div>
 </main>

@@ -16,9 +16,9 @@ function build(): HTMLElement {
   el.className = "sw-lightbox";
   el.setAttribute("role", "dialog");
   el.setAttribute("aria-modal", "true");
-  el.setAttribute("aria-label", "이미지 확대");
+  el.setAttribute("aria-label", "View image");
   el.innerHTML =
-    `<button type="button" class="close" aria-label="닫기">${CLOSE_ICON}</button>` +
+    `<button type="button" class="close" aria-label="Close">${CLOSE_ICON}</button>` +
     '<img alt="">';
   el.addEventListener("click", (e) => {
     // Anywhere outside the image itself closes, as does the button.

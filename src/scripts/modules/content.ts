@@ -31,7 +31,7 @@ function frameCodeBlocks(body: HTMLElement): void {
     copy.type = "button";
     copy.className = "copy";
     copy.setAttribute("data-copy", "");
-    copy.innerHTML = `${COPY_ICON}<span>복사</span>`;
+    copy.innerHTML = `${COPY_ICON}<span>Copy</span>`;
 
     bar.append(lang, copy);
     pre.parentNode?.insertBefore(frame, pre);

@@ -10,7 +10,7 @@ export function initCodeCopy(): void {
         btn.classList.add("ok");
         if (label) {
           const prev = label.textContent;
-          label.textContent = "복사됨";
+          label.textContent = "Copied";
           setTimeout(() => {
             label.textContent = prev;
             btn.classList.remove("ok");

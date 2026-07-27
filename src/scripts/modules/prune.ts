@@ -10,12 +10,12 @@ const EMPTY_GLYPH =
 // Promising that a category will fill up is not ours to promise, and telling a
 // reader that posts appear once published is addressed to the wrong person.
 const MESSAGES: Record<string, [string, string?]> = {
-  "tt-body-search": ["검색 결과가 없습니다", "다른 검색어로 다시 시도해 보세요."],
-  "tt-body-category": ["이 카테고리에는 아직 글이 없습니다"],
-  "tt-body-tag": ["이 태그를 붙인 글이 없습니다"],
-  "tt-body-archive": ["이 기간에 쓴 글이 없습니다"],
+  "tt-body-search": ["No results", "Try a different search term."],
+  "tt-body-category": ["No posts in this category yet"],
+  "tt-body-tag": ["No posts with this tag"],
+  "tt-body-archive": ["No posts from this period"],
 };
-const DEFAULT_MESSAGE: [string, string?] = ["아직 글이 없습니다"];
+const DEFAULT_MESSAGE: [string, string?] = ["No posts yet"];
 
 function escape(text: string): string {
   const el = document.createElement("span");
@@ -31,7 +31,7 @@ function humaniseTodayStamps(): void {
     if (!/^\d{1,2}:\d{2}(:\d{2})?$/.test(text)) return;
     el.dateTime = text;
     el.title = text;
-    el.textContent = "오늘";
+    el.textContent = "Today";
   });
 }
 
@@ -51,6 +51,7 @@ export function initPrune(): void {
     if (list.querySelector(".sw-post-row")) return;
     const box = document.createElement("div");
     box.className = "sw-empty";
+    box.lang = "en";
     box.innerHTML =
       `<div class="glyph" aria-hidden="true">${EMPTY_GLYPH}</div>` +
       `<h2>${escape(heading)}</h2>` +

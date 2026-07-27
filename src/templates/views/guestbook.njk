@@ -6,17 +6,17 @@
     <div class="cover" aria-hidden="true"></div>
     <div class="inner">
       <a class="sw-crumb" href="/">swarea</a>
-      <h1>방명록</h1>
+      <h1>Guestbook</h1>
     </div>
   </header>
-  <section class="sw-comments" aria-label="방명록">
+  <section class="sw-comments" aria-label="Guestbook">
     <form class="sw-cbox" onsubmit="return false">
-      <label class="sw-sr" for="sw-guest-text">방명록 입력</label>
-      <textarea id="sw-guest-text" placeholder="방명록을 남겨주세요"></textarea>
+      <label class="sw-sr" for="sw-guest-text">Write a guestbook entry</label>
+      <textarea id="sw-guest-text" placeholder="Leave a message"></textarea>
       <div class="cfields">
-        <label class="sw-sr" for="sw-guest-name">이름</label><input id="sw-guest-name" placeholder="이름" autocomplete="name">
-        <label class="sw-sr" for="sw-guest-pw">비밀번호</label><input id="sw-guest-pw" type="password" placeholder="비밀번호" autocomplete="off">
-        <button type="submit" class="submit">등록</button>
+        <label class="sw-sr" for="sw-guest-name">Name</label><input id="sw-guest-name" placeholder="Name" autocomplete="name">
+        <label class="sw-sr" for="sw-guest-pw">Password</label><input id="sw-guest-pw" type="password" placeholder="Password" autocomplete="off">
+        <button type="submit" class="submit">Post</button>
       </div>
     </form>
     {% for c in guestbook %}{{ m.comment(c) }}{% endfor %}

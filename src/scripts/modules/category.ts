@@ -50,7 +50,7 @@ function setOpen(
   sub.classList.toggle("open", open);
   btn.querySelector(".twist")?.classList.toggle("open", open);
   btn.setAttribute("aria-expanded", String(open));
-  btn.setAttribute("aria-label", `${label} 하위 카테고리 ${open ? "접기" : "펼치기"}`);
+  btn.setAttribute("aria-label", `${open ? "Collapse" : "Expand"} subcategories of ${label}`);
 
   if (!animate) {
     // Initial state: land there directly, with no motion on page load.
@@ -147,16 +147,16 @@ function initTistoryTree(): void {
   });
 }
 
-// Tistory labels the root of the tree "분류 전체보기". Sitting under a heading
-// that already says Categories, "분류" just repeats itself. Rename the text node
+// Tistory labels the root of the tree "All posts". Sitting under a heading
+// that already says Categories, "Category" just repeats itself. Rename the text node
 // only, leaving the count and any badge Tistory appended untouched.
 function shortenRootLabel(): void {
   document.querySelectorAll(".sw-cat-tistory a").forEach((a) => {
     a.childNodes.forEach((node) => {
       if (node.nodeType !== Node.TEXT_NODE) return;
       const text = node.textContent ?? "";
-      if (text.includes("분류 전체보기")) {
-        node.textContent = text.replace("분류 전체보기", "전체보기");
+      if (text.includes("All posts")) {
+        node.textContent = text.replace("All posts", "All posts");
       }
     });
   });

@@ -12,7 +12,7 @@ export function initToc(): void {
 
   const nav = document.createElement("nav");
   nav.className = "sw-toc";
-  nav.setAttribute("aria-label", "목차");
+  nav.setAttribute("aria-label", "Contents");
 
   const used = new Set<string>();
   const items: string[] = [];
@@ -79,7 +79,7 @@ function addPanelToggle(nav: HTMLElement, links: Map<string, HTMLElement>): void
   btn.type = "button";
   btn.className = "toc-btn";
   btn.innerHTML = LIST_ICON;
-  btn.setAttribute("aria-label", "목차 열기");
+  btn.setAttribute("aria-label", "Show contents");
   btn.setAttribute("aria-expanded", "false");
   // Below back-to-top, above the theme toggle: only back-to-top comes and goes
   // during a read, so it stays at the head of the column.
@@ -90,7 +90,7 @@ function addPanelToggle(nav: HTMLElement, links: Map<string, HTMLElement>): void
   const setOpen = (open: boolean): void => {
     nav.classList.toggle("open", open);
     btn.setAttribute("aria-expanded", String(open));
-    btn.setAttribute("aria-label", open ? "목차 닫기" : "목차 열기");
+    btn.setAttribute("aria-label", open ? "Hide contents" : "Show contents");
     if (open) nav.querySelector<HTMLElement>("a")?.focus();
   };
 

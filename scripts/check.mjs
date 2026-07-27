@@ -245,6 +245,32 @@ try {
   fail("css browser support", e.message);
 }
 
+// Reader-facing copy is English. Tistory's own controls are relabelled at
+// runtime, so the only Korean allowed in what we author is the relabel table
+// that translates them and the slug regex that handles Korean headings.
+try {
+  const HANGUL = /[가-힣]/;
+  const strip = (text) =>
+    text.replace(/<!--[\s\S]*?-->/g, "").replace(/\/\/[^\n]*/g, "").replace(/\/\*[\s\S]*?\*\//g, "");
+  const offenders = [];
+  const scan = (label, text) => {
+    for (const line of strip(text).split("\n")) {
+      if (HANGUL.test(line)) offenders.push(`${label}: ${line.trim().slice(0, 44)}`);
+    }
+  };
+  scan("skin.html", await readFile(join(root, "src", "skin.html"), "utf8"));
+  const moduleDir = join(root, "src", "scripts", "modules");
+  for (const entry of await readdir(moduleDir)) {
+    // relabel.ts holds the Korean it translates away; toc.ts slugs Korean headings.
+    if (entry === "relabel.ts" || entry === "toc.ts") continue;
+    scan(entry, await readFile(join(moduleDir, entry), "utf8"));
+  }
+  if (offenders.length) fail("copy is english", offenders.slice(0, 3).join("; "));
+  else ok("copy is english");
+} catch (e) {
+  fail("copy is english", e.message);
+}
+
 // Report.
 if (!ran.length) {
   console.log("skipped: no applicable checks");

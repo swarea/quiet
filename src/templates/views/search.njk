@@ -5,21 +5,21 @@
   <header class="sw-article-head">
     <div class="cover" aria-hidden="true"></div>
     <div class="inner">
-      <a class="sw-crumb" href="/">검색</a>
-      <h1>&lsquo;{{ search.query }}&rsquo; 검색 결과</h1>
-      <div class="sw-byline"><span>{{ search.results.length }}개의 글</span></div>
+      <a class="sw-crumb" href="/">Search</a>
+      <h1>&lsquo;{{ search.query }}&rsquo; Search results</h1>
+      <div class="sw-byline"><span>{{ search.results.length }} posts</span></div>
     </div>
   </header>
   <div class="sw-wrap">
     {% if search.results.length %}
-    <section class="sw-recent" style="border-top:0;padding-top:2rem;" aria-label="검색 결과">
+    <section class="sw-recent" style="border-top:0;padding-top:2rem;" aria-label="Search results">
       {% for p in search.results %}{{ m.postRow(p) }}{% endfor %}
     </section>
     {% else %}
     <div class="sw-empty">
       <div class="glyph" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></div>
-      <h2>결과가 없습니다</h2>
-      <p><q>{{ search.query }}</q>에 해당하는 글을 찾지 못했습니다. 다른 검색어로 다시 시도해 보세요.</p>
+      <h2>No results</h2>
+      <p><q>{{ search.query }}</q> turned up nothing. Try a different search term.</p>
     </div>
     {% endif %}
   </div>

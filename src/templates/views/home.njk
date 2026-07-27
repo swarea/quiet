@@ -9,22 +9,22 @@
   </section>
 
   {% set f = home.featured %}
-  <section class="sw-featured sw-reveal" aria-label="추천 글">
+  <section class="sw-featured sw-reveal" aria-label="Featured">
     <div class="txt">
       <span class="cat">{{ f.category }}</span>
       <h3><a href="{{ f.url }}">{{ f.title }}</a></h3>
       <p>{{ f.summary }}</p>
-      <div class="meta"><span>{{ f.date }}</span><span>{{ f.readtime }}</span><span>댓글 {{ f.comments }}</span></div>
+      <div class="meta"><span>{{ f.date }}</span><span>{{ f.readtime }}</span><span>Comments {{ f.comments }}</span></div>
     </div>
-    <div class="cover" aria-hidden="true">대표 이미지 (선택)</div>
+    <div class="cover" aria-hidden="true">Cover image (optional)</div>
   </section>
 
-  <section class="sw-recent sw-reveal" aria-label="최근 글">
-    <div class="sw-section-tag"><h2>Recent</h2><a href="/">전체 글 →</a></div>
+  <section class="sw-recent sw-reveal" aria-label="Recent posts">
+    <div class="sw-section-tag"><h2>Recent</h2><a href="/">All posts →</a></div>
     {% for p in home.recent %}{{ m.postRow(p) }}{% endfor %}
   </section>
 
-  <section class="sw-topics sw-reveal" aria-label="주제">
+  <section class="sw-topics sw-reveal" aria-label="Topics">
     <div class="sw-section-tag"><h2>Topics</h2></div>
     <div class="sw-lanes">
       {% for lane in home.topics %}

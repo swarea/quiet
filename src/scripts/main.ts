@@ -12,6 +12,7 @@ import { initPrune } from "./modules/prune";
 import { initLayout } from "./modules/layout";
 import { initContent } from "./modules/content";
 import { initLightbox } from "./modules/lightbox";
+import { initRelabel } from "./modules/relabel";
 
 const boot = (): void => {
   const steps = [
@@ -27,6 +28,7 @@ const boot = (): void => {
     initReveal,
     initSearchShortcut,
     initPrune,
+    initRelabel,
   ];
   for (const step of steps) {
     try {
