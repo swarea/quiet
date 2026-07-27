@@ -28,15 +28,18 @@ main > .quiet-wrap + .quiet-wrap{border-top:1px solid var(--line);}
 /* Hover stays quiet: a soft tint and the title picking up the accent. The row
    used to lift into a white card with a shadow and an accent bar, which read as
    the layout jumping rather than as a link responding. */
-/* No corner radius on the fill. The divider under it is straight, and a rounded
-   fill beneath a straight rule leaves the two disagreeing about where the row
-   ends. They span the same width, so they end the same way. */
-.quiet-post-row{position:relative; display:grid; grid-template-columns:5.5rem 1fr; gap:1.4rem; padding:1.05rem .9rem; transition:background .18s ease;}
+/* The fill is rounded, like every other hover in the skin, and the divider is
+   straight. They looked wrong together because they ended on the same pixel:
+   the fill curved inward exactly where the line ran, leaving a sliver of paper
+   at each bottom corner. So they are given different extents. The line is inset
+   to the row's own padding, where it lines up with the date and the thumbnail,
+   and the fill reaches past it. Neither shape now has to explain the other. */
+.quiet-post-row{position:relative; display:grid; grid-template-columns:5.5rem 1fr; gap:1.4rem; padding:1.05rem .9rem; border-radius:var(--r-sm); transition:background .18s ease;}
 /* The divider is drawn rather than bordered. A border follows the corner radius
    the hover fill needs, so the line curved away at both ends; a line of its own
    stays straight while the fill stays round. */
 .quiet-post-row::after{
-  content:""; position:absolute; left:0; right:0; bottom:0; height:1px;
+  content:""; position:absolute; left:.9rem; right:.9rem; bottom:0; height:1px;
   background:var(--line);
 }
 .quiet-post-row:last-child::after{display:none;}
