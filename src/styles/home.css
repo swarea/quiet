@@ -101,3 +101,18 @@
   overflow:hidden; margin-top:.4rem; font-size:.88rem; line-height:1.6; color:var(--muted);}
 .quiet-feature time{display:block; margin-top:.7rem; font-family:var(--mono);
   font-size:.72rem; color:var(--faint);}
+
+/* The blogger's introduction. It is rendered on every list page, because the
+   header it lives in is shared, and shown only on the home page, because that
+   is the one place the words are about. */
+.quiet-intro{display:none;}
+body#tt-body-index .quiet-intro{display:block;}
+body#tt-body-index .quiet-intro h1{max-width:22ch;}
+body#tt-body-index .quiet-intro .quiet-lede{max-width:52ch;}
+
+/* Where an introduction is set it takes the heading's place rather than stacking
+   above it. A sibling combinator says this exactly: the introduction is only in
+   the document when the blogger wrote one, and it precedes the heading. :has()
+   would say the same thing and be absent from Safari 15.0 to 15.3 and Firefox
+   100 to 120, where those readers would have been shown both. */
+body#tt-body-index .quiet-intro ~ .quiet-list-head{display:none;}

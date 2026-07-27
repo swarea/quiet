@@ -491,7 +491,17 @@
         <main>
           <header class="quiet-article-head">
             <s_list_image><div class="cover" aria-hidden="true"></div></s_list_image>
-            <div class="inner">
+            <!-- An introduction the blogger writes, shown on the home page only.
+                 Tistory titles every list from one token, so home would otherwise
+                 open on the words "all posts". Where a headline is set it takes
+                 that place; where it is not, nothing changes. -->
+            <s_if_var_home-headline>
+              <div class="inner quiet-intro">
+                <h1>[##_var_home-headline_##]</h1>
+                <p class="quiet-lede">[##_var_home-tagline_##]</p>
+              </div>
+            </s_if_var_home-headline>
+            <div class="inner quiet-list-head">
               <h1>[##_list_conform_##]</h1>
               <p class="quiet-lede">[##_list_description_##]</p>
             </div>
