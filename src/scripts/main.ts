@@ -3,6 +3,7 @@
 import { initTheme } from "./modules/theme";
 import { initDrawer } from "./modules/drawer";
 import { initCategory } from "./modules/category";
+import { initCurrent } from "./modules/current";
 import { initCodeCopy } from "./modules/code-copy";
 import { initToc } from "./modules/toc";
 import { initScroll } from "./modules/scroll";
@@ -24,6 +25,7 @@ const boot = (): void => {
     initTheme,
     initDrawer,
     initCategory,
+    initCurrent,
     initContent,
     initInk,
     initCodeCopy,
