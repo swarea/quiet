@@ -39,7 +39,7 @@
 .quiet-nav-label{font-family:var(--mono); font-size:.64rem; letter-spacing:.16em; text-transform:uppercase; color:var(--faint); padding-inline:var(--rail-inset); margin-bottom:.4rem;}
 .quiet-cat{display:flex; flex-direction:column; gap:1px;}
 .quiet-cat-row{width:100%; text-align:left; display:flex; align-items:center; gap:.35rem; padding:.42rem .5rem; border-radius:var(--r-sm); font-size:.9rem; color:var(--ink-2); transition:background .15s, color .15s;}
-.quiet-cat-row:hover{background:var(--surface-2); color:var(--ink);}
+.quiet-cat-row:hover{color:var(--accent);}
 .quiet-cat-row.active{background:var(--accent-wash); color:var(--accent); font-weight:600;}
 .quiet-cat-row .twist{flex:none; width:16px; height:16px; display:grid; place-items:center; color:var(--faint); transition:transform .2s var(--ease);}
 .quiet-cat-row .twist.open{transform:rotate(90deg);}
@@ -50,12 +50,12 @@
 .quiet-sub.open{grid-template-rows:1fr; opacity:1; margin-block:1px 3px;}
 .quiet-sub-inner{overflow:hidden; min-height:0; display:flex; flex-direction:column; gap:1px;}
 .quiet-sub a{padding:.34rem .5rem; border-radius:var(--r-sm); font-size:.84rem; color:var(--muted); display:flex; justify-content:space-between; gap:.5rem;}
-.quiet-sub a:hover{background:var(--surface-2); color:var(--ink);}
+.quiet-sub a:hover{color:var(--accent);}
 .quiet-sub a .n{font-family:var(--mono); font-size:.72rem; color:var(--faint);}
 
 .quiet-menu{display:flex; flex-direction:column; gap:1px;}
 .quiet-menu a{display:flex; align-items:center; gap:.6rem; padding:.42rem .5rem; border-radius:var(--r-sm); font-size:.88rem; color:var(--ink-2); transition:background .15s, color .15s;}
-.quiet-menu a:hover{background:var(--surface-2); color:var(--ink);}
+.quiet-menu a:hover{color:var(--accent);}
 .quiet-menu a:hover svg{color:var(--accent);}
 .quiet-menu svg{color:var(--faint); flex:none; transition:color .15s;}
 
@@ -70,6 +70,13 @@
 .quiet-colophon a{color:var(--faint); transition:color .15s;}
 .quiet-colophon a:first-child{font-weight:600;}
 .quiet-colophon a:hover{color:var(--accent);}
+/* Two kinds of hover, and the difference is what the thing is.
+   A link naming something answers in its own words: the text lifts to the
+   accent and nothing is painted behind it. A control answers as a surface,
+   because a surface is what you press. So the icon buttons here, the page
+   numbers, and the buttons Tistory puts under an article keep their fill, and
+   every list of links does not. Table rows keep theirs for a third reason: it
+   is a reading aid across a wide row, not a signal that anything is clickable. */
 .quiet-icon-btn{width:30px; height:30px; border-radius:8px; display:grid; place-items:center; color:var(--muted); border:1px solid transparent; transition:background .15s, color .15s, border-color .15s;}
 .quiet-icon-btn:hover{background:var(--surface-2); color:var(--ink); border-color:var(--line);}
 
@@ -140,5 +147,12 @@
    gutter grows with the fold, because that overlap once swallowed the clicks
    meant for the category itself. */
 @media (pointer:coarse){
-  .quiet-icon-btn{width:2.5rem; height:2.5rem;}
+  /* Two kinds of hover, and the difference is what the thing is.
+   A link naming something answers in its own words: the text lifts to the
+   accent and nothing is painted behind it. A control answers as a surface,
+   because a surface is what you press. So the icon buttons here, the page
+   numbers, and the buttons Tistory puts under an article keep their fill, and
+   every list of links does not. Table rows keep theirs for a third reason: it
+   is a reading aid across a wide row, not a signal that anything is clickable. */
+.quiet-icon-btn{width:2.5rem; height:2.5rem;}
 }
