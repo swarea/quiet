@@ -33,12 +33,14 @@ const PHRASES: ReadonlyArray<readonly [string, string]> = [
   ["수정", "Edit"],
   ["삭제", "Delete"],
   ["신고", "Report"],
+  ["관리메뉴열기", "Open menu"],
   ["공감", "Like"],
 ];
 
 // Where Tistory's own markup lives. Everything outside these roots is either
 // ours or the author's writing, and must not be touched.
-const ROOTS = ".container_postbtn, .layer_post, .bundle_post, .wrap_btn";
+const ROOTS =
+  ".container_postbtn, .layer_post, .bundle_post, .wrap_btn, #menubar, .menu_toolbar";
 
 function translate(text: string): string {
   let out = text;
@@ -76,11 +78,6 @@ function relabel(root: ParentNode): void {
   });
 }
 
-// Tistory names the first entry of the category tree "분류 전체보기". It is
-// Tistory's wording rather than a category the author named, and in a sidebar
-// whose own labels are English it is the one Korean phrase left that is not the
-// author's writing. Tistory appends the post count, which is the useful half,
-// so only the phrase itself is replaced.
 // The author's own controls in the byline. Tistory supplies the label for the
 // visibility toggle, so it arrives in Korean beside "Edit" and "Delete".
 function relabelBylineAdmin(): void {
@@ -100,6 +97,29 @@ function renameUncategorised(): void {
   });
 }
 
+// Tistory names the first entry of the category tree "분류 전체보기". It is
+// Tistory's wording rather than a category the author named, and in a sidebar
+// whose own labels are English it is the one Korean phrase left that is not the
+// author's writing. Tistory appends the post count, which is the useful half,
+// so only the phrase itself is replaced.
+// The heading of a list page comes from one token that Tistory fills with
+// whatever names the list: a category the author created, a search the reader
+// typed, an archive month, or — for the complete listing — a phrase of its own.
+// Only that last case is ours to translate, so the match is exact. Anything the
+// author or the reader supplied passes through untouched, including a category
+// they happened to name "분류".
+const LISTING_NAMES = new Map([
+  ["분류 전체보기", "All posts"],
+  ["전체 글", "All posts"],
+]);
+
+function renameListingHeading(): void {
+  const heading = document.querySelector<HTMLElement>(".quiet-article-head h1");
+  if (!heading) return;
+  const named = LISTING_NAMES.get((heading.textContent ?? "").trim());
+  if (named) heading.textContent = named;
+}
+
 function renameAllPosts(): void {
   document.querySelectorAll<HTMLAnchorElement>(".quiet-cat-tistory a").forEach((link) => {
     if (!/\/category\/?$/.test(link.getAttribute("href") ?? "")) return;
@@ -111,6 +131,7 @@ function renameAllPosts(): void {
 
 export function initRelabel(): void {
   renameAllPosts();
+  renameListingHeading();
   renameUncategorised();
   relabelBylineAdmin();
 

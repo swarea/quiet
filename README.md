@@ -9,9 +9,9 @@ zoom; reading, menus, categories, search, paging and comments work without it.
 Built from scratch by [swarea](https://github.com/swarea). Not a derivative of
 any existing skin, and not affiliated with Tistory or Kakao.
 
-> **Status: 0.2.0.** Packaged and running on a test blog. Most screens have been
-> verified against live Tistory; the ones that have not are listed under
-> [Known limitations](#known-limitations). See [docs/roadmap.md](docs/roadmap.md).
+> **Status: 0.2.1, unreleased.** 0.2.0 is the published release. Every screen
+> has now been opened on a live Tistory blog; what is still unproven is listed
+> under [Known limitations](#known-limitations). See [docs/roadmap.md](docs/roadmap.md).
 
 ## What it does
 
@@ -70,13 +70,16 @@ What the package contains:
 
 ## Known limitations
 
-- **The blog's CCL setting has nowhere to appear.** Tistory lets a blogger
-  declare a content licence, but its skin guide documents no token for it, so a
-  custom skin has no verified way to render one. Tracked, not guessed at.
-- **Not yet verified on a live blog**: the notice detail page, the empty search
-  result, and the tag page in dark mode. They have only been seen in the local
-  mock, which is not the same thing.
+- **Dark mode has been read, not seen.** Every colour pair is resolved from the
+  tokens and checked by the gate, and the panels Tistory injects were measured
+  against its own stylesheet in production load order. What has not happened is
+  a person looking at every screen in dark mode.
 - **The home page needs covers enabled** to differ from the category archive.
+  With none enabled Tistory serves the plain post list, and the skin cannot
+  override that from its side.
+- **The page title stays in Tistory's wording.** The heading is translated where
+  the phrase is Tistory's own, but `<title>` is left as Tistory writes it: it is
+  what search engines index for a blog whose posts are Korean.
 
 ## Browser support
 
