@@ -28,7 +28,10 @@ main > .quiet-wrap + .quiet-wrap{border-top:1px solid var(--line);}
 /* Hover stays quiet: a soft tint and the title picking up the accent. The row
    used to lift into a white card with a shadow and an accent bar, which read as
    the layout jumping rather than as a link responding. */
-.quiet-post-row{position:relative; display:grid; grid-template-columns:5.5rem 1fr; gap:1.4rem; padding:1.05rem .9rem; border-radius:var(--r-md); transition:background .18s ease;}
+/* No corner radius on the fill. The divider under it is straight, and a rounded
+   fill beneath a straight rule leaves the two disagreeing about where the row
+   ends. They span the same width, so they end the same way. */
+.quiet-post-row{position:relative; display:grid; grid-template-columns:5.5rem 1fr; gap:1.4rem; padding:1.05rem .9rem; transition:background .18s ease;}
 /* The divider is drawn rather than bordered. A border follows the corner radius
    the hover fill needs, so the line curved away at both ends; a line of its own
    stays straight while the fill stays round. */
@@ -133,8 +136,13 @@ body#tt-body-index .quiet-intro ~ .quiet-list-head{display:none;}
    columns a post does. It spans them instead and carries its own image beside
    the words. Selecting the child rather than asking the row what it contains
    keeps this working where :has() is not available. */
+/* An entry typed into the cover settings is a title, a line or two, and perhaps
+   an image. The image is the taller of the two, so the words are set against its
+   middle rather than left at the top of the space it makes: measured, that space
+   was 71px of nothing under two lines of text. With no image the words simply
+   take the width. */
 .quiet-post-row > .quiet-row-plain{
-  grid-column:1 / -1; display:flex; gap:1.2rem; align-items:flex-start;
+  grid-column:1 / -1; display:flex; gap:1.4rem; align-items:center; min-height:0;
 }
 .quiet-post-row > .quiet-row-plain > .txt{flex:1; min-width:0;}
 /* A row's thumbnail is capped by the grid column it sits in, and the rule that
