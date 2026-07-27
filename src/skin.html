@@ -39,9 +39,9 @@
         root.setAttribute("data-theme", dark ? "dark" : "light");
       } catch (e) {}
 
-      /* Whatever accent the blogger picked, the text laid on it has to be
-         readable. Pick the lighter or darker of the two by measuring, rather
-         than assuming white the way this skin did until it shipped 2.37. */
+      /* The colour of text on the accent is settled before the first paint so
+         the page never shows the wrong one, and again on every theme change by
+         the theme module, since the two themes may carry different accents. */
       try {
         var accent = getComputedStyle(root).getPropertyValue(
           root.getAttribute("data-theme") === "dark" ? "--dark-accent" : "--light-accent"

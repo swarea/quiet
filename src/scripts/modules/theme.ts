@@ -17,6 +17,32 @@ function isDark(): boolean {
   return matchMedia("(prefers-color-scheme: dark)").matches;
 }
 
+// Whichever accent the blogger chose for this theme, the text laid on it has to
+// be readable. Measured rather than assumed: assuming white is how a ratio of
+// 2.37 shipped. The head script does this once before the first paint so the
+// page never flashes the wrong one; this repeats it whenever the theme changes,
+// because the two themes may carry very different accents.
+function fitOnAccent(): void {
+  const root = document.documentElement;
+  const accent = getComputedStyle(root)
+    .getPropertyValue(isDark() ? "--dark-accent" : "--light-accent")
+    .trim();
+  const m = accent.match(/^#?([0-9a-f]{6})$/i);
+  if (!m) return;
+  const n = parseInt(m[1], 16);
+  const channel = (c: number): number => {
+    const v = c / 255;
+    return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+  };
+  const L =
+    0.2126 * channel((n >> 16) & 255) +
+    0.7152 * channel((n >> 8) & 255) +
+    0.0722 * channel(n & 255);
+  const onBlack = (L + 0.05) / 0.05;
+  const onWhite = 1.05 / (L + 0.05);
+  root.style.setProperty("--on-accent", onBlack > onWhite ? "#101216" : "#ffffff");
+}
+
 function paintIcons(): void {
   const dark = isDark();
   document.querySelectorAll<HTMLElement>("[data-theme-toggle]").forEach((b) => {
@@ -30,6 +56,7 @@ function paintIcons(): void {
 export function initTheme(): void {
   const root = document.documentElement;
   root.setAttribute("data-theme", isDark() ? "dark" : "light");
+  fitOnAccent();
   paintIcons();
 
   document.querySelectorAll<HTMLElement>("[data-theme-toggle]").forEach((btn) => {
@@ -41,6 +68,7 @@ export function initTheme(): void {
       } catch {
         /* ignore */
       }
+      fitOnAccent();
       paintIcons();
     });
   });

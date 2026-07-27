@@ -44,19 +44,27 @@ function contrast(a: number[], b: number[]): number {
   return (hi + 0.05) / (lo + 0.05);
 }
 
-// The nearest ancestor that actually paints something, since a transparent
-// parent tells us nothing about what the text sits on. If nothing in the chain
-// paints, the page's own ground is the answer, and assuming white there would
-// invert the judgement on a dark page.
+// What the text sits on.
+//
+// Measured on the page, every ancestor of a paragraph is transparent up to
+// <body>, so the answer is the page's ground either way. It is read from the
+// token rather than from the painted background on purpose: the token is the
+// definition and changes with the theme the instant the attribute does, while a
+// painted colour is the result of that change and can still be the old one when
+// the question is asked. Reading the result is how this judgement came to be
+// made against a light page after the reader had switched to a dark one.
+//
+// A box the author gave a background of its own is a different matter, so a
+// painting ancestor below <body> is still believed.
 function backdrop(el: HTMLElement): number[] {
   let node: HTMLElement | null = el;
-  while (node) {
+  while (node && node !== document.body && node !== document.documentElement) {
     const rgb = parse(getComputedStyle(node).backgroundColor);
     if (rgb) return rgb;
     node = node.parentElement;
   }
   const ground = getComputedStyle(document.documentElement).getPropertyValue("--paper");
-  return parse(ground) ?? [255, 255, 255];
+  return parse(ground) ?? parse(getComputedStyle(document.body).backgroundColor) ?? [255, 255, 255];
 }
 
 function coloured(root: ParentNode): HTMLElement[] {
