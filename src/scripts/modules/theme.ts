@@ -53,6 +53,14 @@ function paintIcons(): void {
   });
 }
 
+function stored(): string | null {
+  try {
+    return localStorage.getItem(KEY);
+  } catch {
+    return null;
+  }
+}
+
 export function initTheme(): void {
   const root = document.documentElement;
   root.setAttribute("data-theme", isDark() ? "dark" : "light");
@@ -72,4 +80,19 @@ export function initTheme(): void {
       paintIcons();
     });
   });
+
+  // Writing data-theme onto the element settles the flash before first paint,
+  // but it also outranks the media query from then on. A reader whose system
+  // turns dark at dusk would sit in the theme they arrived in for the rest of
+  // the visit. Follow the system while they have not said otherwise; the moment
+  // they press the button, their choice is stored and this stops applying.
+  const system = matchMedia("(prefers-color-scheme: dark)");
+  const follow = (e: MediaQueryList | MediaQueryListEvent): void => {
+    if (stored()) return;
+    root.setAttribute("data-theme", e.matches ? "dark" : "light");
+    fitOnAccent();
+    paintIcons();
+  };
+  if (typeof system.addEventListener === "function") system.addEventListener("change", follow);
+  else if (typeof system.addListener === "function") system.addListener(follow);
 }
