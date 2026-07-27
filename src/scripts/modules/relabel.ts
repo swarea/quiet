@@ -72,6 +72,17 @@ function relabel(root: ParentNode): void {
 // whose own labels are English it is the one Korean phrase left that is not the
 // author's writing. Tistory appends the post count, which is the useful half,
 // so only the phrase itself is replaced.
+// The author's own controls in the byline. Tistory supplies the label for the
+// visibility toggle, so it arrives in Korean beside "Edit" and "Delete".
+function relabelBylineAdmin(): void {
+  const MAP: Record<string, string> = { "보호": "Protect", "공개": "Publish", "발행": "Publish" };
+  document.querySelectorAll<HTMLElement>(".sw-byline .admin a").forEach((link) => {
+    const text = (link.textContent ?? "").trim();
+    const next = MAP[text];
+    if (next) link.textContent = next;
+  });
+}
+
 function renameAllPosts(): void {
   document.querySelectorAll<HTMLAnchorElement>(".sw-cat-tistory a").forEach((link) => {
     if (!/\/category\/?$/.test(link.getAttribute("href") ?? "")) return;
@@ -83,6 +94,7 @@ function renameAllPosts(): void {
 
 export function initRelabel(): void {
   renameAllPosts();
+  relabelBylineAdmin();
 
   const roots = document.querySelectorAll<HTMLElement>(ROOTS);
   if (!roots.length) return;

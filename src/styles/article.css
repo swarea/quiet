@@ -163,7 +163,7 @@ figure.sw-fig figcaption{text-align:center; font-size:.8rem; color:var(--muted);
    type. Smaller, and it lifts on hover instead of shouting at rest. */
 .sw-cbox .submit{
   margin-left:auto; padding:.4rem .85rem;
-  border-radius:var(--r-sm); background:var(--accent); color:#fff;
+  border-radius:var(--r-sm); background:var(--accent); color:var(--on-accent);
   font-size:.8rem; font-weight:600; line-height:1.35;
   transition:background .15s;
 }

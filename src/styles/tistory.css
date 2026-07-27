@@ -191,6 +191,34 @@
    edge need to follow the theme so they do not glare in dark mode. */
 .sw-article-body .layer_post{background:var(--surface); border-color:var(--line); border-radius:var(--r-md);}
 .sw-article-body .layer_post .txt_sns{color:var(--ink-2);}
+
+/* The share panel's rows carry their label in .txt_sns, but the post-management
+   menu puts plain text straight into the button, where Tistory's own
+   `color:#333` survives. On a dark page that is dark text on a dark panel, so
+   the menu read as three barely visible lines with only the hovered one
+   legible. Both kinds of row are named here. */
+.sw-article-body .layer_post .btn_mark{color:var(--ink-2);}
+.sw-article-body .layer_post .btn_mark:hover{background:var(--surface-2); color:var(--accent);}
+
+/* The licence a blogger declares for a post. Tistory renders it beside the
+   toolbar and gives the popup a white background and #333 text, neither of
+   which survives a dark page. The badges themselves are left as Tistory's
+   sprite on purpose: Creative Commons marks are standardised symbols, and a
+   redrawn one would be a different claim about the licence. They are only
+   lifted enough to stay visible on a dark ground. */
+.sw-article-body .container_postbtn .postbtn_ccl{
+  float:none; display:inline-flex; align-items:center;
+  padding:0; margin-left:.55rem;
+}
+.sw-article-body .container_postbtn .link_ccl{display:inline-flex; align-items:center; height:auto;}
+.sw-article-body .bundle_ccl .ico_postbtn{filter:var(--ccl-filter);}
+.sw-article-body .layer_ccl{
+  background:var(--surface); color:var(--ink-2);
+  border:1px solid var(--line); border-radius:var(--r-md);
+  box-shadow:var(--shadow-lg);
+}
+.sw-article-body .layer_ccl .txt_mark{color:var(--ink-2);}
+.sw-article-body .layer_ccl .ico_postbtn{filter:var(--ccl-filter);}
 .sw-article-foot ~ div{max-width:var(--read); margin-inline:auto; padding-inline:2rem;}
 @media (max-width:640px){ .sw-article-foot ~ div{padding-inline:1.15rem;} }
 

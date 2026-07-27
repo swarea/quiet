@@ -9,7 +9,7 @@
 .sw-paging{display:flex; justify-content:center; align-items:center; gap:.3rem; margin:2.4rem 0 3.5rem;}
 .sw-paging a,.sw-paging span{min-width:2.3rem; height:2.3rem; padding:0 .5rem; display:grid; place-items:center; border-radius:var(--r-sm); font-size:.85rem; font-family:var(--mono); font-variant-numeric:tabular-nums; color:var(--ink-2); border:1px solid transparent; transition:background .15s, border-color .15s;}
 .sw-paging a:hover{background:var(--surface-2); border-color:var(--line);}
-.sw-paging .cur{background:var(--accent); color:#fff; font-weight:600;}
+.sw-paging .cur{background:var(--accent); color:var(--on-accent); font-weight:600;}
 .sw-paging .edge{color:var(--muted);}
 .sw-paging .off{color:var(--faint); pointer-events:none;}
 
@@ -21,5 +21,5 @@
 .sw-protected label{position:absolute; width:1px; height:1px; margin:-1px; overflow:hidden; clip:rect(0 0 0 0);}
 .sw-protected input{flex:1; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-sm); padding:.55rem .75rem; color:var(--ink); font:inherit; outline:none; transition:border-color .15s, box-shadow .15s;}
 .sw-protected input:focus{border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-wash);}
-.sw-protected button{background:var(--accent); color:#fff; border-radius:var(--r-sm); padding:.55rem 1.2rem; font-weight:600; transition:background .15s;}
+.sw-protected button{background:var(--accent); color:var(--on-accent); border-radius:var(--r-sm); padding:.55rem 1.2rem; font-weight:600; transition:background .15s;}
 .sw-protected button:hover{background:var(--accent-ink);}
