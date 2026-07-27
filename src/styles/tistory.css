@@ -4,7 +4,10 @@
 
 /* [##_category_list_##] renders nested <ul><li><a>. */
 .sw-cat-tistory ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:1px;}
-.sw-cat-tistory li a{display:flex; align-items:center; justify-content:space-between; gap:.4rem; padding:.42rem .5rem; border-radius:var(--r-sm); font-size:.9rem; color:var(--ink-2); transition:background .15s, color .15s;}
+/* The left gutter belongs to the fold control. It has to live in this rule:
+   set separately it lost to this shorthand on specificity, which left the
+   chevron sitting on top of the first letter and swallowing its own clicks. */
+.sw-cat-tistory li a{display:flex; align-items:center; justify-content:space-between; gap:.4rem; padding:.5rem .5rem .5rem 1.9rem; border-radius:var(--r-sm); font-size:.9rem; color:var(--ink-2); transition:background .15s, color .15s;}
 .sw-cat-tistory li a:hover{background:var(--surface-2); color:var(--ink);}
 .sw-cat-tistory li a.link_tit,.sw-cat-tistory > ul > li > a{font-weight:600;}
 .sw-cat-tistory li ul{margin:1px 0 3px .9rem; padding-left:.5rem; border-left:1px solid var(--line);}
@@ -60,16 +63,35 @@
   display:flex; justify-content:center; align-items:center; flex-wrap:wrap;
   gap:.5rem; margin:2.2rem 0 .5rem; padding:0;
 }
-.sw-article-body .postbtn_like,
-.sw-article-body .btn_subscription{
-  border:1px solid var(--line); border-radius:999px; background:var(--surface);
-  transition:border-color .15s, background .15s;
+/* The group reads as one control strip: a soft pill holding the actions, with
+   each button getting its own room and its own hover rather than the whole
+   strip lighting up. Tistory zeroes the font size on the wrappers to hide
+   labels, so sizes are restated where text should show. */
+.sw-article-body .postbtn_like{
+  display:inline-flex; align-items:center; gap:.15rem;
+  padding:.25rem .45rem; border:1px solid var(--line); border-radius:999px;
+  background:var(--surface); box-shadow:var(--shadow);
 }
-.sw-article-body .postbtn_like:hover,
-.sw-article-body .btn_subscription:hover{border-color:var(--line-strong); background:var(--surface-2);}
-.sw-article-body .btn_post{color:var(--ink-2);}
-.sw-article-body .txt_like,
-.sw-article-body .btn_subscription .txt_state{color:var(--ink-2); font-size:.8rem;}
+.sw-article-body .postbtn_like .wrap_btn{display:inline-flex; align-items:center;}
+.sw-article-body .btn_post{
+  display:inline-flex; align-items:center; gap:.35rem;
+  padding:.38rem .6rem; border-radius:999px; color:var(--muted);
+  transition:background .15s, color .15s;
+}
+.sw-article-body .btn_post:hover{background:var(--surface-2); color:var(--accent);}
+.sw-article-body .txt_like{font-size:.8rem; font-weight:600; color:inherit;}
+
+/* Subscribing is the one thing here worth inviting, so it carries the accent
+   while the rest stay quiet. */
+.sw-article-body .btn_subscription{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:.5rem 1.05rem; border:1px solid var(--line); border-radius:999px;
+  background:var(--surface); box-shadow:var(--shadow);
+  transition:border-color .15s, background .15s, color .15s;
+}
+.sw-article-body .btn_subscription .txt_state{font-size:.8rem; font-weight:600; color:var(--ink-2);}
+.sw-article-body .btn_subscription:hover{border-color:var(--accent); background:var(--accent-wash);}
+.sw-article-body .btn_subscription:hover .txt_state{color:var(--accent);}
 .sw-article-body .ico_postbtn{filter:var(--tt-icon-filter);}
 /* The share and manage flyouts are Tistory's own panels; only the surface and
    edge need to follow the theme so they do not glare in dark mode. */
@@ -145,10 +167,9 @@
    beside the link rather than wrapping it, so the parent category stays
    navigable and the control has its own accessible name. */
 .sw-cat-tistory li{position:relative;}
-/* Reserve the chevron gutter on every entry, not just the foldable ones, so
-   sibling categories share one left edge whether or not they have children. */
-.sw-cat-tistory a{padding-left:1.55rem;}
-.sw-cat-fold{position:absolute; left:.5rem; top:.3rem; width:1.05rem; height:1.5rem; display:grid; place-items:center; color:var(--faint); border-radius:var(--r-sm);}
+/* Sized to the row rather than to the glyph, so it is comfortable to hit and
+   sits wholly inside the gutter the row reserves for it. */
+.sw-cat-fold{position:absolute; left:.15rem; top:.15rem; width:1.6rem; height:2.05rem; display:grid; place-items:center; color:var(--faint); border-radius:var(--r-sm); transition:color .15s, background .15s;}
 .sw-cat-fold:hover{color:var(--accent); background:var(--surface-2);}
 .sw-cat-fold .twist{display:grid; place-items:center; transition:transform .2s var(--ease);}
 .sw-cat-fold .twist.open{transform:rotate(90deg);}
