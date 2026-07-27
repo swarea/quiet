@@ -116,3 +116,12 @@ body#tt-body-index .quiet-intro .quiet-lede{max-width:52ch;}
    would say the same thing and be absent from Safari 15.0 to 15.3 and Firefox
    100 to 120, where those readers would have been shown both. */
 body#tt-body-index .quiet-intro ~ .quiet-list-head{display:none;}
+
+/* A cover item entered by hand has no date, so it does not sit in the two
+   columns a post does. It spans them instead and carries its own image beside
+   the words. Selecting the child rather than asking the row what it contains
+   keeps this working where :has() is not available. */
+.quiet-post-row > .quiet-row-plain{
+  grid-column:1 / -1; display:flex; gap:1.2rem; align-items:flex-start;
+}
+.quiet-post-row > .quiet-row-plain > .txt{flex:1; min-width:0;}

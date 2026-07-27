@@ -205,7 +205,10 @@
         <s_cover_rep>
           <s_cover name="list">
             <section class="quiet-wrap quiet-recent" aria-label="[##_cover_title_##]">
-              <div class="quiet-section-tag"><h2>[##_cover_title_##]</h2></div>
+              <div class="quiet-section-tag">
+                <h2>[##_cover_title_##]</h2>
+                <s_cover_url><a href="[##_cover_url_##]">More</a></s_cover_url>
+              </div>
               <s_cover_item>
                 <a class="quiet-post-row" href="[##_cover_item_url_##]">
                   <s_cover_item_article_info>
@@ -218,10 +221,16 @@
                     <s_cover_item_thumbnail><span class="thumb"><img src="[##_cover_item_thumbnail_##]" alt="" loading="lazy"></span></s_cover_item_thumbnail>
                   </s_cover_item_article_info>
                   <s_cover_item_not_article_info>
-                    <time></time>
-                    <div>
-                      <h2>[##_cover_item_title_##]</h2>
-                      <p>[##_cover_item_summary_##]</p>
+                    <!-- Entered by hand in the cover settings rather than drawn
+                         from a post: no date and no category exist for it, so no
+                         column is reserved for them. The image the blogger
+                         attached does exist, and is shown. -->
+                    <div class="quiet-row-plain">
+                      <div class="txt">
+                        <h2>[##_cover_item_title_##]</h2>
+                        <p>[##_cover_item_summary_##]</p>
+                      </div>
+                      <s_cover_item_thumbnail><span class="thumb"><img src="[##_cover_item_thumbnail_##]" alt="" loading="lazy"></span></s_cover_item_thumbnail>
                     </div>
                   </s_cover_item_not_article_info>
                 </a>
@@ -235,7 +244,10 @@
                their cover configuration; nothing is written into the skin. -->
           <s_cover name="featured">
             <section class="quiet-wrap quiet-featured-set" aria-label="[##_cover_title_##]">
-              <div class="quiet-section-tag"><h2>[##_cover_title_##]</h2></div>
+              <div class="quiet-section-tag">
+                <h2>[##_cover_title_##]</h2>
+                <s_cover_url><a href="[##_cover_url_##]">More</a></s_cover_url>
+              </div>
               <s_cover_item>
                 <a class="quiet-feature" href="[##_cover_item_url_##]">
                   <s_cover_item_article_info>
@@ -250,6 +262,9 @@
                     </span>
                   </s_cover_item_article_info>
                   <s_cover_item_not_article_info>
+                    <s_cover_item_thumbnail>
+                      <span class="shot"><img src="[##_cover_item_thumbnail_##]" alt="" loading="lazy"></span>
+                    </s_cover_item_thumbnail>
                     <span class="txt">
                       <strong>[##_cover_item_title_##]</strong>
                       <span class="sum">[##_cover_item_summary_##]</span>
@@ -262,7 +277,10 @@
 
           <s_cover name="grid">
             <section class="quiet-wrap quiet-topics" aria-label="[##_cover_title_##]">
-              <div class="quiet-section-tag"><h2>[##_cover_title_##]</h2></div>
+              <div class="quiet-section-tag">
+                <h2>[##_cover_title_##]</h2>
+                <s_cover_url><a href="[##_cover_url_##]">More</a></s_cover_url>
+              </div>
               <div class="quiet-lanes">
                 <s_cover_item>
                   <div class="quiet-lane">
