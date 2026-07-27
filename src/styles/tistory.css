@@ -314,3 +314,28 @@ html.sw-js .sw-cat-tistory ul ul ul.open{max-height:none;}
 @supports selector(:has(*)) {
   html.sw-js .sw-rail nav:not(:has(a)){display:none;}
 }
+
+/* Tistory rings these buttons on :focus rather than :focus-visible, so a plain
+   mouse click leaves a heavy platform focus ring behind:
+     .container_postbtn button:focus{outline:5px auto -webkit-focus-ring-color}
+   Keyboard users still need the ring, so it is not removed but moved onto
+   :focus-visible, where it belongs. */
+.sw-article-body .container_postbtn button:focus,
+.sw-article-body .layer_post button:focus{outline:none;}
+.sw-article-body .container_postbtn button:focus-visible,
+.sw-article-body .layer_post button:focus-visible{
+  outline:2px solid var(--accent); outline-offset:2px;
+}
+
+/* The share popup's tail is a sprite in a fixed light colour, so on a dark
+   page the panel ended in a pale wedge. Drawn instead as a rotated square that
+   takes the panel's own surface and hairline. */
+.sw-article-body .layer_post .ico_arrbt{
+  overflow:visible; background:none; width:1.25rem; height:.6rem;
+}
+.sw-article-body .layer_post .ico_arrbt::after{
+  content:""; position:absolute; left:50%; top:-.34rem;
+  width:.68rem; height:.68rem; background:var(--surface);
+  border:1px solid var(--line); border-top:0; border-left:0;
+  transform:translateX(-50%) rotate(45deg);
+}

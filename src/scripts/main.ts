@@ -10,6 +10,7 @@ import { initReveal } from "./modules/reveal";
 import { initSearchShortcut } from "./modules/search";
 import { initPrune } from "./modules/prune";
 import { initLayout } from "./modules/layout";
+import { initConfirmOnce } from "./modules/confirm-once";
 import { initContent } from "./modules/content";
 import { initLightbox } from "./modules/lightbox";
 import { initRelabel } from "./modules/relabel";
@@ -17,6 +18,7 @@ import { initSubscribe } from "./modules/subscribe";
 
 const boot = (): void => {
   const steps = [
+    initConfirmOnce,
     initLayout,
     initTheme,
     initDrawer,

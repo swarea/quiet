@@ -2,7 +2,7 @@
 
 .sw-empty{text-align:center; padding:4.5rem 1.25rem; color:var(--muted); max-width:32rem; margin:0 auto;}
 .sw-empty .glyph{width:46px; height:46px; border-radius:13px; background:var(--surface-2); border:1px solid var(--line); display:grid; place-items:center; color:var(--faint); margin:0 auto 1.1rem;}
-.sw-empty h2{font-size:1.12rem; color:var(--ink-2); margin-bottom:.45rem;}
+.sw-empty h2{font-size:.98rem; font-weight:600; color:var(--ink-2); margin-bottom:.4rem;}
 .sw-empty p{font-size:.92rem; line-height:1.6;}
 .sw-empty q{color:var(--ink-2); font-weight:600; font-style:normal;}
 
