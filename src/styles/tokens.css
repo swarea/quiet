@@ -8,6 +8,7 @@
   --warm:#a9793c;
   --tt-icon-filter:none;
 
+  --block-gap:2rem;
   --rail:288px; --rail-inset:.5rem; --read:50rem; --wide:64rem; --header-h:56px;
   --r-sm:6px; --r-md:10px; --r-lg:14px;
   --shadow:0 1px 2px rgba(20,22,28,.04), 0 6px 22px -12px rgba(20,22,28,.14);

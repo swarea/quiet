@@ -93,14 +93,19 @@
 
 /* ---- Name card Tistory appends after the article --------------------------
    Restyled to match our author block; it carries the real subscribe button. */
-.tt_box_namecard{display:flex; align-items:center; gap:1rem; padding:1.5rem 0; margin:1.6rem 0; border-block:1px solid var(--line); background:none;}
-.tt_box_namecard .tt_cont{order:2; flex:1; min-width:0; display:flex; flex-direction:column; align-items:flex-start; gap:.15rem;}
+/* Tistory ships this card with a 206px min-height, a 32px margin on the
+   avatar, 34px of padding on the text column and a 32px margin under the
+   subscribe button. Left in place they inflated the card to 213px for a 52px
+   avatar and pushed the text 48px from it, so every one is reset and the
+   spacing comes from the flex gap alone. */
+.tt_box_namecard{display:flex; align-items:center; gap:1rem; min-height:0; padding:1.5rem 0; margin:var(--block-gap) 0; border-block:1px solid var(--line); background:none;}
+.tt_box_namecard .tt_cont{order:2; flex:1; min-width:0; padding:0; display:flex; flex-direction:column; align-items:flex-start; gap:.15rem;}
 .tt_box_namecard .tt_tit_cont{font-weight:700; font-size:1rem; color:var(--ink);}
 .tt_box_namecard .tt_tit_cont:hover{color:var(--accent);}
-.tt_box_namecard .tt_desc{font-size:.86rem; color:var(--muted);}
-.tt_box_namecard .tt_wrap_thumb{order:1; flex:none;}
+.tt_box_namecard .tt_desc{font-size:.86rem; color:var(--muted); padding:0;}
+.tt_box_namecard .tt_wrap_thumb{order:1; flex:none; margin:0;}
 .tt_box_namecard .tt_thumb_g{display:block; width:52px; height:52px; border-radius:14px; background-size:cover; background-position:center; border:1px solid var(--line);}
-.tt_box_namecard .tt_btn_subscribe{margin-top:.55rem; display:inline-flex; align-items:center; gap:.3rem; font-size:.78rem; font-weight:600; color:var(--accent); background:var(--surface); border:1px solid var(--line); border-radius:999px; padding:.32rem .85rem; transition:border-color .15s, background .15s;}
+.tt_box_namecard .tt_btn_subscribe{margin:.55rem 0 0; display:inline-flex; align-items:center; gap:.3rem; font-size:.78rem; font-weight:600; color:var(--accent); background:var(--surface); border:1px solid var(--line); border-radius:999px; padding:.32rem .85rem; transition:border-color .15s, background .15s;}
 .tt_box_namecard .tt_btn_subscribe:hover{border-color:var(--accent); background:var(--accent-wash);}
 .tt_box_namecard .tt_ico_cross{display:none;}
 
