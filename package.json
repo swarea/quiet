@@ -1,7 +1,7 @@
 {
-  "name": "tistory-skin",
+  "name": "quiet",
   "version": "0.2.0",
-  "description": "An original, reading-first Tistory skin by swarea",
+  "description": "A Tistory skin for long-form reading.",
   "private": true,
   "type": "module",
   "scripts": {
@@ -10,7 +10,7 @@
     "preview": "node scripts/build.mjs --preview --serve",
     "check": "node scripts/check.mjs"
   },
-  "license": "SEE LICENSE (undecided)",
+  "license": "MIT",
   "devDependencies": {
     "esbuild": "^0.25.0",
     "lightningcss": "^1.27.0",

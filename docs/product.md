@@ -14,10 +14,11 @@ The blog records, over years, in Korean and English:
 - faith and scripture meditation
 - data-driven analysis and records
 
-The owner's personal brand is **swarea**. The blog's three identity axes under
-consideration are **Bible / Lee / Data**, but names for menus, categories, and
-the blog title are *not final*. The skin must not hard-code them; they are
-managed through Tistory categories, covers, and skin variables.
+The skin is **Quiet**; the author is **swarea**. No menu name, category name,
+blog title, or tagline belongs in the skin. Every one of them is the blogger's
+to choose, and the skin reads them from Tistory categories, covers, and skin
+variables. A skin that ships one blogger's words makes every other blogger wear
+them.
 
 ## Design impression (non-negotiable)
 

@@ -7,13 +7,13 @@
 -->
 <skin>
   <information>
-    <name>swarea</name>
+    <name>Quiet</name>
     <version>0.2.0</version>
     <description>
-      <![CDATA[조용하고 전문적인, 읽기 우선 개인 블로그 스킨입니다.]]>
+      <![CDATA[긴 글을 읽기 위한 티스토리 스킨입니다. 조용한 타이포그래피와 읽는 사람을 따라가는 라이트/다크 테마.]]>
     </description>
     <license>
-      <![CDATA[사용 조건 미정.]]>
+      <![CDATA[MIT License. 자유롭게 사용·수정·재배포할 수 있으며, 저작권 고지만 유지하면 됩니다. https://github.com/swarea/quiet]]>
     </license>
   </information>
   <author>
