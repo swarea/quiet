@@ -13,6 +13,10 @@
   <link rel="stylesheet" media="print" onload="this.media='all'; this.onload=null"
         href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"></noscript>
+  <!-- The blogger's chosen accent, written over the palette rather than over
+       every rule that uses it. Everything downstream already derives from these
+       two, so one value each is enough to recolour the skin. -->
+  <style>:root{--light-accent:[##_var_accent-light_##]; --dark-accent:[##_var_accent-dark_##];}</style>
   <script>
     /* Runs before the first paint. Resolving the theme here keeps the page from
        flashing, and the quiet-js marker lets the stylesheet start the category
@@ -20,11 +24,35 @@
        moment later, on every navigation. Without scripts the marker is absent
        and everything stays expanded and reachable. */
     (function () {
-      document.documentElement.classList.add("quiet-js");
+      var root = document.documentElement;
+      root.classList.add("quiet-js");
       try {
+        /* Order of authority: what this reader chose, then what the blogger set
+           as the blog's default, then what the reader's system asks for. */
         var stored = localStorage.getItem("quiet-theme");
-        var dark = stored ? stored === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
-        document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+        var preset = "[##_var_theme_##]";
+        var dark = stored
+          ? stored === "dark"
+          : preset === "dark" || preset === "light"
+            ? preset === "dark"
+            : matchMedia("(prefers-color-scheme: dark)").matches;
+        root.setAttribute("data-theme", dark ? "dark" : "light");
+      } catch (e) {}
+
+      /* Whatever accent the blogger picked, the text laid on it has to be
+         readable. Pick the lighter or darker of the two by measuring, rather
+         than assuming white the way this skin did until it shipped 2.37. */
+      try {
+        var accent = getComputedStyle(root).getPropertyValue(
+          root.getAttribute("data-theme") === "dark" ? "--dark-accent" : "--light-accent"
+        ).trim();
+        var m = accent.match(/^#?([0-9a-f]{6})$/i);
+        if (m) {
+          var n = parseInt(m[1], 16);
+          var lum = function (c) { c /= 255; return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); };
+          var L = 0.2126 * lum(n >> 16 & 255) + 0.7152 * lum(n >> 8 & 255) + 0.0722 * lum(n & 255);
+          root.style.setProperty("--on-accent", (L + 0.05) / 0.05 > 1.05 / (L + 0.05) ? "#101216" : "#ffffff");
+        }
       } catch (e) {}
     })();
   </script>

@@ -96,6 +96,28 @@
         <default>true</default>
       </variable>
       <variable>
+        <name>accent-light</name>
+        <label><![CDATA[강조색 (라이트)]]></label>
+        <description><![CDATA[링크와 강조에 쓰이는 색입니다. 밝은 배경에서 읽히는 색으로 고르세요.]]></description>
+        <type>COLOR</type>
+        <default>#38548c</default>
+      </variable>
+      <variable>
+        <name>accent-dark</name>
+        <label><![CDATA[강조색 (다크)]]></label>
+        <description><![CDATA[다크 모드에서 쓰이는 강조색입니다. 어두운 배경에서 읽히는 밝은 색으로 고르세요.]]></description>
+        <type>COLOR</type>
+        <default>#90a8e0</default>
+      </variable>
+      <variable>
+        <name>theme</name>
+        <label><![CDATA[기본 테마]]></label>
+        <description><![CDATA[처음 방문한 독자에게 보여줄 테마입니다. 독자가 직접 바꾸면 그 선택이 우선합니다.]]></description>
+        <type>SELECT</type>
+        <option>[{"name":"system","label":"방문자 설정 따름","value":"system"},{"name":"light","label":"라이트","value":"light"},{"name":"dark","label":"다크","value":"dark"}]</option>
+        <default>system</default>
+      </variable>
+      <variable>
         <name>prev-next</name>
         <label><![CDATA[이전·다음 글 표시]]></label>
         <description><![CDATA[글 하단에 바로 앞뒤 순서의 글로 이동하는 링크를 보여줍니다.]]></description>

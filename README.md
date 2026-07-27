@@ -62,6 +62,9 @@ What the package contains:
 
 | Setting | Default | Effect |
 | --- | --- | --- |
+| `accent-light` | `#38548c` | the colour of links and emphasis on a light page |
+| `accent-dark` | `#90a8e0` | the same, for dark. Pick something that reads on a dark ground |
+| `theme` | follow the visitor | which theme a first-time reader sees. Their own choice always wins afterwards |
 | `sidebar` | on | the fixed navigation column on wide screens |
 | `toc` | on | the contents rail beside an article, and the panel on narrow screens |
 | `reading-progress` | on | the thin progress line at the top of an article |
@@ -80,6 +83,20 @@ What the package contains:
 - **The page title stays in Tistory's wording.** The heading is translated where
   the phrase is Tistory's own, but `<title>` is left as Tistory writes it: it is
   what search engines index for a blog whose posts are Korean.
+
+### Changing more than the settings
+
+Every colour in the skin derives from two palettes declared at the top of
+`style.css` as `--light-*` and `--dark-*`. Overriding one of those in the skin
+editor recolours everything that uses it, rather than one rule at a time:
+
+```css
+:root{ --light-surface-2:#f6f4ef; --dark-surface-2:#232830; }
+```
+
+Whatever accent is chosen, the text laid on it is decided by measurement rather
+than assumption: the skin compares the accent against black and white and takes
+whichever a reader can actually read.
 
 ## Browser support
 
