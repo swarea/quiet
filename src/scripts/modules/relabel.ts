@@ -47,6 +47,15 @@ function relabel(root: ParentNode): void {
     if (next !== value) node.nodeValue = next;
   }
 
+  // The heart already says "like", so the word beside it is noise. Tistory
+  // writes the word and the count into the same element, so keep the digits and
+  // drop the rest; the button's accessible name still carries "Like".
+  root.querySelectorAll?.(".txt_like").forEach((el) => {
+    const count = (el.textContent ?? "").match(/\d[\d,]*/);
+    const next = count ? count[0] : "";
+    if (el.textContent !== next) el.textContent = next;
+  });
+
   // Accessible names carried on attributes rather than in the text.
   root.querySelectorAll?.("[aria-label], [title]").forEach((el) => {
     for (const attr of ["aria-label", "title"]) {

@@ -95,30 +95,43 @@
   color:var(--muted);
 }
 
-/* Tistory groups like and share into a bordered capsule with a hairline
-   divider. Both belong to its design, not ours. */
+/* Tistory groups these into a bordered capsule with a hairline divider. The
+   grouping is right — they are all tools for the article just read — so it is
+   kept and redrawn in our own materials. Subscribe is deliberately not in here;
+   it is not a tool for this post but a standing commitment to the author, and
+   it is moved to the block that introduces them. */
 .sw-article-body .container_postbtn .postbtn_like{
-  float:none; display:inline-flex; align-items:center; gap:.15rem;
-  padding:0; border:0; border-radius:0; background:none; box-shadow:none;
+  float:none; display:inline-flex; align-items:center; gap:.1rem;
+  padding:.25rem; border:1px solid var(--line); border-radius:999px;
+  background:var(--surface); box-shadow:var(--shadow);
 }
 .sw-article-body .container_postbtn .postbtn_like .ico_bar{display:none;}
+/* The like control nests its icon and count inside another div, so the gap
+   declared on the button lands between one child and nothing. Space them where
+   they actually sit. */
+.sw-article-body .container_postbtn .btn_post > .uoc-icon{
+  display:inline-flex; align-items:center; gap:.4rem;
+}
 .sw-article-body .container_postbtn .wrap_btn{
   float:none; display:inline-flex; align-items:center;
 }
 
-.sw-article-body .container_postbtn .btn_post,
-.sw-article-body .container_postbtn .btn_menu_toolbar{
+/* Round targets inside a round group, sized to be worth aiming at and given a
+   pressed state, because a control that never answers a press does not invite
+   one. */
+.sw-article-body .container_postbtn .btn_post{
   display:inline-flex; align-items:center; justify-content:center; gap:.4rem;
-  width:auto; height:auto; min-width:2.5rem; min-height:2.5rem; padding:.5rem .8rem;
-  border:0; border-radius:var(--r-sm); background:none; box-shadow:none;
-  line-height:1; transition:background .15s, color .15s;
+  width:auto; height:auto; min-width:2.4rem; min-height:2.4rem; padding:0 .7rem;
+  border:0; border-radius:999px; background:none; box-shadow:none;
+  line-height:1; transition:background .15s, color .15s, transform .1s;
 }
+.sw-article-body .container_postbtn .btn_post:active{transform:scale(.92);}
+/* Empty once the word is stripped and the post has no likes yet. */
+.sw-article-body .container_postbtn .txt_like:empty{display:none;}
 /* The hover colour is taken on the wrapper, not the button, because the button
    refuses any colour of its own. Inheritance carries it to the icon and label. */
-.sw-article-body .container_postbtn .wrap_btn:hover,
-.sw-article-body .container_postbtn .btn_menu_toolbar:hover{color:var(--accent);}
-.sw-article-body .container_postbtn .btn_post:hover,
-.sw-article-body .container_postbtn .btn_menu_toolbar:hover{background:var(--surface-2);}
+.sw-article-body .container_postbtn .wrap_btn:hover{color:var(--accent);}
+.sw-article-body .container_postbtn .btn_post:hover{background:var(--surface-2);}
 .sw-article-body .container_postbtn .txt_like,
 .sw-article-body .container_postbtn .btn_subscription .txt_state{font-weight:600;}
 
@@ -170,8 +183,7 @@
    only control here asking for a commitment. */
 .sw-article-body .container_postbtn .wrap_btn_etc{margin-left:.4rem; opacity:.55;}
 .sw-article-body .container_postbtn .wrap_btn_etc:hover{opacity:1;}
-.sw-article-body .container_postbtn .btn_menu_toolbar{margin-left:.6rem;}
-.sw-article-body .container_postbtn .btn_menu_toolbar .img_common_tistory{display:none;}
+.sw-article-body .container_postbtn.sw-sub-moved .btn_menu_toolbar{display:none;}
 /* The share and manage flyouts are Tistory's own panels; only the surface and
    edge need to follow the theme so they do not glare in dark mode. */
 .sw-article-body .layer_post{background:var(--surface); border-color:var(--line); border-radius:var(--r-md);}

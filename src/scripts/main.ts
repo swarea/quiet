@@ -13,6 +13,7 @@ import { initLayout } from "./modules/layout";
 import { initContent } from "./modules/content";
 import { initLightbox } from "./modules/lightbox";
 import { initRelabel } from "./modules/relabel";
+import { initSubscribe } from "./modules/subscribe";
 
 const boot = (): void => {
   const steps = [
@@ -29,6 +30,7 @@ const boot = (): void => {
     initSearchShortcut,
     initPrune,
     initRelabel,
+    initSubscribe,
   ];
   for (const step of steps) {
     try {

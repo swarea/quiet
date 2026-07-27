@@ -95,6 +95,27 @@ figure.sw-fig figcaption{text-align:center; font-size:.8rem; color:var(--muted);
    to mean "these are rows of a list". */
 .sw-author{display:flex; gap:1rem; align-items:center; padding:1.75rem 1.5rem; margin:var(--block-gap) 0;
   background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md);}
+/* The one thing on this page asking the reader for something ongoing, sitting
+   where the blog has just introduced itself. It is allowed to look like a
+   button — the quiet ghost treatment that suits a row of tools would read as
+   nothing at all here. */
+.sw-subscribe{
+  flex:none; margin-left:auto; align-self:center;
+  padding:.6rem 1.1rem; border:1px solid var(--accent);
+  border-radius:999px; background:var(--accent-wash); color:var(--accent);
+  font:inherit; font-size:.85rem; font-weight:600; line-height:1;
+  cursor:pointer; white-space:nowrap;
+  transition:background .15s, color .15s, transform .1s;
+}
+.sw-subscribe:hover{background:var(--accent); color:var(--paper);}
+.sw-subscribe:active{transform:scale(.96);}
+.sw-subscribe:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+
+@media (max-width:30rem){
+  /* The bio and the button stop fitting on one line long before the panel does. */
+  .sw-author{flex-wrap:wrap;}
+  .sw-subscribe{margin-left:0; width:100%; text-align:center;}
+}
 .sw-author .sw-monogram{width:52px; height:52px; font-size:1.4rem; border-radius:14px;}
 .sw-author .n{font-weight:700;}
 .sw-author .b{font-size:.86rem; color:var(--muted); margin-top:.2rem;}
