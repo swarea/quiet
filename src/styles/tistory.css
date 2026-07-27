@@ -47,7 +47,30 @@
 /* Blocks Tistory injects into the article: the like/share/stat toolbar inside
    the post body, and the subscribe/profile cards appended after our footer
    region. Constrain them to the reading column so they do not sprawl. */
-.sw-article-body .container_postbtn{margin:2rem 0 .5rem; display:flex; justify-content:center;}
+/* Tistory's like / share / manage bar and subscribe pill. The markup is fully
+   styleable, so bring it onto our palette: its own borders are a hardcoded
+   grey that ignores the theme, and its 35px internal padding stacked on our
+   margin left a gap the size of a paragraph. The icons are dark sprite images,
+   so a filter carries them into dark mode. */
+.sw-article-body .container_postbtn{
+  display:flex; justify-content:center; align-items:center; flex-wrap:wrap;
+  gap:.5rem; margin:2.2rem 0 .5rem; padding:0;
+}
+.sw-article-body .postbtn_like,
+.sw-article-body .btn_subscription{
+  border:1px solid var(--line); border-radius:999px; background:var(--surface);
+  transition:border-color .15s, background .15s;
+}
+.sw-article-body .postbtn_like:hover,
+.sw-article-body .btn_subscription:hover{border-color:var(--line-strong); background:var(--surface-2);}
+.sw-article-body .btn_post{color:var(--ink-2);}
+.sw-article-body .txt_like,
+.sw-article-body .btn_subscription .txt_state{color:var(--ink-2); font-size:.8rem;}
+.sw-article-body .ico_postbtn{filter:var(--tt-icon-filter);}
+/* The share and manage flyouts are Tistory's own panels; only the surface and
+   edge need to follow the theme so they do not glare in dark mode. */
+.sw-article-body .layer_post{background:var(--surface); border-color:var(--line); border-radius:var(--r-md);}
+.sw-article-body .layer_post .txt_sns{color:var(--ink-2);}
 .sw-article-foot ~ div{max-width:var(--read); margin-inline:auto; padding-inline:2rem;}
 @media (max-width:640px){ .sw-article-foot ~ div{padding-inline:1.15rem;} }
 

@@ -7,15 +7,19 @@
 // control carries its own accessible name.
 //
 // Two rules matter here. Every category hangs off Tistory's "all posts" entry,
-// so that entry is never foldable — folding it would hide the entire tree.
-// And branches start open: the tree is the rail's primary navigation, so it has
-// to be readable at a glance, with folding available to tidy long branches.
-// Choices persist, since Tistory serves a full page load on every click.
+// so that entry is never foldable — folding it would hide the entire tree and
+// leave the rail with a single row. Below that, branches start closed, so the
+// rail opens as a readable list of top-level categories rather than every
+// sub-category at once; the branch holding the page you are on opens itself so
+// you can see where you are. Choices persist, since Tistory serves a full page
+// load on every click.
 const CHEVRON =
   '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>';
-const STORE_KEY = "sw-cat-collapsed";
+// Renamed alongside the flip from "which are closed" to "which are open", so
+// a reader with the old list stored does not get the inverse of it.
+const STORE_KEY = "sw-cat-open";
 
-function loadCollapsed(): Set<string> {
+function loadExpanded(): Set<string> {
   try {
     return new Set(JSON.parse(localStorage.getItem(STORE_KEY) ?? "[]") as string[]);
   } catch {
@@ -23,7 +27,7 @@ function loadCollapsed(): Set<string> {
   }
 }
 
-function saveCollapsed(set: Set<string>): void {
+function saveExpanded(set: Set<string>): void {
   try {
     localStorage.setItem(STORE_KEY, JSON.stringify([...set]));
   } catch {
@@ -58,7 +62,8 @@ function initTistoryTree(): void {
   const topList = root?.querySelector<HTMLElement>(":scope > ul");
   if (!root || !topList) return;
 
-  const collapsed = loadCollapsed();
+  const expanded = loadExpanded();
+  const here = decodeURIComponent(location.pathname);
 
   topList.querySelectorAll<HTMLElement>("li").forEach((li) => {
     const sub = li.querySelector<HTMLElement>(":scope > ul");
@@ -85,14 +90,19 @@ function initTistoryTree(): void {
     sub.classList.add("sw-sub-tt");
     link.before(btn);
 
-    setOpen(sub, btn, label, !collapsed.has(href));
+    // Open if the reader opened it before, or if the page they are on lives
+    // inside it — otherwise the current category would be hidden from them.
+    const holdsCurrentPage = Array.from(sub.querySelectorAll("a")).some(
+      (a) => decodeURIComponent(a.getAttribute("href") ?? "") === here,
+    );
+    setOpen(sub, btn, label, expanded.has(href) || holdsCurrentPage);
 
     btn.addEventListener("click", () => {
       const open = !sub.classList.contains("open");
       setOpen(sub, btn, label, open);
-      if (open) collapsed.delete(href);
-      else collapsed.add(href);
-      saveCollapsed(collapsed);
+      if (open) expanded.add(href);
+      else expanded.delete(href);
+      saveExpanded(expanded);
     });
   });
 }
