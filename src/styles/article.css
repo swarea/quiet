@@ -190,7 +190,8 @@ figure.quiet-fig figcaption{text-align:center; font-size:.8rem; color:var(--mute
 
 /* Notices listed above the post list: a plain row, no repeated section chrome. */
 .quiet-notice-row{padding-top:1.4rem;}
-.quiet-notice-row .quiet-post-row{border-bottom:0;}
+/* A notice stands alone, so it has nothing to be divided from. */
+.quiet-notice-row .quiet-post-row::after{display:none;}
 .quiet-notice-row .cat{color:var(--warm);}
 
 /* A category or search description is a Korean sentence, not metadata, so it

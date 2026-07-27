@@ -19,15 +19,27 @@
 .quiet-featured .cover::after{content:""; position:absolute; inset:0; background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.14) 50%,transparent 70%); transform:translateX(-120%);}
 .quiet-featured:hover .cover::after{transition:transform 1.1s var(--ease); transform:translateX(120%);}
 
-.quiet-recent{padding:2.2rem 0; border-top:1px solid var(--line);}
+.quiet-recent{padding:2.2rem 0;}
+/* A line above a section is only a separator when there is a section above it.
+   Under a page header there is already one, and the two landed on the same pixel
+   and read as a single thicker rule. Covers stack directly in <main>, so that is
+   where the separator belongs. */
+main > .quiet-wrap + .quiet-wrap{border-top:1px solid var(--line);}
 /* Hover stays quiet: a soft tint and the title picking up the accent. The row
    used to lift into a white card with a shadow and an accent bar, which read as
    the layout jumping rather than as a link responding. */
-.quiet-post-row{position:relative; display:grid; grid-template-columns:5.5rem 1fr; gap:1.4rem; padding:1.05rem .9rem; border-radius:var(--r-md); border-bottom:1px solid var(--line); transition:background .18s ease;}
-.quiet-post-row:last-child{border-bottom:0;}
+.quiet-post-row{position:relative; display:grid; grid-template-columns:5.5rem 1fr; gap:1.4rem; padding:1.05rem .9rem; border-radius:var(--r-md); transition:background .18s ease;}
+/* The divider is drawn rather than bordered. A border follows the corner radius
+   the hover fill needs, so the line curved away at both ends; a line of its own
+   stays straight while the fill stays round. */
+.quiet-post-row::after{
+  content:""; position:absolute; left:0; right:0; bottom:0; height:1px;
+  background:var(--line);
+}
+.quiet-post-row:last-child::after{display:none;}
 .quiet-post-row:hover,.quiet-post-row:focus-visible{background:var(--surface-2);}
 .quiet-post-row h2{transition:color .18s ease;}
-.quiet-post-row:hover h4{color:var(--accent);}
+.quiet-post-row:hover h2{color:var(--accent);}
 .quiet-post-row time{font-family:var(--mono); font-size:.76rem; color:var(--faint); padding-top:.25rem; white-space:nowrap;}
 .quiet-post-row .cat{display:block; font-size:.75rem; color:var(--accent); font-weight:600; margin-bottom:.18rem;}
 .quiet-post-row h2{font-size:1.05rem; font-weight:600; line-height:1.5;}
