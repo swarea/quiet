@@ -16,13 +16,15 @@
 .quiet-cat-tistory li ul{margin:1px 0 3px .9rem; padding-left:.5rem; border-left:1px solid var(--line);}
 .quiet-cat-tistory li ul a{font-size:.84rem; color:var(--muted); font-weight:400;}
 
-/* Where you are. This is the only emphasis the sidebar carries: nothing else
-   rests in bold, so the one entry that does is unmistakable without being loud.
-   With scripting off the attribute is never set and the sidebar simply lists
-   destinations, which is what it did before. */
-.quiet-cat-tistory li a[aria-current="page"],
-.quiet-cat-tistory .quiet-cat-root > ul > li > a[aria-current="page"],
-.quiet-menu-tistory li a[aria-current="page"]{color:var(--ink); font-weight:700;}
+/* The entry for the page being read is still marked, but not drawn differently.
+   Two things already say where you are: the branch holding this page opens
+   itself, and the heading at the top of the page names it. A third signal in
+   bold would be the only weight in the sidebar, spent on something already
+   answered twice.
+
+   The marker itself stays. `aria-current` costs nothing on screen and is the
+   only way a screen reader is told, which cannot read an opened branch or
+   compare a heading to a list. */
 .quiet-cat-tistory .c_cnt,.quiet-cat-tistory .cnt{flex:none; font-family:var(--mono); font-size:.72rem; color:var(--faint); font-variant-numeric:tabular-nums;}
 
 /* [##_blog_menu_##] renders <ul><li><a>. */
