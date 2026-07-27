@@ -76,10 +76,20 @@
    ink on white, and link destinations spelled out since they cannot be
    clicked. Everything that only makes sense on screen is dropped. */
 @media print {
-  :root{
+  /* Paper is paper whichever theme the reader is in. The selector has to name
+     the explicit toggles as well: a media query adds no specificity, so
+     `:root[data-theme="dark"]` in the token sheet would otherwise outrank a
+     plain `:root` here and print the dark palette onto the page. Most browsers
+     drop the background when printing, so that arrives as pale grey text on
+     white. */
+  :root,
+  :root[data-theme="light"],
+  :root[data-theme="dark"]{
     --paper:#fff; --surface:#fff; --surface-2:#f4f4f4;
     --ink:#000; --ink-2:#222; --muted:#444; --faint:#666;
-    --line:#ccc; --line-strong:#999; --accent:#000; --accent-wash:#f0f0f0;
+    --line:#ccc; --line-strong:#999;
+    --accent:#000; --accent-wash:#f0f0f0; --on-accent:#fff; --warm:#000;
+    --ccl-filter:none;
   }
   .quiet-rail,.quiet-scrim,.quiet-topbar,.quiet-dock,.quiet-toc,.quiet-skip,#quiet-progress,
   .quiet-site-foot,.quiet-paging,.quiet-cbox,.container_postbtn,.menu_toolbar,

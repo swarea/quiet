@@ -11,6 +11,28 @@ export function initDrawer(): void {
 
   let lastFocus: HTMLElement | null = null;
 
+  // Everything the drawer covers. Trapping Tab keeps a sighted keyboard user
+  // inside, but a screen reader's cursor is not bound by focus: measured with
+  // the drawer open, fourteen headings behind the overlay were still reachable.
+  // `inert` removes them from both; `aria-hidden` covers browsers without it,
+  // where the Tab trap below is already doing the focus half of the job.
+  const behind = (): HTMLElement[] =>
+    Array.from(
+      document.querySelectorAll<HTMLElement>(".quiet-content, .quiet-topbar, .quiet-dock"),
+    );
+
+  const setBehind = (hidden: boolean): void => {
+    behind().forEach((el) => {
+      if (hidden) {
+        el.setAttribute("aria-hidden", "true");
+        if ("inert" in el) el.inert = true;
+      } else {
+        el.removeAttribute("aria-hidden");
+        if ("inert" in el) el.inert = false;
+      }
+    });
+  };
+
   const focusables = (): HTMLElement[] =>
     Array.from(rail.querySelectorAll<HTMLElement>(FOCUSABLE)).filter(
       (el) => el.offsetParent !== null,
@@ -21,6 +43,7 @@ export function initDrawer(): void {
     scrim.classList.toggle("open", open);
     scrim.hidden = !open;
     btn.setAttribute("aria-expanded", String(open));
+    setBehind(open);
     if (open) {
       lastFocus = document.activeElement as HTMLElement | null;
       focusables()[0]?.focus();
