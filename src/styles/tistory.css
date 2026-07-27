@@ -61,7 +61,7 @@
    so a filter carries them into dark mode. */
 .sw-article-body .container_postbtn{
   display:flex; justify-content:center; align-items:center; flex-wrap:wrap;
-  gap:.5rem; margin:2.2rem 0 .5rem; padding:0;
+  gap:.5rem; margin:var(--block-gap) 0 0; padding:0;
 }
 /* The group reads as one control strip: a soft pill holding the actions, with
    each button getting its own room and its own hover rather than the whole
