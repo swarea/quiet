@@ -26,11 +26,11 @@
 .quiet-post-row{position:relative; display:grid; grid-template-columns:5.5rem 1fr; gap:1.4rem; padding:1.05rem .9rem; border-radius:var(--r-md); border-bottom:1px solid var(--line); transition:background .18s ease;}
 .quiet-post-row:last-child{border-bottom:0;}
 .quiet-post-row:hover,.quiet-post-row:focus-visible{background:var(--surface-2);}
-.quiet-post-row h4{transition:color .18s ease;}
+.quiet-post-row h2{transition:color .18s ease;}
 .quiet-post-row:hover h4{color:var(--accent);}
 .quiet-post-row time{font-family:var(--mono); font-size:.76rem; color:var(--faint); padding-top:.25rem; white-space:nowrap;}
 .quiet-post-row .cat{display:block; font-size:.75rem; color:var(--accent); font-weight:600; margin-bottom:.18rem;}
-.quiet-post-row h4{font-size:1.05rem; font-weight:600; line-height:1.5;}
+.quiet-post-row h2{font-size:1.05rem; font-weight:600; line-height:1.5;}
 .quiet-post-row p{color:var(--muted); font-size:.86rem; margin-top:.32rem; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;}
 
 .quiet-topics{padding:2.2rem 0 3.2rem; border-top:1px solid var(--line);}

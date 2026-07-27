@@ -367,3 +367,12 @@ html.quiet-js .quiet-cat-tistory ul ul ul.open{max-height:none;}
   border:1px solid var(--line); border-top:0; border-left:0;
   transform:translateX(-50%) rotate(45deg);
 }
+
+/* Tistory drops a "new post" image inside the title token of a list row. It
+   carries no alt text and renders at no size, so it is nothing to look at and
+   an unnamed image to anyone listening. The date beside every row already says
+   how recent a post is, which was the reason for taking the accent dots out of
+   these rows too. Hidden rather than restyled, so it leaves the accessibility
+   tree with it. */
+.quiet-post-row img[src*="/category/new_ico"],
+.quiet-side-list img[src*="/category/new_ico"]{display:none;}
