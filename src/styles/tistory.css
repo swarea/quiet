@@ -68,11 +68,15 @@
   display:flex; justify-content:center; align-items:center; flex-wrap:wrap;
   gap:.5rem; margin:var(--block-gap) 0 0; padding:0;
 }
-/* A row of quiet actions, not two capsules competing for the eye. Everything
-   here is secondary to the article that just ended, so every control carries
-   the same weight — including subscribing, which had been picked out in the
-   accent and shouted against a design built on restraint. The accent is left
-   for hover, where it answers a deliberate move rather than announcing itself. */
+/* A row of quiet actions, not capsules competing for the eye. Everything here
+   is secondary to the article that just ended, so nothing is picked out in the
+   accent at rest; the accent answers a hover instead.
+
+   Two things are corrected beyond styling. Tistory ships these icons as raster
+   sprites in a fixed dark colour, which had to be inverted by filter to survive
+   dark mode; drawing them as masks instead lets them take currentColor, so they
+   follow the theme the same way every other icon in the skin does. And share
+   and post-management were 25px wide, well under a usable touch target. */
 .sw-article-body .container_postbtn{
   display:flex; justify-content:center; align-items:center; flex-wrap:wrap;
   gap:.15rem; margin:var(--block-gap) 0 0; padding:0;
@@ -85,7 +89,7 @@
 .sw-article-body .btn_post,
 .sw-article-body .btn_subscription{
   display:inline-flex; align-items:center; justify-content:center; gap:.4rem;
-  min-height:2.25rem; padding:.45rem .8rem;
+  min-width:2.5rem; min-height:2.5rem; padding:.5rem .8rem;
   border:0; border-radius:var(--r-sm); background:none; box-shadow:none;
   color:var(--muted); transition:background .15s, color .15s;
 }
@@ -93,7 +97,38 @@
 .sw-article-body .btn_subscription:hover{background:var(--surface-2); color:var(--accent);}
 .sw-article-body .txt_like,
 .sw-article-body .btn_subscription .txt_state{font-size:.8rem; font-weight:600; color:inherit;}
-.sw-article-body .ico_postbtn{filter:var(--tt-icon-filter);}
+
+/* Our own icons, painted in the current text colour through a mask. */
+/* The colour is stated outright rather than inherited through currentColor.
+   Tistory loads postBtn.css after our stylesheet, so any colour we rely on
+   inheriting is one specificity bump away from being taken back; naming it on
+   the element that paints it keeps the icons on-theme whatever they do. */
+.sw-article-body .ico_postbtn{
+  width:1.05rem; height:1.05rem; background-image:none; background-color:var(--muted);
+  -webkit-mask:var(--sw-icon) center/contain no-repeat;
+          mask:var(--sw-icon) center/contain no-repeat;
+  transition:background-color .15s;
+}
+.sw-article-body .btn_post:hover .ico_postbtn{background-color:var(--accent);}
+.sw-article-body .ico_like{--sw-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 1 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z'/%3E%3C/svg%3E");}
+.sw-article-body .ico_share{--sw-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7M16 6l-4-4-4 4M12 2v14'/%3E%3C/svg%3E");}
+.sw-article-body .ico_etc{--sw-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23000'%3E%3Ccircle cx='5' cy='12' r='1.7'/%3E%3Ccircle cx='12' cy='12' r='1.7'/%3E%3Ccircle cx='19' cy='12' r='1.7'/%3E%3C/svg%3E");}
+
+/* Once a post is liked the heart should say so on its own, not only by a
+   number ticking up. */
+.sw-article-body .uoc-icon.on .ico_like,
+.sw-article-body .btn_post[aria-pressed="true"] .ico_like{--sw-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23000'%3E%3Cpath d='M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 1 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z'/%3E%3C/svg%3E");}
+.sw-article-body .uoc-icon.on{color:var(--accent);}
+.sw-article-body .uoc-icon.on .ico_postbtn{background-color:var(--accent);}
+
+/* Post management belongs to whoever wrote the post, not to whoever is reading
+   it, so it steps back from the reader's actions instead of sharing their
+   weight. The subscribe control is set apart by a gap for the same reason,
+   from the other side: it is the only thing here asking for a commitment. */
+.sw-article-body .wrap_btn_etc{margin-left:.4rem; opacity:.55;}
+.sw-article-body .wrap_btn_etc:hover{opacity:1;}
+.sw-article-body .btn_subscription{margin-left:.6rem;}
+.sw-article-body .btn_subscription .img_common_tistory{display:none;}
 /* The share and manage flyouts are Tistory's own panels; only the surface and
    edge need to follow the theme so they do not glare in dark mode. */
 .sw-article-body .layer_post{background:var(--surface); border-color:var(--line); border-radius:var(--r-md);}
