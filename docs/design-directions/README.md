@@ -26,9 +26,9 @@ restraint instead of dashboard density.
   `prefers-reduced-motion`.
 
 **Where it lives now.** This direction is implemented in [`../../src`](../../src)
-and rendered by the mock preview (`npm run preview`). The interactive design
-reference is the published artifact:
-<https://claude.ai/code/artifact/6026e4ff-e573-4324-b9b4-586be146dece>.
+and rendered by the mock preview (`npm run preview`), which is the reference —
+run it to see the direction as built. Nothing here depends on a link that can
+expire or that points outside the repository.
 
 The three rejected prototypes were removed; they remain in git history if a
 past comparison is ever needed.

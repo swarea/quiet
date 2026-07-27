@@ -271,6 +271,39 @@ try {
   fail("copy is english", e.message);
 }
 
+// One version. A skin whose package and manifest disagree ships a lie to
+// whoever is deciding whether to upgrade.
+try {
+  const pkg = JSON.parse(await readFile(join(root, "package.json"), "utf8"));
+  const xml = await readFile(join(root, "src", "index.xml"), "utf8");
+  const declared = xml.match(/<version>([^<]+)<\/version>/)?.[1]?.trim();
+  if (!declared) fail("one version", "index.xml declares no <version>");
+  else if (declared !== pkg.version) {
+    fail("one version", `package.json ${pkg.version} but index.xml ${declared}`);
+  } else ok("one version");
+} catch (e) {
+  fail("one version", e.message);
+}
+
+// Nothing reader-facing or contributor-facing may depend on a link that expires
+// or that points at a tool used to build this, rather than at the work itself.
+try {
+  const offenders = [];
+  for (const file of await walk(join(root, "docs"))) {
+    if (!file.endsWith(".md")) continue;
+    const body = await readFile(file, "utf8");
+    for (const m of body.matchAll(/https?:\/\/[^\s<>)\]]+/g)) {
+      if (/claude\.(ai|site|com)|chatgpt\.com|openai\.com\/share/.test(m[0])) {
+        offenders.push(`${file.split(/[\/]/).pop()}: ${m[0].slice(0, 46)}`);
+      }
+    }
+  }
+  if (offenders.length) fail("no ephemeral links", offenders.slice(0, 3).join("; "));
+  else ok("no ephemeral links");
+} catch (e) {
+  fail("no ephemeral links", e.message);
+}
+
 // Report.
 if (!ran.length) {
   console.log("skipped: no applicable checks");
