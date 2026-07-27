@@ -16,7 +16,11 @@
 .sw-menu-tistory li a{display:block; padding:.42rem .5rem; border-radius:var(--r-sm); font-size:.88rem; color:var(--ink-2); transition:background .15s, color .15s;}
 .sw-menu-tistory li a:hover{background:var(--surface-2); color:var(--ink);}
 
-/* [##_tag_label_rep_##] renders a list of tag anchors. */
+/* [##_tag_label_rep_##] joins the anchors with a literal ", " between them,
+   which shows up as loose commas between the chips. Collapsing the container's
+   font size hides the separator without deleting it, so a screen reader still
+   hears a list rather than one run-on phrase; each chip restores its own size. */
+.sw-taglabel{font-size:0;}
 .sw-taglabel a{display:inline-block; font-size:.78rem; color:var(--ink-2); background:var(--surface-2); border:1px solid var(--line); border-radius:999px; padding:.3rem .75rem; margin:0 .4rem .4rem 0; transition:border-color .15s, color .15s;}
 .sw-taglabel a:hover{border-color:var(--accent); color:var(--accent);}
 
