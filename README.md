@@ -1,7 +1,8 @@
 # Quiet
 
-A Tistory skin for long-form reading. Quiet typography, a theme that follows the
-reader, and a build that keeps Tistory's substitution tokens intact.
+Quiet is a Tistory skin for writing you want taken seriously. Restrained
+typography, light and dark drawn separately rather than one inverted into the
+other, and no feature that stops working when scripting does.
 
 Built from scratch by [swarea](https://github.com/swarea). Not a derivative of
 any existing skin, and not affiliated with Tistory or Kakao.
@@ -22,8 +23,8 @@ any existing skin, and not affiliated with Tistory or Kakao.
   comments all function with JavaScript disabled or failed. Scripting adds the
   contents rail, the collapsing category tree, code copying and image zoom.
 - **Absorbs Tistory's own markup.** The comment box, the post toolbar, the share
-  panel and the injected name card are restyled to match — including the icons,
-  redrawn so they take a theme colour instead of needing a filter to survive
+  panel and the injected name card are restyled to match, including the icons,
+  which are redrawn so they take a theme colour instead of needing a filter to survive
   dark mode.
 - **No external dependency for anything that matters.** The webfont is requested
   from a CDN and the page falls back to the system stack if it cannot be
@@ -48,11 +49,11 @@ What the package contains:
 
 ### Blog settings this skin expects
 
-- **Menu bar** — set the blog menu bar to display, so the Tistory menu stays
+- **Menu bar**. Set the blog menu bar to display, so the Tistory menu stays
   reachable.
-- **Mobile web** — turn Tistory's automatic mobile web off. This skin is
+- **Mobile web**. Turn Tistory's automatic mobile web off. This skin is
   responsive and handles narrow screens itself.
-- **Covers** — the home page is composed from covers. With none enabled, Tistory
+- **Covers**. The home page is composed from covers. With none enabled, Tistory
   serves the plain post list and home looks the same as the category archive.
 
 ### Settings
@@ -91,12 +92,12 @@ npm run release   # gate + build + versioned archive in release/
 ```
 
 `npm run release` refuses a dirty working tree, refuses a package missing any
-file the skin spec requires, and writes a reproducible archive with its SHA-256
-— the same inputs always produce the same bytes, so the checksum identifies the
+file the skin spec requires, and writes a reproducible archive with its SHA-256.
+The same inputs always produce the same bytes, so the checksum identifies the
 build rather than the moment it was made.
 
 `npm run build` writes the installable package to `dist/`. The mock preview is a
-local stand-in for Tistory, useful for layout work — a pass there is not a pass
+local stand-in for Tistory, useful for layout work. A pass there is not a pass
 on Tistory, and this project does not report it as one.
 
 Skin thumbnails are generated once by opening `scripts/make-previews.html` in a
@@ -105,13 +106,13 @@ every build packages them.
 
 ## Documents
 
-- [docs/product.md](docs/product.md) — what this skin is and its principles
-- [docs/tistory-spec.md](docs/tistory-spec.md) — Tistory platform constraints
+- [docs/product.md](docs/product.md): what this skin is and its principles
+- [docs/tistory-spec.md](docs/tistory-spec.md): Tistory platform constraints
   and the clean-room policy
-- [docs/roadmap.md](docs/roadmap.md) — release milestones and gates
-- [docs/decisions/](docs/decisions/) — architecture decision records
-- [CONTRIBUTING.md](CONTRIBUTING.md) — workflow rules (single source)
-- [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md) — the typeface and the build
+- [docs/roadmap.md](docs/roadmap.md): release milestones and gates
+- [docs/decisions/](docs/decisions/): architecture decision records
+- [CONTRIBUTING.md](CONTRIBUTING.md): workflow rules (single source)
+- [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md): the typeface and the build
   tools
 
 ## Built with
@@ -124,5 +125,5 @@ Rationale in [ADR-0001](docs/decisions/ADR-0001-build-architecture.md).
 
 [MIT](LICENSE). Use it, change it, redistribute it; keep the copyright notice.
 The Pretendard typeface is requested at runtime under the SIL Open Font License
-1.1 and is not redistributed here — see
+1.1 and is not redistributed here. See
 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).

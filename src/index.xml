@@ -10,7 +10,7 @@
     <name>Quiet</name>
     <version>0.2.0</version>
     <description>
-      <![CDATA[긴 글을 읽기 위한 티스토리 스킨입니다. 조용한 타이포그래피와 읽는 사람을 따라가는 라이트/다크 테마.]]>
+      <![CDATA[글이 돋보이도록 물러나 있는 스킨입니다. 절제된 타이포그래피, 라이트와 다크를 따로 그린 테마, 스크립트가 꺼져도 동작하는 구성.]]>
     </description>
     <license>
       <![CDATA[MIT License. 자유롭게 사용·수정·재배포할 수 있으며, 저작권 고지만 유지하면 됩니다. https://github.com/swarea/quiet]]>

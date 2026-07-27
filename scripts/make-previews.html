@@ -87,6 +87,103 @@
     return c;
   }
 
+
+  // Canvas can write JPEG and PNG but not GIF, which is why preview.gif was
+  // absent from every package until the release script started checking. The
+  // encoder is here rather than as a dependency because this drawing is a
+  // handful of flat fills: its palette is tiny, and a GIF of flat colour needs
+  // none of LZW's cleverness.
+  //
+  // Codes are written at a fixed nine bits and the dictionary is cleared before
+  // it can ever grow past that, so every pixel is emitted literally. The result
+  // is a larger file than a real LZW stream would be and a completely ordinary
+  // GIF to every decoder. At 112x84 the difference is a few kilobytes.
+  function encodeGif(imageData) {
+    const { width, height, data } = imageData;
+
+    // Flat fills mean few distinct colours; map them exactly, and fall back to
+    // the nearest entry only if the drawing ever outgrows a full palette.
+    const palette = [];
+    const seen = new Map();
+    const indexes = new Uint8Array(width * height);
+    for (let i = 0; i < width * height; i += 1) {
+      const r = data[i * 4], g = data[i * 4 + 1], b = data[i * 4 + 2];
+      const key = (r << 16) | (g << 8) | b;
+      let index = seen.get(key);
+      if (index === undefined) {
+        if (palette.length < 256) {
+          index = palette.length;
+          palette.push([r, g, b]);
+          seen.set(key, index);
+        } else {
+          let best = 0, bestDistance = Infinity;
+          for (let p = 0; p < palette.length; p += 1) {
+            const dr = palette[p][0] - r, dg = palette[p][1] - g, db = palette[p][2] - b;
+            const distance = dr * dr + dg * dg + db * db;
+            if (distance < bestDistance) { bestDistance = distance; best = p; }
+          }
+          index = best;
+        }
+      }
+      indexes[i] = index;
+    }
+
+    // The global colour table must be a power of two entries long.
+    let bits = 1;
+    while (1 << bits < palette.length) bits += 1;
+    const tableSize = 1 << bits;
+
+    const bytes = [];
+    const pushShort = (v) => { bytes.push(v & 0xff, (v >> 8) & 0xff); };
+    for (const ch of "GIF89a") bytes.push(ch.charCodeAt(0));
+    pushShort(width); pushShort(height);
+    bytes.push(0xf0 | (bits - 1), 0, 0);        // global table present, 8-bit depth
+    for (let i = 0; i < tableSize; i += 1) {
+      const [r, g, b] = palette[i] || [0, 0, 0];
+      bytes.push(r, g, b);
+    }
+    bytes.push(0x2c);                            // image descriptor
+    pushShort(0); pushShort(0); pushShort(width); pushShort(height);
+    bytes.push(0);                               // no local table, not interlaced
+
+    const MIN_CODE_SIZE = 8;
+    const CLEAR = 1 << MIN_CODE_SIZE;            // 256
+    const END = CLEAR + 1;                       // 257
+    const CODE_BITS = MIN_CODE_SIZE + 1;         // 9
+    const stream = [];
+    let bitBuffer = 0, bitCount = 0;
+    const emit = (code) => {
+      bitBuffer |= code << bitCount;             // GIF packs bits least-significant first
+      bitCount += CODE_BITS;
+      while (bitCount >= 8) {
+        stream.push(bitBuffer & 0xff);
+        bitBuffer >>= 8;
+        bitCount -= 8;
+      }
+    };
+
+    emit(CLEAR);
+    // After a clear the dictionary holds 258 entries and each literal adds one.
+    // Clearing again before it reaches 512 keeps every code nine bits wide.
+    let sinceClear = 0;
+    for (let i = 0; i < indexes.length; i += 1) {
+      emit(indexes[i]);
+      sinceClear += 1;
+      if (sinceClear === 253) { emit(CLEAR); sinceClear = 0; }
+    }
+    emit(END);
+    if (bitCount > 0) stream.push(bitBuffer & 0xff);
+
+    bytes.push(MIN_CODE_SIZE);
+    for (let i = 0; i < stream.length; i += 255) {
+      const chunk = stream.slice(i, i + 255);
+      bytes.push(chunk.length, ...chunk);
+    }
+    bytes.push(0);                               // end of the image data blocks
+    bytes.push(0x3b);                            // trailer
+    return new Blob([new Uint8Array(bytes)], { type: "image/gif" });
+  }
+
   const SIZES = [
     ["preview256.jpg", 256, 192],
     ["preview560.jpg", 560, 420],
@@ -107,5 +204,17 @@
       }, "image/jpeg", 0.85);
       if (w <= 560) out.appendChild(canvas);
     }
+
+    // The 112x84 fallback thumbnail Tistory asks for, in the only format it
+    // accepts for that slot.
+    const small = draw(112, 84);
+    const pixels = small.getContext("2d").getImageData(0, 0, 112, 84);
+    const gif = encodeGif(pixels);
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(gif);
+    link.download = "preview.gif";
+    link.click();
+    setTimeout(() => URL.revokeObjectURL(link.href), 5000);
+    out.appendChild(small);
   });
 </script>
