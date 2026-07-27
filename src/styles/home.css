@@ -28,24 +28,27 @@ main > .quiet-wrap + .quiet-wrap{border-top:1px solid var(--line);}
 /* Hover stays quiet: a soft tint and the title picking up the accent. The row
    used to lift into a white card with a shadow and an accent bar, which read as
    the layout jumping rather than as a link responding. */
-/* The fill is rounded, like every other hover in the skin, and the divider is
-   straight. They looked wrong together because they ended on the same pixel:
-   the fill curved inward exactly where the line ran, leaving a sliver of paper
-   at each bottom corner. So they are given different extents. The line is inset
-   to the row's own padding, where it lines up with the date and the thumbnail,
-   and the fill reaches past it. Neither shape now has to explain the other. */
-.quiet-post-row{position:relative; display:grid; grid-template-columns:5.5rem 1fr; gap:1.4rem; padding:1.05rem .9rem; border-radius:var(--r-sm); transition:background .18s ease;}
+/* Hovering a row lifts its words rather than painting a panel behind them. The
+   fill was the largest area of colour on a page built from hairlines, and it
+   was the reason for a chain of corrections: it needed a radius, the radius
+   disagreed with the divider, the divider had to be inset to avoid it. None of
+   that is needed once the row answers with its own text.
+
+   All three parts move together, so the whole row reads as responding and not
+   just the title the pointer happens to be over. */
+.quiet-post-row{position:relative; display:grid; grid-template-columns:5.5rem 1fr; gap:1.4rem; padding:1.05rem .9rem;}
 /* The divider is drawn rather than bordered. A border follows the corner radius
    the hover fill needs, so the line curved away at both ends; a line of its own
    stays straight while the fill stays round. */
 .quiet-post-row::after{
-  content:""; position:absolute; left:.9rem; right:.9rem; bottom:0; height:1px;
+  content:""; position:absolute; left:0; right:0; bottom:0; height:1px;
   background:var(--line);
 }
 .quiet-post-row:last-child::after{display:none;}
-.quiet-post-row:hover,.quiet-post-row:focus-visible{background:var(--surface-2);}
-.quiet-post-row h2{transition:color .18s ease;}
-.quiet-post-row:hover h2{color:var(--accent);}
+.quiet-post-row h2,.quiet-post-row p,.quiet-post-row time{transition:color .18s ease;}
+.quiet-post-row:hover h2,.quiet-post-row:focus-visible h2{color:var(--accent);}
+.quiet-post-row:hover p,.quiet-post-row:focus-visible p{color:var(--ink-2);}
+.quiet-post-row:hover time,.quiet-post-row:focus-visible time{color:var(--muted);}
 .quiet-post-row time{font-family:var(--mono); font-size:.76rem; color:var(--faint); padding-top:.25rem; white-space:nowrap;}
 .quiet-post-row .cat{display:block; font-size:.75rem; color:var(--accent); font-weight:600; margin-bottom:.18rem;}
 .quiet-post-row h2{font-size:1.05rem; font-weight:600; line-height:1.5;}
