@@ -96,6 +96,13 @@
         <default>true</default>
       </variable>
       <variable>
+        <name>prev-next</name>
+        <label><![CDATA[이전·다음 글 표시]]></label>
+        <description><![CDATA[글 하단에 바로 앞뒤 순서의 글로 이동하는 링크를 보여줍니다.]]></description>
+        <type>BOOL</type>
+        <default>true</default>
+      </variable>
+      <variable>
         <name>related-posts</name>
         <label><![CDATA[관련 글 표시]]></label>
         <description><![CDATA[글 하단에 같은 카테고리의 다른 글을 보여줍니다.]]></description>

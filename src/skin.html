@@ -140,13 +140,18 @@
       </div>
       <!-- Whose skin this is. Under MIT this line is a courtesy, not a term:
            nothing obliges a blogger to keep it, and the readme says so. It is
-           therefore written to be worth keeping — one quiet line, below the
-           blog's own footer, pointing at where the skin can be had rather than
-           at its author's vanity. -->
+           therefore written to be worth keeping. One quiet line, below the
+           blog's own footer.
+
+           The credit names a person rather than the brand, matching the name on
+           the licence: an organisation cannot hold a copyright it was never
+           given. The two links go to different places on purpose. The skin's
+           name leads to where the skin can be had; the author's name leads to
+           the author. -->
       <p class="sw-colophon" lang="en">
         <a href="https://github.com/swarea/quiet" rel="noopener">Quiet</a>
         <span>by</span>
-        <a href="https://github.com/swarea" rel="noopener">swarea</a>
+        <a href="https://blog.swarea.com" rel="noopener">Isaac Lee</a>
       </p>
     </aside>
     <div class="sw-scrim" id="sw-scrim" hidden></div>
@@ -310,6 +315,28 @@
                   </div>
                 </s_article_related>
               </s_if_var_related-posts>
+
+              <!-- The neighbouring posts. Tokens verified against the official
+                   skin guide (contents/post.html) rather than guessed, which is
+                   why this block was absent until now. Tistory renders each side
+                   only when there is a post there, so a first or last post
+                   simply shows one arm. -->
+              <s_if_var_prev-next>
+                <nav class="sw-adjacent" aria-label="Adjacent posts" lang="en">
+                  <s_article_prev>
+                    <a class="prev" href="[##_article_prev_link_##]" rel="prev">
+                      <span class="dir">Previous</span>
+                      <span class="ttl">[##_article_prev_title_##]</span>
+                    </a>
+                  </s_article_prev>
+                  <s_article_next>
+                    <a class="next" href="[##_article_next_link_##]" rel="next">
+                      <span class="dir">Next</span>
+                      <span class="ttl">[##_article_next_title_##]</span>
+                    </a>
+                  </s_article_next>
+                </nav>
+              </s_if_var_prev-next>
 
               <div class="sw-author">
                 <img class="sw-avatar" src="[##_image_##]" width="52" height="52" alt="">

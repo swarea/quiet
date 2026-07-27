@@ -66,12 +66,13 @@ What the package contains:
 | `toc` | on | the contents rail beside an article, and the panel on narrow screens |
 | `reading-progress` | on | the thin progress line at the top of an article |
 | `related-posts` | on | other posts from the same category, under an article |
+| `prev-next` | on | links to the posts either side of the one being read |
 
 ## Known limitations
 
-- **Previous / next post links are absent.** The substitution tokens for them
-  could not be confirmed against Tistory's documentation, and this project does
-  not ship tokens it has not verified.
+- **The blog's CCL setting has nowhere to appear.** Tistory lets a blogger
+  declare a content licence, but its skin guide documents no token for it, so a
+  custom skin has no verified way to render one. Tracked, not guessed at.
 - **Not yet verified on a live blog**: the notice detail page, the empty search
   result, and the tag page in dark mode. They have only been seen in the local
   mock, which is not the same thing.

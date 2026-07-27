@@ -197,3 +197,23 @@ figure.sw-fig figcaption{text-align:center; font-size:.8rem; color:var(--muted);
    belongs in the body face rather than the monospace byline treatment. */
 .sw-lede{margin-top:.9rem; font-size:.95rem; color:var(--muted); text-wrap:balance;}
 .sw-lede:empty{display:none;}
+
+/* The neighbouring posts. Two arms that keep their halves whether or not both
+   exist, so a first or last post does not leave the surviving link stretched
+   across the column or nudged out of place. */
+.sw-adjacent{display:grid; gap:.75rem; margin:var(--block-gap) 0;}
+@media (min-width:34rem){ .sw-adjacent{grid-template-columns:1fr 1fr;} }
+.sw-adjacent a{
+  display:flex; flex-direction:column; gap:.3rem;
+  padding:.9rem 1rem; border:1px solid var(--line); border-radius:var(--r-md);
+  background:var(--surface); transition:border-color .15s, transform .15s var(--ease);
+}
+.sw-adjacent a:hover{border-color:var(--line-strong); transform:translateY(-1px);}
+/* The next link sits in the right-hand half even when there is no previous. */
+.sw-adjacent .next{text-align:right; grid-column:2;}
+@media (max-width:33.99rem){ .sw-adjacent .next{grid-column:1;} }
+.sw-adjacent .dir{font-size:.7rem; font-weight:600; letter-spacing:.05em;
+  text-transform:uppercase; color:var(--faint);}
+.sw-adjacent .ttl{font-size:.9rem; line-height:1.45; color:var(--ink-2);
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;}
+.sw-adjacent a:hover .ttl{color:var(--accent);}
