@@ -21,9 +21,12 @@ any existing skin, and not affiliated with Tistory or Kakao.
 - **Follows the reader's theme.** Light and dark are both drawn deliberately;
   the OS preference is the default and an explicit toggle overrides it in either
   direction, remembered between visits.
-- **Works without scripting.** Reading, menus, categories, search, paging and
-  comments all function with JavaScript disabled or failed. Scripting adds the
-  contents rail, the collapsing category tree, code copying and image zoom.
+- **Degrades rather than breaks.** Reading, navigation, categories, paging and
+  the theme all work with scripting disabled or failed; on a narrow screen the
+  sidebar becomes part of the page instead of a drawer nothing can open.
+  Scripting adds the contents rail, the collapsing category tree, code copying
+  and image zoom. Search and posting a comment do not work without it, because
+  both are driven by inline handlers Tistory supplies rather than by the skin.
 - **Absorbs Tistory's own markup.** The comment box, the post toolbar, the share
   panel and the injected name card are restyled to match, including the icons,
   which are redrawn so they take a theme colour instead of needing a filter to survive
@@ -80,6 +83,10 @@ What the package contains:
 - **The home page needs covers enabled** to differ from the category archive.
   With none enabled Tistory serves the plain post list, and the skin cannot
   override that from its side.
+- **Search and comments need JavaScript.** Tistory wires both through inline
+  handlers of its own — `[##_search_onclick_submit_##]` on the search field and
+  `addComment` on the comment button — so a skin cannot give them a no-script
+  path. Everything else on the page still works.
 - **The page title stays in Tistory's wording.** The heading is translated where
   the phrase is Tistory's own, but `<title>` is left as Tistory writes it: it is
   what search engines index for a blog whose posts are Korean.
