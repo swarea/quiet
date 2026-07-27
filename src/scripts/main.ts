@@ -9,7 +9,6 @@ import { initScroll } from "./modules/scroll";
 import { initReveal } from "./modules/reveal";
 import { initSearchShortcut } from "./modules/search";
 import { initPrune } from "./modules/prune";
-import { initNamecard } from "./modules/comments";
 import { initLayout } from "./modules/layout";
 import { initContent } from "./modules/content";
 import { initLightbox } from "./modules/lightbox";
@@ -28,7 +27,6 @@ const boot = (): void => {
     initReveal,
     initSearchShortcut,
     initPrune,
-    initNamecard,
   ];
   for (const step of steps) {
     try {

@@ -119,7 +119,13 @@
 .sw-side-list img[src*="new_ico"]{display:none;}
 
 /* ---- Name card Tistory appends after the article --------------------------
-   Restyled to match our author block; it carries the real subscribe button. */
+   Hidden. It repeats the blog title and description, which the sidebar already
+   carries, where what belongs under an article is who wrote it. Our own block
+   says that instead. Nothing is lost by dropping it: its subscribe button is
+   the third on the page, after the post toolbar and the floating bar.
+   The rules below stay so the card still lands on our palette wherever a page
+   surfaces it outside the article. */
+.sw-article-foot ~ div .tt_box_namecard{display:none;}
 /* Tistory ships this card with a 206px min-height, a 32px margin on the
    avatar, 34px of padding on the text column and a 32px margin under the
    subscribe button. Left in place they inflated the card to 213px for a 52px

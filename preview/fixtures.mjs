@@ -5,6 +5,7 @@ export const site = {
   name: "swarea",
   initial: "s",
   tagline: "기술 · 데이터 · 삶의 기록",
+  blogger: "swarea",
   bio: "기술과 데이터를 기록하고, 해외 개발자 취업을 준비합니다.",
   github: "https://github.com/swarea",
   year: 2026,
