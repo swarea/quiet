@@ -34,8 +34,10 @@ main > .quiet-wrap + .quiet-wrap{border-top:1px solid var(--line);}
    disagreed with the divider, the divider had to be inset to avoid it. None of
    that is needed once the row answers with its own text.
 
-   All three parts move together, so the whole row reads as responding and not
-   just the title the pointer happens to be over. */
+   The answer is weight rather than colour. Colour spends the accent on every
+   row a pointer crosses, and the accent is meant to mean something; weight says
+   the same thing in the type itself. Measured on the live page, the boxes these
+   words sit in are block or full width, so nothing moves when they thicken. */
 .quiet-post-row{position:relative; display:grid; grid-template-columns:5.5rem 1fr; gap:1.4rem; padding:1.05rem .9rem;}
 /* The divider is drawn rather than bordered. A border follows the corner radius
    the hover fill needs, so the line curved away at both ends; a line of its own
@@ -45,8 +47,7 @@ main > .quiet-wrap + .quiet-wrap{border-top:1px solid var(--line);}
   background:var(--line);
 }
 .quiet-post-row:last-child::after{display:none;}
-.quiet-post-row h2{transition:color .18s ease;}
-.quiet-post-row:hover h2,.quiet-post-row:focus-visible h2{color:var(--accent);}
+.quiet-post-row:hover h2,.quiet-post-row:focus-visible h2{font-weight:700;}
 .quiet-post-row time{font-family:var(--mono); font-size:.76rem; color:var(--faint); padding-top:.25rem; white-space:nowrap;}
 .quiet-post-row .cat{display:block; font-size:.75rem; color:var(--accent); font-weight:600; margin-bottom:.18rem;}
 .quiet-post-row h2{font-size:1.05rem; font-weight:600; line-height:1.5;}

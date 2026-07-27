@@ -13,7 +13,7 @@
    and the count sits against the name it belongs to. It also has to live in
    this rule, since set separately it loses to the shorthand on specificity. */
 .quiet-cat-tistory li a{display:flex; align-items:center; gap:.35rem; padding:.5rem 2rem .5rem .5rem; border-radius:var(--r-sm); font-size:.9rem; color:var(--ink-2); transition:background .15s, color .15s;}
-.quiet-cat-tistory li a:hover{color:var(--accent);}
+.quiet-cat-tistory li a:hover{color:var(--ink); font-weight:700;}
 .quiet-cat-tistory li a.link_tit,.quiet-cat-tistory > ul > li > a{font-weight:600;}
 .quiet-cat-tistory li ul{margin:1px 0 3px .9rem; padding-left:.5rem; border-left:1px solid var(--line);}
 .quiet-cat-tistory li ul a{font-size:.84rem; color:var(--muted); font-weight:400;}
@@ -22,7 +22,7 @@
 /* [##_blog_menu_##] renders <ul><li><a>. */
 .quiet-menu-tistory ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:1px;}
 .quiet-menu-tistory li a{display:block; padding:.42rem .5rem; border-radius:var(--r-sm); font-size:.88rem; color:var(--ink-2); transition:background .15s, color .15s;}
-.quiet-menu-tistory li a:hover{color:var(--accent);}
+.quiet-menu-tistory li a:hover{color:var(--ink); font-weight:600;}
 
 /* [##_tag_label_rep_##] joins the anchors with a literal ", " between them,
    which shows up as loose commas between the chips. Collapsing the container's
@@ -54,7 +54,7 @@
 .quiet-side-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column;}
 .quiet-side-list li{font-size:.85rem;}
 .quiet-side-list li a{display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; padding:.36rem var(--rail-inset); border-radius:var(--r-sm); color:var(--ink-2); transition:background .15s, color .15s;}
-.quiet-side-list li a:hover{color:var(--accent);}
+.quiet-side-list li a:hover{color:var(--ink); font-weight:600;}
 
 /* Blocks Tistory injects into the article: the like/share/stat toolbar inside
    the post body, and the subscribe/profile cards appended after our footer
