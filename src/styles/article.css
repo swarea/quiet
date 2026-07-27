@@ -8,6 +8,11 @@
 .quiet-crumb{font-family:var(--mono); font-size:.74rem; color:var(--accent); letter-spacing:.02em; transition:opacity .15s;}
 .quiet-crumb:hover{opacity:.7;}
 .quiet-article-head h1{font-size:clamp(1.65rem,3.4vw,2.3rem); line-height:1.32; letter-spacing:-.02em; margin-top:.75rem; text-wrap:balance;}
+/* A heading that names a page -- "Tags", "Guestbook", the category being
+   browsed -- says where the reader is, not what they came to read. It rests
+   where a post title in the list below rests, so the eye reaches the posts
+   first. The title of an actual post keeps full ink. */
+.quiet-page-head h1{color:var(--ink-2);}
 .quiet-byline{margin-top:1.05rem; font-family:var(--mono); font-size:.76rem; color:var(--muted); display:flex; gap:.9rem; justify-content:center; flex-wrap:wrap;}
 .quiet-byline .admin{color:var(--faint);}
 .quiet-byline .admin a{transition:color .15s;} .quiet-byline .admin a:hover{color:var(--accent);}
