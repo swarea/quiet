@@ -23,7 +23,7 @@
    if the script never runs. */
 .quiet-article-body pre{
   margin:1.8em 0; padding:1.05rem 1.15rem; overflow-x:auto;
-  background:#0f1420; color:#d7dee8; border-radius:var(--r-md);
+  background:var(--code-bg); color:var(--code-ink); border-radius:var(--r-md);
   font-family:var(--mono); font-size:.86rem; line-height:1.74;
   -webkit-overflow-scrolling:touch;
 }
@@ -171,3 +171,14 @@ body.quiet-lightbox-open{overflow:hidden;}
 @media (prefers-reduced-motion:no-preference){
   .quiet-lightbox.open img{animation:quiet-rise .28s var(--ease) both;}
 }
+
+/* Tistory highlights code with its own copy of highlight.js, loaded from a CDN
+   in a light theme. Most of its colours happen to read on our dark code block,
+   but measured against it two do not: the comment colour at 4.01 and the blue
+   it uses for meta and bullets at 4.54. Comments are prose a reader may want,
+   so they are corrected rather than left to chance. */
+.quiet-code .hljs-comment,
+.quiet-code .hljs-quote{color:var(--code-comment);}
+.quiet-code .hljs-meta,
+.quiet-code .hljs-bullet,
+.quiet-code .hljs-link{color:var(--code-accent);}

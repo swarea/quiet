@@ -54,12 +54,16 @@ export async function readTheme() {
   const all = rules(css);
 
   const palette = {};
+  const shared = {};
   const bindings = { light: null, dark: [] };
 
   for (const rule of all) {
     const decls = declarations(rule.body);
     for (const [name, value] of Object.entries(decls)) {
       if (/^--(light|dark)-/.test(name)) palette[name] = value;
+      // Tokens that are the same in both themes are declared outright. They are
+      // still colours a reader has to see, so the gate must be able to read them.
+      else if (!/^var\(/.test(value)) shared[name] = value;
     }
     // A binding block is one that points roles at a palette.
     const bound = Object.entries(decls).filter(([, v]) => /^var\(--(light|dark)-/.test(v));
@@ -75,9 +79,10 @@ export async function readTheme() {
 
   return {
     palette,
+    shared,
     bindings,
-    light: resolve(bindings.light ?? {}),
-    dark: resolve(bindings.dark[0]?.map ?? {}),
+    light: { ...shared, ...resolve(bindings.light ?? {}) },
+    dark: { ...shared, ...resolve(bindings.dark[0]?.map ?? {}) },
   };
 }
 
