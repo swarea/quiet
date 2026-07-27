@@ -376,3 +376,8 @@ html.quiet-js .quiet-cat-tistory ul ul ul.open{max-height:none;}
    tree with it. */
 .quiet-post-row img[src*="/category/new_ico"],
 .quiet-side-list img[src*="/category/new_ico"]{display:none;}
+
+@media (pointer:coarse){
+  .quiet-cat-tistory li a{padding-right:2.9rem;}
+  .quiet-cat-fold{width:2.5rem; height:2.5rem; top:.05rem;}
+}

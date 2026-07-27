@@ -120,3 +120,13 @@
    it, so a page is never left without one. */
 .quiet-site-foot{display:none;}
 .quiet-shell.quiet-no-sidebar .quiet-site-foot{display:block;}
+
+/* A finger is not a cursor. Measured at 375px wide, the control that opens the
+   navigation was 30x30 and the fold beside a category was 26 wide, which clears
+   the 24px floor but is not something you aim at comfortably. Widened for touch
+   only, so the pointer layout keeps its proportions. The category row's right
+   gutter grows with the fold, because that overlap once swallowed the clicks
+   meant for the category itself. */
+@media (pointer:coarse){
+  .quiet-icon-btn{width:2.5rem; height:2.5rem;}
+}
