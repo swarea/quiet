@@ -8,9 +8,9 @@
 <skin>
   <information>
     <name>Quiet</name>
-    <version>0.2.0</version>
+    <version>0.2.1</version>
     <description>
-      <![CDATA[글이 돋보이도록 물러나 있는 스킨입니다. 절제된 타이포그래피, 라이트와 다크를 따로 그린 테마, 스크립트가 꺼져도 동작하는 구성.]]>
+      <![CDATA[글이 잘 읽히도록 여백과 글자 크기를 맞춘 티스토리 스킨입니다. 라이트와 다크를 각각 설계했고, 목차·카테고리 접기·코드 복사·이미지 확대를 지원합니다. 티스토리가 넣는 댓글창과 공감·공유 버튼까지 같은 톤으로 맞췄으며, 스크립트가 꺼져도 글·메뉴·검색·댓글이 그대로 동작합니다.]]>
     </description>
     <license>
       <![CDATA[MIT License. 자유롭게 사용·수정·재배포할 수 있으며, 저작권 고지만 유지하면 됩니다. https://github.com/swarea/quiet]]>
