@@ -15,7 +15,7 @@
   <div>
     <div><span class="who">{{ c.name }}</span><span class="when">{{ c.date }}</span></div>
     <div class="txt">{{ c.body }}</div>
-    <div class="act"><button type="button">수정/삭제</button>{% if not c.reply %}<button type="button">답글</button>{% endif %}</div>
+    <div class="act" lang="en"><button type="button">Edit / Delete</button>{% if not c.reply %}<button type="button">Reply</button>{% endif %}</div>
   </div>
 </div>
 {% endmacro %}

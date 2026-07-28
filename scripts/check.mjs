@@ -370,6 +370,76 @@ try {
   fail("colour contrast", e.message);
 }
 
+// The mock preview and the skin are two separate sets of markup sharing one
+// stylesheet, and nothing keeps them in step. Eight divergences were found by
+// hand in a single day: a class the skin stopped emitting, a heading the mock
+// lacked, a label in the wrong language, a font the mock never loaded. Each one
+// made a pass in the preview mean less than it appeared to.
+//
+// The classes below are allowed to differ, for one of two reasons: the skin
+// styles markup Tistory generates and the mock cannot produce, or the mock
+// carries sample content demonstrating what an author's writing looks like.
+// Anything else that appears on one side only is drift, and fails.
+// Markup only one side can produce. The skin renders what Tistory generates and
+// what its tokens fill; the mock renders its own sidebar and sample content in
+// their place. Neither can carry the other's, so neither is drift.
+const UNAVOIDABLE_SKIN = new Set([
+  "quiet-cat-tistory", "quiet-menu-tistory", "quiet-side-list", "quiet-taglabel",
+  "quiet-avatar", "quiet-secret",
+  "quiet-masthead", "quiet-masthead-item", "quiet-notice-row", "quiet-row-plain",
+]);
+const UNAVOIDABLE_MOCK = new Set([
+  "quiet-cat", "quiet-cat-row", "quiet-sub", "quiet-sub-inner", "quiet-menu",
+  "quiet-monogram", "quiet-empty", "quiet-tags",
+  "quiet-load", "quiet-reveal",
+]);
+
+// Drift the mock has not caught up with. Each entry is a place where a pass in
+// the preview says less than it appears to, and the list should only shrink.
+// Adding to it is how a divergence gets hidden, so it needs a reason each time.
+const KNOWN_DRIFT = new Set([
+  "quiet-list-head", // the mock's list page has no heading wrapper
+  "quiet-lede",      // no supporting line under a list heading
+  "quiet-adjacent",  // no previous/next links
+  "quiet-colophon",  // no colophon in the mock's rail foot
+]);
+
+try {
+  const classesIn = (text) =>
+    new Set(
+      [...text.matchAll(/class="([^"]*)"/g)]
+        .flatMap((m) => m[1].split(/\s+/))
+        .map((c) => c.split("{")[0])
+        .filter((c) => c.startsWith("quiet-")),
+    );
+  const walk = async (d) => {
+    const out = [];
+    for (const e of await readdir(d, { withFileTypes: true })) {
+      const full = join(d, e.name);
+      out.push(...(e.isDirectory() ? await walk(full) : [full]));
+    }
+    return out;
+  };
+  const skin = classesIn(await readFile(join(root, "src", "skin.html"), "utf8"));
+  const SEP = String.fromCharCode(10);
+  const files = await walk(join(root, "src", "templates"));
+  const mockText = (await Promise.all(files.map((f) => readFile(f, "utf8")))).join(SEP);
+  const mock = classesIn(mockText);
+
+  const drifted = [
+    ...[...skin].filter((c) => !mock.has(c) && !UNAVOIDABLE_SKIN.has(c) && !KNOWN_DRIFT.has(c)).map((c) => `${c} (skin only)`),
+    ...[...mock].filter((c) => !skin.has(c) && !UNAVOIDABLE_MOCK.has(c)).map((c) => `${c} (mock only)`),
+  ].sort();
+
+  if (drifted.length) {
+    fail("preview matches skin", `${drifted.length}: ${drifted.slice(0, 4).join(", ")}`);
+  } else {
+    ok("preview matches skin");
+  }
+} catch (e) {
+  fail("preview matches skin", e.message);
+}
+
 // Report.
 if (!ran.length) {
   console.log("skipped: no applicable checks");
