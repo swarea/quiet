@@ -33,7 +33,10 @@ svg[fill="none"][stroke="currentColor"]{stroke-linecap:round; stroke-linejoin:ro
    The uppercase micro-label treatment is kept for .quiet-nav-label, whose text
    we author ourselves and is always Latin. */
 .quiet-section-tag h2{font-size:.86rem; font-weight:600; color:var(--ink-2); letter-spacing:-.005em;}
-.quiet-section-tag a{font-size:.8rem; color:var(--accent); transition:opacity .15s;}
+/* The title is optional in the cover settings, and an empty one left the
+   link hanging on its own against the right edge. */
+.quiet-section-tag h2:empty{display:none;}
+.quiet-section-tag a{font-size:.8rem; color:var(--accent); transition:opacity .15s; white-space:nowrap;}
 .quiet-section-tag a:hover{opacity:.7;}
 
 .quiet-wrap{max-width:var(--wide); margin:0 auto; padding:0 2rem;}

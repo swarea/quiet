@@ -8,15 +8,19 @@
     <p>{{ home.subtitle }}</p>
   </section>
 
+  {# Built like the featured cover the skin renders, thumbnail first, so the
+     mock keeps standing in for what Tistory serves. #}
   {% set f = home.featured %}
-  <section class="quiet-featured quiet-reveal" aria-label="Featured">
-    <div class="txt">
-      <span class="cat">{{ f.category }}</span>
-      <h3><a href="{{ f.url }}">{{ f.title }}</a></h3>
-      <p>{{ f.summary }}</p>
-      <div class="meta"><span>{{ f.date }}</span><span>{{ f.readtime }}</span><span>Comments {{ f.comments }}</span></div>
-    </div>
-    <div class="cover" aria-hidden="true">Cover image (optional)</div>
+  <section class="quiet-featured-set quiet-reveal" aria-label="Featured">
+    <a class="quiet-feature" href="{{ f.url }}">
+      {% if f.thumbnail %}<span class="shot"><img src="{{ f.thumbnail }}" alt="" loading="lazy"></span>{% endif %}
+      <span class="txt">
+        <span class="cat">{{ f.category }}</span>
+        <strong>{{ f.title }}</strong>
+        <span class="sum">{{ f.summary }}</span>
+        <time>{{ f.date }}</time>
+      </span>
+    </a>
   </section>
 
   <section class="quiet-recent quiet-reveal" aria-label="Recent posts">

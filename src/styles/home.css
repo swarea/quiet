@@ -71,31 +71,34 @@ main > .quiet-wrap + .quiet-wrap{border-top:1px solid var(--line);}
   }
 }
 
-/* The featured cover. Cards are wide rather than tall so a row of two reads as
-   a shelf rather than as a gallery, and so a post with no thumbnail still fills
-   its card instead of leaving a hole. */
-.quiet-featured-set .quiet-feature{
-  display:grid; grid-template-columns:1fr; gap:0;
-  border:1px solid var(--line); border-radius:var(--r-md);
-  background:var(--surface); overflow:hidden;
-  transition:border-color .15s;
+/* The featured cover puts one post forward: the words on the left, the picture
+   beside them on the right. Laid out as a row rather than a grid so an item
+   with no picture simply takes the width instead of leaving the column it
+   would have filled standing empty. The row is reversed, so the image comes
+   first in the markup -- where Tistory's thumbnail tag puts it -- and second
+   on screen. Narrow screens stack it, picture first, which is the order the
+   markup already reads in. */
+.quiet-featured-set{display:flex; flex-direction:column; gap:2.6rem;}
+.quiet-feature{display:flex; flex-direction:column; gap:1.3rem;}
+@media (min-width:52rem){
+  .quiet-feature{flex-direction:row-reverse; align-items:center; gap:2.2rem;}
+  .quiet-feature .shot{flex:none; width:24rem;}
+  .quiet-feature .txt{flex:1; min-width:0;}
 }
-.quiet-featured-set{display:grid; gap:1rem;}
-@media (min-width:46rem){
-  .quiet-featured-set{grid-template-columns:repeat(2,1fr); align-items:start;}
-  .quiet-featured-set .quiet-section-tag{grid-column:1 / -1;}
-}
-.quiet-feature:hover{border-color:var(--line-strong);}
-.quiet-feature .shot{display:block; aspect-ratio:16/9; background:var(--surface-2);}
+.quiet-feature .shot{display:block; aspect-ratio:16/10; overflow:hidden;
+  border-radius:var(--r-lg); border:1px solid var(--line); background:var(--surface-2);}
 .quiet-feature .shot img{width:100%; height:100%; object-fit:cover; display:block;}
-.quiet-feature .txt{display:block; padding:1.1rem 1.15rem 1.25rem;}
-.quiet-feature .cat{display:block; font-size:.72rem; font-weight:600; letter-spacing:.04em;
-  text-transform:uppercase; color:var(--accent); margin-bottom:.4rem;}
-.quiet-feature strong{display:block; font-size:1.05rem; line-height:1.4; color:var(--ink);}
-.quiet-feature .sum{display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
-  overflow:hidden; margin-top:.4rem; font-size:.88rem; line-height:1.6; color:var(--muted);}
-.quiet-feature time{display:block; margin-top:.7rem; font-family:var(--mono);
-  font-size:.72rem; color:var(--faint);}
+.quiet-feature .txt{display:block;}
+/* Not uppercased and not tracked out: a category on a live blog is as likely to
+   be Hangul as Latin, and tracking pulls Hangul syllables apart into specks. */
+.quiet-feature .cat{display:block; font-size:.78rem; font-weight:600;
+  color:var(--accent); margin-bottom:.55rem;}
+.quiet-feature strong{display:block; font-size:clamp(1.3rem,2.4vw,1.65rem);
+  line-height:1.36; letter-spacing:-.015em; color:var(--ink); text-wrap:balance;}
+.quiet-feature .sum{display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical;
+  overflow:hidden; margin-top:.7rem; font-size:.95rem; line-height:1.65; color:var(--muted);}
+.quiet-feature time{display:block; margin-top:1rem; font-family:var(--mono);
+  font-size:.74rem; color:var(--faint);}
 
 /* The blogger's introduction. It is rendered on every list page, because the
    header it lives in is shared, and shown only on the home page, because that

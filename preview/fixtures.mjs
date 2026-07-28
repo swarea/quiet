@@ -76,6 +76,10 @@ export const home = {
     readtime: "12 min",
     comments: 8,
     url: "/article",
+    // Stands in for the thumbnail Tistory attaches to a cover item, so the
+    // mock exercises the layout with a picture in it rather than without.
+    thumbnail:
+      "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 200'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23dfe4ee'/%3E%3Cstop offset='1' stop-color='%23c7cede'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='320' height='200' fill='url(%23g)'/%3E%3C/svg%3E",
   },
   recent,
   topics: [
