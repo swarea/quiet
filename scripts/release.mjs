@@ -221,7 +221,26 @@ if (!section) {
   console.error(`${LF}CHANGELOG.md has no section for ${version}. Add one before releasing.`);
   process.exit(1);
 }
-await writeFile(notesPath, `## What changed${LF}${LF}${section.slice(version.length).trim()}${LF}`);
+// GitHub renders a single newline in release notes as a line break, unlike a
+// Markdown file, where it is a space. The changelog is hard-wrapped at 80
+// columns for reading in the repository, so left alone every one of those wraps
+// would show up as a break and chop the sentences apart. Unwrap each paragraph
+// and each list item back into one line and let the page wrap them itself.
+const unwrap = (text) => {
+  const out = [];
+  for (const line of text.split(LF)) {
+    const starts = /^\s*$|^\s*[-*]\s|^#{1,6}\s|^\s*\d+\.\s|^\s*[>|]|^\s*```/.test(line);
+    const afterBlank = out.length > 0 && out[out.length - 1] === "";
+    if (starts || afterBlank || out.length === 0) out.push(line.replace(/\s+$/, ""));
+    else out[out.length - 1] += " " + line.trim();
+  }
+  return out.join(LF);
+};
+
+await writeFile(
+  notesPath,
+  `## What changed${LF}${LF}${unwrap(section.slice(version.length).trim())}${LF}`,
+);
 
 console.log(`${LF}notes:  ${relative(root, notesPath)}`);
 console.log(
