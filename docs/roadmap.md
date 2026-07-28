@@ -12,7 +12,7 @@ details live in issues.
 - build architecture decided (ADR-0001) and scaffolded
 - local mock preview renders at least: home, one list, one article page
 - base design tokens (light/dark, same semantic names)
-- single validation gate (`scripts/check.*`) wired into lean CI
+- single validation gate (`scripts/check.mjs`) wired into CI
 - **Done when:** clean clone installs and builds; ≥3 mock pages render on
   mobile + desktop; basic a11y smoke passes; everything not yet verified on
   real Tistory is explicitly marked as such.
@@ -25,6 +25,16 @@ details live in issues.
 - installable ZIP with official preview images
 - **Done when:** uploaded to a *test* blog; core screens smoke-tested there;
   no token corruption; install/rollback documented.
+
+## 0.3.0 — Audited
+
+- every screen opened on a live blog in both themes, and in a second browser
+- the Latin typeface bundled with the package rather than fetched
+- page language declared per page rather than per blog
+- the validation gate running on every push and pull request, and after the
+  build during a release
+- **Done when:** no page renders without a heading or a landmark; nothing the
+  documentation claims is contradicted by the code; the gate passes in CI.
 
 ## 0.5.0 — Beta
 

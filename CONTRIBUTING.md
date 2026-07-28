@@ -16,9 +16,8 @@ to keep in sync (owner applies in GitHub UI):
 
 - allow **rebase merging** only (squash/merge-commit disabled)
 - **Automatically delete head branches** enabled
-- branch protection on `main` if the plan allows; if not available, this
-  document is the substitute discipline: never commit to `main` directly
-  after bootstrap, always via PR.
+- branch protection on `main`, requiring the `check` workflow to pass. The
+  repository is public, so this is available at no cost.
 
 ## Branches
 

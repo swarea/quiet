@@ -7,11 +7,12 @@ Accepted, and amended — see [Amendment](#amendment-what-was-actually-built).
 ## Context
 
 Tistory skins are a static package (`skin.html` + `style.css` + `index.xml` +
-`images/`). The reference skin we inspected keeps only minified bundles in the
-repo, which makes it unmaintainable. We need human-readable sources, a build
-that cannot corrupt Tistory's `[##_..._##]` tokens or `<s_*>` pseudo-tags, and
-reproducible output from a clean clone. No application framework is needed —
-the deliverable is one HTML file.
+`images/`). Tistory serves the uploaded files directly, so whatever is uploaded
+is what must be maintained. This project therefore needs human-readable sources
+that compile to that package, a build that cannot corrupt Tistory's
+`[##_..._##]` tokens or `<s_*>` pseudo-tags, and reproducible output from a
+clean clone. No application framework is needed: the deliverable is one HTML
+file.
 
 ## Decision
 
@@ -40,9 +41,10 @@ the deliverable is one HTML file.
 
 - **Hand-edit a single skin.html** — no components, guarantees drift between
   preview and skin; rejected.
-- **Tailwind CSS** — utility soup in templates hurts readability, and the
-  reference skin shows the failure mode; semantic CSS with tokens is easier to
-  maintain solo for years; rejected.
+- **Tailwind CSS** — utility classes in the template make the markup harder to
+  read, and Tistory's own injected markup would still need conventional CSS.
+  Semantic classes with design tokens are easier to maintain over years by one
+  person; rejected.
 - **React/Vite/Next static export** — runtime and build complexity with zero
   benefit for a single-file template that Tistory fills server-side; rejected.
 - **Eleventy/Astro as site framework** — brings routing/data layers we don't

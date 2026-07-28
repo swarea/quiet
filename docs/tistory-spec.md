@@ -7,11 +7,11 @@ must be validated on the test blog before release.
 
 ## Clean-room principle
 
-We inspected an existing skin (hELLO-family `skin.html`/CSS) **only** to build a
-feature inventory and find pain points. No HTML structure, Tailwind class
-combinations, bundled JS, icons, assets, or design expressions are copied. All
-substitution variables are re-verified against the official documentation. The
-final implementation is independent, original code.
+An existing third-party skin was examined **only** to establish what features a
+Tistory skin is expected to provide. No markup structure, class combinations,
+scripts, icons, assets or design expression was taken from it. Every
+substitution variable used here was verified against the official Tistory
+documentation or against a live blog. The implementation is original.
 
 ## Required package structure (official)
 
@@ -145,7 +145,10 @@ reply block — is answered below.)
   modifications/renames.
 - Search URL format and `[##_search_..._##]` behavior on list pages.
 
-## Feature inventory taken from the reference skin (behavior only)
+## Feature inventory
+
+What a Tistory skin is generally expected to provide. Behaviour only; no
+implementation was taken from any existing skin.
 
 Home covers (list/grid/zigzag/slideshow) · sidebar with profile, counter,
 search, category, blog menu, notices, popular/recent posts, tags, recent
