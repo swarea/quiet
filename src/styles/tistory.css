@@ -201,8 +201,16 @@
    whoever is reading it, so they step back from the reader's actions. Subscribe
    is set apart from the other side, by a gap rather than by colour: it is the
    only control here asking for a commitment. */
-.quiet-article-body .container_postbtn .wrap_btn_etc{margin-left:.4rem; opacity:.55;}
-.quiet-article-body .container_postbtn .wrap_btn_etc:hover{opacity:1;}
+.quiet-article-body .container_postbtn .wrap_btn_etc{margin-left:.4rem;}
+/* The step back is taken by the button, not by the wrapper. Tistory keeps the
+   flyout inside the same wrapper as the button that opens it, so fading the
+   wrapper faded the open menu with it: move the pointer off and the panel you
+   were reading went translucent, while the share panel beside it -- which is
+   dimmed by nothing -- stayed solid. A menu that is open is not stepping back,
+   so the button comes forward while it is, which `aria-expanded` already says. */
+.quiet-article-body .container_postbtn .wrap_btn_etc > .btn_post{opacity:.55; transition:opacity .15s;}
+.quiet-article-body .container_postbtn .wrap_btn_etc:hover > .btn_post,
+.quiet-article-body .container_postbtn .wrap_btn_etc > .btn_post[aria-expanded="true"]{opacity:1;}
 .quiet-article-body .container_postbtn.quiet-sub-moved .btn_menu_toolbar{display:none;}
 /* The share and manage flyouts are Tistory's own panels; only the surface and
    edge need to follow the theme so they do not glare in dark mode. */
