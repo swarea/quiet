@@ -229,7 +229,10 @@
    the menu read as three barely visible lines with only the hovered one
    legible. Both kinds of row are named here. */
 .quiet-article-body .layer_post .btn_mark{color:var(--ink-2);}
-.quiet-article-body .layer_post .btn_mark:hover{background:var(--surface-2); color:var(--accent);}
+.quiet-article-body .layer_post .btn_mark:hover,
+.quiet-article-body .layer_post .btn_mark:focus-visible{background:var(--surface-2); color:var(--ink);}
+.quiet-article-body .layer_post .btn_mark:hover .txt_sns,
+.quiet-article-body .layer_post .btn_mark:focus-visible .txt_sns{color:var(--ink);}
 
 /* The licence a blogger declares for a post. Tistory renders it beside the
    toolbar and gives the popup a white background and #333 text, neither of
@@ -408,7 +411,7 @@ html.quiet-js .quiet-cat-tistory ul ul ul.open{max-height:none;}
   overflow:visible; background:none; width:1.25rem; height:.6rem;
 }
 .quiet-article-body .layer_post .ico_arrbt::after{
-  content:""; position:absolute; left:50%; top:-.34rem;
+  content:""; position:absolute; left:50%; top:-.42rem;
   width:.68rem; height:.68rem; background:var(--surface);
   border:1px solid var(--line); border-top:0; border-left:0;
   transform:translateX(-50%) rotate(45deg);
