@@ -22,7 +22,12 @@ jobs:
       # Runs the gate, builds, verifies the package is complete, and writes the
       # archive plus its checksum. Any of those failing fails the release.
       - run: npm run release
+      # npm run release writes release/notes-<version>.md from the changelog
+      # entry for this version, and fails if that entry is missing. Generated
+      # notes would list commits, which is not what a reader of a release wants.
       - name: Publish
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "$GITHUB_REF_NAME" release/*.zip release/*.sha256 --generate-notes
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          gh release create "$GITHUB_REF_NAME" release/*.zip release/*.sha256 --title "Quiet $version" --notes-file "release/notes-$version.md"
