@@ -2,10 +2,11 @@
 
 A quiet, professional Tistory skin for reading.
 
-The design tries to be the thing you stop noticing. Korean and Latin are set
-together rather than one after the other, light and dark are each drawn on their
-own terms, and the palette is chosen for long sittings. Emphasis is spent
-sparingly, so that when something is emphasised it means something.
+The design tries to be the thing you stop noticing. Hangul and the Latin
+alphabet are set together rather than one fitted around the other, light and
+dark are each drawn on their own terms, and the palette is chosen for long
+sittings. Emphasis is spent sparingly, so that when something is emphasised it
+means something.
 
 It suits a blog where a technical note and a personal entry sit next to each
 other and neither looks out of place.
@@ -26,11 +27,12 @@ by hovering is emphasis they have to go looking for.
 pointer; a button says it was pressed. A sidebar link carries no underline and no
 colour of its own, so without that answer nothing distinguishes it from a label.
 
-**Nothing moves under the pointer.** No lift, no slide, no change of weight. A
-box that shifts under the cursor reads as the page failing rather than as the
-link responding. Motion is kept for things that open or arrive — a category tree
-unfolding, the sidebar sliding in on a narrow screen — and every one of them
-stops when the reader has asked for reduced motion.
+**Hovering moves nothing.** No lift, no slide, no change of weight. A box that
+shifts under the cursor reads as the page failing rather than as the link
+responding. Movement belongs to two other moments: a button dips when it is
+pressed, and things that open or arrive are allowed to — a category tree
+unfolding, the sidebar sliding in on a narrow screen. All of it stops when the
+reader has asked for reduced motion.
 
 **The accent is saved.** One colour, spent on links inside prose, on category
 labels, and on the button that posts a comment. Everywhere else, emphasis is a
