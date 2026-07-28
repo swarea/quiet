@@ -43,9 +43,9 @@ export function initDrawer(): void {
     scrim.classList.toggle("open", open);
     scrim.hidden = !open;
     btn.setAttribute("aria-expanded", String(open));
+    if (open) lastFocus = document.activeElement as HTMLElement | null;
     setBehind(open);
     if (open) {
-      lastFocus = document.activeElement as HTMLElement | null;
       focusables()[0]?.focus();
     } else if (lastFocus) {
       lastFocus.focus();
@@ -54,6 +54,14 @@ export function initDrawer(): void {
   };
 
   btn.addEventListener("click", () => set(!rail.classList.contains("open")));
+
+  // The drawer only exists below this width. Widening past it takes the scrim
+  // and the button away with the media query, but the background stays inert
+  // until something closes it -- a page nothing on screen can recover.
+  const narrow = typeof matchMedia === "function" ? matchMedia("(max-width:960px)") : null;
+  narrow?.addEventListener?.("change", () => {
+    if (!narrow.matches && rail.classList.contains("open")) set(false);
+  });
   scrim.addEventListener("click", () => set(false));
 
   document.addEventListener("keydown", (e) => {

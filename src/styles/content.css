@@ -130,6 +130,11 @@
 #quiet-main .quiet-article-body b,
 #quiet-main .quiet-article-body strong{font-weight:700; color:var(--ink);}
 #quiet-main .quiet-article-body figure{margin:1.9em 0;}
+/* Restated behind the same id. The class-level rules above set margin-inline,
+   which the shorthand on the line above resets, so the editor's alignment
+   buttons had no effect on a live post. */
+#quiet-main .quiet-article-body figure.alignLeft{margin-inline:0 auto;}
+#quiet-main .quiet-article-body figure.alignRight{margin-inline:auto 0;}
 #quiet-main .quiet-article-body blockquote{margin:1.7em 0;}
 
 /* ---- syntax highlighting --------------------------------------------------

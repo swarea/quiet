@@ -8,9 +8,7 @@ export function initReveal(): void {
   if (!els.length) return;
   if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-  els.forEach((el) => {
-    el.style.opacity = "0";
-  });
+  if (typeof IntersectionObserver === "undefined") return;
 
   const obs = new IntersectionObserver(
     (entries) => {
@@ -24,5 +22,8 @@ export function initReveal(): void {
     },
     { rootMargin: "0px 0px -12% 0px", threshold: 0.08 },
   );
-  els.forEach((el) => obs.observe(el));
+  els.forEach((el) => {
+    el.style.opacity = "0";
+    obs.observe(el);
+  });
 }

@@ -114,7 +114,7 @@ const LISTING_NAMES = new Map([
 ]);
 
 function renameListingHeading(): void {
-  const heading = document.querySelector<HTMLElement>(".quiet-article-head h1");
+  const heading = document.querySelector<HTMLElement>(".quiet-list-head h1");
   if (!heading) return;
   const named = LISTING_NAMES.get((heading.textContent ?? "").trim());
   if (named) heading.textContent = named;
@@ -130,6 +130,20 @@ const COUNT = /^(.*?)\s*([([（]\s*\d+\s*[)）])\s*$/;
 function renameAllPosts(): void {
   document.querySelectorAll<HTMLAnchorElement>(".quiet-cat-tistory a").forEach((link) => {
     if (!/\/category\/?$/.test(link.getAttribute("href") ?? "")) return;
+    // Where the count already has a span of its own, only the label is renamed,
+    // and by editing its text node rather than the link -- writing textContent
+    // on the link would take the count away with the Korean. Returning early
+    // here used to discard the rename entirely, leaving the label in Korean.
+    if (link.querySelector(".c_cnt, .cnt")) {
+      const first = link.firstChild;
+      if (first && first.nodeType === 3) {
+        const was = first.textContent ?? "";
+        const now = was.replace(/^(\s*)분류\s*전체보기|^(\s*)전체보기/, "$1$2All posts");
+        if (now !== was) first.textContent = now;
+      }
+      return;
+    }
+
     const text = (link.textContent ?? "").trim();
     const next = text.replace(/^분류\s*전체보기|^전체보기/, "All posts");
     const split = next.match(COUNT);
@@ -137,7 +151,6 @@ function renameAllPosts(): void {
       if (next !== text) link.textContent = next;
       return;
     }
-    if (link.querySelector(".c_cnt")) return;
     link.textContent = split[1];
     const count = document.createElement("span");
     count.className = "c_cnt";

@@ -28,7 +28,10 @@ function fitOnAccent(): void {
     .getPropertyValue(isDark() ? "--dark-accent" : "--light-accent")
     .trim();
   const m = accent.match(/^#?([0-9a-f]{6})$/i);
-  if (!m) return;
+  if (!m) {
+    root.style.removeProperty("--on-accent");
+    return;
+  }
   const n = parseInt(m[1], 16);
   const channel = (c: number): number => {
     const v = c / 255;
