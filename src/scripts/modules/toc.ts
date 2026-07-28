@@ -1,5 +1,9 @@
 // Build a table of contents from article headings and track the active section.
 // Preserves author-supplied ids; only generates ids where missing.
+function escape(text: string): string {
+  return text.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c] as string);
+}
+
 export function initToc(): void {
   // The skin setting can switch the table of contents off entirely.
   if (document.getElementById("quiet-toc-off")) return;
@@ -35,14 +39,16 @@ export function initToc(): void {
     anchor.href = `#${h.id}`;
     anchor.textContent = "#";
     anchor.setAttribute("aria-hidden", "true");
-    const label = h.textContent ?? "";
+    // Hidden from the accessibility tree, so it must not be a tab stop either.
+    anchor.tabIndex = -1;
+    const label = escape(h.textContent ?? "");
     h.appendChild(anchor);
     items.push(
       `<li class="${h.tagName === "H3" ? "h3" : "h2"}"><a href="#${h.id}">${label}</a></li>`,
     );
   });
 
-  nav.innerHTML = `<div class="quiet-toc-inner"><h4>On this page</h4><ol>${items.join("")}</ol></div>`;
+  nav.innerHTML = `<div class="quiet-toc-inner"><h2>On this page</h2><ol>${items.join("")}</ol></div>`;
   document.body.appendChild(nav);
 
   const links = new Map<string, HTMLElement>();

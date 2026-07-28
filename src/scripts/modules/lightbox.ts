@@ -11,6 +11,20 @@ const CLOSE_ICON =
 let overlay: HTMLElement | null = null;
 let lastFocus: HTMLElement | null = null;
 
+// Everything the overlay covers. It calls itself a modal, so the page behind it
+// has to stop being reachable -- by focus and by a screen reader's cursor alike.
+function setBehind(hidden: boolean): void {
+  document.querySelectorAll<HTMLElement>(".quiet-shell, .quiet-dock").forEach((el) => {
+    if (hidden) {
+      el.setAttribute("aria-hidden", "true");
+      if ("inert" in el) el.inert = true;
+    } else {
+      el.removeAttribute("aria-hidden");
+      if ("inert" in el) el.inert = false;
+    }
+  });
+}
+
 function build(): HTMLElement {
   const el = document.createElement("div");
   el.className = "quiet-lightbox";
@@ -32,6 +46,7 @@ function close(): void {
   if (!overlay) return;
   overlay.classList.remove("open");
   document.body.classList.remove("quiet-lightbox-open");
+  setBehind(false);
   lastFocus?.focus();
   lastFocus = null;
 }
@@ -45,6 +60,7 @@ function open(img: HTMLImageElement): void {
   lastFocus = document.activeElement as HTMLElement | null;
   overlay.classList.add("open");
   document.body.classList.add("quiet-lightbox-open");
+  setBehind(true);
   overlay.querySelector<HTMLElement>(".close")?.focus();
 }
 
@@ -55,10 +71,30 @@ export function initLightbox(): void {
   body.querySelectorAll<HTMLImageElement>("img").forEach((img) => {
     if (img.closest("a")) return; // author linked it deliberately
     img.classList.add("quiet-zoomable");
+    // The cursor advertises this to a pointer; without these it was advertised
+    // to nobody else. A picture that opens is a button, so it says so and
+    // answers the keys a button answers.
+    img.tabIndex = 0;
+    img.setAttribute("role", "button");
     img.addEventListener("click", () => open(img));
+    img.addEventListener("keydown", (e) => {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      e.preventDefault();
+      open(img);
+    });
   });
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") close();
+    if (!overlay?.classList.contains("open")) return;
+    if (e.key === "Escape") {
+      close();
+      return;
+    }
+    // Only the close button is focusable inside, so Tab has nowhere else to go;
+    // holding it there is what keeps the page behind out of reach.
+    if (e.key === "Tab") {
+      e.preventDefault();
+      overlay.querySelector<HTMLElement>(".close")?.focus();
+    }
   });
 }

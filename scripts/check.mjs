@@ -340,7 +340,7 @@ const PAIRS = [
   ["--ink-2", "--paper"], ["--ink-2", "--surface"],
   ["--nav", "--paper"], ["--nav", "--surface"],
   ["--muted", "--paper"], ["--muted", "--surface"], ["--muted", "--surface-2"],
-  ["--faint", "--paper"], ["--faint", "--surface"],
+  ["--faint", "--paper"], ["--faint", "--surface"], ["--faint", "--surface-2"],
   ["--accent", "--paper"], ["--accent", "--surface"], ["--accent", "--accent-wash"],
   ["--on-accent", "--accent"],
   ["--warm", "--paper"],

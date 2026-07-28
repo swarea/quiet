@@ -14,7 +14,7 @@
 :root{
   /* ---- light palette ---- */
   --light-paper:#fbfbfa; --light-surface:#ffffff; --light-surface-2:#f2f2f0;
-  --light-ink:#191b1f; --light-ink-2:#3f434a; --light-muted:#565b62; --light-faint:#6b7078;
+  --light-ink:#191b1f; --light-ink-2:#3f434a; --light-muted:#565b62; --light-faint:#6a6f77;
   --light-nav:#4a4e56;
   --light-line:#ebebe8; --light-line-strong:#dcdcd7;
   --light-accent:#38548c; --light-accent-ink:#2a4170; --light-accent-wash:#eef1f7;
