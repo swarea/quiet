@@ -264,8 +264,10 @@ try {
   scan("skin.html", await readFile(join(root, "src", "skin.html"), "utf8"));
   const moduleDir = join(root, "src", "scripts", "modules");
   for (const entry of await readdir(moduleDir)) {
-    // relabel.ts holds the Korean it translates away; toc.ts slugs Korean headings.
-    if (entry === "relabel.ts" || entry === "toc.ts") continue;
+    // relabel.ts holds the Korean it translates away; toc.ts slugs Korean
+    // headings; lang.ts names the Hangul range to recognise it. None of these
+    // is copy a reader sees.
+    if (entry === "relabel.ts" || entry === "toc.ts" || entry === "lang.ts") continue;
     scan(entry, await readFile(join(moduleDir, entry), "utf8"));
   }
   if (offenders.length) fail("copy is english", offenders.slice(0, 3).join("; "));

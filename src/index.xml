@@ -78,7 +78,7 @@
     </item>
   </cover>
   <variables>
-    <variablegroup name="레이아웃">
+    <variablegroup name="스킨 설정">
       <variable>
         <name>sidebar</name>
         <label><![CDATA[사이드바 사용]]></label>
@@ -103,7 +103,7 @@
       <variable>
         <name>lang</name>
         <label><![CDATA[글을 쓰는 언어]]></label>
-        <description><![CDATA[글을 주로 어떤 언어로 쓰는지입니다. 브라우저가 번역을 제안할지, 검색엔진이 어떤 언어로 색인할지, 화면 낭독기가 어떤 발음으로 읽을지가 이 값으로 정해집니다.]]></description>
+        <description><![CDATA[블로그 전체의 기본 언어입니다. 글 하나하나는 본문을 보고 알아서 판별하니, 여기에는 주로 쓰는 언어를 두시면 됩니다. 화면 낭독기가 어떤 발음으로 읽을지를 정합니다.]]></description>
         <type>SELECT</type>
         <option>[{"name":"ko","label":"한국어","value":"ko"},{"name":"en","label":"English","value":"en"}]</option>
         <default>ko</default>

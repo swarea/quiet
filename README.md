@@ -61,7 +61,7 @@ What the package contains:
 
 | Setting | Default | Effect |
 | --- | --- | --- |
-| `lang` | `ko` | the language the blog is written in. Sets `<html lang>`, which browsers, search engines and screen readers all read |
+| `lang` | `ko` | the blog's own language. Each post is judged from its own words and marked separately, so this is the answer for the blog as a whole |
 | `home-eyebrow` | empty | a short line above the headline. Hidden when empty |
 | `home-headline` | empty | the opening line on the home page. Empty leaves Tistory's own list title |
 | `home-tagline` | empty | a line under the headline. Shown only when the headline is set |
