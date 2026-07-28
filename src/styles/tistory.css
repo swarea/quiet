@@ -390,8 +390,10 @@ html.quiet-js .quiet-cat-tistory ul ul ul.open{max-height:none;}
      .container_postbtn button:focus{outline:5px auto -webkit-focus-ring-color}
    Keyboard users still need the ring, so it is not removed but moved onto
    :focus-visible, where it belongs. */
-.quiet-article-body .container_postbtn button:focus,
-.quiet-article-body .layer_post button:focus{outline:none;}
+@supports selector(:focus-visible){
+  .quiet-article-body .container_postbtn button:focus,
+  .quiet-article-body .layer_post button:focus{outline:none;}
+}
 .quiet-article-body .container_postbtn button:focus-visible,
 .quiet-article-body .layer_post button:focus-visible{
   outline:2px solid var(--accent); outline-offset:2px;

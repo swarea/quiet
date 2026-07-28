@@ -101,6 +101,14 @@
         <default>true</default>
       </variable>
       <variable>
+        <name>lang</name>
+        <label><![CDATA[글을 쓰는 언어]]></label>
+        <description><![CDATA[글을 주로 어떤 언어로 쓰는지입니다. 브라우저가 번역을 제안할지, 검색엔진이 어떤 언어로 색인할지, 화면 낭독기가 어떤 발음으로 읽을지가 이 값으로 정해집니다.]]></description>
+        <type>SELECT</type>
+        <option>[{"name":"ko","label":"한국어","value":"ko"},{"name":"en","label":"English","value":"en"}]</option>
+        <default>ko</default>
+      </variable>
+      <variable>
         <name>home-eyebrow</name>
         <label><![CDATA[홈 소개 머리말]]></label>
         <description><![CDATA[소개 문구 위에 작게 놓일 한 마디입니다. 짧을수록 좋고, 비워두면 나오지 않습니다.]]></description>
