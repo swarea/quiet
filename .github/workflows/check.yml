@@ -1,0 +1,29 @@
+# Run the gate on every change, not only at a tag. CONTRIBUTING has described
+# this as the arrangement since the repository was set up; until now nothing
+# ran it, so a regression could only be caught by someone remembering to run it
+# by hand, or at release time when it is far too late to be cheap.
+name: check
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      # Build first: two of the gate's checks read dist/, and skip themselves
+      # when it is absent. Running the gate alone would report a pass for
+      # checks that never looked at anything.
+      - run: npm run build
+      - run: npm run check

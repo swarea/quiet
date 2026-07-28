@@ -13,7 +13,9 @@ const root = join(__dirname, "..");
 
 const ran = [];
 const failures = [];
+const skipped = [];
 function ok(name) { ran.push(name); }
+function skip(name, why) { skipped.push(`${name} (${why})`); }
 function fail(name, detail) { ran.push(name); failures.push(`${name}: ${detail}`); }
 
 async function walk(dir) {
@@ -97,7 +99,7 @@ try {
     dist = null;
   }
   if (dist === null) {
-    ran.push("token preservation (skipped: no dist, run npm run build)");
+    skip("token preservation", "no dist, run npm run build");
   } else {
     const count = (text, re) => {
       const m = text.match(re) ?? [];
@@ -219,7 +221,7 @@ try {
 try {
   const css = await readFile(join(root, "dist", "style.css"), "utf8").catch(() => null);
   if (css === null) {
-    ran.push("css browser support (skipped: no dist, run npm run build)");
+    skip("css browser support", "no dist, run npm run build");
   } else {
     const problems = [];
     const modernRange = css.match(/@media\s*\([a-z-]*width\s*[<>]=?/g);
@@ -372,6 +374,9 @@ if (!ran.length) {
   process.exit(0);
 }
 console.log(`ran ${ran.length} checks: ${ran.join(", ")}`);
+if (skipped.length) {
+  console.log(`skipped ${skipped.length}: ${skipped.join(", ")}`);
+}
 if (failures.length) {
   console.error(`\nFAILED (${failures.length}):`);
   for (const f of failures) console.error(`  - ${f}`);

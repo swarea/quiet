@@ -12,3 +12,6 @@ playwright-report/
 
 # Release archives are built from a tag, never committed.
 release/
+
+# Editor/tool-local launch configuration.
+.claude/

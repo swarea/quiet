@@ -144,10 +144,19 @@ if (dirty && !process.argv.includes("--allow-dirty")) {
 }
 const commit = execFileSync("git", ["rev-parse", "--short", "HEAD"], { cwd: root, encoding: "utf8" }).trim();
 
-console.log(`\n== gate ==`);
-node("check.mjs");
+// In CI the tag is what a reader sees; the archive is named from the manifest.
+// If those disagree the release announces one version and contains another.
+const tag = process.env.GITHUB_REF_NAME;
+if (tag && tag !== `v${version}`) {
+  console.error(`tag ${tag} does not match version ${version} in package.json`);
+  console.error("bump the version and commit it, or retag.");
+  process.exit(1);
+}
+
 console.log(`\n== build ==`);
 node("build.mjs");
+console.log(`\n== gate ==`);
+node("check.mjs");
 
 const dist = join(root, "dist");
 await stat(dist).catch(() => {
@@ -189,7 +198,8 @@ the package is missing files the skin spec requires: ${absent.join(", ")}`);
 
 const outDir = join(root, "release");
 await mkdir(outDir, { recursive: true });
-const base = `${name}-${version}`;
+// A throwaway build and a real one were indistinguishable once the file moved.
+const base = dirty ? `${name}-${version}-dirty-${commit}` : `${name}-${version}`;
 const archive = zip(entries);
 await writeFile(join(outDir, `${base}.zip`), archive);
 
