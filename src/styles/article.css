@@ -106,18 +106,24 @@ figure.quiet-fig figcaption{text-align:center; font-size:.8rem; color:var(--mute
    bottoms out at 1.06 in light and 1.10 in dark — the word disappears on every
    hover. Here the label stays the same colour throughout and only the frame and
    the wash move, so the worst moment is still perfectly readable. */
+/* Smaller than the button that posts a comment, because it asks for less.
+   Measured before this: 33px tall at 13.6px and weight 600, against 30px and
+   12.8px for the comment button and 32px for a tag chip -- the largest
+   control on the page by size, weight and height at once, and the one
+   committing least. The weight stays: with no fill behind it, the letters
+   are what carry the shape. */
 .quiet-subscribe{
-  display:inline-flex; align-items:center; gap:.45rem;
+  display:inline-flex; align-items:center; gap:.38rem;
   flex:none; margin-left:auto; align-self:center;
-  padding:.55rem 1rem .55rem .85rem;
+  padding:.44rem .85rem .44rem .7rem;
   border:1px solid var(--line-strong); border-radius:999px;
   background:none; color:var(--ink-2);
-  font:inherit; font-size:.85rem; font-weight:600; line-height:1;
+  font:inherit; font-size:.8rem; font-weight:600; line-height:1;
   cursor:pointer; white-space:nowrap;
   transition:border-color .15s, color .15s, background-color .15s, transform .1s;
 }
 .quiet-subscribe::before{
-  content:""; width:.85rem; height:.85rem; flex:none;
+  content:""; width:.8rem; height:.8rem; flex:none;
   background-color:currentColor;
   -webkit-mask:var(--quiet-plus) center/contain no-repeat;
           mask:var(--quiet-plus) center/contain no-repeat;
