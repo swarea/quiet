@@ -145,7 +145,10 @@ every build packages them.
 - [docs/tistory-spec.md](docs/tistory-spec.md): Tistory platform constraints
   and the clean-room policy
 - [docs/roadmap.md](docs/roadmap.md): release milestones and gates
-- [docs/decisions/](docs/decisions/): architecture decision records
+- [docs/decisions/](docs/decisions/): architecture decision records — the
+  build ([ADR-0001](docs/decisions/ADR-0001-build-architecture.md)), the
+  typeface ([ADR-0002](docs/decisions/ADR-0002-typeface.md)) and how it is
+  delivered ([ADR-0003](docs/decisions/ADR-0003-bundled-latin.md))
 - [CHANGELOG.md](CHANGELOG.md): what changed, by release
 - [CONTRIBUTING.md](CONTRIBUTING.md): workflow rules (single source)
 - [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md): the typeface and the build

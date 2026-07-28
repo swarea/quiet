@@ -63,6 +63,21 @@ blog. Grouped by what a reader of the blog would notice.
 - Skipped checks are reported separately instead of counted among the ones that
   ran.
 
+### The typeface and the language
+
+- The Latin half of Pretendard is cut at build time and ships inside the
+  package, so the letters the design was drawn for no longer depend on a third
+  party staying up. 51 KB, one file, renamed as the licence requires, with the
+  licence beside it. Hangul is left to the reader's system font, which is what
+  this typeface was drawn to sit beside. See
+  [ADR-0003](docs/decisions/ADR-0003-bundled-latin.md).
+- A post now says what language it is written in, judged from its own words,
+  and a page of titles can correct what the blog declared. A blogger who never
+  opens the setting is mostly right anyway, which matters for a skin that will
+  not only be installed on Korean blogs.
+- The blog's own language became a setting. It decides what the page says
+  before scripts run and where they do not run at all.
+
 ### Design
 
 - Titles in the reading column arrive at full strength and do not respond to a

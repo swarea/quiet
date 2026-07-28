@@ -2,7 +2,9 @@
 
 ## Status
 
-Accepted
+Accepted. The typeface choice stands; the delivery decision is superseded by
+[ADR-0003](ADR-0003-bundled-latin.md), which ships the Latin half in the
+package and leaves only Hangul to the CDN.
 
 ## Context
 
