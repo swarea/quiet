@@ -2,6 +2,8 @@
 {% import "macros.njk" as m %}
 {% block main %}
 <main class="quiet-wrap" id="quiet-home">
+  {# The skin emits this on a cover home; the mock needs it to match. #}
+  <h1 class="quiet-sr">{{ blog.title }}</h1>
   <section class="quiet-intro quiet-load">
     <div class="quiet-eyebrow">Learning in public</div>
     <h1>{{ home.headline | safe }}</h1>

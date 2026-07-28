@@ -294,7 +294,7 @@
 .quiet-comment .who .tistoryProfileLayerTrigger{display:none;}
 /* Mark the blog owner's own comments. */
 .quiet-comment.rp_admin .who::after{
-  content:"글쓴이"; margin-left:.45rem; padding:.1rem .4rem; border-radius:999px;
+  content:"Author"; margin-left:.45rem; padding:.1rem .4rem; border-radius:999px;
   font-size:.66rem; font-weight:600; color:var(--accent); background:var(--accent-wash);
   vertical-align:middle;
 }
