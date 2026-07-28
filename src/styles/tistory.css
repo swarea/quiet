@@ -31,14 +31,6 @@
 .quiet-menu-tistory li a:focus-visible,
 .quiet-side-list li a:hover,
 .quiet-side-list li a:focus-visible{color:var(--ink);}
-/* The count moves with the name it belongs to. It carries its own colour, so
-   the colour set on the row never reached it and half of every category row
-   stayed put while the other half answered. It moves one rung, not two, so
-   the number stays subordinate to the word while both respond. */
-.quiet-cat-tistory li a:hover .c_cnt,
-.quiet-cat-tistory li a:focus-visible .c_cnt,
-.quiet-cat-tistory li a:hover .cnt,
-.quiet-cat-tistory li a:focus-visible .cnt{color:var(--nav);}
 
 /* The entry for the page being read is still marked, but not drawn differently.
    Two things already say where you are: the branch holding this page opens
@@ -49,7 +41,7 @@
    The marker itself stays. `aria-current` costs nothing on screen and is the
    only way a screen reader is told, which cannot read an opened branch or
    compare a heading to a list. */
-.quiet-cat-tistory .c_cnt,.quiet-cat-tistory .cnt{flex:none; font-family:var(--mono); font-size:.72rem; color:var(--faint); font-variant-numeric:tabular-nums; transition:color .15s;}
+.quiet-cat-tistory .c_cnt,.quiet-cat-tistory .cnt{flex:none; font-family:var(--mono); font-size:.72rem; color:var(--faint); font-variant-numeric:tabular-nums;}
 
 /* [##_blog_menu_##] renders <ul><li><a>. */
 .quiet-menu-tistory ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:1px;}
