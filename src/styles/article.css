@@ -133,7 +133,11 @@ figure.quiet-fig figcaption{text-align:center; font-size:.8rem; color:var(--mute
   .quiet-subscribe{margin-left:0; width:100%; justify-content:center;}
 }
 .quiet-author .quiet-monogram{width:52px; height:52px; font-size:1.4rem; border-radius:14px;}
-.quiet-author .n{font-weight:700;}
+/* The last of the names. The blog in the rail, the person who left a comment
+   and this one are the same kind of thing, and this was the one still
+   inheriting full ink -- not by decision, but by having no colour of its
+   own. A title is what the reader came for; a name is who is speaking. */
+.quiet-author .n{font-weight:700; color:var(--ink-2);}
 .quiet-author .b{font-size:.86rem; color:var(--muted); margin-top:.2rem;}
 .quiet-prevnext{display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin:var(--block-gap) 0;}
 .quiet-prevnext a{border:1px solid var(--line); border-radius:var(--r-md); padding:.95rem 1.05rem; background:var(--surface); transition:border-color .16s;}
