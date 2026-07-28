@@ -7,9 +7,10 @@ rest of the page.
 Built from scratch by [swarea](https://github.com/swarea). Not a derivative of
 any existing skin, and not affiliated with Tistory or Kakao.
 
-> **Status: 0.2.1, unreleased.** 0.2.0 is the published release. Every screen
-> has now been opened on a live Tistory blog; what is still unproven is listed
-> under [Known limitations](#known-limitations). See [docs/roadmap.md](docs/roadmap.md).
+> **Status: 0.2.1, unreleased.** 0.2.0 is the published release. Every screen has
+> been opened on a live Tistory blog in both themes, and in Safari as well as
+> Chrome. What the skin still cannot do is listed under
+> [Known limitations](#known-limitations). See [docs/roadmap.md](docs/roadmap.md).
 
 ## What it does
 
@@ -76,10 +77,6 @@ What the package contains:
 
 ## Known limitations
 
-- **Dark mode has been read, not seen.** Every colour pair is resolved from the
-  tokens and checked by the gate, and the panels Tistory injects were measured
-  against its own stylesheet in production load order. What has not happened is
-  a person looking at every screen in dark mode.
 - **The home page needs covers enabled** to differ from the category archive.
   With none enabled Tistory serves the plain post list, and the skin cannot
   override that from its side.
