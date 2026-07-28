@@ -2,6 +2,7 @@
 {% import "macros.njk" as m %}
 {% block main %}
 {% set a = article %}
+<main>
 <article id="quiet-article">
   <header class="quiet-article-head">
     <div class="cover" aria-hidden="true"></div>
@@ -51,4 +52,5 @@
     {% for c in a.commentList %}{{ m.comment(c) }}{% endfor %}
   </section>
 </article>
+</main>
 {% endblock %}
