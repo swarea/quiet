@@ -32,15 +32,11 @@
 .quiet-side-list li a:hover,
 .quiet-side-list li a:focus-visible{color:var(--ink);}
 
-/* The entry for the page being read is still marked, but not drawn differently.
-   Two things already say where you are: the branch holding this page opens
-   itself, and the heading at the top of the page names it. A third signal in
-   bold would be the only weight in the sidebar, spent on something already
-   answered twice.
-
-   The marker itself stays. `aria-current` costs nothing on screen and is the
-   only way a screen reader is told, which cannot read an opened branch or
-   compare a heading to a list. */
+/* The entry for the page being read carries aria-current and nothing else.
+   Two things already say where you are on screen -- the branch holding this
+   page opens itself, and the heading names it -- but neither is available to
+   a screen reader, which cannot see an opened branch or compare a heading to
+   a list. The attribute costs nothing and is the only way it is told. */
 .quiet-cat-tistory .c_cnt,.quiet-cat-tistory .cnt{flex:none; font-family:var(--mono); font-size:.72rem; color:var(--faint); font-variant-numeric:tabular-nums;}
 
 /* [##_blog_menu_##] renders <ul><li><a>. */
@@ -195,7 +191,11 @@
 /* Once a post is liked the heart says so on its own, not only by a number. */
 .quiet-article-body .uoc-icon.on .ico_like,
 .quiet-article-body .btn_post[aria-pressed="true"] .ico_like{--quiet-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23000'%3E%3Cpath d='M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 1 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z'/%3E%3C/svg%3E");}
-.quiet-article-body .container_postbtn .wrap_btn:has(.uoc-icon.on){color:var(--accent);}
+/* Safari 15.0-15.3 and Firefox 100-120 have no :has(); there the liked state
+   simply is not coloured, which is the direction that loses nothing. */
+@supports selector(:has(*)){
+  .quiet-article-body .container_postbtn .wrap_btn:has(.uoc-icon.on){color:var(--accent);}
+}
 .quiet-article-body .container_postbtn .uoc-icon.on .ico_like::before{background-color:var(--accent);}
 
 /* Post management and statistics belong to whoever wrote the post, not to
@@ -378,7 +378,11 @@ body#tt-body-page .menu_toolbar.toolbar_rb{display:none;}
 html.quiet-js .quiet-cat-tistory ul ul ul{max-height:0;}
 html.quiet-js .quiet-cat-tistory ul ul ul.open{max-height:none;}
 @supports selector(:has(*)) {
-  html.quiet-js .quiet-rail nav:not(:has(a)){display:none;}
+  /* A belt to the braces in prune.ts, which removes these in script. Without
+     :has() the script is the only thing doing it, which it already was. */
+  @supports selector(:has(*)){
+    html.quiet-js .quiet-rail nav:not(:has(a)){display:none;}
+  }
 }
 
 /* Tistory rings these buttons on :focus rather than :focus-visible, so a plain

@@ -71,20 +71,11 @@
 .quiet-colophon a{color:var(--faint); transition:color .15s;}
 .quiet-colophon a:first-child{font-weight:600;}
 .quiet-colophon a:hover{color:var(--accent);}
-/* One rule for hover, with one exception that earns itself.
-
-   A link does not answer a hover. Four treatments were tried on the post list
-   and each was refused for a reason the others share: a fill was the largest
-   area of colour on a page made of hairlines, a colour spent the accent on
-   every row a pointer crossed, a heavier weight left the letters resettling
-   inside a box that had not moved, and an underline was louder than the row it
-   marked. The pointer already says a link is a link.
-
-   A control does answer, because a button that does not respond feels broken in
-   a way a line of text does not. So the icon buttons here, the page numbers and
-   the buttons Tistory puts under an article keep their fill. Table rows keep
-   theirs for a third reason: following a wide row by eye, not saying anything
-   is clickable. */
+/* A control answers, because a button that does not respond feels broken in a
+   way a line of text does not. These answer by darkening, like everything else
+   in the rail: a fill behind a bare icon was the largest area of colour in a
+   column built from hairlines. The page numbers and the buttons Tistory puts
+   under an article do still fill -- they sit on a page, not in the rail. */
 .quiet-icon-btn{width:30px; height:30px; border-radius:8px; display:grid; place-items:center; color:var(--muted); border:1px solid transparent; transition:color .15s;}
 .quiet-icon-btn:hover,.quiet-icon-btn:focus-visible{color:var(--ink);}
 
@@ -131,7 +122,6 @@ html:not(.quiet-js) .quiet-dock{display:none;}
 .quiet-dock .totop.show{display:grid;}
 
 /* prototype-only divider */
-.quiet-proto-note{background:var(--surface-2); border-block:1px solid var(--line); text-align:center; font-family:var(--mono); font-size:.72rem; letter-spacing:.1em; color:var(--muted); padding:.55rem;}
 
 /* Sidebar turned off in skin settings: the shell collapses to one column. */
 /* The same three rules, said two ways. The class is added by the bundle; the
@@ -161,20 +151,6 @@ html:not(.quiet-js) .quiet-dock{display:none;}
    only, so the pointer layout keeps its proportions. The category row's right
    gutter grows with the fold, because that overlap once swallowed the clicks
    meant for the category itself. */
-/* Three answers to a pointer, one for each kind of thing.
-
-   Navigation rests a step back and darkens under the pointer. A sidebar is a
-   list of places you are not, so separating the one you are pointing at from
-   its neighbours is the whole job.
-
-   A title does not answer at all. It arrives at full ink and stays there:
-   making a reader hover to see a title at full strength puts a question
-   between them and what they came to read. The cursor already says the row is
-   a link, and a keyboard still gets its focus ring.
-
-   A control answers with its fill, because a button that does not respond
-   feels broken in a way a line of text does not. Table rows keep a fill for a
-   third reason again: following a wide row by eye. */
 @media (pointer:coarse){
   .quiet-icon-btn{width:2.5rem; height:2.5rem;}
 

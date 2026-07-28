@@ -18,9 +18,10 @@ main > .quiet-wrap + .quiet-wrap{border-top:1px solid var(--line);}
    is for. Navigation still rests back and steps forward -- there the point is
    to separate one entry from its neighbours, not to be read. */
 .quiet-post-row{position:relative; display:grid; grid-template-columns:5.5rem 1fr; gap:1.4rem; padding:1.05rem .9rem;}
-/* The divider is drawn rather than bordered. A border follows the corner radius
-   the hover fill needs, so the line curved away at both ends; a line of its own
-   stays straight while the fill stays round. */
+/* The divider is drawn rather than bordered. When the row still took a fill on
+   hover it needed a corner radius, and a border followed that radius so the line
+   curved away at both ends. The fill is gone; a drawn line is kept because it is
+   the simpler of the two and reaches the full width either way. */
 .quiet-post-row::after{
   content:""; position:absolute; left:0; right:0; bottom:0; height:1px;
   background:var(--line);
@@ -38,8 +39,6 @@ main > .quiet-wrap + .quiet-wrap{border-top:1px solid var(--line);}
 .quiet-lane a.item{display:block; font-size:.88rem; color:var(--ink); padding:.36rem 0;}
 
 @media (max-width:720px){
-  .quiet-featured{grid-template-columns:1fr;}
-  .quiet-featured .cover{order:-1; min-height:150px;}
   .quiet-lanes{grid-template-columns:1fr;}
   .quiet-post-row{grid-template-columns:1fr; gap:.2rem;}
   .quiet-post-row time{order:2; padding-top:.35rem;}

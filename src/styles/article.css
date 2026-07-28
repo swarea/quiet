@@ -133,19 +133,6 @@ figure.quiet-fig figcaption{text-align:center; font-size:.8rem; color:var(--mute
   .quiet-subscribe{margin-left:0; width:100%; justify-content:center;}
 }
 .quiet-author .quiet-monogram{width:52px; height:52px; font-size:1.4rem; border-radius:14px;}
-/* The last of the names. The blog in the rail, the person who left a comment
-   and this one are the same kind of thing, and this was the one still
-   inheriting full ink -- not by decision, but by having no colour of its
-   own. A title is what the reader came for; a name is who is speaking. */
-.quiet-author .n{font-weight:700; color:var(--ink-2);}
-.quiet-author .b{font-size:.86rem; color:var(--muted); margin-top:.2rem;}
-.quiet-prevnext{display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin:var(--block-gap) 0;}
-.quiet-prevnext a{border:1px solid var(--line); border-radius:var(--r-md); padding:.95rem 1.05rem; background:var(--surface); transition:border-color .16s;}
-.quiet-prevnext a:hover{border-color:var(--line-strong);}
-.quiet-prevnext .dir{font-family:var(--mono); font-size:.68rem; color:var(--faint); text-transform:uppercase; letter-spacing:.1em;}
-.quiet-prevnext .t{font-size:.9rem; font-weight:600; margin-top:.35rem; line-height:1.4; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;}
-.quiet-prevnext .next{text-align:right;}
-@media (max-width:560px){ .quiet-prevnext{grid-template-columns:1fr;} }
 .quiet-related{margin:var(--block-gap) 0;}
 /* The label was set smaller and lighter than the titles it introduces, so a
    section read as weaker than its own contents. It leads now. */
@@ -165,7 +152,8 @@ figure.quiet-fig figcaption{text-align:center; font-size:.8rem; color:var(--mute
 .quiet-cbox .cfields input:focus{border-color:var(--accent);}
 /* Posting a comment is the form's commit action, so it stays solid — but a
    filled block this size dominated a box whose real content is the text you
-   type. Smaller, and it lifts on hover instead of shouting at rest. */
+   type. Smaller, and it deepens under the pointer rather than shouting at
+   rest. Nothing here lifts: the ground moves, the button does not. */
 .quiet-cbox .submit{
   margin-left:auto; padding:.4rem .85rem;
   border-radius:var(--r-sm); background:var(--accent); color:var(--on-accent);
