@@ -210,4 +210,21 @@ console.log(`\n== packaged ==`);
 console.log(`  release/${base}.zip   ${(archive.length / 1024).toFixed(1)} KiB, ${entries.length} files, from ${commit}`);
 for (const entry of entries) console.log(`    ${entry.name}`);
 console.log(`  sha256  ${sha}`);
-console.log(`\nnext:  gh release create v${version} release/${base}.zip release/${base}.zip.sha256 --generate-notes`);
+// The changelog entry for this version is the release note. Generated notes
+// list commits, which answers "what was done" rather than "should I upgrade",
+// and this repository already writes the second answer by hand.
+const LF = String.fromCharCode(10);
+const notesPath = join(root, "release", `notes-${version}.md`);
+const changelog = await readFile(join(root, "CHANGELOG.md"), "utf8");
+const section = changelog.split(/^## /m).find((s) => s.startsWith(version + LF));
+if (!section) {
+  console.error(`${LF}CHANGELOG.md has no section for ${version}. Add one before releasing.`);
+  process.exit(1);
+}
+await writeFile(notesPath, `## What changed${LF}${LF}${section.slice(version.length).trim()}${LF}`);
+
+console.log(`${LF}notes:  ${relative(root, notesPath)}`);
+console.log(
+  `next:   gh release create v${version} release/${base}.zip release/${base}.zip.sha256` +
+    ` --title "Quiet ${version}" --notes-file ${relative(root, notesPath)}`,
+);
