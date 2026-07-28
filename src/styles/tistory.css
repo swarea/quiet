@@ -13,8 +13,13 @@
    and the count sits against the name it belongs to. It also has to live in
    this rule, since set separately it loses to the shorthand on specificity. */
 .quiet-cat-tistory li a{display:flex; align-items:center; gap:.35rem; padding:.5rem 2rem .5rem .5rem; border-radius:var(--r-sm); font-size:.9rem; color:var(--muted); transition:color .15s;}
-.quiet-cat-tistory li ul{margin:1px 0 3px .9rem; padding-left:.5rem; border-left:1px solid var(--line);}
+.quiet-cat-tistory li ul{margin:0 0 0 .9rem; padding-left:.5rem; border-left:1px solid var(--line);}
 .quiet-cat-tistory li ul a{font-size:.84rem; color:var(--muted); font-weight:400;}
+/* The column's 1px comes from the gap between siblings, and a sub-list is a
+   child rather than a sibling, so the parent row and the first row under it
+   touched. Stated on that first row instead of on the list, where it sits
+   inside the box that collapses and so costs nothing while it is shut. */
+.quiet-cat-tistory li ul > li:first-child{margin-top:1px;}
 
 /* Hovering darkens rather than colours. The move is inside the neutral scale,
    so it spends nothing the accent is saving for links in prose, and it moves no
@@ -69,7 +74,7 @@
 /* Compact sidebar lists (notices, popular, recent posts, recent comments). */
 /* Titles only. These lists exist to surface something worth opening, so the
    entry is the link and nothing else competes with it. */
-.quiet-side-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column;}
+.quiet-side-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:1px;}
 .quiet-side-list li{font-size:.85rem;}
 .quiet-side-list li a{display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; padding:.36rem var(--rail-inset); border-radius:var(--r-sm); color:var(--muted); transition:color .15s;}
 
@@ -337,7 +342,13 @@ body#tt-body-page .menu_toolbar.toolbar_rb{display:none;}
 .quiet-sub-tt.open{max-height:none;}
 /* The generated markup nests <li> straight into <ul>, so give the panel its
    own scrollable box without breaking the indent guide. */
-.quiet-cat-tistory .quiet-sub-tt{margin:1px 0 3px .9rem; padding-left:.5rem; border-left:1px solid var(--line);}
+/* No vertical space of its own. As margin it survived the collapse; moved to
+   padding it survived too, because a border box cannot be shorter than its own
+   padding however small max-height is set. Either way a category with
+   sub-categories pushed the next row 4px further down than one without. The
+   guide line already says these rows are a branch, so the space it was buying
+   was not needed, and the column is now a steady 1px from top to bottom. */
+.quiet-cat-tistory .quiet-sub-tt{margin:0 0 0 .9rem; padding:0 0 0 .5rem; border-left:1px solid var(--line);}
 
 /* Tistory hangs every category off its "all posts" entry, which made the real
    categories render as an indented, muted sub-branch of a heading — the
