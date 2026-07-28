@@ -35,9 +35,12 @@ them.
 2. **Reading first** — long technical docs, meditations, short diary posts, and
    image-heavy posts must all read comfortably.
 3. **Progressive enhancement** — with JS delayed or failed, reading, menu and
-   category navigation, search, paging, and comments access still work.
+   category navigation, paging, and reading existing comments still work.
    JS only *enhances* (theme toggle, TOC, reading progress, code copy).
    No full-screen loader, ever.
+   Two things are outside this and cannot be brought inside it: search and
+   posting a comment are driven by Tistory's own scripts, which a skin does
+   not replace.
 4. **Original identity** — no layout/structure recognizably cloned from another
    skin (see [tistory-spec.md](tistory-spec.md) clean-room note).
 5. **Maintainability** — human-readable templates/styles/scripts; only the build

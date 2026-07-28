@@ -69,12 +69,49 @@ Referenced as `[##_var_{name}_##]`, conditionally as `<s_if_var_{name}>` /
   used by the current editor are unverified** until inspected on the test
   blog (0.2.0 task).
 
-## Known open questions (verify on test blog, 0.2.0)
+## Verified on the test blog
 
-- Exact behavior of comment/guestbook substitution IDs (duplicate-ID risk noted
-  in the reference skin: it reuses `id="text"`, `id="name"` etc. in both the
-  comment and guestbook forms — our implementation must not).
-- Toolbar/subscribe button integration markup currently required.
+Behaviour confirmed by inspecting the rendered DOM on a live blog, not from the
+official guide. The skin depends on all of it; until now it was recorded only in
+comments beside the code that works around it.
+
+- **Tistory stamps the page type on `<body>` as an id**: `tt-body-index`,
+  `tt-body-category`, `tt-body-search`, `tt-body-tag`, `tt-body-archive`,
+  `tt-body-page`, `tt-body-guestbook`. The skin branches on these.
+- **Tistory's own stylesheets load *after* the skin's.** This is why the rules
+  for the post body and the article toolbar are pitched above them, in places
+  behind an id. Any rule of ours at class level inside the post body may lose.
+- **Enabling covers suppresses `<s_list>` entirely** on the home page. Anything
+  the home page needs — its heading included — has to live inside
+  `<s_cover_group>`, not inside `<s_list>`.
+- **`<s_cover>` items come from one of two sources**, chosen per cover in the
+  blog's settings: entries typed by hand, or recent posts filtered by category
+  and count. There is no source for comments, and none for images alone.
+- **A hand-typed cover item has no date and no category** — only title, summary,
+  url and an optional image.
+- **The share and manage flyouts (`.layer_post`) carry no border.** What looks
+  like one is `box-shadow:0 0 0 1px rgba(0,0,0,.1)`, a fixed black alpha, so
+  setting `border-color` does nothing and a dark page swallows the ring.
+- **Tistory replaces the `<form>` inside `<s_rp_input_form>` and
+  `<s_guest_input_form>`** with its own, discarding any class on it. Styling
+  hooks must go on an inner element.
+- **Tistory rebuilds the controls inside `.container_postbtn`** when a reader
+  likes or subscribes, so any node held from that subtree becomes detached.
+- **Tistory injects `highlight.js` with a light theme from a CDN.** Two of its
+  colours measure 4.01 and 4.54 against the skin's code ground.
+- **`[##_tag_label_rep_##]` joins its anchors with a literal `", "`.**
+- **Tistory renders declared sidebar sections and list blocks even when empty**,
+  and injects an unlabelled `new_ico` image inside list-row titles.
+- **A list row prints a clock time rather than a date for a post published
+  today.**
+
+## Known open questions
+
+- Whether the `_rep_` token families rescope inside a nested reply block
+  (`<s_rp2_rep>`, `<s_guest_reply_rep>`). The skin reuses the parent family
+  there; if they do not rescope, a thread with a reply emits duplicate ids.
+  **Unverified** — the gate cannot see it, because it skips ids whose value is
+  a token.
 - Whether `index.xml` *additions* (new variables) also reset settings, or only
   modifications/renames.
 - Search URL format and `[##_search_..._##]` behavior on list pages.

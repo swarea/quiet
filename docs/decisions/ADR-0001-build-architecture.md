@@ -2,7 +2,7 @@
 
 ## Status
 
-Accepted
+Accepted, and amended — see [Amendment](#amendment-what-was-actually-built).
 
 ## Context
 
@@ -65,3 +65,25 @@ the deliverable is one HTML file.
 - `scripts/check` asserts: required dist files exist, tokens preserved,
   no duplicate static IDs, XML well-formed, budgets (once set).
 - Real verification happens on a test Tistory blog per docs/tistory-spec.md.
+
+## Amendment: what was actually built
+
+The template half of this decision did not survive contact with the skin.
+`skin.html` is written by hand in `src/` and copied into `dist/` byte-identical
+(`scripts/build.mjs`); Nunjucks builds only the mock preview from a separate set
+of views under `src/templates/`, with fixture objects rather than the token
+resolver described above. The styles and scripts halves are as decided.
+
+Why the split happened is not recorded, and this amendment does not invent a
+reason. What can be said is that the consequence this ADR predicted for the
+rejected alternative — "no components, guarantees drift between preview and
+skin" — is the one the project actually pays. The preview has drifted from the
+skin repeatedly: a featured block whose class the skin no longer emitted, a
+list heading missing the class the skin styles it by, a home page still built
+from markup whose rules had been deleted as dead. Each was found by measuring
+the preview against the skin rather than by anything in the build.
+
+The gate does not catch this class of fault, and the two are only kept in step
+by hand. Either the preview should be generated from `skin.html` with the tokens
+resolved — the original decision — or the drift should be checked for. Until one
+of those happens, a pass in the preview says less than this ADR assumes.

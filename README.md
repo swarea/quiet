@@ -67,7 +67,7 @@ What the package contains:
 | `theme` | follow the visitor | which theme a first-time reader sees. Their own choice always wins afterwards |
 | `sidebar` | on | the fixed navigation column on wide screens |
 | `toc` | on | the contents rail beside an article, and the panel on narrow screens |
-| `reading-progress` | on | the thin progress line at the top of an article |
+| `reading-progress` | on | the thin progress line at the top of the window, on every page |
 | `related-posts` | on | other posts from the same category, under an article |
 | `prev-next` | off | links to the posts either side of the one being read. Off by default because on a blog whose categories are small it repeats the related list directly above it |
 
@@ -88,13 +88,18 @@ What the package contains:
 
 ### Changing more than the settings
 
-Every colour in the skin derives from two palettes declared at the top of
-`style.css` as `--light-*` and `--dark-*`. Overriding one of those in the skin
-editor recolours everything that uses it, rather than one rule at a time:
+Every colour that changes with the theme derives from two palettes declared at
+the top of `style.css` as `--light-*` and `--dark-*`. Overriding one of those in
+the skin editor recolours everything that uses it, rather than one rule at a
+time:
 
 ```css
 :root{ --light-surface-2:#f6f4ef; --dark-surface-2:#232830; }
 ```
+
+Three things sit outside those palettes on purpose: the code block, which
+keeps one dark set for both themes; the image lightbox, which is always dark;
+and the print stylesheet, which is always on paper.
 
 Whatever accent is chosen, the text laid on it is decided by measurement rather
 than assumption: the skin compares the accent against black and white and takes
@@ -103,8 +108,10 @@ whichever a reader can actually read.
 ## Browser support
 
 Compiled for Chrome, Edge and Firefox 100+, Safari and iOS 15+, and Samsung
-Internet 16+. The validation gate fails the build if the stylesheet outruns
-those targets.
+Internet 16+. The gate checks the two things the compiler is asked to rewrite
+and can silently fail to: modern media-range syntax, and `color-mix` without a
+fallback. Everything newer than the targets is guarded in the stylesheet by
+hand — `:has()` behind `@supports` — rather than caught by the gate.
 
 ## Develop
 
