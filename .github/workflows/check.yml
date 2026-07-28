@@ -8,6 +8,8 @@ on:
   pull_request:
   push:
     branches: [main]
+  # Runnable by hand, so the gate can be exercised without inventing a commit.
+  workflow_dispatch:
 
 permissions:
   contents: read
