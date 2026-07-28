@@ -10,10 +10,10 @@
     <name>Quiet</name>
     <version>0.3.0</version>
     <description>
-      <![CDATA[글이 잘 읽히도록 여백과 글자 크기를 맞춘 티스토리 스킨입니다. 라이트와 다크를 각각 설계했고, 목차·카테고리 접기·코드 복사·이미지 확대를 지원합니다. 티스토리가 넣는 댓글창과 공감·공유 버튼까지 같은 톤으로 맞췄습니다. 영문 서체를 스킨 안에 담아 외부 서버 없이도 의도한 글자로 나옵니다. 스크립트가 꺼져도 글과 메뉴, 카테고리 이동은 그대로 동작합니다.]]>
+      <![CDATA[A skin for long-form reading. Light and dark are designed separately, and the comment box, post toolbar and share panels Tistory injects are restyled to match. Includes a contents rail, a collapsible category tree, copy buttons on code and click-to-zoom on images. The Latin typeface is bundled, so the skin renders as designed without reaching an external server. Reading, menus and category navigation work with JavaScript disabled.]]>
     </description>
     <license>
-      <![CDATA[스킨은 MIT License로, 자유롭게 사용·수정·재배포할 수 있으며 저작권 고지만 유지하면 됩니다. 함께 들어 있는 영문 서체는 Pretendard에서 잘라낸 것으로 SIL Open Font License 1.1을 따릅니다(images/OFL.txt). https://github.com/swarea/quiet]]>
+      <![CDATA[MIT License for the skin: use, modify and redistribute it, keeping the copyright notice. The bundled Latin typeface is a subset of Pretendard under the SIL Open Font License 1.1 (see images/OFL.txt). https://github.com/swarea/quiet]]>
     </license>
   </information>
   <author>
@@ -38,12 +38,12 @@
     <showListOnCategory>1</showListOnCategory>
     <showListOnArchive>1</showListOnArchive>
     <commentMessage>
-      <none>댓글이 없습니다.</none>
-      <single>댓글 &lt;span class="cnt"&gt;하나&lt;/span&gt; 달렸습니다.</single>
+      <none>No comments yet.</none>
+      <single>&lt;span class="cnt"&gt;1&lt;/span&gt; comment</single>
     </commentMessage>
     <trackbackMessage>
-      <none>트랙백이 없습니다.</none>
-      <single>트랙백이 &lt;span class="cnt"&gt;하나&lt;/span&gt; 달렸습니다.</single>
+      <none>No trackbacks yet.</none>
+      <single>&lt;span class="cnt"&gt;1&lt;/span&gt; trackback</single>
     </trackbackMessage>
     <tree>
       <color>565b62</color>
@@ -58,110 +58,110 @@
   <cover>
     <item>
       <name>masthead</name>
-      <label><![CDATA[소개]]></label>
-      <description><![CDATA[홈 맨 위에 놓일 소개말입니다. 콘텐츠를 '직접 입력'으로 두고 글을 하나만 추가하세요. 커버 타이틀은 그 위에 작게, 글 제목은 크게, 내용은 그 아래에 놓입니다.]]></description>
+      <label><![CDATA[Introduction]]></label>
+      <description><![CDATA[The opening band at the top of the home page. Set its content to Direct entry and add one item: the cover title becomes the small line above, the item's title the headline, and its body the line below.]]></description>
     </item>
     <item>
       <name>list</name>
-      <label><![CDATA[리스트]]></label>
-      <description><![CDATA[글을 한 줄씩 목록으로 보여줍니다.]]></description>
+      <label><![CDATA[List]]></label>
+      <description><![CDATA[Posts in a single column.]]></description>
     </item>
     <item>
       <name>featured</name>
-      <label><![CDATA[대표 글]]></label>
-      <description><![CDATA[글 몇 개를 큰 카드로 앞세웁니다. 홈을 목록이 아니라 입구로 만들 때 씁니다.]]></description>
+      <label><![CDATA[Featured]]></label>
+      <description><![CDATA[One post at a time, with its image beside it. Use this to open the home page with a single piece of writing rather than a list.]]></description>
     </item>
     <item>
       <name>grid</name>
-      <label><![CDATA[주제 묶음]]></label>
-      <description><![CDATA[글을 카테고리별 묶음으로 보여줍니다.]]></description>
+      <label><![CDATA[Topics]]></label>
+      <description><![CDATA[Posts grouped by category, in a grid.]]></description>
     </item>
   </cover>
   <variables>
-    <variablegroup name="스킨 설정">
+    <variablegroup name="Skin settings">
       <variable>
         <name>sidebar</name>
-        <label><![CDATA[사이드바 사용]]></label>
-        <description><![CDATA[왼쪽 사이드바를 표시합니다.]]></description>
+        <label><![CDATA[Sidebar]]></label>
+        <description><![CDATA[Show the navigation column on wide screens.]]></description>
         <type>BOOL</type>
         <default>true</default>
       </variable>
       <variable>
         <name>toc</name>
-        <label><![CDATA[목차 사용]]></label>
-        <description><![CDATA[글에 제목이 있을 때만 자동으로 표시됩니다.]]></description>
+        <label><![CDATA[Contents rail]]></label>
+        <description><![CDATA[Shown beside an article that has headings, and as a panel on narrow screens.]]></description>
         <type>BOOL</type>
         <default>true</default>
       </variable>
       <variable>
         <name>reading-progress</name>
-        <label><![CDATA[읽기 진행률 표시]]></label>
-        <description><![CDATA[화면 상단에 읽은 비율을 얇은 막대로 표시합니다.]]></description>
+        <label><![CDATA[Reading progress]]></label>
+        <description><![CDATA[A thin line at the top of the window showing how far down the page you are.]]></description>
         <type>BOOL</type>
         <default>true</default>
       </variable>
       <variable>
         <name>lang</name>
-        <label><![CDATA[글을 쓰는 언어]]></label>
-        <description><![CDATA[블로그의 기본 언어입니다. 글과 목록은 각자 내용을 보고 알아서 판별하니 대개 그대로 두셔도 됩니다. 화면 낭독기가 어떤 발음으로 읽을지를 정합니다.]]></description>
+        <label><![CDATA[Blog language]]></label>
+        <description><![CDATA[The language this blog is mostly written in. Individual posts and lists detect their own, so this rarely needs changing. It decides how a screen reader pronounces the page.]]></description>
         <type>SELECT</type>
-        <option>[{"name":"ko","label":"한국어","value":"ko"},{"name":"en","label":"English","value":"en"}]</option>
+        <option>[{"name":"ko","label":"Korean","value":"ko"},{"name":"en","label":"English","value":"en"}]</option>
         <default>ko</default>
       </variable>
       <variable>
         <name>home-eyebrow</name>
-        <label><![CDATA[홈 소개 머리말]]></label>
-        <description><![CDATA[소개 문구 위에 작게 놓일 한 마디입니다. 짧을수록 좋고, 비워두면 나오지 않습니다.]]></description>
+        <label><![CDATA[Home: small line]]></label>
+        <description><![CDATA[A short line above the home headline. Hidden when empty.]]></description>
         <type>STRING</type>
         <default><![CDATA[]]></default>
       </variable>
       <variable>
         <name>home-headline</name>
-        <label><![CDATA[홈 소개 문구]]></label>
-        <description><![CDATA[홈 맨 위에 크게 놓일 한 줄입니다. 비워두면 글 목록 제목이 그대로 나옵니다.]]></description>
+        <label><![CDATA[Home: headline]]></label>
+        <description><![CDATA[The opening line on the home page. Left empty, Tistory's own list title is used.]]></description>
         <type>STRING</type>
         <default><![CDATA[]]></default>
       </variable>
       <variable>
         <name>home-tagline</name>
-        <label><![CDATA[홈 소개 설명]]></label>
-        <description><![CDATA[소개 문구 아래에 놓일 한 줄입니다. 소개 문구를 채운 경우에만 보입니다.]]></description>
+        <label><![CDATA[Home: supporting line]]></label>
+        <description><![CDATA[A line below the headline. Shown only when the headline is set.]]></description>
         <type>STRING</type>
         <default><![CDATA[]]></default>
       </variable>
       <variable>
         <name>accent-light</name>
-        <label><![CDATA[강조색 (라이트)]]></label>
-        <description><![CDATA[링크와 강조에 쓰이는 색입니다. 밝은 배경에서 읽히는 색으로 고르세요.]]></description>
+        <label><![CDATA[Accent colour (light)]]></label>
+        <description><![CDATA[Links and emphasis on light backgrounds. Choose a colour that reads against white.]]></description>
         <type>COLOR</type>
         <default>#38548c</default>
       </variable>
       <variable>
         <name>accent-dark</name>
-        <label><![CDATA[강조색 (다크)]]></label>
-        <description><![CDATA[다크 모드에서 쓰이는 강조색입니다. 어두운 배경에서 읽히는 밝은 색으로 고르세요.]]></description>
+        <label><![CDATA[Accent colour (dark)]]></label>
+        <description><![CDATA[The same for dark mode. Choose a colour that reads against a dark background.]]></description>
         <type>COLOR</type>
         <default>#90a8e0</default>
       </variable>
       <variable>
         <name>theme</name>
-        <label><![CDATA[기본 테마]]></label>
-        <description><![CDATA[처음 방문한 독자에게 보여줄 테마입니다. 독자가 직접 바꾸면 그 선택이 우선합니다.]]></description>
+        <label><![CDATA[Default theme]]></label>
+        <description><![CDATA[The theme a first-time visitor sees. Their own choice takes over once they make one.]]></description>
         <type>SELECT</type>
-        <option>[{"name":"system","label":"방문자 설정 따름","value":"system"},{"name":"light","label":"라이트","value":"light"},{"name":"dark","label":"다크","value":"dark"}]</option>
+        <option>[{"name":"system","label":"Follow visitor","value":"system"},{"name":"light","label":"Light","value":"light"},{"name":"dark","label":"Dark","value":"dark"}]</option>
         <default>system</default>
       </variable>
       <variable>
         <name>prev-next</name>
-        <label><![CDATA[이전·다음 글 표시]]></label>
-        <description><![CDATA[글 하단에 바로 앞뒤 순서의 글로 이동하는 링크를 보여줍니다.]]></description>
+        <label><![CDATA[Previous and next post]]></label>
+        <description><![CDATA[Links to the posts either side of the one being read.]]></description>
         <type>BOOL</type>
         <default>false</default>
       </variable>
       <variable>
         <name>related-posts</name>
-        <label><![CDATA[관련 글 표시]]></label>
-        <description><![CDATA[글 하단에 같은 카테고리의 다른 글을 보여줍니다.]]></description>
+        <label><![CDATA[Related posts]]></label>
+        <description><![CDATA[Other posts from the same category, shown below an article.]]></description>
         <type>BOOL</type>
         <default>true</default>
       </variable>

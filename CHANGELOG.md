@@ -13,7 +13,7 @@ does. Note your accent colours and home copy before uploading.
   Pretendard at build time and renamed as the licence requires. Hangul uses the
   reader's system font. See
   [ADR-0003](docs/decisions/ADR-0003-bundled-latin.md).
-- A `소개` (Introduction) cover type for the home page's opening band. The three
+- An Introduction cover type for the home page's opening band. The three
   home settings meant to produce it could not: they lived in the list block,
   which Tistory does not render once covers are enabled.
 - Language detection. A post is marked from its own text; a page of titles can

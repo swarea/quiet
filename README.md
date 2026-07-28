@@ -57,36 +57,31 @@ loading.
 | Mobile web | off | the skin is responsive and handles narrow screens itself |
 | Covers | at least one | without any, Tistory serves the plain post list and the home page matches the category archive |
 
-Four cover types are available. The names below are the labels as they appear in
-the cover editor.
+Four cover types are available:
 
-| Cover | English | Purpose |
-| --- | --- | --- |
-| `소개` | Introduction | the opening band. The cover's own title becomes the small line above it; a single hand-entered item supplies the headline and the line below |
-| `리스트` | List | posts in one column |
-| `대표 글` | Featured | one post with its image beside it |
-| `주제 묶음` | Topics | a grid grouped by category |
+| Cover | Purpose |
+| --- | --- |
+| Introduction | the opening band. The cover's own title becomes the small line above it; a single hand-entered item supplies the headline and the line below |
+| List | posts in one column |
+| Featured | one post with its image beside it |
+| Topics | a grid grouped by category |
 
 ### Settings
 
-Tistory's admin interface is Korean, so this skin's settings are labelled in
-Korean to match it. The table gives the label as it appears in the skin editor
-alongside the variable name used in `index.xml`.
-
-| Label in the editor | Variable | Default | Effect |
+| Setting | Variable | Default | Effect |
 | --- | --- | --- | --- |
-| 글을 쓰는 언어 | `lang` | `ko` | the blog's language, applied before scripts run. Individual pages then detect their own |
-| 홈 소개 머리말 | `home-eyebrow` | empty | a short line above the home headline |
-| 홈 소개 문구 | `home-headline` | empty | the home page's opening line |
-| 홈 소개 설명 | `home-tagline` | empty | a line below the headline. Requires a headline |
-| 강조색 (라이트) | `accent-light` | `#38548c` | link and emphasis colour on light backgrounds |
-| 강조색 (다크) | `accent-dark` | `#90a8e0` | the same for dark backgrounds |
-| 기본 테마 | `theme` | follow visitor | the theme a first-time visitor sees |
-| 사이드바 사용 | `sidebar` | on | the fixed navigation column on wide screens |
-| 목차 사용 | `toc` | on | the contents rail, and its panel on narrow screens |
-| 읽기 진행률 표시 | `reading-progress` | on | the progress line at the top of the window |
-| 관련 글 표시 | `related-posts` | on | other posts from the same category, below an article |
-| 이전·다음 글 표시 | `prev-next` | off | links to adjacent posts. Off by default because it duplicates the related list on blogs with small categories |
+| Blog language | `lang` | Korean | the language this blog is mostly written in, applied before scripts run. Individual pages then detect their own |
+| Home: small line | `home-eyebrow` | empty | a short line above the home headline |
+| Home: headline | `home-headline` | empty | the home page's opening line |
+| Home: supporting line | `home-tagline` | empty | a line below the headline. Requires a headline |
+| Accent colour (light) | `accent-light` | `#38548c` | links and emphasis on light backgrounds |
+| Accent colour (dark) | `accent-dark` | `#90a8e0` | the same for dark backgrounds |
+| Default theme | `theme` | follow visitor | the theme a first-time visitor sees |
+| Sidebar | `sidebar` | on | the navigation column on wide screens |
+| Contents rail | `toc` | on | the contents rail, and its panel on narrow screens |
+| Reading progress | `reading-progress` | on | the line at the top of the window |
+| Related posts | `related-posts` | on | other posts from the same category, below an article |
+| Previous and next post | `prev-next` | off | links to adjacent posts. Off by default because it duplicates the related list on blogs with small categories |
 
 Settings left empty are hidden rather than rendered blank.
 
