@@ -336,6 +336,7 @@ try {
 const PAIRS = [
   ["--ink", "--paper"], ["--ink", "--surface"], ["--ink", "--surface-2"],
   ["--ink-2", "--paper"], ["--ink-2", "--surface"],
+  ["--nav", "--paper"], ["--nav", "--surface"],
   ["--muted", "--paper"], ["--muted", "--surface"], ["--muted", "--surface-2"],
   ["--faint", "--paper"], ["--faint", "--surface"],
   ["--accent", "--paper"], ["--accent", "--surface"], ["--accent", "--accent-wash"],
