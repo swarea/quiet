@@ -385,10 +385,16 @@ html.quiet-js .quiet-cat-tistory ul ul ul.open{max-height:none;}
 
 /* The share popup's tail is a sprite in a fixed light colour, so on a dark
    page the panel ended in a pale wedge. Drawn instead as a rotated square that
-   takes the panel's own surface and hairline. */
+   takes the panel's own surface and hairline.
+
+   It carries no shadow of its own. The wedge overlaps the panel by about half
+   its height, so a shadow cast from here landed on the panel's own background
+   and drew two short strokes across it -- the seam that made one bubble read as
+   two pieces stuck together. Tistory's sprite carries no shadow either: the
+   panel's is the only one in the picture, and the wedge is simply part of its
+   outline. */
 .quiet-article-body .layer_post .ico_arrbt{
   overflow:visible; background:none; width:1.25rem; height:.6rem;
-  filter:drop-shadow(0 2px 2px var(--drop));
 }
 .quiet-article-body .layer_post .ico_arrbt::after{
   content:""; position:absolute; left:50%; top:-.34rem;

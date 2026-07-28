@@ -19,7 +19,6 @@
   --light-accent:#38548c; --light-accent-ink:#2a4170; --light-accent-wash:#eef1f7;
   --light-on-accent:#ffffff; --light-warm:#8d632f;
   --light-ccl-filter:none;
-  --light-drop:rgba(20,22,28,.13);
   --light-shadow:0 1px 2px rgba(20,22,28,.04), 0 6px 22px -12px rgba(20,22,28,.14);
   --light-shadow-lg:0 2px 6px rgba(20,22,28,.05), 0 20px 48px -22px rgba(20,22,28,.28);
 
@@ -30,7 +29,6 @@
   --dark-accent:#90a8e0; --dark-accent-ink:#a9bdec; --dark-accent-wash:#1b2233;
   --dark-on-accent:#101216; --dark-warm:#cda56a;
   --dark-ccl-filter:invert(1) brightness(1.6);
-  --dark-drop:rgba(0,0,0,.55);
   --dark-shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 30px -14px rgba(0,0,0,.6);
   --dark-shadow-lg:0 2px 6px rgba(0,0,0,.4), 0 24px 60px -24px rgba(0,0,0,.75);
 
@@ -62,7 +60,6 @@
   --accent:var(--light-accent); --accent-ink:var(--light-accent-ink); --accent-wash:var(--light-accent-wash);
   --on-accent:var(--light-on-accent); --warm:var(--light-warm);
   --ccl-filter:var(--light-ccl-filter);
-  --drop:var(--light-drop);
   --shadow:var(--light-shadow); --shadow-lg:var(--light-shadow-lg);
   color-scheme:light;
 }
@@ -76,7 +73,6 @@
     --accent:var(--dark-accent); --accent-ink:var(--dark-accent-ink); --accent-wash:var(--dark-accent-wash);
     --on-accent:var(--dark-on-accent); --warm:var(--dark-warm);
     --ccl-filter:var(--dark-ccl-filter);
-    --drop:var(--dark-drop);
     --shadow:var(--dark-shadow); --shadow-lg:var(--dark-shadow-lg);
     color-scheme:dark;
   }
@@ -90,7 +86,6 @@
   --accent:var(--dark-accent); --accent-ink:var(--dark-accent-ink); --accent-wash:var(--dark-accent-wash);
   --on-accent:var(--dark-on-accent); --warm:var(--dark-warm);
   --ccl-filter:var(--dark-ccl-filter);
-  --drop:var(--dark-drop);
   --shadow:var(--dark-shadow); --shadow-lg:var(--dark-shadow-lg);
   color-scheme:dark;
 }
