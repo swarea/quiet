@@ -10,18 +10,12 @@
    and read as a single thicker rule. Covers stack directly in <main>, so that is
    where the separator belongs. */
 main > .quiet-wrap + .quiet-wrap{border-top:1px solid var(--line);}
-/* Hovering a row lifts its words rather than painting a panel behind them. The
-   fill was the largest area of colour on a page built from hairlines, and it
-   was the reason for a chain of corrections: it needed a radius, the radius
-   disagreed with the divider, the divider had to be inset to avoid it. None of
-   that is needed once the row answers with its own text.
-
-   The title rests a step back and steps forward under the pointer, the same
-   move the sidebar makes. Earlier attempts each spent something: a fill was the
-   largest area of colour on a page made of hairlines, the accent is saved for
-   links in prose, a heavier weight left the letters resettling inside a box
-   that had not moved, and an underline was louder than the row it marked.
-   Darkening within the neutral scale spends none of them. */
+/* A row title carries full ink from the moment it is drawn. Nothing about it
+   answers a pointer: the cursor already says the row is a link, and a keyboard
+   still gets its focus ring. Emphasis that has to be summoned is emphasis the
+   reader has to go looking for, which is the opposite of what a list of titles
+   is for. Navigation still rests back and steps forward -- there the point is
+   to separate one entry from its neighbours, not to be read. */
 .quiet-post-row{position:relative; display:grid; grid-template-columns:5.5rem 1fr; gap:1.4rem; padding:1.05rem .9rem;}
 /* The divider is drawn rather than bordered. A border follows the corner radius
    the hover fill needs, so the line curved away at both ends; a line of its own
@@ -33,16 +27,14 @@ main > .quiet-wrap + .quiet-wrap{border-top:1px solid var(--line);}
 .quiet-post-row:last-child::after{display:none;}
 .quiet-post-row time{font-family:var(--mono); font-size:.76rem; color:var(--faint); padding-top:.25rem; white-space:nowrap;}
 .quiet-post-row .cat{display:block; font-size:.75rem; color:var(--accent); font-weight:600; margin-bottom:.18rem;}
-.quiet-post-row h2{font-size:1.05rem; font-weight:600; line-height:1.5; color:var(--ink-2); transition:color .15s;}
-.quiet-post-row:hover h2,.quiet-post-row:focus-visible h2{color:var(--ink);}
+.quiet-post-row h2{font-size:1.05rem; font-weight:600; line-height:1.5; color:var(--ink);}
 .quiet-post-row p{color:var(--muted); font-size:.86rem; margin-top:.32rem; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;}
 
 .quiet-topics{padding:2.2rem 0 3.2rem; border-top:1px solid var(--line);}
 .quiet-lanes{display:grid; grid-template-columns:repeat(3,1fr); gap:1.6rem 2.2rem;}
 .quiet-lane h3{font-size:.92rem; font-weight:700; display:flex; align-items:center; gap:.5rem; padding-bottom:.6rem; margin-bottom:.6rem; border-bottom:1px solid var(--line-strong);}
 .quiet-lane h3::before{content:""; width:7px; height:7px; border-radius:2px; background:var(--accent); flex:none;}
-.quiet-lane a.item{display:block; font-size:.88rem; color:var(--muted); padding:.36rem 0; transition:color .15s;}
-.quiet-lane a.item:hover,.quiet-lane a.item:focus-visible{color:var(--ink);}
+.quiet-lane a.item{display:block; font-size:.88rem; color:var(--ink); padding:.36rem 0;}
 
 @media (max-width:720px){
   .quiet-featured{grid-template-columns:1fr;}
