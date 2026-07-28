@@ -60,3 +60,30 @@ Request **Pretendard** at runtime, keeping the system stack as the fallback.
 - `scripts/check.mjs` keeps the token and structure gates green.
 - Verified on the test blog that the page renders immediately and the face
   swaps in, and that blocking the CDN still leaves the skin fully usable.
+
+## What self-hosting would actually cost
+
+Measured on the live blog, so the question does not have to be reopened from
+memory.
+
+The dynamic subset declares **92 `@font-face` blocks, one per unicode range**,
+each backed by its own file of roughly 34-37 KB. An article page in Korean and
+English downloaded **three of them, about 107 KB**. The rest are never fetched
+because no glyph on the page falls in their range.
+
+Bundling means choosing between three bad shapes:
+
+- **All 92 files** — about 3.2 MB in the package, uploaded by hand through the
+  skin editor, and re-uploaded on every version bump.
+- **The single unsubset variable font** — one file of roughly 1.2 MB, which
+  every reader downloads in full to render a page that needed 107 KB.
+- **Subsetting ourselves** — the only sensible size, but it adds a Python
+  toolchain to a build that currently needs only Node, and it means shipping a
+  font we cut, whose coverage is then ours to get wrong.
+
+The licence permits redistribution (OFL 1.1), so this is a cost question rather
+than a permission one, and the cost is worse than the risk it buys off. If the
+CDN goes away the skin falls back to a system stack that covers Korean and Latin
+on every target platform; the design changes, nothing breaks. Revisit if Tistory
+ever allows uploading arbitrary files, which would remove the hand-upload
+objection but not the size one.
