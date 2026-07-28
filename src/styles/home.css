@@ -29,7 +29,9 @@ main > .quiet-wrap + .quiet-wrap{border-top:1px solid var(--line);}
 .quiet-post-row:last-child::after{display:none;}
 .quiet-post-row time{font-family:var(--mono); font-size:.76rem; color:var(--faint); padding-top:.25rem; white-space:nowrap;}
 .quiet-post-row .cat{display:block; font-size:.75rem; color:var(--accent); font-weight:600; margin-bottom:.18rem;}
-.quiet-post-row h2{font-size:1.05rem; font-weight:600; line-height:1.5; color:var(--ink);}
+/* The same row appears under a page heading and under a cover heading, one
+   level apart, so both levels are styled the same. */
+.quiet-post-row :is(h2,h3){font-size:1.05rem; font-weight:600; line-height:1.5; color:var(--ink);}
 .quiet-post-row p{color:var(--muted); font-size:.86rem; margin-top:.32rem; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;}
 
 .quiet-topics{padding:2.2rem 0 3.2rem; border-top:1px solid var(--line);}

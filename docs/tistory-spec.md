@@ -105,6 +105,16 @@ comments beside the code that works around it.
 - **A list row prints a clock time rather than a date for a post published
   today.**
 
+## Known limitations we have chosen to keep
+
+- **The pager renders outside `<main>`.** `<s_paging>` sits between the list
+  block and the guestbook block, so it is a sibling of both landmarks rather
+  than a child of either. Moving it inside the list block would put it in the
+  right landmark on list pages and remove it from the guestbook, which is also
+  paginated. Whether Tistory honours more than one `<s_paging>` is unverified,
+  and guessing risks a skin the editor rejects outright. On the guestbook the
+  visual order is corrected in CSS; the reading order is not.
+
 ## Known open questions
 
 - Whether the `_rep_` token families rescope inside a nested reply block

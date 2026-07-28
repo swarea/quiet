@@ -143,6 +143,7 @@ every build packages them.
   and the clean-room policy
 - [docs/roadmap.md](docs/roadmap.md): release milestones and gates
 - [docs/decisions/](docs/decisions/): architecture decision records
+- [CHANGELOG.md](CHANGELOG.md): what changed, by release
 - [CONTRIBUTING.md](CONTRIBUTING.md): workflow rules (single source)
 - [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md): the typeface and the build
   tools
