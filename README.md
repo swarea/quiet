@@ -1,15 +1,13 @@
 # Quiet
 
-A Tistory skin for a blog you intend to keep.
+A quiet, professional Tistory skin for reading.
 
-Most skins are made to look right in a screenshot. This one is made to be read
-in for an hour, and to still be worth reading in three years. In practice that
-means refusing most of what a skin can do: nothing animates, nothing moves under
-the pointer, and colour is spent almost nowhere. What is left is the writing —
-set for Korean and Latin together, on a palette chosen for long sittings rather
-than for a first impression.
+The design tries to be the thing you stop noticing. Korean and Latin are set
+together rather than one after the other, light and dark are each drawn on their
+own terms, and the palette is chosen for long sittings. Emphasis is spent
+sparingly, so that when something is emphasised it means something.
 
-It is built for a blog where a technical note and a diary entry sit next to each
+It suits a blog where a technical note and a personal entry sit next to each
 other and neither looks out of place.
 
 Built from scratch by [swarea](https://github.com/swarea). Not a derivative of
@@ -17,23 +15,26 @@ any existing skin, and not affiliated with Tistory or Kakao.
 
 ## How it decides
 
-Four rules settle almost every question the design has had to answer. They are
-written down because most of the work was learning which of them applies.
+Four rules settle most of the questions this design has had to answer. They are
+written down because much of the work has been learning which one applies.
 
 **What you read arrives whole.** A post title, a heading, a list of titles — all
 at full strength from the moment they are drawn. Emphasis a reader has to summon
 by hovering is emphasis they have to go looking for.
 
 **What you click answers.** Navigation rests a shade back and darkens under the
-pointer; a button says it was pressed. A sidebar link has no underline and no
+pointer; a button says it was pressed. A sidebar link carries no underline and no
 colour of its own, so without that answer nothing distinguishes it from a label.
 
-**Nothing moves.** No lift, no slide, no change of weight. A box that shifts
-under the cursor reads as the page failing rather than as the link responding.
+**Nothing moves under the pointer.** No lift, no slide, no change of weight. A
+box that shifts under the cursor reads as the page failing rather than as the
+link responding. Motion is kept for things that open or arrive — a category tree
+unfolding, the sidebar sliding in on a narrow screen — and every one of them
+stops when the reader has asked for reduced motion.
 
 **The accent is saved.** One colour, spent on links inside prose, on category
 labels, and on the button that posts a comment. Everywhere else, emphasis is a
-change of lightness within one neutral scale.
+change of lightness within a single neutral scale.
 
 > **Status: 0.2.1, unreleased.** 0.2.0 is the published release. Every screen has
 > been opened on a live Tistory blog in both themes, and in Safari as well as
