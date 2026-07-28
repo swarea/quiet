@@ -54,6 +54,9 @@ What the package contains:
 
 | Setting | Default | Effect |
 | --- | --- | --- |
+| `home-eyebrow` | empty | a short line above the headline. Hidden when empty |
+| `home-headline` | empty | the opening line on the home page. Empty leaves Tistory's own list title |
+| `home-tagline` | empty | a line under the headline. Shown only when the headline is set |
 | `accent-light` | `#38548c` | the colour of links and emphasis on a light page |
 | `accent-dark` | `#90a8e0` | the same, for dark. Pick something that reads on a dark ground |
 | `theme` | follow the visitor | which theme a first-time reader sees. Their own choice always wins afterwards |

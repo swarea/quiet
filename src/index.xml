@@ -96,6 +96,13 @@
         <default>true</default>
       </variable>
       <variable>
+        <name>home-eyebrow</name>
+        <label><![CDATA[홈 소개 머리말]]></label>
+        <description><![CDATA[소개 문구 위에 작게 놓일 한 마디입니다. 짧을수록 좋고, 비워두면 나오지 않습니다.]]></description>
+        <type>STRING</type>
+        <default><![CDATA[]]></default>
+      </variable>
+      <variable>
         <name>home-headline</name>
         <label><![CDATA[홈 소개 문구]]></label>
         <description><![CDATA[홈 맨 위에 크게 놓일 한 줄입니다. 비워두면 글 목록 제목이 그대로 나옵니다.]]></description>

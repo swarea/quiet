@@ -1,6 +1,7 @@
 /* Home: intro, featured, recent list, topic lanes. */
 .quiet-intro{padding:3.6rem 0 2.6rem;}
 .quiet-intro .quiet-eyebrow{display:inline-block; margin-bottom:.95rem;}
+.quiet-intro .quiet-eyebrow:empty{display:none;}
 .quiet-intro h1{font-size:clamp(1.55rem,3.2vw,2.15rem); line-height:1.42; font-weight:700; letter-spacing:-.015em; text-wrap:balance; max-width:38rem;}
 .quiet-intro p{margin-top:.9rem; color:var(--muted); font-size:1rem; max-width:34rem;}
 

@@ -26,7 +26,7 @@ svg[fill="none"][stroke="currentColor"]{stroke-linecap:round; stroke-linejoin:ro
 .quiet-skip:focus{transform:none;}
 #quiet-main:focus{outline:none;}
 .quiet-eyebrow{font-family:var(--mono); font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); font-weight:600;}
-.quiet-section-tag{display:flex; align-items:baseline; justify-content:space-between; margin-bottom:1.15rem;}
+.quiet-section-tag{display:flex; align-items:baseline; gap:1rem; margin-bottom:1.15rem;}
 /* Section headings carry real Korean sentences on a live blog — a category
    name, "댓글 4", a cover title. Monospace with wide tracking pulls Hangul
    syllables apart into unreadable specks, so these stay in the body face.
@@ -36,7 +36,7 @@ svg[fill="none"][stroke="currentColor"]{stroke-linecap:round; stroke-linejoin:ro
 /* The title is optional in the cover settings, and an empty one left the
    link hanging on its own against the right edge. */
 .quiet-section-tag h2:empty{display:none;}
-.quiet-section-tag a{font-size:.8rem; color:var(--accent); transition:opacity .15s; white-space:nowrap;}
+.quiet-section-tag a{margin-left:auto; font-size:.8rem; color:var(--accent); transition:opacity .15s; white-space:nowrap;}
 .quiet-section-tag a:hover{opacity:.7;}
 
 .quiet-wrap{max-width:var(--wide); margin:0 auto; padding:0 2rem;}
