@@ -8,6 +8,7 @@ import { createServer } from "node:http";
 import esbuild from "esbuild";
 import { transform } from "lightningcss";
 import nunjucks from "nunjucks";
+import { buildFont } from "./font.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
@@ -82,6 +83,11 @@ async function build() {
   const [css, js, htmlFiles] = await Promise.all([buildCss(), buildJs(), buildHtml()]);
   await writeFile(join(outDir, "styles.css"), css);
   await writeFile(join(outDir, "app.js"), js);
+  // The stylesheet asks for images/quiet-latin.woff2 relative to itself, so the
+  // preview needs the same shape or it silently falls back to a system font and
+  // stops previewing the typeface it exists to preview.
+  await mkdir(join(outDir, "images"), { recursive: true });
+  await writeFile(join(outDir, "images", "quiet-latin.woff2"), (await buildFont()).data);
   for (const f of htmlFiles) await writeFile(join(outDir, f.name), f.content);
 
   const list = (await readdir(outDir)).sort();
@@ -104,22 +110,32 @@ async function buildSkinPackage() {
   await writeFile(join(distDir, "style.css"), css);
   await writeFile(join(distDir, "images", "app.js"), js);
 
+  // The Latin half of the typeface, cut from the full variable font so the
+  // design does not rest on a third party staying up. See scripts/font.mjs.
+  const font = await buildFont();
+  await writeFile(join(distDir, "images", "quiet-latin.woff2"), font.data);
+  await writeFile(
+    join(distDir, "images", "OFL.txt"),
+    await readFile(join(root, "src", "fonts", "OFL.txt")),
+  );
+
   // Static assets (preview thumbnails, icons) ship alongside. Generate the
   // previews once with scripts/make-previews.html and drop them in src/assets.
   const assetDir = join(root, "src", "assets");
   const copied = [];
   try {
-    for (const name of await readdir(assetDir)) {
-      if (name.endsWith(".md")) continue; // notes for maintainers, not assets
-      await writeFile(join(distDir, name), await readFile(join(assetDir, name)));
-      copied.push(name);
+    for (const entry of await readdir(assetDir, { withFileTypes: true })) {
+      if (!entry.isFile()) continue; // a directory here would abort the loop
+      if (entry.name.endsWith(".md")) continue; // notes for maintainers
+      await writeFile(join(distDir, entry.name), await readFile(join(assetDir, entry.name)));
+      copied.push(entry.name);
     }
   } catch {
     /* no assets yet */
   }
 
   console.log("built tistory package → dist");
-  for (const f of ["skin.html", "index.xml", "style.css", "images/app.js", ...copied]) {
+  for (const f of ["skin.html", "index.xml", "style.css", "images/app.js", "images/quiet-latin.woff2", ...copied]) {
     console.log(`  ${f}`);
   }
   const previews = ["preview256.jpg", "preview560.jpg", "preview1600.jpg"];

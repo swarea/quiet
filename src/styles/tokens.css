@@ -1,3 +1,22 @@
+/* The Latin half of the typeface, cut from the full variable font and shipped
+   inside the skin, so the letters the design was drawn for do not depend on a
+   third party staying up. Korean is deliberately not in it: 11,172 syllables
+   measure 1.7 MB and there is no honest way to guess which of them a blog will
+   use, so Hangul comes from the reader's own system font -- which is what this
+   typeface was drawn to sit beside, its metrics following the platform default.
+   The unicode-range means a page with no Latin on it never asks for the file.
+
+   Renamed because the original is OFL 1.1 with a Reserved Font Name and a
+   subset is a modified version. images/OFL.txt travels with it. */
+@font-face{
+  font-family:"Quiet Latin";
+  src:url("images/quiet-latin.woff2") format("woff2");
+  font-weight:300 800;
+  font-style:normal;
+  font-display:swap;
+  unicode-range:U+0000-024F,U+2000-206F,U+2190-21FF,U+2200-22FF,U+00B0-00B1,U+00D7,U+00F7;
+}
+
 /* Design tokens.
    Components never name a colour; they name a role, and the role is bound to a
    palette here.
@@ -49,7 +68,7 @@
   --r-sm:6px; --r-md:10px; --r-lg:14px;
   --ease:cubic-bezier(.2,.7,.2,1);
 
-  --sans:"Pretendard Variable","Pretendard",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Segoe UI",Roboto,"Malgun Gothic","Noto Sans KR",sans-serif;
+  --sans:"Quiet Latin","Pretendard Variable","Pretendard",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Segoe UI",Roboto,"Malgun Gothic","Noto Sans KR",sans-serif;
   --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
   --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono","D2Coding",monospace;
 }

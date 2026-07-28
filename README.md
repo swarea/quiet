@@ -39,6 +39,8 @@ What the package contains:
 | `style.css` | compiled stylesheet |
 | `index.xml` | skin metadata, covers, and settings |
 | `images/app.js` | progressive enhancement bundle |
+| `images/quiet-latin.woff2` | the Latin typeface, cut from Pretendard and shipped with the skin |
+| `images/OFL.txt` | the typeface licence, which travels with the file |
 | `preview.gif`, `preview*.jpg` | thumbnails shown in the skin list |
 
 ### Blog settings this skin expects
@@ -158,6 +160,6 @@ Rationale in [ADR-0001](docs/decisions/ADR-0001-build-architecture.md).
 ## License
 
 [MIT](LICENSE). Use it, change it, redistribute it; keep the copyright notice.
-The Pretendard typeface is requested at runtime under the SIL Open Font License
-1.1 and is not redistributed here. See
+A subset of the Pretendard typeface is redistributed with the skin under the
+SIL Open Font License 1.1, renamed as the licence requires. See
 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).
