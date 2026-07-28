@@ -331,8 +331,8 @@ body#tt-body-page .menu_toolbar.toolbar_rb{display:none;}
 .quiet-cat-tistory li{position:relative;}
 /* Sized to the row rather than to the glyph, so it is comfortable to hit and
    sits wholly inside the gutter the row reserves for it. */
-.quiet-cat-fold{position:absolute; right:.15rem; top:.15rem; width:1.6rem; height:2.05rem; display:grid; place-items:center; color:var(--faint); border-radius:var(--r-sm); transition:color .15s, background .15s;}
-.quiet-cat-fold:hover{color:var(--accent); background:var(--surface-2);}
+.quiet-cat-fold{position:absolute; right:.15rem; top:.15rem; width:1.6rem; height:2.05rem; display:grid; place-items:center; color:var(--faint); border-radius:var(--r-sm); transition:color .15s;}
+.quiet-cat-fold:hover,.quiet-cat-fold:focus-visible{color:var(--ink);}
 .quiet-cat-fold .twist{display:grid; place-items:center; transition:transform .2s var(--ease);}
 .quiet-cat-fold .twist.open{transform:rotate(90deg);}
 /* The height itself is set inline from the measured panel; this only supplies

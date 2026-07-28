@@ -85,8 +85,8 @@
    the buttons Tistory puts under an article keep their fill. Table rows keep
    theirs for a third reason: following a wide row by eye, not saying anything
    is clickable. */
-.quiet-icon-btn{width:30px; height:30px; border-radius:8px; display:grid; place-items:center; color:var(--muted); border:1px solid transparent; transition:background .15s, color .15s, border-color .15s;}
-.quiet-icon-btn:hover{background:var(--surface-2); color:var(--ink); border-color:var(--line);}
+.quiet-icon-btn{width:30px; height:30px; border-radius:8px; display:grid; place-items:center; color:var(--muted); border:1px solid transparent; transition:color .15s;}
+.quiet-icon-btn:hover,.quiet-icon-btn:focus-visible{color:var(--ink);}
 
 /* topbar (mobile) */
 .quiet-topbar{display:none; position:sticky; top:0; z-index:40; height:var(--header-h); align-items:center; gap:.6rem; padding:0 1rem; background:var(--surface); background:color-mix(in srgb,var(--surface) 86%, transparent); backdrop-filter:saturate(1.4) blur(10px); border-bottom:1px solid var(--line);}
