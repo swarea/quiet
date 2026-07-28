@@ -120,6 +120,7 @@
 /* floating dock */
 /* Sits above Tistory's fixed subscribe bar when there is one; --dock-lift is
    measured at runtime, so with no bar the dock keeps its own margin. */
+html:not(.quiet-js) .quiet-dock{display:none;}
 .quiet-dock{position:fixed; right:1.1rem; bottom:var(--dock-lift, 1.1rem); z-index:35; display:flex; flex-direction:column; gap:.5rem; transition:bottom .2s var(--ease);}
 .quiet-dock button{width:40px; height:40px; border-radius:12px; background:var(--surface); border:1px solid var(--line); color:var(--muted); display:grid; place-items:center; box-shadow:var(--shadow); transition:color .15s, border-color .15s;}
 .quiet-dock button:hover{color:var(--accent); border-color:var(--accent);}
@@ -133,6 +134,12 @@
 .quiet-proto-note{background:var(--surface-2); border-block:1px solid var(--line); text-align:center; font-family:var(--mono); font-size:.72rem; letter-spacing:.1em; color:var(--muted); padding:.55rem;}
 
 /* Sidebar turned off in skin settings: the shell collapses to one column. */
+/* The same three rules, said two ways. The class is added by the bundle; the
+   marker is written by the template, so the layout is right before a single
+   line of script has run and stays right if none ever does. */
+#quiet-sidebar-off ~ .quiet-shell{grid-template-columns:1fr;}
+#quiet-sidebar-off ~ .quiet-shell .quiet-topbar{display:flex;}
+#quiet-sidebar-off ~ .quiet-shell .quiet-site-foot{display:block;}
 .quiet-shell.quiet-no-sidebar{grid-template-columns:1fr;}
 .quiet-shell.quiet-no-sidebar .quiet-topbar{display:flex;}
 

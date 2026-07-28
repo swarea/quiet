@@ -6,20 +6,27 @@ export function initCodeCopy(): void {
       const pre = block?.querySelector("pre");
       if (!pre) return;
       const label = btn.querySelector("span");
-      const done = (): void => {
+      // Say what happened. Treating a rejected write as success, and reporting
+      // success where there is no clipboard at all, told the reader the code
+      // was on their clipboard when it was not.
+      const report = (word: string): void => {
         btn.classList.add("ok");
-        if (label) {
-          const prev = label.textContent;
-          label.textContent = "Copied";
-          setTimeout(() => {
-            label.textContent = prev;
-            btn.classList.remove("ok");
-          }, 1400);
-        }
+        const prev = label?.textContent;
+        if (label) label.textContent = word;
+        setTimeout(() => {
+          if (label) label.textContent = prev ?? "";
+          btn.classList.remove("ok");
+        }, 1400);
       };
       const text = pre.textContent ?? "";
-      if (navigator.clipboard) navigator.clipboard.writeText(text).then(done, done);
-      else done();
+      if (!navigator.clipboard) {
+        report("Press Ctrl+C");
+        return;
+      }
+      navigator.clipboard.writeText(text).then(
+        () => report("Copied"),
+        () => report("Copy failed"),
+      );
     });
   });
 }

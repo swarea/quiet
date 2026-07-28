@@ -22,9 +22,13 @@ function labelOf(original: HTMLElement): string {
 
 export function initSubscribe(): void {
   const host = document.querySelector<HTMLElement>(".quiet-author");
-  const original = document.querySelector<HTMLElement>(
-    ".container_postbtn .btn_menu_toolbar.btn_subscription",
-  );
+  // Looked up each time rather than held. Tistory rebuilds the controls in this
+  // bar when a reader likes or subscribes, and a held reference would then be a
+  // detached node: the proxy would click nothing and the label would stop
+  // following, while the working button stayed hidden.
+  const live = (): HTMLElement | null =>
+    document.querySelector<HTMLElement>(".container_postbtn .btn_menu_toolbar.btn_subscription");
+  const original = live();
   if (!host || !original || host.querySelector(".quiet-subscribe")) return;
 
   const button = document.createElement("button");
@@ -32,7 +36,7 @@ export function initSubscribe(): void {
   button.className = "quiet-subscribe";
   button.lang = "en";
   button.textContent = labelOf(original);
-  button.addEventListener("click", () => original.click());
+  button.addEventListener("click", () => live()?.click());
   host.appendChild(button);
 
   // Only now is it safe to take the original out of the layout.
@@ -40,9 +44,13 @@ export function initSubscribe(): void {
 
   // Subscribing flips the original's label; keep ours saying the same thing.
   if (typeof MutationObserver === "undefined") return;
+  const bar = document.querySelector(".container_postbtn");
+  if (!bar) return;
   const observer = new MutationObserver(() => {
-    const next = labelOf(original);
+    const el = live();
+    if (!el) return;
+    const next = labelOf(el);
     if (next !== button.textContent) button.textContent = next;
   });
-  observer.observe(original, { childList: true, subtree: true, characterData: true });
+  observer.observe(bar, { childList: true, subtree: true, characterData: true });
 }

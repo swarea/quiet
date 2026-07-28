@@ -19,10 +19,23 @@ export function initConfirmOnce(): void {
   // A click is the unit of deduplication: two prompts raised by one click are a
   // repeat, the same prompt raised by two clicks is not. Capture runs before
   // the delegated handlers, so the count is already current when they ask.
-  let click = 0;
-  document.addEventListener("click", () => { click += 1; }, true);
-
   let asked: { click: number; message: string; answer: boolean } | null = null;
+  let click = 0;
+  document.addEventListener(
+    "click",
+    () => {
+      click += 1;
+      // Bounded to the dispatch, not to "until the next click". A prompt
+      // raised later from a callback is a new question -- answering it from
+      // a stale record would confirm a deletion nobody was asked about.
+      const round = click;
+      setTimeout(() => {
+        if (asked && asked.click === round) asked = null;
+      }, 0);
+    },
+    true,
+  );
+
   window.confirm = (message?: string): boolean => {
     const text = String(message ?? "");
     if (asked && asked.click === click && asked.message === text) return asked.answer;
