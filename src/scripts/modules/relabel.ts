@@ -159,8 +159,30 @@ function renameAllPosts(): void {
   });
 }
 
+// Tistory writes three of its own words into the comment list, outside the
+// blocks it puts its controls in: a report link on every comment, and a name
+// and a body for one it will not show. In a sidebar and a toolbar that read
+// English these are the only Korean left that nobody wrote.
+//
+// Matched exactly, and the body only inside a comment Tistory has marked as
+// hidden, so a reader who writes those words themselves keeps them.
+function relabelComments(): void {
+  document.querySelectorAll<HTMLElement>(".quiet-comment .when a").forEach((link) => {
+    if ((link.textContent ?? "").trim() === "신고") link.textContent = "Report";
+  });
+  document.querySelectorAll<HTMLElement>(".quiet-comment .who").forEach((who) => {
+    if ((who.textContent ?? "").trim() === "익명") who.textContent = "Anonymous";
+  });
+  document
+    .querySelectorAll<HTMLElement>(".quiet-comment.rp_secret .txt, .quiet-comment.hiddenComment .txt")
+    .forEach((txt) => {
+      if ((txt.textContent ?? "").trim() === "비밀댓글입니다.") txt.textContent = "This comment is private";
+    });
+}
+
 export function initRelabel(): void {
   renameAllPosts();
+  relabelComments();
   renameListingHeading();
   renameUncategorised();
   relabelBylineAdmin();

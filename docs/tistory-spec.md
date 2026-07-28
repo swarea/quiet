@@ -104,6 +104,16 @@ comments beside the code that works around it.
   and injects an unlabelled `new_ico` image inside list-row titles.
 - **A list row prints a clock time rather than a date for a post published
   today.**
+- **The `_rep_` token families rescope inside a nested reply block.** Verified
+  on a post with three replies across two threads: every reply carried its own
+  id, its own text and its own delete handler, and the page had no duplicate
+  ids. Reusing the parent family inside `<s_rp2_rep>` is therefore correct.
+- **A reply cannot itself be replied to.** Tistory emits no reply control on a
+  nested comment, so the thread is one level deep.
+- **Tistory writes three of its own Korean strings into the comment list**,
+  outside the blocks that hold its controls: a `신고` link inside the date, and
+  `익명` / `비밀댓글입니다.` for a comment it will not show. A skin whose
+  interface is in another language has to translate these itself.
 - **Replying to a comment opens a window Tistory owns.**
   `[##_rp_rep_onclick_reply_##]` expands to Tistory's own `commentComment(id)`,
   which calls `window.open` at 450x550 on `/comment/comment/<id>`. That page is
@@ -129,11 +139,8 @@ comments beside the code that works around it.
 
 ## Known open questions
 
-- Whether the `_rep_` token families rescope inside a nested reply block
-  (`<s_rp2_rep>`, `<s_guest_reply_rep>`). The skin reuses the parent family
-  there; if they do not rescope, a thread with a reply emits duplicate ids.
-  **Unverified** — the gate cannot see it, because it skips ids whose value is
-  a token.
+(None open. The last one — whether the token families rescope inside a nested
+reply block — is answered below.)
 - Whether `index.xml` *additions* (new variables) also reset settings, or only
   modifications/renames.
 - Search URL format and `[##_search_..._##]` behavior on list pages.
