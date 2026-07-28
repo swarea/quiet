@@ -104,6 +104,18 @@ comments beside the code that works around it.
   and injects an unlabelled `new_ico` image inside list-row titles.
 - **A list row prints a clock time rather than a date for a post published
   today.**
+- **Replying to a comment opens a window Tistory owns.**
+  `[##_rp_rep_onclick_reply_##]` expands to Tistory's own `commentComment(id)`,
+  which calls `window.open` at 450x550 on `/comment/comment/<id>`. That page is
+  served by Tistory, not by the skin, so none of our styling reaches it and
+  there is no token that returns an inline form instead.
+- **That same token expands differently depending on who is reading.** For a
+  signed-out visitor it arrives as
+  `commentRequireLogin(); return false; commentComment(id);return false` — the
+  call to open the window sits after a `return`, so only the login prompt runs.
+  A button in this skin can therefore receive entirely different code from one
+  reader to the next, which is worth remembering before reasoning about any
+  `onclick` token from its value on one page load.
 
 ## Known limitations we have chosen to keep
 
