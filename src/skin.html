@@ -206,9 +206,13 @@
            with auto inline margins; inside a flex parent those absorb the free
            space instead of centring a stretched box, so a cover collapsed to the
            width of its own words. And a home page built from covers was the one
-           page with no main landmark at all. -->
-      <main>
+           page with no main landmark at all.
+
+           The tag sits inside the cover block rather than around it: outside, it
+           survived on every page that has no covers, and the guestbook was left
+           announcing two main landmarks, one of them empty. -->
       <s_cover_group>
+      <main>
         <s_cover_rep>
           <s_cover name="list">
             <section class="quiet-wrap quiet-recent" aria-label="[##_cover_title_##]">
@@ -304,8 +308,8 @@
             </section>
           </s_cover>
         </s_cover_rep>
-      </s_cover_group>
       </main>
+      </s_cover_group>
 
       <!-- ---------- NOTICE ---------- -->
       <s_notice_rep>

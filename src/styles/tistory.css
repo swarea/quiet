@@ -286,8 +286,6 @@
   font-size:.66rem; font-weight:600; color:var(--accent); background:var(--accent-wash);
   vertical-align:middle;
 }
-/* A comment reached by its anchor keeps a quiet marker after Tistory's flash. */
-.quiet-comment:target{background:var(--accent-wash); border-radius:var(--r-md); padding-inline:.9rem; margin-inline:-.9rem;}
 
 /* Tistory injects its own "other posts in this category" box into the article
    body. We render that list ourselves, styled to match and gated on the

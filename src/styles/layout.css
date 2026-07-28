@@ -184,3 +184,11 @@
     top:50%; height:2.75rem; transform:translateY(-50%);
   }
 }
+
+/* Tistory lifts the guestbook into a container of its own and drops it after
+   everything the template wrote next, so the pager -- which sits between the
+   list and the guestbook, where it belongs for a list -- came out above the
+   entries it pages. The content column is a flex column, so on this page alone
+   the pager is sent past them, and the footer past it. */
+body#tt-body-guestbook .quiet-paging{order:1;}
+body#tt-body-guestbook .quiet-site-foot{order:2;}
