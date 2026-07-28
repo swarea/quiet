@@ -341,7 +341,10 @@ const PAIRS = [
   ["--accent", "--paper"], ["--accent", "--surface"], ["--accent", "--accent-wash"],
   ["--on-accent", "--accent"],
   ["--warm", "--paper"],
-  ["--code-ink", "--code-bg"], ["--code-comment", "--code-bg"], ["--code-accent", "--code-bg"],
+  ["--code-ink", "--code-bg"], ["--code-ink-2", "--code-bg"], ["--code-faint", "--code-bg"],
+  ["--code-comment", "--code-bg"], ["--code-accent", "--code-bg"],
+  ["--code-key", "--code-bg"], ["--code-str", "--code-bg"],
+  ["--code-fn", "--code-bg"], ["--code-num", "--code-bg"], ["--code-del", "--code-bg"],
 ];
 const AA = 4.5;
 try {

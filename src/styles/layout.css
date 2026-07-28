@@ -154,20 +154,33 @@
    only, so the pointer layout keeps its proportions. The category row's right
    gutter grows with the fold, because that overlap once swallowed the clicks
    meant for the category itself. */
+/* Three answers to a pointer, one for each kind of thing.
+
+   Navigation rests a step back and darkens under the pointer. A sidebar is a
+   list of places you are not, so separating the one you are pointing at from
+   its neighbours is the whole job.
+
+   A title does not answer at all. It arrives at full ink and stays there:
+   making a reader hover to see a title at full strength puts a question
+   between them and what they came to read. The cursor already says the row is
+   a link, and a keyboard still gets its focus ring.
+
+   A control answers with its fill, because a button that does not respond
+   feels broken in a way a line of text does not. Table rows keep a fill for a
+   third reason again: following a wide row by eye. */
 @media (pointer:coarse){
-  /* One rule for hover, with one exception that earns itself.
+  .quiet-icon-btn{width:2.5rem; height:2.5rem;}
 
-   A link does not answer a hover. Four treatments were tried on the post list
-   and each was refused for a reason the others share: a fill was the largest
-   area of colour on a page made of hairlines, a colour spent the accent on
-   every row a pointer crossed, a heavier weight left the letters resettling
-   inside a box that had not moved, and an underline was louder than the row it
-   marked. The pointer already says a link is a link.
-
-   A control does answer, because a button that does not respond feels broken in
-   a way a line of text does not. So the icon buttons here, the page numbers and
-   the buttons Tistory puts under an article keep their fill. Table rows keep
-   theirs for a third reason: following a wide row by eye, not saying anything
-   is clickable. */
-.quiet-icon-btn{width:2.5rem; height:2.5rem;}
+  /* Measured at 390px: the comment actions come out 21px tall and the section
+     link 22px, against a 24px minimum. The design wants them exactly the size
+     they are, so the tappable area is grown instead of the box -- an overlay
+     that reaches a finger's height without moving a glyph. It stays inside the
+     .85rem gap between siblings, so the target next door keeps its own taps. */
+  .quiet-comment .act button,
+  .quiet-section-tag a{position:relative;}
+  .quiet-comment .act button::after,
+  .quiet-section-tag a::after{
+    content:""; position:absolute; left:-.3rem; right:-.3rem;
+    top:50%; height:2.75rem; transform:translateY(-50%);
+  }
 }

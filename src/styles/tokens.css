@@ -39,8 +39,10 @@
      are tokens rather than literals so the contrast gate can see them, and so
      the two syntax colours Tistory's highlighter leaves too dim have somewhere
      to be corrected. */
-  --code-bg:#0f1420; --code-ink:#d7dee8;
+  --code-bg:#0f1420; --code-ink:#d7dee8; --code-ink-2:#aeb7c6; --code-faint:#8b96a8;
   --code-comment:#8b97ad; --code-accent:#7aa2f7;
+  --code-key:#c493e8; --code-str:#8fd3a0; --code-fn:#78b6f0; --code-num:#e0a06a;
+  --code-del:#ee8888;
 
   --block-gap:2rem;
   --rail:288px; --rail-inset:.5rem; --read:50rem; --wide:64rem; --header-h:56px;

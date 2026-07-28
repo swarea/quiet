@@ -137,26 +137,26 @@
    drops a pale block inside our dark code frame and is unreadable in dark
    mode. Neutralise its surface and restate the token colours to match the
    frame, so highlighted code looks the same in both themes. */
-#quiet-main .quiet-article-body .hljs{background:none; color:#d7dee8; padding:0;}
+#quiet-main .quiet-article-body .hljs{background:none; color:var(--code-ink); padding:0;}
 #quiet-main .quiet-article-body .hljs-comment,
-#quiet-main .quiet-article-body .hljs-quote{color:#6b7688; font-style:italic;}
+#quiet-main .quiet-article-body .hljs-quote{color:var(--code-comment); font-style:italic;}
 #quiet-main .quiet-article-body .hljs-keyword,
 #quiet-main .quiet-article-body .hljs-selector-tag,
 #quiet-main .quiet-article-body .hljs-literal,
-#quiet-main .quiet-article-body .hljs-type{color:#c493e8;}
+#quiet-main .quiet-article-body .hljs-type{color:var(--code-key);}
 #quiet-main .quiet-article-body .hljs-string,
 #quiet-main .quiet-article-body .hljs-addition,
-#quiet-main .quiet-article-body .hljs-regexp{color:#8fd3a0;}
+#quiet-main .quiet-article-body .hljs-regexp{color:var(--code-str);}
 #quiet-main .quiet-article-body .hljs-title,
 #quiet-main .quiet-article-body .hljs-function,
 #quiet-main .quiet-article-body .hljs-section,
-#quiet-main .quiet-article-body .hljs-name{color:#78b6f0;}
+#quiet-main .quiet-article-body .hljs-name{color:var(--code-fn);}
 #quiet-main .quiet-article-body .hljs-number,
 #quiet-main .quiet-article-body .hljs-built_in,
 #quiet-main .quiet-article-body .hljs-attr,
 #quiet-main .quiet-article-body .hljs-attribute,
-#quiet-main .quiet-article-body .hljs-variable{color:#e0a06a;}
-#quiet-main .quiet-article-body .hljs-deletion{color:#e88}
+#quiet-main .quiet-article-body .hljs-variable{color:var(--code-num);}
+#quiet-main .quiet-article-body .hljs-deletion{color:var(--code-del)}
 #quiet-main .quiet-article-body .hljs-emphasis{font-style:italic;}
 #quiet-main .quiet-article-body .hljs-strong{font-weight:700;}
 
