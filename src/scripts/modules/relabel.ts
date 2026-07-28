@@ -120,12 +120,29 @@ function renameListingHeading(): void {
   if (named) heading.textContent = named;
 }
 
+// Every category row but this one arrives as a label plus a `.c_cnt` span, which
+// the stylesheet sets small, monospaced and faint. Tistory writes the root's
+// count into the label itself, so "(6)" was not a count at all: it rendered at
+// the label's size in the body face and read as part of the name. Split it back
+// out so the row is built like the rows under it.
+const COUNT = /^(.*?)\s*([([（]\s*\d+\s*[)）])\s*$/;
+
 function renameAllPosts(): void {
   document.querySelectorAll<HTMLAnchorElement>(".quiet-cat-tistory a").forEach((link) => {
     if (!/\/category\/?$/.test(link.getAttribute("href") ?? "")) return;
     const text = (link.textContent ?? "").trim();
     const next = text.replace(/^분류\s*전체보기|^전체보기/, "All posts");
-    if (next !== text) link.textContent = next;
+    const split = next.match(COUNT);
+    if (!split) {
+      if (next !== text) link.textContent = next;
+      return;
+    }
+    if (link.querySelector(".c_cnt")) return;
+    link.textContent = split[1];
+    const count = document.createElement("span");
+    count.className = "c_cnt";
+    count.textContent = split[2];
+    link.append(count);
   });
 }
 
