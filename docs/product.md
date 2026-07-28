@@ -46,12 +46,32 @@ them.
 5. **Maintainability** — human-readable templates/styles/scripts; only the build
    output is in Tistory's format.
 6. **Accessibility** — WCAG 2.2 AA as a floor, designed in from the start.
-7. **Performance** — no external CDN or runtime framework dependencies for core
-   function; defer what the first screen does not need.
+7. **Performance** — no runtime framework, and no external dependency the design
+   needs to be correct. The Latin typeface is bundled; the CDN copy of the same
+   family covers Hangul and is optional. Defer what the first screen does not
+   need.
 8. **Configurability** — meaningful options via Tistory skin variables only;
    every option must earn its place.
 9. **Honest validation** — mock-preview pass and real-Tistory pass are reported
    separately; nothing is claimed "works on Tistory" until verified on a test blog.
+
+## Interaction rules
+
+Four rules settle most questions about how an element should behave. Each was
+arrived at by trying the alternatives; the rejected options and the reasons are
+recorded in the stylesheet beside the rules they produced.
+
+1. **Text that is read carries full contrast from the start.** Post titles,
+   headings and titles in a list do not change on hover.
+2. **Text that is clicked rests one step lighter and darkens on hover.** Sidebar
+   links carry no underline and no colour of their own, so without this they are
+   indistinguishable from the section labels beside them.
+3. **Hover changes colour and nothing else.** No transform, no weight change, no
+   underline, no background fill. Buttons scale down on press; elements that
+   open or arrive may animate. All animation respects `prefers-reduced-motion`.
+4. **The accent colour is used in three places:** links within prose, category
+   labels, and the comment submit button. Elsewhere emphasis is a step within a
+   single neutral scale.
 
 ## Screens in scope
 
