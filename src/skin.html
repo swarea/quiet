@@ -81,7 +81,7 @@
     <s_if_var_sidebar>
     <aside class="quiet-rail" id="quiet-rail" aria-label="Blog navigation">
       <div class="quiet-brand">
-        <a href="[##_blog_link_##]"><img class="quiet-avatar" src="[##_image_##]" width="42" height="42" alt=""></a>
+        <img class="quiet-avatar" src="[##_image_##]" width="42" height="42" alt="" aria-hidden="true">
         <div class="quiet-brand-text">
           <div class="name"><a href="[##_blog_link_##]">[##_title_##]</a></div>
           <div class="tag">[##_blogger_##]</div>
@@ -213,7 +213,24 @@
            announcing two main landmarks, one of them empty. -->
       <s_cover_group>
       <main>
+        <h1 class="quiet-sr">[##_title_##]</h1>
         <s_cover_rep>
+          <!-- The opening band. Written as a cover so it sits with the rest of
+               the home page in the cover settings, and so it can be reordered
+               and removed there like anything else. The cover's own title is
+               the small line above the headline. -->
+          <s_cover name="masthead">
+            <section class="quiet-wrap quiet-masthead" aria-label="[##_cover_title_##]">
+              <p class="quiet-eyebrow">[##_cover_title_##]</p>
+              <s_cover_item>
+                <div class="quiet-masthead-item">
+                  <p class="quiet-display">[##_cover_item_title_##]</p>
+                  <p class="quiet-lede">[##_cover_item_summary_##]</p>
+                </div>
+              </s_cover_item>
+            </section>
+          </s_cover>
+
           <s_cover name="list">
             <section class="quiet-wrap quiet-recent" aria-label="[##_cover_title_##]">
               <div class="quiet-section-tag">

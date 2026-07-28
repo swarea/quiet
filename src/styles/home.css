@@ -139,3 +139,15 @@ body#tt-body-index .quiet-intro ~ .quiet-list-head{display:none;}
 @media (max-width:720px){
   .quiet-post-row > .quiet-row-plain{flex-direction:column;}
 }
+
+/* The opening band, written as a cover item so the blogger composes it beside
+   everything else on the home page. It borrows the intro's proportions; what
+   differs is where the words come from -- a cover title and one item, rather
+   than three settings in a panel. */
+.quiet-masthead{padding:3.6rem 0 2.6rem;}
+.quiet-masthead .quiet-eyebrow{display:inline-block; margin-bottom:.95rem;}
+.quiet-masthead .quiet-eyebrow:empty{display:none;}
+.quiet-masthead .quiet-display{font-size:clamp(1.55rem,3.2vw,2.15rem); line-height:1.42;
+  font-weight:700; letter-spacing:-.015em; text-wrap:balance; max-width:22ch; color:var(--ink);}
+.quiet-masthead .quiet-lede{margin-top:.9rem; color:var(--muted); font-size:1rem; max-width:52ch;}
+.quiet-masthead .quiet-lede:empty{display:none;}

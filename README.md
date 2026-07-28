@@ -49,6 +49,11 @@ What the package contains:
   responsive and handles narrow screens itself.
 - **Covers**. The home page is composed from covers. With none enabled, Tistory
   serves the plain post list and home looks the same as the category archive.
+  Four cover types are offered: **소개** for the opening band, **리스트** for a
+  column of posts, **대표 글** to stand one post up with its picture beside it,
+  and **주제 묶음** for a grid by category. The opening band takes its small
+  line from the cover's own title and its headline and lede from a single
+  hand-entered item.
 
 ### Settings
 

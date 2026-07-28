@@ -57,6 +57,11 @@
   </default>
   <cover>
     <item>
+      <name>masthead</name>
+      <label><![CDATA[소개]]></label>
+      <description><![CDATA[홈 맨 위에 놓일 소개말입니다. 콘텐츠를 '직접 입력'으로 두고 글을 하나만 추가하세요. 커버 타이틀은 그 위에 작게, 글 제목은 크게, 내용은 그 아래에 놓입니다.]]></description>
+    </item>
+    <item>
       <name>list</name>
       <label><![CDATA[리스트]]></label>
       <description><![CDATA[글을 한 줄씩 목록으로 보여줍니다.]]></description>
