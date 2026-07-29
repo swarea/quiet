@@ -38,8 +38,8 @@
 .quiet-code{margin:1.8em 0; border-radius:var(--r-md); overflow:hidden; border:1px solid var(--line); background:var(--code-bg);}
 .quiet-code .bar{display:flex; align-items:center; justify-content:space-between; padding:.5rem .85rem; background:rgba(255,255,255,.04); border-bottom:1px solid rgba(255,255,255,.08);}
 .quiet-code .lang{font-family:var(--mono); font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--code-faint);}
-.quiet-code .copy{display:flex; align-items:center; gap:.35rem; font-size:.72rem; color:var(--code-ink-2); padding:.24rem .55rem; border-radius:6px; font-family:var(--mono); transition:background .15s, color .15s;}
-.quiet-code .copy:hover{background:rgba(255,255,255,.08); color:#fff;}
+.quiet-code .copy{display:flex; align-items:center; gap:.35rem; font-size:.72rem; color:var(--code-ink-2); padding:.24rem .55rem; border-radius:6px; font-family:var(--mono); transition:color .15s;}
+.quiet-code .copy:hover,.quiet-code .copy:focus-visible{color:var(--code-ink);}
 .quiet-code .copy.ok{color:var(--code-str);}
 .quiet-code pre{margin:0; padding:1.05rem 1.15rem; overflow-x:auto; font-family:var(--mono); font-size:.86rem; line-height:1.74; color:var(--code-ink);}
 .quiet-code .t-k{color:var(--code-key);} .quiet-code .t-s{color:var(--code-str);}
@@ -51,8 +51,8 @@ table.quiet-data{border-collapse:collapse; width:100%; font-size:.92rem; min-wid
 table.quiet-data th,table.quiet-data td{text-align:left; padding:.62rem .9rem; border-bottom:1px solid var(--line);}
 table.quiet-data th{background:var(--surface-2); font-weight:600; font-size:.72rem; letter-spacing:.05em; color:var(--ink-2); font-family:var(--mono); text-transform:uppercase;}
 table.quiet-data tr:last-child td{border-bottom:0;}
-table.quiet-data tbody tr{transition:background .15s;}
-table.quiet-data tbody tr:hover{background:var(--surface-2);}
+/* A table row is read, not clicked. Lighting one up under the pointer is a
+   surface appearing where none was, on content that leads nowhere. */
 table.quiet-data td.num{font-family:var(--mono); font-variant-numeric:tabular-nums; text-align:right; color:var(--ink-2);}
 
 figure.quiet-fig{margin:1.9em 0;}
@@ -129,7 +129,7 @@ figure.quiet-fig figcaption{text-align:center; font-size:.8rem; color:var(--mute
           mask:var(--quiet-plus) center/contain no-repeat;
   --quiet-plus:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M12 5v14M5 12h14'/%3E%3C/svg%3E");
 }
-.quiet-subscribe:hover{border-color:var(--accent); color:var(--accent); background-color:var(--accent-wash);}
+.quiet-subscribe:hover{border-color:var(--accent); color:var(--accent);}
 .quiet-subscribe:active{transform:scale(.96);}
 .quiet-subscribe:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
 
