@@ -81,6 +81,33 @@
 .quiet-article-body .link_title,.quiet-article-body figure.fileblock .name{font-weight:600; color:var(--ink);}
 .quiet-article-body .link_url,.quiet-article-body figure.fileblock .size{font-size:.82rem; color:var(--muted);}
 
+/* Tistory's link card, `data-ke-type="opengraph"`. It arrives wearing fixed
+   colours from Tistory's own stylesheet, none of which know a theme exists: a
+   #d9d9d9 hairline around it and down the side of the thumbnail, #000 for the
+   title, #909090 for the description and host.
+
+   Measured on a dark page, the outline sits at 13.28 against the ground -- about
+   ten times louder than every other border in the skin -- and the title at 1.12,
+   which is not a title, it is the space where one should be. In light the
+   #909090 measures 3.1 on the card, under the 4.5 this project treats as a
+   floor. 99 of these appear across 26 of the author's posts.
+
+   Pitched behind `#quiet-main` because Tistory declares each of these rules
+   twice, the second time behind `#tt-body-page`, which a post's body carries.
+   A class-level rule of ours loses to it; the background and the radius here
+   landed while the border and the title colour did not, which is how the
+   duplicate was found. */
+#quiet-main .quiet-article-body figure[data-ke-type="opengraph"] a{
+  border:1px solid var(--line); border-radius:var(--r-md); overflow:hidden;
+  background:var(--surface); color:var(--ink); transition:border-color .15s;
+}
+#quiet-main .quiet-article-body figure[data-ke-type="opengraph"] a:hover,
+#quiet-main .quiet-article-body figure[data-ke-type="opengraph"] a:focus-visible{border-color:var(--line-strong);}
+#quiet-main .quiet-article-body figure[data-ke-type="opengraph"] div.og-image{border-right-color:var(--line);}
+#quiet-main .quiet-article-body figure[data-ke-type="opengraph"] div.og-text p.og-title{color:var(--ink);}
+#quiet-main .quiet-article-body figure[data-ke-type="opengraph"] div.og-text p.og-desc,
+#quiet-main .quiet-article-body figure[data-ke-type="opengraph"] div.og-text p.og-host{color:var(--muted);}
+
 /* Tistory zeroes <p> margins inside .tt_article_useless_p_margin on purpose:
    the editor emits one paragraph per line and represents a blank line as its
    own paragraph. Do not fight that, and never collapse those spacers — they
