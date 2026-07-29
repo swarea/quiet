@@ -2,6 +2,39 @@
 
 Starts at 0.2.1. Earlier releases are described in their GitHub release notes.
 
+## Unreleased
+
+Upgrading resets a blog's saved skin settings, as every change to `index.xml`
+does. Note your accent colours and home copy before uploading.
+
+### Fixed
+
+- Colour pasted into a post is reconciled with the theme it is read in. The
+  editor keeps colour on the element, so text copied from another page arrives
+  carrying that page's palette, and inline style outranks the stylesheet. Three
+  things followed from that, and all three are the same fault:
+  - A callout the author built kept the white it was given, on a dark page.
+    Words inside it that carried a colour survived; words that carried none
+    inherited the theme's light ink and disappeared.
+  - Code copied from a page using `atom-one-light` brought that theme's ground
+    with it, so a pale block landed inside the dark code frame, under syntax
+    colours drawn for a dark one.
+  - Paragraphs, headings and spans arrived carrying the white of the page they
+    were copied from — over a thousand of them on the author's blog — and became
+    white slabs in dark mode.
+
+  The ground is now settled before the text is measured against it. A background
+  the author built a box around moves into the theme; one that is only the
+  source page's paper is dropped. Anything that still reads where it landed is
+  left exactly as it was, which in light mode is all of it.
+- Sidebar lists no longer break mid-column. Tistory truncated them by character
+  count on the server while the stylesheet clamped them by line, and the two
+  disagreed; the server limits are now past what two lines can hold, so the
+  ellipsis lands where the line actually ends.
+- The visitor counts sit in a band of their own rather than reading as a heading
+  for the category tree below them.
+- The release notes no longer break mid-sentence.
+
 ## 0.3.0
 
 Upgrading resets a blog's saved skin settings, as every change to `index.xml`
