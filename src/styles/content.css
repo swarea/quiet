@@ -180,10 +180,10 @@
 #quiet-main .quiet-article-body blockquote{margin:1.7em 0;}
 
 /* ---- syntax highlighting --------------------------------------------------
-   Tistory always loads the light `atom-one-light` highlight.js theme, which
-   drops a pale block inside our dark code frame and is unreadable in dark
-   mode. Neutralise its surface and restate the token colours to match the
-   frame, so highlighted code looks the same in both themes. */
+   Tistory always loads the same highlight.js theme, `atom-one-light`, whatever
+   the page is set to. Its surface is dropped and every token colour restated
+   from ours, so the highlighting follows the theme along with the block it sits
+   in rather than staying at whatever Tistory happened to load. */
 #quiet-main .quiet-article-body .hljs{background:none; color:var(--code-ink); padding:0;}
 #quiet-main .quiet-article-body .hljs-comment,
 #quiet-main .quiet-article-body .hljs-quote{color:var(--code-comment); font-style:italic;}
@@ -229,11 +229,10 @@ body.quiet-lightbox-open{overflow:hidden;}
   .quiet-lightbox.open img{animation:quiet-rise .28s var(--ease) both;}
 }
 
-/* Tistory highlights code with its own copy of highlight.js, loaded from a CDN
-   in a light theme. Most of its colours happen to read on our dark code block,
-   but measured against it two do not: the comment colour at 4.01 and the blue
-   it uses for meta and bullets at 4.54. Comments are prose a reader may want,
-   so they are corrected rather than left to chance. */
+/* The two token classes the block above does not cover. Tistory's own copy of
+   highlight.js measured 4.01 for comments and 4.54 for the blue it uses on meta
+   and bullets against the dark block; both are ours now, in both themes, and
+   the gate holds them to 4.5 either way. */
 .quiet-code .hljs-comment,
 .quiet-code .hljs-quote{color:var(--code-comment);}
 .quiet-code .hljs-meta,

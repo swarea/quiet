@@ -36,7 +36,10 @@
 .quiet-callout p{margin:.35em 0!important; color:var(--ink-2)!important;}
 
 .quiet-code{margin:1.8em 0; border-radius:var(--r-md); overflow:hidden; border:1px solid var(--line); background:var(--code-bg);}
-.quiet-code .bar{display:flex; align-items:center; justify-content:space-between; padding:.5rem .85rem; background:rgba(255,255,255,.04); border-bottom:1px solid rgba(255,255,255,.08);}
+/* The bar was a pair of white alphas, which only ever meant anything on a dark
+   block. Now that the block follows the theme they are tokens like everything
+   else. */
+.quiet-code .bar{display:flex; align-items:center; justify-content:space-between; padding:.5rem .85rem; background:var(--code-bar); border-bottom:1px solid var(--code-edge);}
 .quiet-code .lang{font-family:var(--mono); font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--code-faint);}
 .quiet-code .copy{display:flex; align-items:center; gap:.35rem; font-size:.72rem; color:var(--code-ink-2); padding:.24rem .55rem; border-radius:6px; font-family:var(--mono); transition:color .15s;}
 .quiet-code .copy:hover,.quiet-code .copy:focus-visible{color:var(--code-ink);}

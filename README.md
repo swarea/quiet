@@ -140,9 +140,10 @@ everything that uses it:
 :root{ --light-surface-2:#f6f4ef; --dark-surface-2:#232830; }
 ```
 
-Three groups sit outside those palettes deliberately: the code block, which
-keeps one dark set for both themes; the image lightbox, which is always dark;
-and the print stylesheet.
+The code block has its own pair, `--light-code-*` and `--dark-code-*`, covering
+the block, the bar above it and every syntax colour. Two groups sit outside the
+palettes deliberately: the image lightbox, which is always dark, and the print
+stylesheet.
 
 Text placed on the accent colour is chosen by measurement — the skin compares
 the accent against black and white and uses whichever gives higher contrast.
