@@ -6,11 +6,32 @@
 .quiet-empty p{font-size:.92rem; line-height:1.6;}
 .quiet-empty q{color:var(--ink-2); font-weight:600; font-style:normal;}
 
+/* Tistory builds each item as `<a href><span class="selected">3</span></a>`, and
+   the ellipsis it puts between ranges is an `<a>` with no href at all. Styling
+   `a` and `span` together therefore gave every number a box inside a box, and
+   let the ellipsis light up as though it led somewhere.
+
+   `.cur` was our own invention and matched nothing on a real page, so the reader
+   was never shown which page they were on. The class Tistory actually writes is
+   `selected`, and it is on the span. */
 .quiet-paging{display:flex; justify-content:center; align-items:center; gap:.3rem; margin:2.4rem 0 3.5rem;}
-.quiet-paging a,.quiet-paging span{min-width:2.3rem; height:2.3rem; padding:0 .5rem; display:grid; place-items:center; border-radius:var(--r-sm); font-size:.85rem; font-family:var(--mono); font-variant-numeric:tabular-nums; color:var(--ink-2); border:1px solid transparent; transition:background .15s, border-color .15s;}
-.quiet-paging a:hover{background:var(--surface-2); border-color:var(--line);}
-.quiet-paging .cur{background:var(--accent); color:var(--on-accent); font-weight:600;}
+.quiet-paging > a,.quiet-paging > span{
+  min-width:2.3rem; height:2.3rem; padding:0 .5rem; display:grid; place-items:center;
+  border-radius:var(--r-sm); font-size:.85rem; font-family:var(--mono);
+  font-variant-numeric:tabular-nums; color:var(--nav); transition:color .15s;
+}
+/* A page number is text that is clicked, so it follows the rule the sidebar
+   follows: it rests a step lighter and darkens under the pointer, and nothing is
+   painted that was not already there. */
+.quiet-paging > a[href]:hover,
+.quiet-paging > a[href]:focus-visible{color:var(--ink);}
+/* Where the reader already is. Full contrast because it is being read rather
+   than aimed at, and a step of weight because two of them would be one too many.
+   No accent: that is spent elsewhere. */
+.quiet-paging .selected{color:var(--ink); font-weight:600;}
 .quiet-paging .edge{color:var(--muted);}
+/* The ellipsis, and an arrow with nowhere to go. */
+.quiet-paging > a:not([href]),
 .quiet-paging .off{color:var(--faint); pointer-events:none;}
 
 .quiet-protected{max-width:27rem; margin:0 auto; padding:4.5rem 1.25rem; text-align:center;}
