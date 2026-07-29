@@ -66,8 +66,6 @@
   background:var(--surface-2); font-weight:600; font-size:.8rem;
   color:var(--ink-2); letter-spacing:.02em;
 }
-.quiet-article-body tbody tr{transition:background .15s;}
-.quiet-article-body tbody tr:hover{background:var(--surface-2);}
 
 /* ---- editor quote variants ------------------------------------------------ */
 .quiet-article-body blockquote p{margin:.4em 0;}

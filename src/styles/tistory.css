@@ -155,7 +155,6 @@
 /* The hover colour is taken on the wrapper, not the button, because the button
    refuses any colour of its own. Inheritance carries it to the icon and label. */
 .quiet-article-body .container_postbtn .wrap_btn:hover{color:var(--accent);}
-.quiet-article-body .container_postbtn .btn_post:hover{background:var(--surface-2);}
 .quiet-article-body .container_postbtn .txt_like,
 .quiet-article-body .container_postbtn .btn_subscription .txt_state{font-weight:600;}
 
@@ -233,7 +232,7 @@
    legible. Both kinds of row are named here. */
 .quiet-article-body .layer_post .btn_mark{color:var(--ink-2);}
 .quiet-article-body .layer_post .btn_mark:hover,
-.quiet-article-body .layer_post .btn_mark:focus-visible{background:var(--surface-2); color:var(--ink);}
+.quiet-article-body .layer_post .btn_mark:focus-visible{color:var(--ink);}
 .quiet-article-body .layer_post .btn_mark:hover .txt_sns,
 .quiet-article-body .layer_post .btn_mark:focus-visible .txt_sns{color:var(--ink);}
 

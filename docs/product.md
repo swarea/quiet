@@ -69,6 +69,13 @@ recorded in the stylesheet beside the rules they produced.
 3. **Hover changes colour and nothing else.** No transform, no weight change, no
    underline, no background fill. Buttons scale down on press; elements that
    open or arrive may animate. All animation respects `prefers-reduced-motion`.
+
+   The test, when "no background fill" is argued about: **hover may change the
+   colour of a surface that is already painted; it may not paint a surface that
+   was not there.** A submit button is already a filled shape and may darken. A
+   page number, a copy button and a subscribe pill are not, and get their colour
+   changed instead. A table row is neither — it is read, not aimed at — so it
+   does nothing at all.
 4. **The accent colour is used in three places:** links within prose, category
    labels, and the comment submit button. Elsewhere emphasis is a step within a
    single neutral scale.
