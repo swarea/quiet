@@ -33,6 +33,23 @@
   background:none; border:0; padding:0; white-space:pre;
 }
 
+/* Code pasted from another page arrives wearing that page's code theme, written
+   into the element: `<pre style="background-color:#f8f8f8; color:#383a42">` is
+   atom-one-light's own palette, carried along by the copy. Inline style outranks
+   every stylesheet, so the frame above loses and a pale ground ends up under
+   syntax colours drawn for a dark one, which is unreadable in either theme.
+
+   The frame is ours, so it is restated at a weight the paste cannot outrank.
+   This is deliberately the whole block and not a per-colour repair: a <pre> that
+   arrived painted is a paste, and its inner spans carry the same foreign palette
+   -- highlight.js colours by class, never inline, so nothing of Tistory's is
+   caught here. A <pre> the author painted by hand, one span at a time, has no
+   style of its own and is left alone.
+
+   In CSS rather than in script so it also holds with scripts off. */
+.quiet-article-body pre[style]{background:var(--code-bg) !important; color:var(--code-ink) !important;}
+.quiet-article-body pre[style] [style]{background:none !important; color:inherit !important;}
+
 /* ---- tables --------------------------------------------------------------- */
 /* Wrapped at runtime in .quiet-tbl-wrap for horizontal scroll; these rules make a
    bare table presentable on its own and stop it forcing the page sideways. */
