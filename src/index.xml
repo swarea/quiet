@@ -30,11 +30,11 @@
     <sortInCloud>3</sortInCloud>
     <expandComment>1</expandComment>
     <expandTrackback>0</expandTrackback>
-    <lengthOfRecentNotice>28</lengthOfRecentNotice>
-    <lengthOfRecentEntry>28</lengthOfRecentEntry>
-    <lengthOfRecentComment>30</lengthOfRecentComment>
+    <lengthOfRecentNotice>90</lengthOfRecentNotice>
+    <lengthOfRecentEntry>90</lengthOfRecentEntry>
+    <lengthOfRecentComment>90</lengthOfRecentComment>
     <lengthOfRecentTrackback>30</lengthOfRecentTrackback>
-    <lengthOfLink>30</lengthOfLink>
+    <lengthOfLink>90</lengthOfLink>
     <showListOnCategory>1</showListOnCategory>
     <showListOnArchive>1</showListOnArchive>
     <commentMessage>
