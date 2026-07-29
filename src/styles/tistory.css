@@ -68,6 +68,13 @@
    entry is the link and nothing else competes with it. */
 .quiet-side-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:1px;}
 .quiet-side-list li{font-size:.85rem;}
+/* Two lines, and the ellipsis lands where the second one runs out.
+   Tistory also truncates these strings on the server, by character count, and
+   the two do not agree: at 216px this column holds 32 Korean characters or 56
+   Latin ones across two lines, so a count low enough for the first cuts the
+   second off mid-column with the line half empty. The `lengthOf*` values in
+   index.xml are set past what two lines can hold, which leaves the decision
+   here, where the width is actually known. */
 .quiet-side-list li a{display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; padding:.36rem var(--rail-inset); border-radius:var(--r-sm); color:var(--nav); transition:color .15s;}
 
 /* Blocks Tistory injects into the article: the like/share/stat toolbar inside
