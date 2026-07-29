@@ -1,6 +1,8 @@
 # Changelog
 
-Starts at 0.2.1. Earlier releases are described in their GitHub release notes.
+Kept from 0.2.0, the first release with an installable package. The work before
+it built the repository, the pipeline and the design, and produced nothing to
+install, so there is no 0.1.0 and nothing earlier to record.
 
 ## Unreleased
 
