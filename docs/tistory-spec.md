@@ -139,11 +139,10 @@ comments beside the code that works around it.
 
 ## Known open questions
 
-(None open. The last one — whether the token families rescope inside a nested
-reply block — is answered below.)
 - Whether `index.xml` *additions* (new variables) also reset settings, or only
-  modifications/renames.
-- Search URL format and `[##_search_..._##]` behavior on list pages.
+  modifications and renames. Every release so far has changed existing values,
+  so the distinction has not had to be settled.
+- Search URL format and `[##_search_..._##]` behaviour on list pages.
 
 ## Feature inventory
 

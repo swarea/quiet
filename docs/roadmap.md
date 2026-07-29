@@ -1,10 +1,21 @@
 # Roadmap
 
-Milestones are release-based. A milestone contains only the issues committed to
-that release. Criteria below are completion gates, not implementation specs —
-details live in issues.
+This file is where a release's contents are recorded; GitHub milestones are not
+in use ([CONTRIBUTING.md](../CONTRIBUTING.md)). Criteria are completion gates,
+not implementation specs — details live in issues.
+
+| Release | State |
+| --- | --- |
+| 0.1.0 | met, never tagged — it produced nothing installable |
+| 0.2.0 | released 2026-07-27 |
+| 0.3.0 | released 2026-07-28 |
+| 0.5.0 | next |
+| 1.0.0 | planned |
 
 ## 0.1.0 — Foundation
+
+Never released. Everything below was built, but a skin with no installable
+package is nothing a blogger can put on a blog, so the first tag is 0.2.0.
 
 - product goals and clean-room principles documented
 - design direction chosen from three distinct proposals (recorded)

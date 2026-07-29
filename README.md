@@ -22,8 +22,9 @@ any existing skin, and not affiliated with Tistory or Kakao.
   code blocks, and click-to-zoom on images.
 - Tistory's injected markup — the comment box, the post toolbar, the share and
   manage panels — restyled to match the rest of the page.
-- Author colours pasted into a post are preserved, except where a colour would
-  fall below readable contrast in the theme the visitor is using.
+- Colours written into a post are preserved wherever they still read. Where they
+  do not, they are reconciled with the theme — see
+  [What the skin changes in your posts](#what-the-skin-changes-in-your-posts).
 - The Latin typeface is bundled (51 KB). Hangul uses the reader's system font.
 
 ## Install
@@ -84,6 +85,40 @@ Four cover types are available:
 | Previous and next post | `prev-next` | off | links to adjacent posts. Off by default because it duplicates the related list on blogs with small categories |
 
 Settings left empty are hidden rather than rendered blank.
+
+## What the skin changes in your posts
+
+Your posts are never edited. What follows happens in the browser, at display
+time only, and only inside the article body.
+
+The Tistory editor writes colour onto the element, so text pasted from another
+page arrives carrying that page's palette as inline style — which outranks any
+stylesheet and therefore follows no theme. On a dark page that shows up as white
+slabs behind paragraphs, callout boxes that stayed white, and code blocks wearing
+a light syntax theme inside the dark frame.
+
+So, per element:
+
+| what it carries | what happens |
+| --- | --- |
+| a colour that still reads where it landed | nothing — it is your choice and it is kept |
+| a background on something you built a box around (padding, a border, a radius) | moved into the current theme, keeping its hue |
+| a background that is only the paper of the page it was copied from | dropped, so the page's own ground shows through |
+| a `<pre>` that arrived already painted | replaced by the skin's code frame |
+| text that fails 4.5:1 against what it now sits on | falls back to the theme's own text colour |
+
+Two consequences worth knowing:
+
+- **Text that was invisible becomes visible.** White text on a white background
+  is hidden by accident, not by design, so it is given a readable colour rather
+  than left hidden.
+- **A deliberate colour inside a pasted code block is flattened.** Only blocks
+  that arrived with an inline style are treated this way; a code block you
+  coloured by hand is untouched, and highlight.js colours by class and is never
+  affected.
+
+With JavaScript off, only the code-frame rule applies; everything else is left
+exactly as written.
 
 ## Known limitations
 
