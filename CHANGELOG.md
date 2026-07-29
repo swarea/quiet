@@ -9,6 +9,15 @@ install, so there is no 0.1.0 and nothing earlier to record.
 Upgrading resets a blog's saved skin settings, as every change to `index.xml`
 does. Note your accent colours and home copy before uploading.
 
+### Changed
+
+- The code block follows the theme. It had one dark set of colours used in both,
+  which left a black slab as the heaviest thing on a light page. There are now
+  `--light-code-*` and `--dark-code-*` palettes covering the block, the bar above
+  it and all ten syntax colours, and the gate holds every one of them to 4.5:1 in
+  both themes. The bar was a pair of white alphas that only meant anything on a
+  dark block; it is tokens now like everything else.
+
 ### Fixed
 
 - Colour pasted into a post is reconciled with the theme it is read in. The
@@ -35,6 +44,18 @@ does. Note your accent colours and home copy before uploading.
   ellipsis lands where the line actually ends.
 - The visitor counts sit in a band of their own rather than reading as a heading
   for the category tree below them.
+- Tistory's link card, built from a pasted URL, had never been styled and kept
+  the fixed colours Tistory gives it. Measured against a dark page its frame
+  came to 13.28 and its title to 1.12, so the title was not there at all; on a
+  light page its description measured 3.08, under the floor this project holds
+  itself to. 99 of them appear across the author's posts.
+- The pagination never marked the page being read: the class it styled was one
+  the skin invented, where Tistory writes `selected` on a span inside the link.
+  Numbers were also boxed twice over, and the ellipsis between ranges responded
+  as though it led somewhere.
+- Hover no longer paints a surface that was not already there — pagination, the
+  copy button, the subscribe pill, the post toolbar, the share menu. Table rows
+  lose the highlight entirely: a row is read, not aimed at.
 - The release notes no longer break mid-sentence.
 
 ## 0.3.0

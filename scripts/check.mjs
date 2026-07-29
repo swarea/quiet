@@ -350,6 +350,9 @@ const PAIRS = [
   ["--code-comment", "--code-bg"], ["--code-accent", "--code-bg"],
   ["--code-key", "--code-bg"], ["--code-str", "--code-bg"],
   ["--code-fn", "--code-bg"], ["--code-num", "--code-bg"], ["--code-del", "--code-bg"],
+  // The bar above the code carries the language and the copy button, and is a
+  // shade off the block rather than the same colour.
+  ["--code-faint", "--code-bar"], ["--code-ink-2", "--code-bar"], ["--code-ink", "--code-bar"],
 ];
 const AA = 4.5;
 try {
