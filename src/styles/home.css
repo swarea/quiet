@@ -33,7 +33,13 @@ main > .quiet-cover + .quiet-cover{border-top:1px solid var(--line);}
    reader has to go looking for, which is the opposite of what a list of titles
    is for. Navigation still rests back and steps forward -- there the point is
    to separate one entry from its neighbours, not to be read. */
-.quiet-post-row{position:relative; display:grid; grid-template-columns:5.5rem 1fr; gap:1.4rem; padding:1.05rem .9rem;}
+/* No side padding. It was there to hold a hover fill off the text, and the fill
+   is gone -- the corner radius went with it, but this did not, so a row's
+   contents sat 14.4px inside the rule that separates them. The section heading
+   and its More link are at the section's own edges, which made the inset read as
+   the heading being out of line with its own list. A tile in the grid has no
+   side padding either, and those lined up. */
+.quiet-post-row{position:relative; display:grid; grid-template-columns:5.5rem 1fr; gap:1.4rem; padding-block:1.05rem;}
 /* The divider is drawn rather than bordered. When the row still took a fill on
    hover it needed a corner radius, and a border followed that radius so the line
    curved away at both ends. The fill is gone; a drawn line is kept because it is
