@@ -402,6 +402,53 @@ try {
   fail("no ephemeral links", e.message);
 }
 
+// A class that shares an element with .quiet-wrap inherits the 2rem side inset
+// that keeps every section of the page on the same left edge. The `padding`
+// shorthand resets that inset whether or not it meant to: `.quiet-recent{padding:
+// 2.2rem 0}` set it to zero, and because the featured cover happened to have no
+// padding rule at all, three home covers sat 32px left of the fourth. Nothing
+// caught it, because each rule was correct about the axis it was thinking about.
+// Say the axis.
+try {
+  const html = await readFile(join(root, "src", "skin.html"), "utf8");
+  const templates = await walk(join(root, "src", "templates"));
+  const markup = [html, ...(await Promise.all(templates.map((f) => readFile(f, "utf8"))))].join("\n");
+
+  const co = new Set();
+  for (const m of markup.matchAll(/class="([^"]*)"/g)) {
+    const cls = m[1].split(/\s+/).filter(Boolean);
+    if (!cls.includes("quiet-wrap")) continue;
+    for (const c of cls) if (c !== "quiet-wrap" && c.startsWith("quiet-")) co.add(c);
+  }
+  if (!co.size) throw new Error("no class shares an element with quiet-wrap");
+
+  // The subject of a selector is its last compound: `.a .b` styles .b, not .a.
+  const subjectIs = (selector, cls) =>
+    selector.split(",").some((part) => {
+      const compounds = part.trim().split(/[\s>+~]+/).filter(Boolean);
+      const last = compounds[compounds.length - 1] ?? "";
+      return new RegExp(`\\.${cls}(?![\\w-])`).test(last);
+    });
+
+  const offenders = [];
+  for (const file of await walk(join(root, "src", "styles"))) {
+    const css = (await readFile(file, "utf8")).replace(/\/\*[\s\S]*?\*\//g, "");
+    for (const rule of css.matchAll(/([^{}@]+)\{([^{}]*)\}/g)) {
+      const [, selector, body] = rule;
+      const decl = body.match(/(?:^|;)\s*padding\s*:\s*([^;]+)/);
+      if (!decl) continue;
+      for (const cls of co) {
+        if (!subjectIs(selector, cls)) continue;
+        offenders.push(`${file.split(/[/\\]/).pop()}: ${selector.trim()} {padding:${decl[1].trim()}}`);
+      }
+    }
+  }
+  if (offenders.length) fail("padding states its axis", offenders.slice(0, 3).join("; "));
+  else ok("padding states its axis");
+} catch (e) {
+  fail("padding states its axis", e.message);
+}
+
 // Every role must be bound in both themes. The bindings are the one part of the
 // token sheet that is written more than once, because an explicit toggle has to
 // beat the operating system's preference in both directions and CSS gives no
