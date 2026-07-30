@@ -13,10 +13,24 @@ GitHub only: issues, PRs, releases. No mirrors, no second home for issues.
 long-term; releases are identified by tags and GitHub Releases. Repo settings
 to keep in sync (owner applies in GitHub UI):
 
-- allow **rebase merging** only (squash/merge-commit disabled)
+- allow **rebase merging** only; squash and merge commits disabled
 - **Automatically delete head branches** enabled
-- branch protection on `main`, requiring the `check` workflow to pass. The
-  repository is public, so this is available at no cost.
+- branch protection on `main`: the `gate` check required, linear history
+  required, force pushes and deletion refused
+
+Two deliberate gaps in that protection, both because this is a one-person
+repository:
+
+- **No required review.** There is nobody to approve a pull request, so
+  requiring one would stop every merge.
+- **Administrators are not included.** The gate runs on GitHub Actions, and
+  Actions has been unavailable here before — see the closed issue about billing.
+  A rule that cannot be bypassed turns an outage in someone else's service into
+  an inability to ship. The owner can override; the protection is there to catch
+  a mistake, not to be the only thing standing between a red gate and `main`.
+
+These were applied through the API on 2026-07-30. Before that date none of them
+were set, and every rule above held by habit alone.
 
 ## Branches
 
