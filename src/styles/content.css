@@ -202,8 +202,15 @@
 #quiet-main .quiet-article-body figure[data-ke-type="video"] figcaption{color:var(--muted);}
 /* The "더보기" toggle on a long embed, at #909090 — the same grey the link card
    used, and 3.08 against a light page. It sits in the reading column and a
-   reader is meant to press it. */
-#quiet-main .quiet-article-body .btn-toggle-moreless{color:var(--muted);}
+   reader is meant to press it.
+
+   Written first as `#quiet-main .quiet-article-body .btn-toggle-moreless` on the
+   assumption that an id was enough to clear Tistory. It was not: their copy is
+   `#tt-body-page div[data-ke-type='moreLess'] .btn-toggle-moreless`, which
+   carries an attribute and an element as well and wins (1,2,1) to (1,2,0). The
+   id-scoped duplicates are not the class-level rule with a prefix — they can be
+   longer than what they duplicate, so the whole shape has to be matched. */
+#quiet-main .quiet-article-body div[data-ke-type="moreLess"] .btn-toggle-moreless{color:var(--muted);}
 
 /* ---- syntax highlighting --------------------------------------------------
    Tistory always loads the same highlight.js theme, `atom-one-light`, whatever
