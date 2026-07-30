@@ -281,3 +281,63 @@ body.quiet-lightbox-open{overflow:hidden;}
 .quiet-code .hljs-meta,
 .quiet-code .hljs-bullet,
 .quiet-code .hljs-link{color:var(--code-accent);}
+
+/* ---------- Dividers ----------
+   Tistory draws all eight of the editor's divider styles as slices of one SVG
+   sprite on its own CDN, positioned by background-position. Measured on a live
+   post: every one of them, including the two that look like plain rules.
+
+   An image does not follow a theme. On a dark page the heavier styles turned
+   into the faintest marks and the lighter ones stayed brightest -- the reverse
+   of what the author picked -- and none of them took the theme's colour at all.
+   Each is drawn here instead, from the same token every other rule on the page
+   uses, so a divider is as dark as it was chosen to be in both themes.
+
+   The spacing is the skin's too: Tistory left 20px above and below, which is
+   less than the gap between two paragraphs, so a divider sat closer to the text
+   it was separating than the text was to itself. */
+#tt-body-page .quiet-article-body hr[data-ke-type="horizontalRule"]{
+  background:none; border:0; overflow:visible;
+  margin:2.9rem auto; width:100%; height:1px; max-width:none;
+}
+/* Three dots. */
+#tt-body-page .quiet-article-body hr[data-ke-style="style1"]{
+  width:64px; height:3px;
+  background:radial-gradient(circle closest-side,var(--line-strong) 99%,transparent 100%) 0 50%/22px 3px repeat-x;
+}
+/* A short bar. */
+#tt-body-page .quiet-article-body hr[data-ke-style="style2"]{
+  width:64px; height:2px; background:var(--line-strong);
+}
+/* A wave. Drawn as a mask so the shape is data and the colour is a token: a
+   background image would have to carry its own colour and could not follow the
+   theme, which is the whole fault being fixed here. The data URI keeps it off
+   any other host. */
+#tt-body-page .quiet-article-body hr[data-ke-style="style3"]{
+  width:64px; height:8px; background:var(--line-strong);
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 8'%3E%3Cpath d='M0 6L4 2L8 6L12 2L16 6' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") 0 50%/16px 8px repeat-x;
+}
+/* A vertical stroke: a break rather than a rule. */
+#tt-body-page .quiet-article-body hr[data-ke-style="style4"]{
+  width:1px; height:60px; background:var(--line-strong);
+}
+/* The full-width pair, the lighter first. */
+#tt-body-page .quiet-article-body hr[data-ke-style="style5"]{background:var(--line);}
+#tt-body-page .quiet-article-body hr[data-ke-style="style6"]{background:var(--line-strong);}
+/* A rule with a mark set on its middle. The mark carries the page's own ground
+   so the rule appears to pass behind it rather than through it. */
+#tt-body-page .quiet-article-body hr[data-ke-style="style7"],
+#tt-body-page .quiet-article-body hr[data-ke-style="style8"]{
+  position:relative; width:200px; background:var(--line-strong);
+}
+#tt-body-page .quiet-article-body hr[data-ke-style="style7"]::after,
+#tt-body-page .quiet-article-body hr[data-ke-style="style8"]::after{
+  content:""; position:absolute; left:50%; top:50%; width:7px; height:7px;
+  background:var(--paper); border:1px solid var(--line-strong);
+}
+#tt-body-page .quiet-article-body hr[data-ke-style="style7"]::after{
+  transform:translate(-50%,-50%) rotate(45deg);
+}
+#tt-body-page .quiet-article-body hr[data-ke-style="style8"]::after{
+  transform:translate(-50%,-50%); border-radius:50%;
+}
