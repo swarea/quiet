@@ -15,8 +15,9 @@ published, reviewed or endorsed by Tistory or Kakao. "Tistory" and "Kakao" are
 used only to identify the platform this skin is built for, and are the trademarks
 of their respective owners.
 
-> **0.3.0.** Verified on a live Tistory blog in both themes, in Chrome and
-> Safari. See [CHANGELOG.md](CHANGELOG.md) for what changed and
+> **0.4.0.** Every page type verified on a live Tistory blog in both themes, in
+> Chrome and Safari. The home page's covers are verified in the preview but not
+> yet on a live blog. See [CHANGELOG.md](CHANGELOG.md) for what changed and
 > [Known limitations](#known-limitations) for what the skin cannot do.
 
 ## Features

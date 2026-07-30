@@ -9,6 +9,7 @@ not implementation specs — details live in issues.
 | 0.1.0 | met, never tagged — it produced nothing installable |
 | 0.2.0 | released 2026-07-27 |
 | 0.3.0 | released 2026-07-28 |
+| 0.4.0 | released 2026-07-30 |
 | 0.5.0 | next |
 | 1.0.0 | planned |
 
@@ -46,6 +47,22 @@ package is nothing a blogger can put on a blog, so the first tag is 0.2.0.
   build during a release
 - **Done when:** no page renders without a heading or a landmark; nothing the
   documentation claims is contradicted by the code; the gate passes in CI.
+
+## 0.4.0 — Audit follow-up
+
+Not planned. It exists because auditing 0.3.0 on a live blog produced more
+defects than a patch release could carry quietly, and holding them back to
+bundle with 0.5.0's features would have left a released version standing with
+known faults in it.
+
+- the home covers: one left edge, rhythm by position, the Introduction image,
+  the Topics grid, and the Introduction cover surviving a post list
+- a category names the branch it hangs off, written the way Tistory writes it
+- a theme change no longer leaves elements holding the previous theme's colours
+- public documentation reviewed for overclaims, third-party characterisation
+  and trademark use
+- **Done when:** every page type passes the sweep in both themes on a live blog
+  and in the preview; the gate covers each defect class found.
 
 ## 0.5.0 — Beta
 
