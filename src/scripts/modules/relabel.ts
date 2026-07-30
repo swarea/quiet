@@ -127,8 +127,20 @@ const LISTING_NAMES = new Map([
 function renameListingHeading(): void {
   const heading = document.querySelector<HTMLElement>(".quiet-list-head h1");
   if (!heading) return;
-  const named = LISTING_NAMES.get((heading.textContent ?? "").trim());
-  if (named) heading.textContent = named;
+  const text = (heading.textContent ?? "").trim();
+  const named = LISTING_NAMES.get(text);
+  if (named) {
+    heading.textContent = named;
+    return;
+  }
+  // A blog whose Tistory settings are in English gets "Categories" for the same
+  // listing, which is a heading over every post the blog has and not a list of
+  // categories at all. Renamed only on the complete listing's own path, because
+  // "Categories" is a name an author could give a category, and on that
+  // category's page the heading would be theirs rather than Tistory's.
+  if (text === "Categories" && ALL_POSTS_PATH.test(location.pathname)) {
+    heading.textContent = "All posts";
+  }
 }
 
 // Every category row but this one arrives as a label plus a `.c_cnt` span, which
@@ -137,6 +149,15 @@ function renameListingHeading(): void {
 // the label's size in the body face and read as part of the name. Split it back
 // out so the row is built like the rows under it.
 const COUNT = /^(.*?)\s*([([（]\s*\d+\s*[)）])\s*$/;
+
+// The complete listing, and nothing under it.
+const ALL_POSTS_PATH = /^\/category\/?$/;
+
+// Tistory's own name for the root of the tree, in either language it writes it
+// in. Both are Tistory's wording rather than a category the author created --
+// the row is generated, it is always the link to /category, and an author has
+// no way to rename it.
+const ROOT_NAMES = /^(\s*)(분류\s*전체보기|전체보기|Categories)/;
 
 function renameAllPosts(): void {
   document.querySelectorAll<HTMLAnchorElement>(".quiet-cat-tistory a").forEach((link) => {
@@ -149,14 +170,14 @@ function renameAllPosts(): void {
       const first = link.firstChild;
       if (first && first.nodeType === 3) {
         const was = first.textContent ?? "";
-        const now = was.replace(/^(\s*)분류\s*전체보기|^(\s*)전체보기/, "$1$2All posts");
+        const now = was.replace(ROOT_NAMES, "$1All posts");
         if (now !== was) first.textContent = now;
       }
       return;
     }
 
     const text = (link.textContent ?? "").trim();
-    const next = text.replace(/^분류\s*전체보기|^전체보기/, "All posts");
+    const next = text.replace(ROOT_NAMES, "$1All posts");
     const split = next.match(COUNT);
     if (!split) {
       if (next !== text) link.textContent = next;

@@ -80,7 +80,13 @@ main > .quiet-cover + .quiet-cover{border-top:1px solid var(--line);}
 /* Tag index — uniform chips with counts, not a random-size cloud. */
 .quiet-tagcloud{padding:2.2rem 0 3rem;}
 .quiet-tagcloud ul{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(auto-fill,minmax(11rem,1fr)); gap:.6rem;}
-.quiet-tagcloud a{display:flex; align-items:center; justify-content:space-between; gap:.6rem; padding:.6rem .85rem; border:1px solid var(--line); border-radius:var(--r-md); background:var(--surface); font-size:.9rem; color:var(--muted); transition:border-color .15s, color .15s;}
+/* font-weight, not just font-size. Tistory grades a tag by how often it is used
+   and writes that grade into a class -- cloud1 to cloud5 -- which this grid
+   flattens, because a tag index is for finding a tag rather than for reading a
+   popularity chart. Only the size was being flattened: measured on a live blog,
+   116 chips came through at 600 and 166 at 700 against everything else at 400,
+   so two thirds of the grid was bold for a reason no reader could see. */
+.quiet-tagcloud a{display:flex; align-items:center; justify-content:space-between; gap:.6rem; padding:.6rem .85rem; border:1px solid var(--line); border-radius:var(--r-md); background:var(--surface); font-size:.9rem; font-weight:400; color:var(--muted); transition:border-color .15s, color .15s;}
 .quiet-tagcloud a:hover,.quiet-tagcloud a:focus-visible{border-color:var(--line-strong); color:var(--ink);}
 .quiet-tagcloud a .name{overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
 .quiet-tagcloud a .n{font-family:var(--mono); font-size:.74rem; color:var(--faint); flex:none;}
