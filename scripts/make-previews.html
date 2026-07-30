@@ -1,98 +1,308 @@
 <!doctype html>
 <meta charset="utf-8">
-<title>swarea skin — preview image generator</title>
+<title>Quiet — preview image generator</title>
 <!--
-  Tistory shows a skin thumbnail in the skin editor and skin list. It wants
-  preview256.jpg (256x192), preview560.jpg (560x420) and preview1600.jpg
-  (1600x1200). We have no image toolchain in the build, so the thumbnails are
-  drawn here with the canvas API and downloaded, then committed to src/assets/.
+  Tistory shows a skin thumbnail in the skin editor and the skin list. It wants
+  preview256.jpg (256x192), preview560.jpg (560x420), preview1600.jpg
+  (1600x1200) and a 112x84 preview.gif.
 
-  Open this file in a browser and press the button. Re-run it whenever the
-  skin's colours or layout change materially.
+  The artwork is drawn once at 1600x1200 and every smaller file is reduced from
+  that master. Drawing each size separately, as this did before, means the small
+  cards redraw their detail on a coarse canvas: the composition drifts between
+  sizes and the type loses its edges. Reducing one master keeps every size the
+  same picture and lets the browser antialias it properly.
+
+  What it draws is the home page a blog gets with covers configured — an
+  Introduction band, a Featured post and a List. Without covers Tistory serves
+  its own post list and no skin can override it, so that is the arrangement the
+  thumbnail should promise. The rail is the skin's, the words in it are sample
+  content: no blog's real title, categories or tagline belong in a skin, and
+  nothing here advertises the skin inside the chrome a blogger's own name goes.
+
+  **Serve this file, do not open it from disk.** Browsers refuse font requests
+  from a file:// page, so opening it directly draws every word in a fallback
+  face and produces thumbnails that are not in the skin's typeface at all —
+  silently, since the picture still looks finished. The button refuses to
+  generate when the face has not loaded rather than let that ship. Any static
+  server over the repository root will do:
+
+      npx serve .        then open /scripts/make-previews.html
+
+  Put the downloads in src/assets/. Re-run whenever the palette or the home
+  layout changes.
 -->
 <style>
-  body{font:15px/1.6 system-ui,sans-serif;margin:2rem;color:#191b1f}
+  @font-face{
+    font-family:"Quiet Preview";
+    src:url("../src/fonts/source.woff2") format("woff2");
+    font-weight:100 900;
+    font-display:block;
+  }
+  body{font:15px/1.6 "Quiet Preview",system-ui,sans-serif;margin:2rem;color:#191b1f;background:#fbfbfa}
   button{font:inherit;font-weight:600;background:#38548c;color:#fff;border:0;border-radius:6px;padding:.6rem 1.1rem;cursor:pointer}
-  canvas{border:1px solid #e6e6e2;margin-top:1rem;max-width:100%}
+  button:hover{background:#2a4170}
+  #out{display:grid;gap:1rem;margin-top:1rem;justify-items:start}
+  canvas{border:1px solid #ebebe8;max-width:100%}
 </style>
 <h1>Preview images</h1>
-<p>Generates the three JPEG thumbnails Tistory uses. Save them into <code>src/assets/</code>.</p>
+<p>Generates the four thumbnails Tistory uses. Save them into <code>src/assets/</code>.</p>
 <button id="go" type="button">Generate and download</button>
 <div id="out"></div>
 <script>
+  // Copied from src/styles/tokens.css, keyed by the token they come from. The
+  // validation gate asserts they still match: this file is opened from disk, so
+  // it cannot fetch the stylesheet, and a hand-copied palette drifts. Both this
+  // generator and the one before it had drifted before the check existed.
+  const TOKENS = {
+    "--light-paper": "#fbfbfa",
+    "--light-surface": "#ffffff",
+    "--light-surface-2": "#f2f2f0",
+    "--light-ink": "#191b1f",
+    "--light-ink-2": "#3f434a",
+    "--light-muted": "#565b62",
+    "--light-faint": "#6a6f77",
+    "--light-nav": "#4a4e56",
+    "--light-line": "#ebebe8",
+    "--light-line-strong": "#dcdcd7",
+    "--light-accent": "#38548c",
+    "--light-accent-ink": "#2a4170",
+    "--light-accent-wash": "#eef1f7",
+  };
   const C = {
-    paper: "#f6f6f4", surface: "#ffffff", line: "#e6e6e2", wash: "#eef1f7",
-    ink: "#191b1f", muted: "#565b62", faint: "#6b7078", accent: "#38548c",
+    paper: TOKENS["--light-paper"],
+    surface: TOKENS["--light-surface"],
+    surface2: TOKENS["--light-surface-2"],
+    ink: TOKENS["--light-ink"],
+    ink2: TOKENS["--light-ink-2"],
+    muted: TOKENS["--light-muted"],
+    faint: TOKENS["--light-faint"],
+    nav: TOKENS["--light-nav"],
+    line: TOKENS["--light-line"],
+    lineStrong: TOKENS["--light-line-strong"],
+    accent: TOKENS["--light-accent"],
+    accentInk: TOKENS["--light-accent-ink"],
+    wash: TOKENS["--light-accent-wash"],
   };
 
-  function roundRect(x, x1, y1, w1, h1, r) {
+  function roundRect(x, left, top, width, height, radius) {
     x.beginPath();
-    x.moveTo(x1 + r, y1);
-    x.arcTo(x1 + w1, y1, x1 + w1, y1 + h1, r);
-    x.arcTo(x1 + w1, y1 + h1, x1, y1 + h1, r);
-    x.arcTo(x1, y1 + h1, x1, y1, r);
-    x.arcTo(x1, y1, x1 + w1, y1, r);
+    x.moveTo(left + radius, top);
+    x.arcTo(left + width, top, left + width, top + height, radius);
+    x.arcTo(left + width, top + height, left, top + height, radius);
+    x.arcTo(left, top + height, left, top, radius);
+    x.arcTo(left, top, left + width, top, radius);
     x.closePath();
   }
 
-  // Draws a flat abstraction of the skin: sidebar rail on the left, centred
-  // title, then hairline-separated post rows. Design coordinates assume a
-  // 560px wide canvas and scale from there.
-  function draw(w, h) {
-    const c = document.createElement("canvas");
-    c.width = w; c.height = h;
-    const x = c.getContext("2d");
-    const s = w / 560;
-    x.fillStyle = C.paper; x.fillRect(0, 0, w, h);
-
-    const railW = 150 * s;
-    x.fillStyle = C.surface; x.fillRect(0, 0, railW, h);
-    x.strokeStyle = C.line; x.lineWidth = Math.max(1, s);
-    x.beginPath(); x.moveTo(railW, 0); x.lineTo(railW, h); x.stroke();
-
-    x.fillStyle = C.accent; roundRect(x, 16 * s, 18 * s, 22 * s, 22 * s, 6 * s); x.fill();
-    x.fillStyle = C.ink; x.fillRect(46 * s, 22 * s, 62 * s, 6 * s);
-    x.fillStyle = C.faint; x.fillRect(46 * s, 33 * s, 46 * s, 4 * s);
-    x.fillStyle = "#efefec"; roundRect(x, 16 * s, 54 * s, railW - 32 * s, 18 * s, 5 * s); x.fill();
-
-    let y = 88 * s;
-    x.fillStyle = C.faint; x.fillRect(16 * s, y, 34 * s, 4 * s); y += 14 * s;
-    for (let i = 0; i < 6; i++) {
-      if (i === 0) {
-        x.fillStyle = C.wash; roundRect(x, 12 * s, y - 5 * s, railW - 24 * s, 16 * s, 4 * s); x.fill();
-        x.fillStyle = C.accent;
-      } else x.fillStyle = C.muted;
-      x.fillRect(16 * s, y, (i === 0 ? 66 : 52 + (i * 5) % 34) * s, 5 * s);
-      y += 20 * s;
+  function fillRound(x, left, top, width, height, radius, fill, stroke, lineWidth) {
+    roundRect(x, left, top, width, height, radius);
+    x.fillStyle = fill;
+    x.fill();
+    if (stroke) {
+      x.strokeStyle = stroke;
+      x.lineWidth = lineWidth || 2;
+      x.stroke();
     }
-
-    const cx = railW + 40 * s;
-    x.fillStyle = C.ink; x.fillRect(cx + 90 * s, 40 * s, 150 * s, 13 * s);
-    x.fillStyle = C.faint; x.fillRect(cx + 118 * s, 62 * s, 94 * s, 5 * s);
-    x.strokeStyle = C.line;
-    x.beginPath(); x.moveTo(railW + 20 * s, 86 * s); x.lineTo(w - 20 * s, 86 * s); x.stroke();
-
-    y = 108 * s;
-    for (let i = 0; i < 3; i++) {
-      x.fillStyle = C.faint; x.fillRect(cx, y + 4 * s, 26 * s, 5 * s);
-      x.fillStyle = C.accent; x.fillRect(cx + 44 * s, y, 40 * s, 5 * s);
-      x.fillStyle = C.ink; x.fillRect(cx + 44 * s, y + 12 * s, (150 - i * 22) * s, 7 * s);
-      x.fillStyle = C.muted;
-      x.fillRect(cx + 44 * s, y + 26 * s, (210 - i * 30) * s, 4 * s);
-      x.fillRect(cx + 44 * s, y + 35 * s, (170 - i * 24) * s, 4 * s);
-      x.strokeStyle = C.line;
-      x.beginPath(); x.moveTo(cx, y + 52 * s); x.lineTo(w - 20 * s, y + 52 * s); x.stroke();
-      y += 68 * s;
-    }
-    return c;
   }
 
+  function rule(x, left, top, right, bottom, colour, width) {
+    x.beginPath();
+    x.moveTo(left, top);
+    x.lineTo(right, bottom);
+    x.strokeStyle = colour;
+    x.lineWidth = width || 2;
+    x.stroke();
+  }
+
+  // The skin sets body type in the bundled face and labels in a monospace; the
+  // thumbnail follows so the picture reads as the same object as the page.
+  function type(x, size, weight, mono) {
+    x.font = mono
+      ? `${weight || 400} ${size}px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace`
+      : `${weight || 400} ${size}px "Quiet Preview", system-ui, sans-serif`;
+    x.textBaseline = "top";
+  }
+
+  function text(x, value, left, top, size, colour, weight, mono) {
+    type(x, size, weight, mono);
+    x.fillStyle = colour;
+    x.fillText(value, left, top);
+  }
+
+  function stack(x, values, left, top, size, step, colour, weight, mono) {
+    for (let i = 0; i < values.length; i += 1) {
+      text(x, values[i], left, top + i * step, size, colour, weight, mono);
+    }
+  }
+
+  // The image beside a featured post. Drawn rather than photographed because a
+  // photograph would be someone's, and because the accent is the one colour the
+  // skin spends: the thumbnail should show where it goes.
+  function featureArt(x, left, top, width, height) {
+    x.save();
+    roundRect(x, left, top, width, height, 22);
+    x.clip();
+    const wash = x.createLinearGradient(left, top, left, top + height);
+    wash.addColorStop(0, "#41609a");
+    wash.addColorStop(1, "#22355a");
+    x.fillStyle = wash;
+    x.fillRect(left, top, width, height);
+
+    x.strokeStyle = "rgba(238,241,247,.22)";
+    x.lineWidth = 2;
+    x.beginPath();
+    x.arc(left + 296, top + 60, 170, 0, Math.PI * 2);
+    x.stroke();
+    x.beginPath();
+    x.arc(left + 296, top + 60, 114, 0, Math.PI * 2);
+    x.stroke();
+
+    rule(x, left + 48, top + 58, left + width - 48, top + 58, "rgba(238,241,247,.18)");
+    rule(x, left + 48, top + 108, left + width - 48, top + 108, "rgba(238,241,247,.13)");
+    rule(x, left + 48, top + 158, left + width - 48, top + 158, "rgba(238,241,247,.10)");
+    fillRound(x, left + 49, top + 28, 11, 158, 5, "rgba(240,243,249,.70)");
+    fillRound(x, left + 78, top + 56, 11, 130, 5, "rgba(240,243,249,.40)");
+    x.restore();
+  }
+
+  // The rail as the skin builds it: the blog's own identity, search, the three
+  // counters, the category tree with its top level flush, and the blog menu.
+  function drawRail(x, width, height) {
+    x.fillStyle = C.surface;
+    x.fillRect(0, 0, width, height);
+    rule(x, width, 0, width, height, C.line);
+
+    fillRound(x, 54, 52, 60, 60, 30, C.surface2, C.line, 2);
+    text(x, "Field Notes", 132, 58, 27, C.ink2, 700);
+    text(x, "notes on the work", 133, 95, 15, C.muted);
+
+    fillRound(x, 54, 162, 266, 52, 10, C.surface2, C.line, 2);
+    x.beginPath();
+    x.arc(80, 188, 7, 0, Math.PI * 2);
+    x.strokeStyle = C.faint;
+    x.lineWidth = 2;
+    x.stroke();
+    rule(x, 85, 193, 92, 200, C.faint);
+    text(x, "Search", 104, 178, 15, C.faint);
+
+    const counts = [["Total", "39,852"], ["Today", "192"], ["Yesterday", "65"]];
+    for (let i = 0; i < counts.length; i += 1) {
+      const left = 54 + i * 92;
+      text(x, counts[i][0], left, 258, 12, C.muted, 400);
+      text(x, counts[i][1], left, 280, 14, C.muted, 400, true);
+    }
+
+    text(x, "CATEGORIES", 54, 356, 12, C.faint, 400, true);
+    const nav = [["Categories", "128"], ["Engineering", "61"], ["Data", "24"], ["Career", "18"], ["Life", "25"]];
+    let y = 396;
+    for (let i = 0; i < nav.length; i += 1) {
+      text(x, nav[i][0], 54, y, 17, i === 0 ? C.ink2 : C.nav, i === 0 ? 600 : 400);
+      text(x, nav[i][1], 286, y + 3, 13, C.faint, 400, true);
+      y += 58;
+    }
+
+    text(x, "MENU", 54, 712, 12, C.faint, 400, true);
+    stack(x, ["Home", "Archive", "Tags"], 54, 752, 17, 52, C.nav);
+  }
+
+  function drawMaster() {
+    const canvas = document.createElement("canvas");
+    canvas.width = 1600;
+    canvas.height = 1200;
+    const x = canvas.getContext("2d");
+
+    x.fillStyle = C.paper;
+    x.fillRect(0, 0, canvas.width, canvas.height);
+
+    const railWidth = 374;
+    drawRail(x, railWidth, canvas.height);
+
+    const left = 464;
+    const right = 1516;
+
+    // The theme control is an icon, not a labelled switch: the skin never puts
+    // the word "Light" on the page.
+    fillRound(x, right - 56, 48, 56, 56, 28, C.surface, C.line, 2);
+    x.save();
+    x.translate(right - 28, 76);
+    x.strokeStyle = C.muted;
+    x.lineWidth = 2.4;
+    x.beginPath();
+    x.arc(2, -2, 11, 2.4, 6.0);
+    x.stroke();
+    x.restore();
+
+    // Introduction cover: the small line, the headline, the line under it.
+    text(x, "A QUIET PLACE FOR IDEAS", left, 58, 13, C.faint, 400, true);
+    stack(x, ["Ideas, carefully", "kept."], left, 142, 68, 82, C.ink, 700);
+    stack(
+      x,
+      ["A calm home for long-form notes, technical writing,", "and the work in between."],
+      left,
+      340,
+      22,
+      33,
+      C.muted,
+    );
+
+    // Featured cover: one post with its image beside it.
+    text(x, "FIELD NOTES", left, 486, 13, C.accent, 600, true);
+    stack(x, ["Building software", "that remembers", "its work"], left, 526, 38, 46, C.ink, 700);
+    stack(
+      x,
+      ["Evidence, decisions, and the small details", "that make a project understandable later."],
+      left,
+      686,
+      17,
+      26,
+      C.muted,
+    );
+    text(x, "2026.07.30  ·  8 MIN", left, 762, 12, C.faint, 400, true);
+    featureArt(x, 1052, 468, 464, 278);
+
+    // List cover.
+    const listTop = 852;
+    rule(x, left, listTop, right, listTop, C.lineStrong);
+    text(x, "Recent", left, listTop + 30, 24, C.ink, 700);
+    text(x, "All posts  →", right - 108, listTop + 36, 14, C.nav);
+    rule(x, left, listTop + 92, right, listTop + 92, C.line);
+
+    const rows = [
+      ["07.24", "DESIGN", "Designing for the long read"],
+      ["07.18", "DATA", "What the logs actually said"],
+      ["07.09", "NOTES", "A week of small decisions"],
+    ];
+    let y = listTop + 122;
+    for (let i = 0; i < rows.length; i += 1) {
+      text(x, rows[i][0], left, y + 3, 13, C.faint, 400, true);
+      text(x, rows[i][1], 596, y, 12, C.accent, 600, true);
+      text(x, rows[i][2], 596, y + 30, 20, C.ink, 600);
+      if (i < rows.length - 1) rule(x, 596, y + 80, right, y + 80, C.line);
+      y += 102;
+    }
+
+    return canvas;
+  }
+
+  function reduce(master, width, height) {
+    const canvas = document.createElement("canvas");
+    canvas.width = width;
+    canvas.height = height;
+    const x = canvas.getContext("2d");
+    x.imageSmoothingEnabled = true;
+    x.imageSmoothingQuality = "high";
+    x.drawImage(master, 0, 0, width, height);
+    return canvas;
+  }
 
   // Canvas can write JPEG and PNG but not GIF, which is why preview.gif was
   // absent from every package until the release script started checking. The
-  // encoder is here rather than as a dependency because this drawing is a
-  // handful of flat fills: its palette is tiny, and a GIF of flat colour needs
-  // none of LZW's cleverness.
+  // encoder is here rather than as a dependency because it is only wanted for
+  // one 112x84 file made at release time.
+  //
+  // Colours are mapped exactly while the table has room and to the nearest
+  // entry after that. A fixed colour cube would be shorter, but the featured
+  // image is a gradient and a cube bands it visibly at this size.
   //
   // Codes are written at a fixed nine bits and the dictionary is cleared before
   // it can ever grow past that, so every pixel is emitted literally. The result
@@ -101,8 +311,6 @@
   function encodeGif(imageData) {
     const { width, height, data } = imageData;
 
-    // Flat fills mean few distinct colours; map them exactly, and fall back to
-    // the nearest entry only if the drawing ever outgrows a full palette.
     const palette = [];
     const seen = new Map();
     const indexes = new Uint8Array(width * height);
@@ -184,37 +392,51 @@
     return new Blob([new Uint8Array(bytes)], { type: "image/gif" });
   }
 
-  const SIZES = [
-    ["preview256.jpg", 256, 192],
-    ["preview560.jpg", 560, 420],
-    ["preview1600.jpg", 1600, 1200],
-  ];
-
-  document.getElementById("go").addEventListener("click", () => {
-    const out = document.getElementById("out");
-    out.textContent = "";
-    for (const [name, w, h] of SIZES) {
-      const canvas = draw(w, h);
-      canvas.toBlob((blob) => {
-        const a = document.createElement("a");
-        a.href = URL.createObjectURL(blob);
-        a.download = name;
-        a.click();
-        setTimeout(() => URL.revokeObjectURL(a.href), 5000);
-      }, "image/jpeg", 0.85);
-      if (w <= 560) out.appendChild(canvas);
-    }
-
-    // The 112x84 fallback thumbnail Tistory asks for, in the only format it
-    // accepts for that slot.
-    const small = draw(112, 84);
-    const pixels = small.getContext("2d").getImageData(0, 0, 112, 84);
-    const gif = encodeGif(pixels);
+  function download(blob, name) {
     const link = document.createElement("a");
-    link.href = URL.createObjectURL(gif);
-    link.download = "preview.gif";
+    link.href = URL.createObjectURL(blob);
+    link.download = name;
     link.click();
     setTimeout(() => URL.revokeObjectURL(link.href), 5000);
+  }
+
+  document.getElementById("go").addEventListener("click", async () => {
+    const out = document.getElementById("out");
+    out.textContent = "";
+
+    // Without this the master is drawn in the fallback face and every reduced
+    // file inherits it. A thumbnail in the wrong typeface looks perfectly
+    // finished, which is exactly why this refuses rather than warns.
+    try {
+      await document.fonts.load('400 68px "Quiet Preview"');
+      await document.fonts.load('700 68px "Quiet Preview"');
+      await document.fonts.ready;
+    } catch (e) {
+      /* reported by the check below */
+    }
+    if (!document.fonts.check('700 68px "Quiet Preview"')) {
+      out.textContent =
+        "The bundled typeface did not load, so the thumbnails would be drawn in a " +
+        "fallback face. Serve the repository over http rather than opening this " +
+        "file from disk, then try again.";
+      out.style.color = "#a3202f";
+      return;
+    }
+    out.style.color = "";
+    const master = drawMaster();
+
+    for (const [name, width, height] of [
+      ["preview1600.jpg", 1600, 1200],
+      ["preview560.jpg", 560, 420],
+      ["preview256.jpg", 256, 192],
+    ]) {
+      const canvas = width === 1600 ? master : reduce(master, width, height);
+      canvas.toBlob((blob) => download(blob, name), "image/jpeg", 0.9);
+      if (width <= 560) out.appendChild(canvas);
+    }
+
+    const small = reduce(master, 112, 84);
+    download(encodeGif(small.getContext("2d").getImageData(0, 0, 112, 84)), "preview.gif");
     out.appendChild(small);
   });
 </script>
