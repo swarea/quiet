@@ -26,6 +26,18 @@ preview560.jpg   — 560×420  (skin list)
 preview1600.jpg  — 1600×1200 (detail view)
 ```
 
+None of this is the skin's choice. The three editable files and the four preview
+images are fixed names Tistory reads by name at the top of the package;
+everything else a skin ships goes under `images/`, whatever it is. The folder
+holds this skin's script, its typeface and that typeface's licence, none of
+which are images — the name is Tistory's and predates skins carrying anything
+else. A skin cannot flatten the package or rename the folder, so `images/app.js`
+looking odd is worth knowing about rather than fixing.
+
+What the skin does choose is the names inside it. `quiet-latin.woff2` matches
+the family the licence obliged us to rename, and `OFL.txt` sits beside the font
+it covers because it has to travel with it.
+
 ## index.xml — key facts
 
 - Holds `<information>` (name/version/description/license), `<author>`,
