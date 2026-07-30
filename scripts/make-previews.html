@@ -223,13 +223,18 @@
     // The theme control is an icon, not a labelled switch: the skin never puts
     // the word "Light" on the page.
     fillRound(x, right - 56, 48, 56, 56, 28, C.surface, C.line, 2);
+    // A crescent cut out of a disc. Drawn as an arc first, it came out as a
+    // broken ring and read as a loading spinner.
     x.save();
     x.translate(right - 28, 76);
-    x.strokeStyle = C.muted;
-    x.lineWidth = 2.4;
+    x.fillStyle = C.muted;
     x.beginPath();
-    x.arc(2, -2, 11, 2.4, 6.0);
-    x.stroke();
+    x.arc(0, 0, 12, 0, Math.PI * 2);
+    x.fill();
+    x.globalCompositeOperation = "destination-out";
+    x.beginPath();
+    x.arc(5.5, -4.5, 11, 0, Math.PI * 2);
+    x.fill();
     x.restore();
 
     // Introduction cover: the small line, the headline, the line under it.
@@ -261,7 +266,9 @@
     featureArt(x, 1052, 468, 464, 278);
 
     // List cover.
-    const listTop = 852;
+    // High enough that the third row's title clears the bottom edge. Lower, the
+    // canvas cut it and left a date and a category label hanging there.
+    const listTop = 820;
     rule(x, left, listTop, right, listTop, C.lineStrong);
     text(x, "Recent", left, listTop + 30, 24, C.ink, 700);
     text(x, "All posts  →", right - 108, listTop + 36, 14, C.nav);
@@ -277,8 +284,8 @@
       text(x, rows[i][0], left, y + 3, 13, C.faint, 400, true);
       text(x, rows[i][1], 596, y, 12, C.accent, 600, true);
       text(x, rows[i][2], 596, y + 30, 20, C.ink, 600);
-      if (i < rows.length - 1) rule(x, 596, y + 80, right, y + 80, C.line);
-      y += 102;
+      if (i < rows.length - 1) rule(x, 596, y + 78, right, y + 78, C.line);
+      y += 98;
     }
 
     return canvas;
@@ -304,6 +311,13 @@
   // entry after that. A fixed colour cube would be shorter, but the featured
   // image is a gradient and a cube bands it visibly at this size.
   //
+  // The table is seeded before the scan starts, and that is not a refinement.
+  // Scanning row by row from the top fills all 256 slots with the rail's and the
+  // paper's greys before it ever reaches the featured image, so the blue was
+  // mapped to its nearest neighbour — measured, `rgb(50,74,121)` came out
+  // `rgb(80,81,84)`, a neutral. The one colour the skin spends was leaving the
+  // thumbnail entirely, in the size most people see.
+  //
   // Codes are written at a fixed nine bits and the dictionary is cleared before
   // it can ever grow past that, so every pixel is emitted literally. The result
   // is a larger file than a real LZW stream would be and a completely ordinary
@@ -313,6 +327,19 @@
 
     const palette = [];
     const seen = new Map();
+    const add = ([r, g, b]) => {
+      const key = (r << 16) | (g << 8) | b;
+      if (seen.has(key) || palette.length >= 256) return;
+      seen.set(key, palette.length);
+      palette.push([r, g, b]);
+    };
+    const fromHex = (hex) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
+    const mix = (a, b, t) => a.map((v, i) => Math.round(v + (b[i] - v) * t));
+    for (const hex of Object.values(TOKENS)) add(fromHex(hex));
+    const top = fromHex("#41609a");
+    const bottom = fromHex("#22355a");
+    for (let i = 0; i <= 24; i += 1) add(mix(top, bottom, i / 24));
+
     const indexes = new Uint8Array(width * height);
     for (let i = 0; i < width * height; i += 1) {
       const r = data[i * 4], g = data[i * 4 + 1], b = data[i * 4 + 2];
