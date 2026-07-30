@@ -154,8 +154,6 @@ main > .quiet-cover + .quiet-cover{border-top:1px solid var(--line);}
    is the one place the words are about. */
 .quiet-intro{display:none;}
 body#tt-body-index .quiet-intro{display:block;}
-body#tt-body-index .quiet-intro h1{max-width:22ch;}
-body#tt-body-index .quiet-intro .quiet-lede{max-width:52ch;}
 
 /* Three heads are written into the list page and the home page shows exactly one
    of them, in this order of precedence: the introduction the blogger composed,
@@ -173,8 +171,14 @@ body#tt-body-index .quiet-home-head{display:block;}
 body#tt-body-index .quiet-home-head ~ .quiet-list-head{display:none;}
 body#tt-body-index .quiet-intro ~ .quiet-home-head{display:none;}
 body#tt-body-index .quiet-intro ~ .quiet-list-head{display:none;}
-body#tt-body-index .quiet-home-head h1{max-width:22ch;}
-body#tt-body-index .quiet-home-head .quiet-lede{max-width:52ch;}
+/* Both heads sit inside `.quiet-article-head .inner`, which centres itself and
+   centres its text. A capped block inside a centred parent does not centre
+   itself: it keeps the cap and sits against the left edge, so the words were
+   centred inside a box that was not. Measured on the home page: the heading's
+   own centre landed 133px left of the list beneath it, and the line under it
+   165px left. The cap is a measure and stays; the box is centred as well. */
+body#tt-body-index :is(.quiet-intro,.quiet-home-head) h1{max-width:22ch; margin-inline:auto;}
+body#tt-body-index :is(.quiet-intro,.quiet-home-head) .quiet-lede{max-width:52ch; margin-inline:auto;}
 
 /* A cover item entered by hand has no date, so it does not sit in the two
    columns a post does. It spans them instead and carries its own image beside
