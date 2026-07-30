@@ -449,6 +449,38 @@ try {
   fail("padding states its axis", e.message);
 }
 
+// A theme swap has to hold every element transition for its duration, and then
+// let go. A property fed by a theme token and given a transition of its own was
+// left holding the previous theme's value after the swap and stayed there --
+// measured after one toggle, 41 elements across 13 kinds, the category tree
+// among them reading 1.70 against its new ground. The failure is silent: the
+// page looks fine until someone changes theme, and only then on the elements
+// that happen to carry a transition.
+//
+// Holding it forever is the other half. Waiting on the view transition to finish
+// does not work, because in a hidden tab it never does, so the release needs a
+// path that does not depend on that promise.
+try {
+  const css = await readFile(join(root, "src", "styles", "base.css"), "utf8");
+  const ts = await readFile(join(root, "src", "scripts", "modules", "theme.ts"), "utf8");
+  const problems = [];
+
+  const rule = css.match(/\.quiet-swapping[^{]*\{([^}]*)\}/);
+  if (!rule) problems.push("base.css never suppresses transitions during a swap");
+  else if (!/transition\s*:\s*none\s*!important/.test(rule[1])) {
+    problems.push("the .quiet-swapping rule does not force transition:none");
+  }
+
+  if (!/classList\.add\("quiet-swapping"\)/.test(ts)) problems.push("theme.ts never holds the swap");
+  if (!/classList\.remove\("quiet-swapping"\)/.test(ts)) problems.push("theme.ts never releases the swap");
+  if (!/setTimeout\(/.test(ts)) problems.push("theme.ts has no release that survives a promise never settling");
+
+  if (problems.length) fail("theme swap holds transitions", problems.join("; "));
+  else ok("theme swap holds transitions");
+} catch (e) {
+  fail("theme swap holds transitions", e.message);
+}
+
 // Every role must be bound in both themes. The bindings are the one part of the
 // token sheet that is written more than once, because an explicit toggle has to
 // beat the operating system's preference in both directions and CSS gives no

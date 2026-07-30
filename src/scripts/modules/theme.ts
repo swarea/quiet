@@ -73,16 +73,53 @@ function stored(): string | null {
 // carry a hundred code blocks. Browsers without it get the change with no
 // animation, which is coherent even if it is abrupt. A reader who has asked for
 // less motion gets the same.
+//
+// Every element transition is held off for the length of the swap. A property
+// fed by a theme token and given a transition of its own was left holding the
+// previous theme's value -- not briefly, but until something else happened to
+// invalidate it. Measured after a single toggle: 41 elements across 13 kinds,
+// among them the whole category tree, whose text stayed at the light theme's
+// #3f434a on a dark page, a contrast of 1.70. The page has one animation during
+// a theme change and it belongs to the view transition; anything else competing
+// with it was never wanted.
 function change(apply: () => void): void {
+  const root = document.documentElement;
   const start = (document as Document & {
-    startViewTransition?: (cb: () => void) => unknown;
+    startViewTransition?: (cb: () => void) => { updateCallbackDone?: Promise<unknown> };
   }).startViewTransition;
   const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  root.classList.add("quiet-swapping");
+  let released = false;
+  const release = (): void => {
+    released = true;
+    root.classList.remove("quiet-swapping");
+  };
+  const releaseNextFrame = (): void => {
+    // A frame after the new colours are in, so the release cannot itself be the
+    // thing that starts a transition.
+    requestAnimationFrame(release);
+  };
+  // Whatever else happens, the hold ends. Waiting on the transition to finish
+  // was the first attempt and it does not: in a hidden tab the animation never
+  // runs, the promise never settles, and every transition on the page stays
+  // switched off for good. Measured -- three toggles in, hover was dead.
+  setTimeout(() => {
+    if (!released) release();
+  }, 400);
+
   if (typeof start !== "function" || still) {
     apply();
+    releaseNextFrame();
     return;
   }
-  start.call(document, apply);
+  const run = start.call(document, apply);
+  // The colours are exchanged by the time the update callback is done. The
+  // cross-fade carries on afterwards; it is the view transition's own animation
+  // and owes nothing to the transitions being held.
+  const swapped = run && typeof run === "object" ? run.updateCallbackDone : undefined;
+  if (swapped && typeof swapped.then === "function") swapped.then(releaseNextFrame, release);
+  else releaseNextFrame();
 }
 
 export function initTheme(): void {
