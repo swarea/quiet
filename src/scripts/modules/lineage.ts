@@ -14,9 +14,13 @@
 // Read from there rather than from the sidebar tree. The tree is a different set
 // of links, a blog can turn it off, and it says nothing about any given post.
 //
-// Whichever shape arrives, one trail comes out. Without scripting a reader sees
-// what Tistory sent, which is never wrong -- only inconsistent between pages,
-// and that was true before any of this.
+// Whichever shape arrives, one trail comes out, and it is written the way the
+// list token already writes it: `Engineering/Backend`. The wording is Tistory's,
+// not this skin's -- what the skin adds is that the leaf carries the weight, so
+// a reader can see which part is the category the post is actually in.
+//
+// Without scripting a reader sees what Tistory sent, which is never wrong --
+// only inconsistent between pages, and that was true before any of this.
 
 const SOURCE = "[data-quiet-cat]";
 
@@ -80,12 +84,18 @@ export function initLineage(): void {
     // The separator is a real character rather than a CSS ::after, so that it
     // survives being copied and is spoken. Left to the stylesheet, selecting the
     // label yielded "ProgrammingTypeScript".
+    //
+    // A slash, and no spaces around it, because that is how Tistory writes a
+    // category path itself -- `Engineering/Backend` is what the list token sends
+    // and what the blogger sees in their own settings. A prettier separator was
+    // tried and was ours alone; a label a reader meets on two pages should not
+    // be spelled the way this skin would have chosen.
     el.textContent = "";
     for (const name of parts.slice(0, -1)) {
       const up = document.createElement("span");
       up.className = "up";
       up.textContent = name;
-      el.append(up, " · ");
+      el.append(up, "/");
     }
     el.append(parts[parts.length - 1]);
   }
