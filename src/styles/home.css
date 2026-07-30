@@ -152,3 +152,19 @@ body#tt-body-index .quiet-intro ~ .quiet-list-head{display:none;}
   font-weight:700; letter-spacing:-.015em; text-wrap:balance; max-width:22ch; color:var(--ink);}
 .quiet-masthead .quiet-lede{margin-top:.9rem; color:var(--muted); font-size:1rem; max-width:52ch;}
 .quiet-masthead .quiet-lede:empty{display:none;}
+
+/* The Introduction cover is one item: a headline and a line under it. Point its
+   contents at recent posts instead and Tistory repeats the block, so five post
+   titles arrive at display size and the band becomes a wall — measured at
+   1,558px on a live blog, within minutes of the cover first being offered.
+   The description says to use Direct entry; a description is not a guard.
+
+   Nothing is hidden. Dropping a blogger's posts to tidy a layout would be worse
+   than the layout. The first item keeps the treatment the cover exists for and
+   anything after it steps down to a size a page can carry. */
+.quiet-masthead-item ~ .quiet-masthead-item{margin-top:1.7rem;}
+.quiet-masthead-item ~ .quiet-masthead-item .quiet-display{font-size:1.12rem; line-height:1.5;}
+.quiet-masthead-item ~ .quiet-masthead-item .quiet-lede{
+  margin-top:.35rem; font-size:.92rem;
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+}
