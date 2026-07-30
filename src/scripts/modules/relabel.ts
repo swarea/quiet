@@ -12,7 +12,15 @@
 // This is an enhancement, not a dependency: with scripting off the controls
 // still work, they just keep Tistory's wording.
 
-// Longest first, so "URL 복사" is not half-eaten by a shorter entry.
+// Replacement is by substring, so a short phrase can eat the front of a longer
+// one. This list used to say "longest first" and leave it at that; it was not
+// actually in that order, and a comment is not a rule anything enforces. It is
+// sorted by key length before use now.
+//
+// Sorting only settles conflicts between entries here. A Korean word that is
+// the start of a longer Tistory string it does not know about will still cut
+// it: "신고" turned Tistory's own "신고하기" into "Report하기" on a live page,
+// which is why the compound is listed as well.
 const PHRASES: ReadonlyArray<readonly [string, string]> = [
   ["동일조건변경허락", "ShareAlike"],
   ["비공개로 변경", "Make private"],
@@ -32,6 +40,7 @@ const PHRASES: ReadonlyArray<readonly [string, string]> = [
   ["좋아요", "Like"],
   ["수정", "Edit"],
   ["삭제", "Delete"],
+  ["신고하기", "Report"],
   ["신고", "Report"],
   ["관리메뉴열기", "Open menu"],
   ["공감", "Like"],
@@ -42,9 +51,11 @@ const PHRASES: ReadonlyArray<readonly [string, string]> = [
 const ROOTS =
   ".container_postbtn, .layer_post, .bundle_post, .wrap_btn, #menubar, .menu_toolbar";
 
+const ORDERED = [...PHRASES].sort((a, b) => b[0].length - a[0].length);
+
 function translate(text: string): string {
   let out = text;
-  for (const [ko, en] of PHRASES) out = out.split(ko).join(en);
+  for (const [ko, en] of ORDERED) out = out.split(ko).join(en);
   return out;
 }
 
