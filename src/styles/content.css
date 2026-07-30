@@ -179,6 +179,32 @@
 #quiet-main .quiet-article-body figure.alignRight{margin-inline:auto 0;}
 #quiet-main .quiet-article-body blockquote{margin:1.7em 0;}
 
+/* Tistory colours the editor's own furniture with fixed values, the same way it
+   does the link card. Quotes are the worst of it: `blockquote, blockquote p` is
+   `#666`, and `#tt-body-page blockquote[data-ke-style='style1']` is `#333`,
+   which on a dark page measures 1.48 — a quote nobody can read. Found by
+   sweeping every page of the live blog rather than by looking at a quote.
+   Twenty of them across twenty-five posts, so it is not a corner.
+
+   The skin already gave `blockquote` a colour, at class level; the id-scoped
+   copy outranked it, and the paragraphs inside a quote were never given one at
+   all. Restated here above both.
+
+   Not touched: `table[data-ke-style='style12'..'style15']`, which set a grey
+   ground and white text together. That pair reads on any page, and no post on
+   this blog uses one — changing an unused thing that already works is a way to
+   break it. */
+#quiet-main .quiet-article-body blockquote,
+#quiet-main .quiet-article-body blockquote[data-ke-style],
+#quiet-main .quiet-article-body blockquote p{color:var(--ink-2);}
+#quiet-main .quiet-article-body blockquote cite{color:var(--muted);}
+#quiet-main .quiet-article-body figure.imageslideblock figcaption,
+#quiet-main .quiet-article-body figure[data-ke-type="video"] figcaption{color:var(--muted);}
+/* The "더보기" toggle on a long embed, at #909090 — the same grey the link card
+   used, and 3.08 against a light page. It sits in the reading column and a
+   reader is meant to press it. */
+#quiet-main .quiet-article-body .btn-toggle-moreless{color:var(--muted);}
+
 /* ---- syntax highlighting --------------------------------------------------
    Tistory always loads the same highlight.js theme, `atom-one-light`, whatever
    the page is set to. Its surface is dropped and every token colour restated
