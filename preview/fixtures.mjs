@@ -31,7 +31,8 @@ export const site = {
 const recent = [
   {
     date: "06.28",
-    category: "Programming / TypeScript",
+    category: "TypeScript",
+    categoryUrl: "/category/Programming/TypeScript",
     title: "TypeScript 프로젝트에서 런타임 검증이 필요한 순간들",
     summary:
       "컴파일 타입은 런타임 데이터를 지켜주지 못한다. 경계에서 한 번 검증하면 내부 코드는 타입을 신뢰할 수 있다.",
@@ -40,6 +41,7 @@ const recent = [
   {
     date: "06.15",
     category: "Career",
+    categoryUrl: "/category/Career",
     title: "해외 취업 준비 로그 #3: 영어 이력서를 다시 쓰며 배운 것",
     summary:
       "한국식 이력서와 영문 레주메는 형식이 아니라 화법이 다르다. 성과를 숫자로 말하는 연습, 그리고 동사 선택이 남기는 인상.",
@@ -47,7 +49,8 @@ const recent = [
   },
   {
     date: "05.30",
-    category: "Daily / 묵상",
+    category: "묵상",
+    categoryUrl: "/category/Daily/묵상",
     title: "시편 23편: 부족함이 없으리로다",
     summary: "",
     url: "/article",
@@ -55,6 +58,7 @@ const recent = [
   {
     date: "05.11",
     category: "Programming",
+    categoryUrl: "/category/Programming",
     title:
       "아주 긴 제목이 들어와도 목록이 무너지지 않는지 확인하는 예시: Understanding Long Titles and Overflow Behavior in List Layouts",
     summary: "",
@@ -68,7 +72,8 @@ export const home = {
   subtitle:
     "Notes on software, data, career abroad, and faith. Written in Korean and English, kept for the long run.",
   featured: {
-    category: "Data · 회고",
+    category: "회고",
+    categoryUrl: "/category/Data/회고",
     title: "재택근무 1년, 데이터로 돌아보기",
     summary:
       "1년치 커밋과 업무 로그를 정리해 보니, 막연히 느끼던 것과 실제 패턴은 꽤 달랐다. 집중 시간대, 회의가 생산성에 남긴 흔적, 그리고 기록이 습관이 되기까지.",
@@ -85,6 +90,7 @@ export const home = {
   topics: [
     {
       title: "기술 & 데이터",
+      url: "/category/Engineering/기술 & 데이터",
       items: [
         { title: "런타임 검증이 필요한 순간들", url: "/article", date: "2026.07.30" },
         { title: "상태 관리 라이브러리 다시 보기", url: "/article", date: "2026.07.28" },
@@ -93,6 +99,7 @@ export const home = {
     },
     {
       title: "커리어 & 해외",
+      url: "/category/Career/커리어 & 해외",
       items: [
         { title: "영어 이력서를 다시 쓰며", url: "/article", date: "2026.07.19" },
         { title: "기술 면접 영어 표현 노트", url: "/article", date: "2026.07.11" },
@@ -101,6 +108,7 @@ export const home = {
     },
     {
       title: "삶 & 믿음",
+      url: "/category/Life/삶 & 믿음",
       items: [
         { title: "시편 23편 묵상", url: "/article", date: "2026.06.25" },
         { title: "일과 소명에 대한 생각", url: "/article", date: "2026.06.14" },
@@ -117,8 +125,8 @@ export const list = {
 };
 
 export const article = {
-  crumb: "programming / typescript",
-  categoryUrl: "/category/programming/typescript",
+  crumb: "TypeScript",
+  categoryUrl: "/category/Programming/TypeScript",
   categoryName: "TypeScript",
   title: "TypeScript 프로젝트에서 런타임 검증이 필요한 순간들",
   date: "2026.06.28",

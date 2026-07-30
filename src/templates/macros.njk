@@ -2,7 +2,7 @@
 <a class="quiet-post-row" href="{{ p.url }}">
   <time>{{ p.date }}</time>
   <div>
-    <span class="cat">{{ p.category }}</span>
+    <span class="cat" data-quiet-cat="{{ p.categoryUrl }}">{{ p.category }}</span>
     <h2>{{ p.title }}</h2>
     {% if p.summary %}<p>{{ p.summary }}</p>{% endif %}
   </div>
