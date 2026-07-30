@@ -84,6 +84,17 @@ svg[fill="none"][stroke="currentColor"]{stroke-linecap:round; stroke-linejoin:ro
   mix-blend-mode:normal;
 }
 
+/* Held on the root for the length of a theme swap, and only then.
+   A property fed by a theme token and given a transition of its own -- a nav
+   link's colour, a button's fill -- was left holding the previous theme's value
+   after the swap, and stayed there. Measured after one toggle: 41 elements
+   across 13 kinds, the category tree among them at 1.70 against its new ground.
+   Hover still animates; there is simply nothing animating at the moment the
+   colours are exchanged, which is the moment the view transition already owns. */
+.quiet-swapping *,
+.quiet-swapping *::before,
+.quiet-swapping *::after{transition:none !important;}
+
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto;}
   *{animation:none!important; transition:none!important;}
