@@ -15,10 +15,10 @@
          below it. The full account is the README, which is what the homepage
          link is for. -->
     <description>
-      <![CDATA[A skin for long-form reading, with light and dark drawn separately and the typeface bundled. Works without JavaScript.]]>
+      <![CDATA[A skin for long-form reading, with light and dark drawn separately and the Latin typeface bundled. Reading and navigation need no JavaScript.]]>
     </description>
     <license>
-      <![CDATA[MIT. Bundled Latin typeface: a Pretendard subset under OFL 1.1 (images/OFL.txt).]]>
+      <![CDATA[MIT. Bundled Latin typeface "Quiet Latin", derived from Pretendard, (c) 2021 Kil Hyung-jin, SIL OFL 1.1 (images/OFL.txt).]]>
     </license>
   </information>
   <author>

@@ -4,7 +4,9 @@
 
 Quiet is a Tistory skin: an HTML template, a stylesheet, a small script bundle
 and a font, uploaded to a blog and served by Tistory. It has no server, no
-database, no accounts and no build-time network access. It stores nothing about
+database, no accounts and no build-time network access. At runtime one
+third-party host is contacted — jsDelivr, for the Hangul half of the typeface —
+and the skin works with it blocked. It stores nothing about
 a reader except one value in `localStorage` — which of the two themes they chose.
 
 Almost everything on a page carrying this skin is Tistory's: the comment system,
@@ -20,8 +22,9 @@ the build that produces them.
 Open a [private security advisory](https://github.com/swarea/quiet/security/advisories/new).
 Please do not open a public issue for something exploitable.
 
-A reply should arrive within a week. This is a solo project, so a fix may take
-longer than the reply; you will be told either way.
+Replies are usually sent within a week, but this is a solo project and no
+response time is guaranteed. A fix may take longer than the reply; you will be
+told either way.
 
 ## Scope
 
@@ -51,7 +54,8 @@ derived rather than copied.
 
 `src/scripts/modules/relabel.ts` and `lang.ts` rewrite text Tistory generates —
 button labels, a category name, a comment marked private. They match exactly and
-write through `textContent`, so nothing they touch can introduce markup.
+write through `textContent` rather than `innerHTML`, so these paths are not
+intended to be able to introduce markup.
 
 Both operate on content the blog's own author or Tistory produced. On a
 single-author blog neither crosses a privilege boundary, but they are the places

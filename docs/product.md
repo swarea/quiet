@@ -37,7 +37,7 @@ them.
 3. **Progressive enhancement** — with JS delayed or failed, reading, menu and
    category navigation, paging, and reading existing comments still work.
    JS only *enhances* (theme toggle, TOC, reading progress, code copy).
-   No full-screen loader, ever.
+   Content is never hidden behind a full-screen loader.
    Two things are outside this and cannot be brought inside it: search and
    posting a comment are driven by Tistory's own scripts, which a skin does
    not replace.
@@ -45,7 +45,9 @@ them.
    skin (see [tistory-spec.md](tistory-spec.md) clean-room note).
 5. **Maintainability** — human-readable templates/styles/scripts; only the build
    output is in Tistory's format.
-6. **Accessibility** — WCAG 2.2 AA as a floor, designed in from the start.
+6. **Accessibility** — WCAG 2.2 AA is the target the design is measured
+   against, not a conformance claim. Contrast is checked by the gate; the rest
+   is checked by hand.
 7. **Performance** — no runtime framework, and no external dependency the design
    needs to be correct. The Latin typeface is bundled; the CDN copy of the same
    family covers Hangul and is optional. Defer what the first screen does not
