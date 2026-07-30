@@ -276,6 +276,41 @@ try {
   fail("copy is english", e.message);
 }
 
+// Every syntax colour on the page must be ours.
+//
+// Tistory injects highlight.js with the `atom-one-light` theme from a CDN, and
+// whatever we do not restate keeps that theme's colour — chosen for a white page
+// nobody here designed. It has leaked twice: first the comment colour at 4.01
+// against the dark block, then `hljs-selector-class` at 4.22 against the light
+// one, found only by sweeping a real post. The contrast gate cannot see these,
+// because the colours are not ours and are not in the token sheet.
+//
+// The list is what `atom-one-light` colours, read from the CDN on 2026-07-30 and
+// pinned here rather than fetched: a check that needs the network is a check
+// that fails for reasons that have nothing to do with the skin. If Tistory ever
+// changes theme this list goes stale, which is worth a re-read then, not a
+// network call on every run.
+const HLJS_COLOURED = [
+  "hljs-comment", "hljs-quote", "hljs-doctag", "hljs-keyword", "hljs-formula",
+  "hljs-section", "hljs-name", "hljs-selector-tag", "hljs-deletion", "hljs-subst",
+  "hljs-literal", "hljs-string", "hljs-regexp", "hljs-addition", "hljs-attribute",
+  "hljs-meta-string", "hljs-built_in", "hljs-attr", "hljs-variable",
+  "hljs-template-variable", "hljs-type", "hljs-selector-class", "hljs-selector-attr",
+  "hljs-selector-pseudo", "hljs-number", "hljs-symbol", "hljs-bullet", "hljs-link",
+  "hljs-meta", "hljs-title", "hljs-function",
+];
+try {
+  const css = await readFile(join(root, "dist", "style.css"), "utf8").catch(() => null);
+  if (!css) skip("syntax colours are ours", "dist/style.css not built");
+  else {
+    const missing = HLJS_COLOURED.filter((cls) => !css.includes(`.${cls}`));
+    if (missing.length) fail("syntax colours are ours", `never restated: ${missing.join(", ")}`);
+    else ok("syntax colours are ours");
+  }
+} catch (e) {
+  fail("syntax colours are ours", e.message);
+}
+
 // One version. A skin whose package and manifest disagree ships a lie to
 // whoever is deciding whether to upgrade.
 try {
