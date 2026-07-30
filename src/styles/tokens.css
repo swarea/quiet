@@ -41,10 +41,17 @@
   /* Code, light. Every one of these is measured against --light-code-bg by the
      gate, which is why they are darker than a syntax theme usually goes: on a
      ground this pale, 4.5:1 leaves no room for the mid-tone pastels editors
-     tend to use. */
-  --light-code-bg:#efefeb; --light-code-bar:#e6e6e0; --light-code-edge:#d9d9d2;
-  --light-code-ink:#1f2328; --light-code-ink-2:#4a5158; --light-code-faint:#5d656e;
-  --light-code-comment:#5a6470; --light-code-accent:#0550ae;
+     tend to use.
+
+     The grounds follow the warmth the rest of the light palette already keeps:
+     paper is one step warm at 251, surface-2 two at 242, line three at 235,
+     line-strong five at 220 -- roughly (255 - value) / 7 of red over blue. These
+     were first drawn at nearly twice that and read yellow beside the page. The
+     inks lean the other way, cool, which is the pairing the palette was built
+     on: warm paper, cool ink. */
+  --light-code-bg:#efefed; --light-code-bar:#e6e6e2; --light-code-edge:#d9d9d4;
+  --light-code-ink:#1f2328; --light-code-ink-2:#4a5158; --light-code-faint:#5e656c;
+  --light-code-comment:#5c646b; --light-code-accent:#0550ae;
   --light-code-key:#7b3aad; --light-code-str:#0f6b33; --light-code-fn:#1f4b99;
   --light-code-num:#8a4b1a; --light-code-del:#a3202f;
   --light-ccl-filter:none;
@@ -58,8 +65,11 @@
   --dark-line:#262a31; --dark-line-strong:#333842;
   --dark-accent:#90a8e0; --dark-accent-ink:#a9bdec; --dark-accent-wash:#1b2233;
   --dark-on-accent:#101216; --dark-warm:#cda56a;
-  /* Code, dark. This was the single set both themes used. */
-  --dark-code-bg:#0f1420; --dark-code-bar:#151b29; --dark-code-edge:#232c3f;
+  /* Code, dark. The colours here were the single set both themes used; the bar
+     and its rule are new, and extend the block's own slight navy rather than
+     the page's. The rule was drawn bluer than the block it borders and is
+     pulled back in line. */
+  --dark-code-bg:#0f1420; --dark-code-bar:#151b29; --dark-code-edge:#232c3b;
   --dark-code-ink:#d7dee8; --dark-code-ink-2:#aeb7c6; --dark-code-faint:#8b96a8;
   --dark-code-comment:#8b97ad; --dark-code-accent:#7aa2f7;
   --dark-code-key:#c493e8; --dark-code-str:#8fd3a0; --dark-code-fn:#78b6f0;
