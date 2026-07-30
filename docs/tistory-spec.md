@@ -204,7 +204,9 @@ comments · article with TOC + scrollspy, related posts, tag labels, author box
 · tag cloud grid · paging · dark mode with pre-hydration flash guard · reading
 progress indicator.
 
-Pain points observed (to fix, not to copy): full-screen loader blocks content;
-content hidden behind JS templates (`x-teleport`) so a JS failure blanks the
-article; external CDN dependencies for fonts/icons/highlighting; duplicate
-HTML IDs; `onclick`-only fake links; author credit hard-coded in sidebar.
+Requirements this skin holds itself to, stated as its own rather than as
+anyone else's shortcomings: an article is readable before any script runs and
+stays readable if one fails; no full-screen loader; nothing the design needs to
+be correct is fetched from another host; every HTML id on a page is unique;
+navigation is real links rather than click handlers; and no credit to the
+skin's author is written into a blogger's sidebar.

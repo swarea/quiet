@@ -24,7 +24,8 @@ repository:
 - **No required review.** There is nobody to approve a pull request, so
   requiring one would stop every merge.
 - **Administrators are not included.** The gate runs on GitHub Actions, and
-  Actions has been unavailable here before — see the closed issue about billing.
+  Actions has been unavailable to this repository before, for reasons outside
+  the project's control.
   A rule that cannot be bypassed turns an outage in someone else's service into
   an inability to ship. The owner can override; the protection is there to catch
   a mistake, not to be the only thing standing between a red gate and `main`.

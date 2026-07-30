@@ -4,12 +4,16 @@ A Tistory skin for long-form reading, in Korean and English.
 
 The reading column is 50rem. Light and dark are drawn as two separate palettes
 rather than one derived from the other. The Latin typeface ships inside the
-package, so the skin renders as designed without reaching a CDN. Everything
-except search and comment posting works with JavaScript disabled.
+package, so Latin renders as designed without reaching a CDN; Hangul falls back
+to the reader's system font when that CDN is blocked. Reading, navigation, paging
+and existing comments work with JavaScript disabled. Search, posting a comment
+and replying to one are driven by Tistory's own scripts and do not.
 
 Built from scratch by [swarea](https://github.com/swarea), and not a derivative
 of any existing skin. It is a third-party skin *for* Tistory: it is not
-published, reviewed or endorsed by Tistory or Kakao, and nothing here is theirs.
+published, reviewed or endorsed by Tistory or Kakao. "Tistory" and "Kakao" are
+used only to identify the platform this skin is built for, and are the trademarks
+of their respective owners.
 
 > **0.3.0.** Verified on a live Tistory blog in both themes, in Chrome and
 > Safari. See [CHANGELOG.md](CHANGELOG.md) for what changed and
@@ -55,7 +59,7 @@ loading.
 
 | Setting | Value | Why |
 | --- | --- | --- |
-| Menu bar | hide | 꾸미기 → 설정. Everything in it belongs to Tistory — three links to Tistory, and a subscribe button this skin already builds in the author block. It is fixed to the corner of every page in colours that follow no theme |
+| Menu bar | hide | 꾸미기 → 설정. Everything in it belongs to Tistory — three links to Tistory, and a subscribe button this skin already builds in the author block. It is fixed to the corner of every page and uses fixed colours that do not follow the skin's themes |
 | Subscribe button | hide | the same page. This is Tistory's floating one; the skin's own sits in the author block and is unaffected |
 | Mobile web | off | the skin is responsive and handles narrow screens itself |
 | Covers | at least one | without any, Tistory serves the plain post list and the home page matches the category archive |
@@ -116,8 +120,9 @@ Two consequences worth knowing:
   than left hidden.
 - **A deliberate colour inside a pasted code block is flattened.** Only blocks
   that arrived with an inline style are treated this way; a code block you
-  coloured by hand is untouched, and highlight.js colours by class and is never
-  affected.
+  coloured by hand is untouched. highlight.js colours by class rather than by
+  inline style, so this pass does not reach it; the skin sets those classes
+  itself elsewhere.
 
 With JavaScript off, only the code-frame rule applies; everything else is left
 exactly as written.
@@ -150,10 +155,12 @@ stylesheet.
 Text placed on the accent colour is chosen by measurement — the skin compares
 the accent against black and white and uses whichever gives higher contrast.
 
-## Browser support
+## Compiler targets
 
 Compiled for Chrome, Edge and Firefox 100+, Safari and iOS 15+, and Samsung
-Internet 16+.
+Internet 16+. These are what the stylesheet and script are compiled for, not
+browsers the skin has been tested in: it has been checked by hand on a live blog
+in Chrome and Safari only.
 
 The validation gate checks two compiler behaviours: that no modern media-range
 syntax is emitted, and that every `color-mix` has a fallback. Features newer
@@ -173,8 +180,8 @@ npm run release   # gate, build, and a versioned archive in release/
 `npm run build` writes the installable package to `dist/`.
 
 `npm run release` refuses a dirty working tree or a package missing a required
-file, and writes a reproducible archive with its SHA-256: identical inputs
-produce identical bytes.
+file, and writes an archive with its SHA-256. On the same Node version and
+lockfile, identical inputs produce identical bytes.
 
 The mock preview is a local stand-in for Tistory and uses its own markup, so it
 is useful for layout work but does not verify the skin itself.
@@ -187,7 +194,7 @@ browser; place the resulting files in `src/assets/`.
 | Document | Contents |
 | --- | --- |
 | [docs/product.md](docs/product.md) | what the skin is for, and the rules the design follows |
-| [docs/tistory-spec.md](docs/tistory-spec.md) | Tistory platform behaviour, verified and open |
+| [docs/tistory-spec.md](docs/tistory-spec.md) | Tistory platform behaviour: what has been verified, and what is still open |
 | [docs/roadmap.md](docs/roadmap.md) | release milestones |
 | [docs/decisions/](docs/decisions/) | architecture decision records |
 | [CHANGELOG.md](CHANGELOG.md) | what changed, by release |
