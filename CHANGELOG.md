@@ -62,6 +62,14 @@ does. Note your accent colours and home copy before uploading.
 - Hover no longer paints a surface that was not already there — pagination, the
   copy button, the subscribe pill, the post toolbar, the share menu. Table rows
   lose the highlight entirely: a row is read, not aimed at.
+- The share menu's rows went back to painting Tistory's near-white on hover. The
+  rule removed while making hover paint nothing had been replacing that fill
+  rather than creating it, so removing it made a dark panel worse; the fill is
+  switched off now instead of left unset.
+- The tooltip on the post toolbar read `Report하기`. Relabelling replaces by
+  substring, and the table's shortest Korean entry was cutting the front off a
+  longer word Tistory writes. The table is sorted by length before use — it
+  claimed to be and was not — and the compound is listed.
 - Quotes, captions and the "더보기" toggle kept the fixed colours Tistory gives
   them. A quote in the `style1` variant measured 1.48 on a dark page, which is a
   quote nobody can read; the skin had coloured `blockquote` at class level and
