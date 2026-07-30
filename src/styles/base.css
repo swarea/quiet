@@ -6,7 +6,6 @@ body{
   font-family:var(--sans); font-size:15px; line-height:1.7;
   -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
   word-break:keep-all; overflow-wrap:anywhere;
-  transition:background .3s ease, color .3s ease;
 }
 a{color:inherit; text-decoration:none;}
 h1,h2,h3,h4,p,ul,ol,figure,blockquote,pre{margin:0;}
@@ -55,6 +54,29 @@ svg[fill="none"][stroke="currentColor"]{stroke-linecap:round; stroke-linejoin:ro
 .quiet-load > *:nth-child(3){animation-delay:.26s;}
 
 #quiet-progress{position:fixed; top:0; left:0; height:2px; width:0; background:var(--accent); z-index:60; transition:width .12s linear;}
+
+/* ---- changing theme -------------------------------------------------------
+   Switching from light to dark moves the page's ground by a factor of about
+   150, and how that is done is the difference between a change and a flash.
+
+   It used to be done badly, and only here: `body` alone carried
+   `transition:background .3s`. Everything drawn on it -- the rail, the header,
+   every code block, every card and rule -- had none, so they all cut to dark at
+   once while the largest bright surface on the screen drained away underneath
+   them over three tenths of a second. The eye has nowhere to settle during
+   that, which is what made it hurt.
+
+   The page now changes as one thing. Where the browser can cross-fade a whole
+   document, it does; where it cannot, the change is instant, which is at least
+   coherent. Transitioning each element instead was the other option and was not
+   taken: this page can carry a hundred code blocks, and animating a colour on
+   every node in one is a poor trade for a fade nobody asked to be slow. */
+::view-transition-old(root),
+::view-transition-new(root){
+  animation-duration:.22s;
+  animation-timing-function:ease;
+  mix-blend-mode:normal;
+}
 
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto;}
