@@ -11,6 +11,12 @@ does. Note your accent colours and home copy before uploading.
 
 ### Changed
 
+- Changing theme moves the whole page at once. `body` alone carried a
+  three-tenths-of-a-second fade while everything drawn on it cut across
+  immediately, so the largest bright surface drained away underneath panels that
+  had already gone dark. Where a browser can cross-fade a document it now does;
+  where it cannot, and where less motion has been asked for, the change is
+  instant.
 - The code block follows the theme. It had one dark set of colours used in both,
   which left a black slab as the heaviest thing on a light page. There are now
   `--light-code-*` and `--dark-code-*` palettes covering the block, the bar above
@@ -56,6 +62,14 @@ does. Note your accent colours and home copy before uploading.
 - Hover no longer paints a surface that was not already there — pagination, the
   copy button, the subscribe pill, the post toolbar, the share menu. Table rows
   lose the highlight entirely: a row is read, not aimed at.
+- Quotes, captions and the "더보기" toggle kept the fixed colours Tistory gives
+  them. A quote in the `style1` variant measured 1.48 on a dark page, which is a
+  quote nobody can read; the skin had coloured `blockquote` at class level and
+  Tistory declares it again behind `#tt-body-page`, while the paragraphs inside a
+  quote had no colour of their own at all.
+- The light code block read yellow. Its grounds carried about 1.7× the warmth the
+  rest of the light palette keeps, which is enough to be seen as a colour rather
+  than a cast; they now follow the same measure the page's own grounds do.
 - Eleven highlight.js classes kept the colours of the theme Tistory loads from a
   CDN, which was chosen for a page this skin did not design. One of them,
   `hljs-selector-class`, measured 4.22 in light and 3.78 in dark. The gate now
