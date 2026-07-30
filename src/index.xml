@@ -10,12 +10,17 @@
     <name>Quiet</name>
     <version>0.4.0</version>
     <!-- Kept short because the skin editor gives these a fixed strip and does
-         not scroll it. At 446 characters the description was cut off mid-word;
-         at 243 the licence ran straight out of its panel and over the heading
-         below it. The full account is the README, which is what the homepage
-         link is for. -->
+         not scroll it. The panel wraps to two lines and cuts at about 128
+         characters: at 141 the description lost its last sentence, at 446 it was
+         cut mid-word, and at 243 the licence ran out of the panel entirely and
+         printed over the heading below.
+
+         What this says is what a blogger scanning a list of skins needs, which
+         is not what the skin is proud of. Light and dark drawn separately and a
+         bundled typeface are craft; a calm column and a rail beside a long post
+         are what they will see. The full account is the README. -->
     <description>
-      <![CDATA[A skin for long-form reading, with light and dark drawn separately and the Latin typeface bundled. Reading and navigation need no JavaScript.]]>
+      <![CDATA[For blogs where the writing is the point: a calm reading column, light and dark, and a contents rail beside long posts.]]>
     </description>
     <license>
       <![CDATA[MIT. Bundled Latin typeface "Quiet Latin", derived from Pretendard, (c) 2021 Kil Hyung-jin, SIL OFL 1.1 (images/OFL.txt).]]>
@@ -67,7 +72,7 @@
       <!-- The editor cuts a cover description off around 150 characters, and
            this one has to carry an instruction, so it says the shape and
            leaves the mapping to the README. -->
-      <description><![CDATA[The opening band. Set Contents to Direct entry and add one item — cover title, item title, item body, and an image if you want one.]]></description>
+      <description><![CDATA[The opening band. Set Contents to Direct entry and add one item: a title, a line under it, and an image if you have one.]]></description>
     </item>
     <item>
       <name>list</name>
@@ -121,14 +126,14 @@
       <variable>
         <name>home-eyebrow</name>
         <label><![CDATA[Home: small line]]></label>
-        <description><![CDATA[A short line above the home headline. Hidden when empty.]]></description>
+        <description><![CDATA[A short line above the home headline. Shown only when the headline is set.]]></description>
         <type>STRING</type>
         <default><![CDATA[]]></default>
       </variable>
       <variable>
         <name>home-headline</name>
         <label><![CDATA[Home: headline]]></label>
-        <description><![CDATA[The opening line on the home page. Left empty, Tistory's own list title is used.]]></description>
+        <description><![CDATA[The home page's opening line. Not used when covers are set, because a cover then supplies the top of the page.]]></description>
         <type>STRING</type>
         <default><![CDATA[]]></default>
       </variable>

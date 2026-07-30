@@ -79,8 +79,8 @@ Four cover types are available:
 | Setting | Variable | Default | Effect |
 | --- | --- | --- | --- |
 | Blog language | `lang` | Korean | the language this blog is mostly written in, applied before scripts run. Individual pages then detect their own |
-| Home: small line | `home-eyebrow` | empty | a short line above the home headline |
-| Home: headline | `home-headline` | empty | the home page's opening line |
+| Home: small line | `home-eyebrow` | empty | a short line above the home headline. Requires a headline |
+| Home: headline | `home-headline` | empty | the home page's opening line. Not used when covers are set, because a cover then supplies the top of the page |
 | Home: supporting line | `home-tagline` | empty | a line below the headline. Requires a headline |
 | Accent colour (light) | `accent-light` | `#38548c` | links and emphasis on light backgrounds |
 | Accent colour (dark) | `accent-dark` | `#90a8e0` | the same for dark backgrounds |
