@@ -231,8 +231,14 @@
    the menu read as three barely visible lines with only the hovered one
    legible. Both kinds of row are named here. */
 .quiet-article-body .layer_post .btn_mark{color:var(--ink-2);}
+/* `background:none` is doing work here, not tidying up. Tistory paints
+   `.layer_post .btn_mark:hover{background-color:#F5F5F5}`, and the rule that
+   used to sit here replaced that with a theme colour. Removing ours to satisfy
+   "hover paints nothing" did not stop the fill — it handed the row back to
+   Tistory's near-white, which on a dark share panel is worse than what it
+   replaced. The fill has to be turned off, not merely not set. */
 .quiet-article-body .layer_post .btn_mark:hover,
-.quiet-article-body .layer_post .btn_mark:focus-visible{color:var(--ink);}
+.quiet-article-body .layer_post .btn_mark:focus-visible{background:none; color:var(--ink);}
 .quiet-article-body .layer_post .btn_mark:hover .txt_sns,
 .quiet-article-body .layer_post .btn_mark:focus-visible .txt_sns{color:var(--ink);}
 
