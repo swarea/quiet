@@ -56,6 +56,11 @@ does. Note your accent colours and home copy before uploading.
 - Hover no longer paints a surface that was not already there — pagination, the
   copy button, the subscribe pill, the post toolbar, the share menu. Table rows
   lose the highlight entirely: a row is read, not aimed at.
+- Eleven highlight.js classes kept the colours of the theme Tistory loads from a
+  CDN, which was chosen for a page this skin did not design. One of them,
+  `hljs-selector-class`, measured 4.22 in light and 3.78 in dark. The gate now
+  requires every class that theme colours to be one the skin sets, because the
+  contrast check can only see colours that are in the token sheet.
 - The release notes no longer break mid-sentence.
 
 ## 0.3.0
