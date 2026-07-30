@@ -86,25 +86,25 @@ export const home = {
     {
       title: "기술 & 데이터",
       items: [
-        { title: "런타임 검증이 필요한 순간들", url: "/article" },
-        { title: "상태 관리 라이브러리 다시 보기", url: "/article" },
-        { title: "쿼리 로그로 병목 찾기", url: "/article" },
+        { title: "런타임 검증이 필요한 순간들", url: "/article", date: "2026.07.30" },
+        { title: "상태 관리 라이브러리 다시 보기", url: "/article", date: "2026.07.28" },
+        { title: "쿼리 로그로 병목 찾기", url: "/article", date: "2026.07.24" },
       ],
     },
     {
       title: "커리어 & 해외",
       items: [
-        { title: "영어 이력서를 다시 쓰며", url: "/article" },
-        { title: "기술 면접 영어 표현 노트", url: "/article" },
-        { title: "원격 협업에서 배운 것", url: "/article" },
+        { title: "영어 이력서를 다시 쓰며", url: "/article", date: "2026.07.19" },
+        { title: "기술 면접 영어 표현 노트", url: "/article", date: "2026.07.11" },
+        { title: "원격 협업에서 배운 것", url: "/article", date: "2026.07.02" },
       ],
     },
     {
       title: "삶 & 믿음",
       items: [
-        { title: "시편 23편 묵상", url: "/article" },
-        { title: "일과 소명에 대한 생각", url: "/article" },
-        { title: "한 해를 닫으며", url: "/article" },
+        { title: "시편 23편 묵상", url: "/article", date: "2026.06.25" },
+        { title: "일과 소명에 대한 생각", url: "/article", date: "2026.06.14" },
+        { title: "한 해를 닫으며", url: "/article", date: "2026.06.03" },
       ],
     },
   ],

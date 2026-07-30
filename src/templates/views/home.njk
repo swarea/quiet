@@ -1,19 +1,34 @@
 {% extends "layout.njk" %}
 {% import "macros.njk" as m %}
 {% block main %}
-<main class="quiet-wrap" id="quiet-home">
-  {# The skin emits this on a cover home; the mock needs it to match. #}
+{# The home page is built entirely from covers: enabling them suppresses
+   <s_list>, so every section here is a <s_cover> in the skin, each one its own
+   .quiet-wrap in <main>. The mock is laid out the same way, because the spacing
+   between covers is decided by that structure -- a single wrapping <main> with
+   sections inside it would have previewed a rhythm the skin never renders. #}
+<main id="quiet-home">
   <h1 class="quiet-sr">{{ blog.title }}</h1>
-  <section class="quiet-intro quiet-load">
-    <div class="quiet-eyebrow">Learning in public</div>
-    <p class="quiet-display">{{ home.headline | safe }}</p>
-    <p>{{ home.subtitle }}</p>
+
+  <section class="quiet-wrap quiet-cover quiet-masthead quiet-load" aria-label="Introduction">
+    <p class="quiet-eyebrow">Learning in public</p>
+    <div class="quiet-masthead-item">
+      <div class="txt">
+        <p class="quiet-display">{{ home.headline | safe }}</p>
+        <p class="quiet-lede">{{ home.subtitle }}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="quiet-wrap quiet-cover quiet-recent quiet-reveal" aria-label="Recent">
+    <div class="quiet-section-tag"><h2>Recent</h2><a href="/">More &rarr;</a></div>
+    {% for p in home.recent %}{{ m.postRow(p) }}{% endfor %}
   </section>
 
   {# Built like the featured cover the skin renders, thumbnail first, so the
      mock keeps standing in for what Tistory serves. #}
   {% set f = home.featured %}
-  <section class="quiet-featured-set quiet-reveal" aria-label="Featured">
+  <section class="quiet-wrap quiet-cover quiet-featured-set quiet-reveal" aria-label="Featured">
+    <div class="quiet-section-tag"><h2>Featured</h2><a href="/">More &rarr;</a></div>
     <a class="quiet-feature" href="{{ f.url }}">
       {% if f.thumbnail %}<span class="shot"><img src="{{ f.thumbnail }}" alt="" loading="lazy"></span>{% endif %}
       <span class="txt">
@@ -25,20 +40,19 @@
     </a>
   </section>
 
-  <section class="quiet-recent quiet-reveal" aria-label="Recent posts">
-    <div class="quiet-section-tag"><h2>Recent</h2><a href="/">All posts →</a></div>
-    {% for p in home.recent %}{{ m.postRow(p) }}{% endfor %}
-  </section>
-
-  <section class="quiet-topics quiet-reveal" aria-label="Topics">
-    <div class="quiet-section-tag"><h2>Topics</h2></div>
+  {# Flattened, because Tistory repeats a cover item and has no way to group
+     them: the fixture's lanes are only a convenient way to give each post a
+     category. One tile per post is what the skin renders. #}
+  <section class="quiet-wrap quiet-cover quiet-topics quiet-reveal" aria-label="Topics">
+    <div class="quiet-section-tag"><h2>Topics</h2><a href="/">More &rarr;</a></div>
     <div class="quiet-lanes">
-      {% for lane in home.topics %}
-      <div class="quiet-lane">
-        <h3>{{ lane.title }}</h3>
-        {% for item in lane.items %}<a class="item" href="{{ item.url }}">{{ item.title }}</a>{% endfor %}
-      </div>
-      {% endfor %}
+      {% for lane in home.topics %}{% for item in lane.items %}
+      <a class="quiet-lane" href="{{ item.url }}">
+        <span class="cat">{{ lane.title }}</span>
+        <h3>{{ item.title }}</h3>
+        <time>{{ item.date }}</time>
+      </a>
+      {% endfor %}{% endfor %}
     </div>
   </section>
 </main>

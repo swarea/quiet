@@ -221,19 +221,27 @@
                and removed there like anything else. The cover's own title is
                the small line above the headline. -->
           <s_cover name="masthead">
-            <section class="quiet-wrap quiet-masthead" aria-label="[##_cover_title_##]">
+            <section class="quiet-wrap quiet-cover quiet-masthead" aria-label="[##_cover_title_##]">
               <p class="quiet-eyebrow">[##_cover_title_##]</p>
               <s_cover_item>
                 <div class="quiet-masthead-item">
-                  <p class="quiet-display">[##_cover_item_title_##]</p>
-                  <p class="quiet-lede">[##_cover_item_summary_##]</p>
+                  <div class="txt">
+                    <p class="quiet-display">[##_cover_item_title_##]</p>
+                    <p class="quiet-lede">[##_cover_item_summary_##]</p>
+                  </div>
+                  <!-- An item typed into the cover settings may carry an image.
+                       It was being dropped, so a blogger who attached one saw it
+                       vanish with no explanation. -->
+                  <s_cover_item_thumbnail>
+                    <span class="shot"><img src="[##_cover_item_thumbnail_##]" alt="" loading="lazy"></span>
+                  </s_cover_item_thumbnail>
                 </div>
               </s_cover_item>
             </section>
           </s_cover>
 
           <s_cover name="list">
-            <section class="quiet-wrap quiet-recent" aria-label="[##_cover_title_##]">
+            <section class="quiet-wrap quiet-cover quiet-recent" aria-label="[##_cover_title_##]">
               <div class="quiet-section-tag">
                 <h2>[##_cover_title_##]</h2>
                 <s_cover_url><a href="[##_cover_url_##]">More <span aria-hidden="true">&rarr;</span></a></s_cover_url>
@@ -272,7 +280,7 @@
                Every word and image here comes from the blogger's own posts and
                their cover configuration; nothing is written into the skin. -->
           <s_cover name="featured">
-            <section class="quiet-wrap quiet-featured-set" aria-label="[##_cover_title_##]">
+            <section class="quiet-wrap quiet-cover quiet-featured-set" aria-label="[##_cover_title_##]">
               <div class="quiet-section-tag">
                 <h2>[##_cover_title_##]</h2>
                 <s_cover_url><a href="[##_cover_url_##]">More <span aria-hidden="true">&rarr;</span></a></s_cover_url>
@@ -304,23 +312,29 @@
             </section>
           </s_cover>
 
+          <!-- Tistory repeats a cover item; it does not group them. A category
+               heading per item therefore printed the same word once per post --
+               five lanes reading "Backend", each with a rule under it and one
+               link, on a live blog. The category is a label on the post, which
+               is what it always was, and the grid is a grid of posts. -->
           <s_cover name="grid">
-            <section class="quiet-wrap quiet-topics" aria-label="[##_cover_title_##]">
+            <section class="quiet-wrap quiet-cover quiet-topics" aria-label="[##_cover_title_##]">
               <div class="quiet-section-tag">
                 <h2>[##_cover_title_##]</h2>
                 <s_cover_url><a href="[##_cover_url_##]">More <span aria-hidden="true">&rarr;</span></a></s_cover_url>
               </div>
               <div class="quiet-lanes">
                 <s_cover_item>
-                  <div class="quiet-lane">
+                  <a class="quiet-lane" href="[##_cover_item_url_##]">
                     <s_cover_item_article_info>
-                      <h3>[##_cover_item_category_##]</h3>
-                      <a class="item" href="[##_cover_item_url_##]">[##_cover_item_title_##]</a>
+                      <span class="cat">[##_cover_item_category_##]</span>
+                      <h3>[##_cover_item_title_##]</h3>
+                      <time>[##_cover_item_simple_date_##]</time>
                     </s_cover_item_article_info>
                     <s_cover_item_not_article_info>
-                      <a class="item" href="[##_cover_item_url_##]">[##_cover_item_title_##]</a>
+                      <h3>[##_cover_item_title_##]</h3>
                     </s_cover_item_not_article_info>
-                  </div>
+                  </a>
                 </s_cover_item>
               </div>
             </section>

@@ -67,7 +67,7 @@
       <!-- The editor cuts a cover description off around 150 characters, and
            this one has to carry an instruction, so it says the shape and
            leaves the mapping to the README. -->
-      <description><![CDATA[The opening band. Set Contents to Direct entry and add one item — cover title, item title, item body.]]></description>
+      <description><![CDATA[The opening band. Set Contents to Direct entry and add one item — cover title, item title, item body, and an image if you want one.]]></description>
     </item>
     <item>
       <name>list</name>
@@ -82,7 +82,9 @@
     <item>
       <name>grid</name>
       <label><![CDATA[Topics]]></label>
-      <description><![CDATA[Posts grouped by category, in a grid.]]></description>
+      <!-- Not "grouped by category": Tistory repeats a cover item and offers no
+           way to group them, so the promise could not be kept. -->
+      <description><![CDATA[Posts in a grid, three across.]]></description>
     </item>
   </cover>
   <variables>

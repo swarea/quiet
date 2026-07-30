@@ -5,12 +5,28 @@
 .quiet-intro h1{font-size:clamp(1.55rem,3.2vw,2.15rem); line-height:1.42; font-weight:700; letter-spacing:-.015em; text-wrap:balance; max-width:38rem;}
 .quiet-intro p{margin-top:.9rem; color:var(--muted); font-size:1rem; max-width:34rem;}
 
-.quiet-recent{padding:2.2rem 0;}
+/* padding-block, not the shorthand. `.quiet-recent` is a `.quiet-wrap` on the
+   home page, and `padding:2.2rem 0` set the side inset to zero along with the
+   top and bottom -- so three of the four covers lost the 2rem `.quiet-wrap`
+   gives them and the fourth, which had no padding rule at all, kept it. The
+   sections were 32px out of line with each other on a live blog. Every rule
+   below states the axis it means. */
+.quiet-recent{padding-block:2.2rem;}
+
+/* Covers stack directly in <main>, and the blogger can reorder or remove any of
+   them in the settings. Vertical rhythm therefore belongs to a cover's position
+   rather than to its type: a cover that lands first opens the page, and a cover
+   that lands last has to leave room under itself, whichever cover it happens to
+   be. Each type used to carry its own -- the masthead 3.6/2.6, the list and the
+   grid 2.2, the featured set nothing at all -- which was only ever right for the
+   order they were written in. */
+main > .quiet-cover{padding-block:2.4rem;}
+main > .quiet-cover:first-child{padding-block-start:3.4rem;}
+main > .quiet-cover:last-child{padding-block-end:4.5rem;}
 /* A line above a section is only a separator when there is a section above it.
    Under a page header there is already one, and the two landed on the same pixel
-   and read as a single thicker rule. Covers stack directly in <main>, so that is
-   where the separator belongs. */
-main > .quiet-wrap + .quiet-wrap{border-top:1px solid var(--line);}
+   and read as a single thicker rule. */
+main > .quiet-cover + .quiet-cover{border-top:1px solid var(--line);}
 /* A row title carries full ink from the moment it is drawn. Nothing about it
    answers a pointer: the cursor already says the row is a link, and a keyboard
    still gets its focus ring. Emphasis that has to be summoned is emphasis the
@@ -34,11 +50,20 @@ main > .quiet-wrap + .quiet-wrap{border-top:1px solid var(--line);}
 .quiet-post-row :is(h2,h3){font-size:1.05rem; font-weight:600; line-height:1.5; color:var(--ink);}
 .quiet-post-row p{color:var(--muted); font-size:.86rem; margin-top:.32rem; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;}
 
-.quiet-topics{padding:2.2rem 0 3.2rem; border-top:1px solid var(--line);}
-.quiet-lanes{display:grid; grid-template-columns:repeat(3,1fr); gap:1.6rem 2.2rem;}
-.quiet-lane h3{font-size:.92rem; font-weight:700; display:flex; align-items:center; gap:.5rem; padding-bottom:.6rem; margin-bottom:.6rem; border-bottom:1px solid var(--line-strong);}
-.quiet-lane h3::before{content:""; width:7px; height:7px; border-radius:2px; background:var(--accent); flex:none;}
-.quiet-lane a.item{display:block; font-size:.88rem; color:var(--ink); padding:.36rem 0;}
+.quiet-lanes{display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem 2.2rem;}
+/* One post per tile. The category is a label on the post, set the same way it is
+   in a list row, rather than a heading that claims the tiles under it are a
+   group -- Tistory repeats a cover item, it does not group them, so that heading
+   printed once per post. The rule sits above the tile, where it separates one
+   post from the section, instead of under a heading it no longer has. */
+.quiet-lane{display:block; padding:.85rem 0 .1rem; border-top:1px solid var(--line-strong);}
+.quiet-lane .cat{display:flex; align-items:center; gap:.5rem; margin-bottom:.32rem;
+  font-size:.75rem; font-weight:600; color:var(--accent);}
+.quiet-lane .cat::before{content:""; width:7px; height:7px; border-radius:2px; background:var(--accent); flex:none;}
+/* A square with no word beside it is not a label. */
+.quiet-lane .cat:empty,.quiet-post-row .cat:empty{display:none;}
+.quiet-lane h3{font-size:.9rem; font-weight:600; line-height:1.5; color:var(--ink);}
+.quiet-lane time{display:block; margin-top:.4rem; font-family:var(--mono); font-size:.72rem; color:var(--faint);}
 
 @media (max-width:720px){
   .quiet-lanes{grid-template-columns:1fr;}
@@ -80,7 +105,12 @@ main > .quiet-wrap + .quiet-wrap{border-top:1px solid var(--line);}
    first in the markup -- where Tistory's thumbnail tag puts it -- and second
    on screen. Narrow screens stack it, picture first, which is the order the
    markup already reads in. */
-.quiet-featured-set{display:flex; flex-direction:column; gap:2.6rem;}
+/* Spacing between the items, stated on the items. As a column gap it also
+   applied between the section heading and the first item, so this heading stood
+   60px clear of its list where every other one stands 18px clear -- the gap and
+   the heading's own margin were both counted. */
+.quiet-featured-set{display:block;}
+.quiet-feature + .quiet-feature{margin-top:2.6rem;}
 .quiet-feature{display:flex; flex-direction:column; gap:1.3rem;}
 @media (min-width:52rem){
   .quiet-feature{flex-direction:row-reverse; align-items:center; gap:2.2rem;}
@@ -145,7 +175,6 @@ body#tt-body-index .quiet-intro ~ .quiet-list-head{display:none;}
    everything else on the home page. It borrows the intro's proportions; what
    differs is where the words come from -- a cover title and one item, rather
    than three settings in a panel. */
-.quiet-masthead{padding:3.6rem 0 2.6rem;}
 .quiet-masthead .quiet-eyebrow{display:inline-block; margin-bottom:.95rem;}
 .quiet-masthead .quiet-eyebrow:empty{display:none;}
 .quiet-masthead .quiet-display{font-size:clamp(1.55rem,3.2vw,2.15rem); line-height:1.42;
@@ -167,4 +196,26 @@ body#tt-body-index .quiet-intro ~ .quiet-list-head{display:none;}
 .quiet-masthead-item ~ .quiet-masthead-item .quiet-lede{
   margin-top:.35rem; font-size:.92rem;
   display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+}
+
+/* An image attached to the cover item, beside the words rather than under them.
+   Laid out as a row rather than a grid so an item without one simply takes the
+   width instead of leaving a reserved column standing empty -- Tistory omits the
+   thumbnail tag altogether when there is no image, so there is nothing to hide.
+   Narrow screens stack it, words first: the headline is what the band is for,
+   and it should not open on a picture. */
+.quiet-masthead-item{display:flex; flex-direction:column; gap:1.4rem;}
+.quiet-masthead-item > .txt{min-width:0;}
+.quiet-masthead-item > .shot{
+  display:block; width:100%; max-width:19rem; aspect-ratio:4/3; overflow:hidden;
+  border-radius:var(--r-lg); border:1px solid var(--line); background:var(--surface-2);
+}
+.quiet-masthead-item > .shot img{width:100%; height:100%; object-fit:cover; display:block;}
+@media (min-width:52rem){
+  .quiet-masthead-item{flex-direction:row; align-items:center; gap:2.4rem;}
+  .quiet-masthead-item > .txt{flex:1;}
+  .quiet-masthead-item > .shot{flex:none; width:16rem; max-width:none;}
+  /* Stepped down with the words it belongs to. */
+  .quiet-masthead-item ~ .quiet-masthead-item{gap:1.6rem;}
+  .quiet-masthead-item ~ .quiet-masthead-item > .shot{width:9rem;}
 }

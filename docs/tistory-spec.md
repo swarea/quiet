@@ -101,6 +101,16 @@ comments beside the code that works around it.
   and count. There is no source for comments, and none for images alone.
 - **A hand-typed cover item has no date and no category** — only title, summary,
   url and an optional image.
+- **`<s_cover_item>` repeats; it does not group.** There is no token, block tag
+  or setting that divides a cover's items into sections, so a layout that prints
+  a category heading per item prints the same heading once per post. Measured on
+  a live blog: five posts in one category produced five headings reading
+  "Backend", each with a rule under it and one link. A category belongs to the
+  item, not to a group of them.
+- **A cover can be pointed at a source its layout was not designed for.** The
+  contents dropdown is free of the cover's shape: an introduction meant for one
+  hand-typed item can be fed the five most recent posts, and Tistory will repeat
+  the block. Every cover layout has to survive its own contents being a list.
 - **The share and manage flyouts (`.layer_post`) carry no border.** What looks
   like one is `box-shadow:0 0 0 1px rgba(0,0,0,.1)`, a fixed black alpha, so
   setting `border-color` does nothing and a dark page swallows the ring.
