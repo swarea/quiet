@@ -529,7 +529,7 @@ try {
 const UNAVOIDABLE_SKIN = new Set([
   "quiet-cat-tistory", "quiet-menu-tistory", "quiet-side-list", "quiet-taglabel",
   "quiet-avatar", "quiet-secret",
-  "quiet-masthead", "quiet-masthead-item", "quiet-notice-row", "quiet-row-plain",
+  "quiet-notice-row", "quiet-row-plain",
 ]);
 const UNAVOIDABLE_MOCK = new Set([
   "quiet-cat", "quiet-cat-row", "quiet-sub", "quiet-sub-inner", "quiet-menu",
@@ -541,8 +541,6 @@ const UNAVOIDABLE_MOCK = new Set([
 // the preview says less than it appears to, and the list should only shrink.
 // Adding to it is how a divergence gets hidden, so it needs a reason each time.
 const KNOWN_DRIFT = new Set([
-  "quiet-list-head", // the mock's list page has no heading wrapper
-  "quiet-lede",      // no supporting line under a list heading
   "quiet-adjacent",  // no previous/next links
   "quiet-colophon",  // no colophon in the mock's rail foot
 ]);
