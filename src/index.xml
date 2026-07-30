@@ -9,11 +9,16 @@
   <information>
     <name>Quiet</name>
     <version>0.3.0</version>
+    <!-- Kept short because the skin editor gives these a fixed strip and does
+         not scroll it. At 446 characters the description was cut off mid-word;
+         at 243 the licence ran straight out of its panel and over the heading
+         below it. The full account is the README, which is what the homepage
+         link is for. -->
     <description>
-      <![CDATA[A skin for long-form reading. Light and dark are designed separately, and the comment box, post toolbar and share panels Tistory injects are restyled to match. Includes a contents rail, a collapsible category tree, copy buttons on code and click-to-zoom on images. The Latin typeface is bundled, so the skin renders as designed without reaching an external server. Reading, menus and category navigation work with JavaScript disabled.]]>
+      <![CDATA[A skin for long-form reading, with light and dark drawn separately and the typeface bundled. Works without JavaScript.]]>
     </description>
     <license>
-      <![CDATA[MIT License for the skin: use, modify and redistribute it, keeping the copyright notice. The bundled Latin typeface is a subset of Pretendard under the SIL Open Font License 1.1 (see images/OFL.txt). https://github.com/swarea/quiet]]>
+      <![CDATA[MIT. Bundled Latin typeface: a Pretendard subset under OFL 1.1 (images/OFL.txt).]]>
     </license>
   </information>
   <author>
@@ -59,7 +64,10 @@
     <item>
       <name>masthead</name>
       <label><![CDATA[Introduction]]></label>
-      <description><![CDATA[The opening band at the top of the home page. Set its content to Direct entry and add one item: the cover title becomes the small line above, the item's title the headline, and its body the line below.]]></description>
+      <!-- The editor cuts a cover description off around 150 characters, and
+           this one has to carry an instruction, so it says the shape and
+           leaves the mapping to the README. -->
+      <description><![CDATA[The opening band. Set Contents to Direct entry and add one item — cover title, item title, item body.]]></description>
     </item>
     <item>
       <name>list</name>
@@ -69,7 +77,7 @@
     <item>
       <name>featured</name>
       <label><![CDATA[Featured]]></label>
-      <description><![CDATA[One post at a time, with its image beside it. Use this to open the home page with a single piece of writing rather than a list.]]></description>
+      <description><![CDATA[One post, with its image beside it.]]></description>
     </item>
     <item>
       <name>grid</name>
@@ -103,7 +111,7 @@
       <variable>
         <name>lang</name>
         <label><![CDATA[Blog language]]></label>
-        <description><![CDATA[The language this blog is mostly written in. Individual posts and lists detect their own, so this rarely needs changing. It decides how a screen reader pronounces the page.]]></description>
+        <description><![CDATA[The language this blog is mostly written in. Posts detect their own, so this rarely needs changing.]]></description>
         <type>SELECT</type>
         <option>[{"name":"ko","label":"Korean","value":"ko"},{"name":"en","label":"English","value":"en"}]</option>
         <default>ko</default>
