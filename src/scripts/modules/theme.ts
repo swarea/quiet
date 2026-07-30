@@ -64,6 +64,27 @@ function stored(): string | null {
   }
 }
 
+// Move the whole page at once, or move it instantly. Anything in between is
+// what made the old switch hurt: the ground faded for three tenths of a second
+// while everything standing on it had already gone dark.
+//
+// A view transition cross-fades a snapshot of the document, so the cost does not
+// grow with the length of the page -- which matters here, where one post can
+// carry a hundred code blocks. Browsers without it get the change with no
+// animation, which is coherent even if it is abrupt. A reader who has asked for
+// less motion gets the same.
+function change(apply: () => void): void {
+  const start = (document as Document & {
+    startViewTransition?: (cb: () => void) => unknown;
+  }).startViewTransition;
+  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (typeof start !== "function" || still) {
+    apply();
+    return;
+  }
+  start.call(document, apply);
+}
+
 export function initTheme(): void {
   const root = document.documentElement;
   root.setAttribute("data-theme", isDark() ? "dark" : "light");
@@ -73,14 +94,16 @@ export function initTheme(): void {
   document.querySelectorAll<HTMLElement>("[data-theme-toggle]").forEach((btn) => {
     btn.addEventListener("click", () => {
       const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
-      root.setAttribute("data-theme", next);
       try {
         localStorage.setItem(KEY, next);
       } catch {
         /* ignore */
       }
-      fitOnAccent();
-      paintIcons();
+      change(() => {
+        root.setAttribute("data-theme", next);
+        fitOnAccent();
+        paintIcons();
+      });
     });
   });
 
@@ -92,9 +115,11 @@ export function initTheme(): void {
   const system = matchMedia("(prefers-color-scheme: dark)");
   const follow = (e: MediaQueryList | MediaQueryListEvent): void => {
     if (stored()) return;
-    root.setAttribute("data-theme", e.matches ? "dark" : "light");
-    fitOnAccent();
-    paintIcons();
+    change(() => {
+      root.setAttribute("data-theme", e.matches ? "dark" : "light");
+      fitOnAccent();
+      paintIcons();
+    });
   };
   if (typeof system.addEventListener === "function") system.addEventListener("change", follow);
   else if (typeof system.addListener === "function") system.addListener(follow);
