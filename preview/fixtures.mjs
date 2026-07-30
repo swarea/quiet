@@ -121,7 +121,13 @@ export const home = {
 export const list = {
   title: "Programming",
   count: 360,
-  posts: recent.concat(recent).slice(0, 6),
+  // Tistory sends the trail joined by "/" on a list page and a bare leaf on a
+  // cover, both documented as "the category name". The mock serves both shapes,
+  // so the preview exercises the same two branches the skin has to.
+  posts: recent
+    .concat(recent)
+    .slice(0, 6)
+    .map((p) => ({ ...p, category: decodeURIComponent(p.categoryUrl.replace("/category/", "")) })),
 };
 
 export const article = {

@@ -101,6 +101,20 @@ comments beside the code that works around it.
   and count. There is no source for comments, and none for images alone.
 - **A hand-typed cover item has no date and no category** — only title, summary,
   url and an optional image.
+- **The two category-name tokens send different things.** The guide documents
+  `[##_cover_item_category_##]` as 카테고리 명 and `[##_list_rep_category_##]` as
+  글이 속한 카테고리 이름, which read as the same promise. Measured on the same
+  post on a live blog, the cover returned `Backend` and the list returned
+  `Engineering/Backend` — a bare leaf against a path joined by `/`. A skin that
+  prints either verbatim shows one category two ways on two pages.
+- **No token returns a parent category or a full path**, on a cover, on a list or
+  on an article. Every one of them offers a name and a url and nothing else. The
+  hierarchy survives only in the category url — `/category/Engineering/Backend`,
+  `/category/Projects/Web%20Projects` — so a trail can only be assembled from
+  there, which means from script.
+- **A category url does not have to carry the name's capitalisation.** They match
+  on this blog; treating that as a rule rather than a courtesy is how a label
+  gets rewritten in the url's spelling.
 - **`<s_cover_item>` repeats; it does not group.** There is no token, block tag
   or setting that divides a cover's items into sections, so a layout that prints
   a category heading per item prints the same heading once per post. Measured on
