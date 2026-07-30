@@ -397,8 +397,19 @@ body#tt-body-page .menu_toolbar.toolbar_rb{display:none;}
    their labels and vanished. Both now start in their final state.
 
    Gated on .quiet-js, set by the head script before the first paint, so with
-   scripts off nothing is hidden behind a control that will never appear. */
-html.quiet-js .quiet-cat-tistory ul ul ul{max-height:0;}
+   scripts off nothing is hidden behind a control that will never appear.
+
+   `overflow:hidden` is half of this rule, not a tidying detail. `max-height:0`
+   takes the branch out of the layout but does not stop it painting: measured
+   before the script ran, a branch 199px tall drew its first row 39.8px below a
+   box of zero height, straight over the categories underneath it. The rail
+   arrived as overlapping text for as long as the script took to add the class
+   that carries the clip. Collapsing without hiding is not collapsing.
+
+   Only the collapsed state names `overflow`. The open state deliberately does
+   not: it would outrank `.quiet-sub-tt` and un-clip the branch for the whole
+   opening animation, spilling the rows it is meant to be revealing. */
+html.quiet-js .quiet-cat-tistory ul ul ul{max-height:0; overflow:hidden;}
 html.quiet-js .quiet-cat-tistory ul ul ul.open{max-height:none;}
 @supports selector(:has(*)) {
   /* A belt to the braces in prune.ts, which removes these in script. Without
