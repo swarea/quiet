@@ -377,12 +377,21 @@ body#tt-body-page .menu_toolbar.toolbar_rb{display:none;}
    hierarchy upside down. That list is the top level: no indent, no guide line,
    and the same weight as the entry above it. Genuine sub-categories keep the
    demoted treatment. */
-.quiet-cat-tistory .quiet-cat-root > ul{margin:0; padding-left:0; border-left:0;}
+/* Two selectors for one thing. `.quiet-cat-root` is the truth, but the script
+   adds it, and until it did the top level was drawn as a sub-list: indented
+   .9rem behind a rule, in the smaller type sub-categories get. The rail visibly
+   un-indented itself on every page load. The second selector is the same
+   element named structurally -- Tistory's root entry is always the only <li> at
+   the top of the tree -- so the geometry is settled before the first paint and
+   the script changes nothing when it arrives. */
+.quiet-cat-tistory .quiet-cat-root > ul,
+html.quiet-js .quiet-cat-tistory > ul > li > ul{margin:0; padding-left:0; border-left:0;}
 /* Only the size is restored. The colour used to be restated here to undo the
    sub-category demotion, and it outranked the hover rule at (0,2,3) against
    (0,2,2), so the top level was the one part of the sidebar that neither
    rested with the others nor answered a pointer. */
-.quiet-cat-tistory .quiet-cat-root > ul > li > a{font-size:.9rem;}
+.quiet-cat-tistory .quiet-cat-root > ul > li > a,
+html.quiet-js .quiet-cat-tistory > ul > li > ul > li > a{font-size:.9rem;}
 
 /* Tistory wraps our comment section in a div of its own, which the rule above
    already constrains to the reading column. The section then applied the same
