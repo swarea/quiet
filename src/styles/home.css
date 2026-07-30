@@ -157,12 +157,24 @@ body#tt-body-index .quiet-intro{display:block;}
 body#tt-body-index .quiet-intro h1{max-width:22ch;}
 body#tt-body-index .quiet-intro .quiet-lede{max-width:52ch;}
 
-/* Where an introduction is set it takes the heading's place rather than stacking
-   above it. A sibling combinator says this exactly: the introduction is only in
-   the document when the blogger wrote one, and it precedes the heading. :has()
-   would say the same thing and be absent from Safari 15.0 to 15.3 and Firefox
-   100 to 120, where those readers would have been shown both. */
+/* Three heads are written into the list page and the home page shows exactly one
+   of them, in this order of precedence: the introduction the blogger composed,
+   then the blog's own name, then Tistory's name for the listing. A sibling
+   combinator says it exactly -- each head is only in the document under its own
+   condition, and they are written in order -- where :has() would say the same
+   thing and be absent from Safari 15.0 to 15.3 and Firefox 100 to 120, leaving
+   those readers shown two heads at once.
+
+   Every other list page shows the last of the three, which is where a name like
+   "All posts" or "Engineering/Backend" belongs: there the reader chose a
+   listing. At the front door they chose nothing and arrived at a blog. */
+.quiet-home-head{display:none;}
+body#tt-body-index .quiet-home-head{display:block;}
+body#tt-body-index .quiet-home-head ~ .quiet-list-head{display:none;}
+body#tt-body-index .quiet-intro ~ .quiet-home-head{display:none;}
 body#tt-body-index .quiet-intro ~ .quiet-list-head{display:none;}
+body#tt-body-index .quiet-home-head h1{max-width:22ch;}
+body#tt-body-index .quiet-home-head .quiet-lede{max-width:52ch;}
 
 /* A cover item entered by hand has no date, so it does not sit in the two
    columns a post does. It spans them instead and carries its own image beside
