@@ -75,7 +75,18 @@
    second off mid-column with the line half empty. The `lengthOf*` values in
    index.xml are set past what two lines can hold, which leaves the decision
    here, where the width is actually known. */
-.quiet-side-list li a{display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; padding:.36rem var(--rail-inset); border-radius:var(--r-sm); color:var(--nav); transition:color .15s;}
+/* The clamp is on the span, not on the link, and that placement is the whole
+   point. `-webkit-line-clamp` sizes the *content* box to two lines, while
+   `overflow:hidden` clips at the *padding* box — so any padding-bottom on the
+   clamped element is a window onto the line that was supposed to be cut. With
+   .36rem of it, the tops of the third line's glyphs showed through as a row of
+   marks below the ellipsis: 2.7px of ink, measured, and visible enough to be
+   reported from across the room.
+
+   The link keeps its padding, because that padding is the pointer target. The
+   span has none, so its padding box and its content box are the same edge. */
+.quiet-side-list li a{display:block; padding:.36rem var(--rail-inset); border-radius:var(--r-sm); color:var(--nav); transition:color .15s;}
+.quiet-side-list li a > span{display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;}
 
 /* Blocks Tistory injects into the article: the like/share/stat toolbar inside
    the post body, and the subscribe/profile cards appended after our footer
