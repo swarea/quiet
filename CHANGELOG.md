@@ -84,6 +84,42 @@ does. Note your accent colours and home copy before uploading.
   requires every class that theme colours to be one the skin sets, because the
   contrast check can only see colours that are in the token sheet.
 - The release notes no longer break mid-sentence.
+- Every home cover sits on one left edge. `.quiet-wrap` gives a section the 2rem
+  inset that keeps the page aligned, and three covers reset it with a
+  `padding: <n> 0` shorthand; the featured cover, which had no padding rule at
+  all, was the only one that kept it, leaving the other three 32px to its left.
+  The gate now refuses the `padding` shorthand on any class that shares an
+  element with `.quiet-wrap`.
+- Vertical rhythm follows a cover's position rather than its type. Covers are
+  reordered and removed in the blog's settings, so a bottom margin that belonged
+  to the grid was only ever right while the grid was last, and the featured
+  cover, which carried no vertical padding at all, was only ever right in the
+  middle. The last cover now leaves room under itself whichever one it is.
+- A list row's contents line up with the heading above them. The row kept the
+  side padding that once held a hover fill off the text, so its date and
+  thumbnail sat 14.4px inside a divider drawn at the row's own edges.
+- An image attached to an Introduction item is shown beside the words instead of
+  being discarded. The cover had nowhere to put one, so a blogger who attached
+  an image simply never saw it.
+- The Introduction cover survives being pointed at a post list. Tistory repeats
+  the block, and five post titles arrived at display size — 1,558px of band. The
+  first item keeps the treatment the cover exists for and the rest step down.
+  Nothing is hidden.
+- The Topics grid is a grid of posts. It gave each item a category heading with
+  a rule under it, as though the items below were a group; Tistory repeats a
+  cover item and offers no way to group them, so five posts in one category
+  printed five headings reading "Backend".
+- A post's category names the branch it hangs off. Tistory documents one thing
+  under two tokens and sends two: a cover returns `Backend` where a list returns
+  `Engineering/Backend`, so the same category was written two ways on two pages.
+  No token anywhere returns a parent or a path, and the hierarchy survives only
+  in the category url, so the trail is assembled from there — in the list's own
+  spelling, slash included. Without scripting the leaf still shows.
+- Changing theme no longer leaves half the page in the old one. Any property fed
+  by a theme token and given a transition of its own was orphaned at the previous
+  theme's value and stayed there: 41 elements across 13 kinds after one toggle,
+  the category tree among them at 1.70 against its new ground. Element
+  transitions are held for the swap and released a frame after the colours land.
 
 ## 0.3.0
 
