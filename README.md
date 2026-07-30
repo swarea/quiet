@@ -7,8 +7,9 @@ rather than one derived from the other. The Latin typeface ships inside the
 package, so the skin renders as designed without reaching a CDN. Everything
 except search and comment posting works with JavaScript disabled.
 
-Built from scratch by [swarea](https://github.com/swarea). Not a derivative of
-any existing skin, and not affiliated with Tistory or Kakao.
+Built from scratch by [swarea](https://github.com/swarea), and not a derivative
+of any existing skin. It is a third-party skin *for* Tistory: it is not
+published, reviewed or endorsed by Tistory or Kakao, and nothing here is theirs.
 
 > **0.3.0.** Verified on a live Tistory blog in both themes, in Chrome and
 > Safari. See [CHANGELOG.md](CHANGELOG.md) for what changed and
@@ -63,10 +64,10 @@ Four cover types are available:
 
 | Cover | Purpose |
 | --- | --- |
-| Introduction | the opening band. The cover's own title becomes the small line above it; a single hand-entered item supplies the headline and the line below |
+| Introduction | the opening band. The cover's own title becomes the small line above it; a single hand-entered item supplies the headline, the line below, and an image if you attach one. Pointed at a post list instead, it keeps the treatment for the first item and steps the rest down |
 | List | posts in one column |
 | Featured | one post with its image beside it |
-| Topics | a grid grouped by category |
+| Topics | posts in a grid, three across. Not grouped: Tistory repeats a cover item and offers no way to divide them |
 
 ### Settings
 
