@@ -4,6 +4,22 @@ Kept from 0.2.0, the first release with an installable package. The work before
 it built the repository, the pipeline and the design, and produced nothing to
 install, so there is no 0.1.0 and nothing earlier to record.
 
+## Unreleased
+
+### Changed
+
+- The description a stranger reads in the skin editor says what the skin is for
+  rather than what it is proud of. It had been three facts about how the thing
+  was built -- light and dark drawn separately, a bundled typeface, no
+  JavaScript needed -- and the panel cut the last of them off mid-sentence at
+  141 characters. The gate's ceiling was 160, a number chosen before anyone had
+  seen the panel; it is 125 now, which is measured: 121 characters wrapped to
+  two lines and showed in full, 141 wrapped to the same two lines and was cut at
+  about 128.
+- The Home settings say that a cover, once set, supplies the top of the page and
+  the home headline is not used. Three variables and a cover competed for the
+  same place and only the code said which one won.
+
 ## 0.4.0
 
 Upgrading resets a blog's saved skin settings, as every change to `index.xml`

@@ -318,10 +318,15 @@ try {
 // 243 and left its panel entirely, printing over the heading below. Both looked
 // fine in the file.
 //
-// 160 is a ceiling this project chose, not a limit Tistory documents: 96
-// characters displayed cleanly, 213 was truncated, 243 overflowed. Anything that
-// needs more room belongs in the README, which is what the homepage link is for.
-const XML_TEXT_LIMIT = 160;
+// 125 is measured rather than chosen. In the skin editor's header panel the
+// licence at 121 characters wrapped to two lines and showed in full, while the
+// description at 141 wrapped to the same two lines and was cut mid-word at
+// roughly 128. The old ceiling of 160 was a guess made before either had been
+// seen there, and it passed a string the panel could not show.
+//
+// Anything that needs more room belongs in the README, which is what the
+// homepage link is for.
+const XML_TEXT_LIMIT = 125;
 try {
   const xml = await readFile(join(root, "src", "index.xml"), "utf8");
   const long = [];
