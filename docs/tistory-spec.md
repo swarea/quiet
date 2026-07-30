@@ -125,6 +125,14 @@ comments beside the code that works around it.
   contents dropdown is free of the cover's shape: an introduction meant for one
   hand-typed item can be fed the five most recent posts, and Tistory will repeat
   the block. Every cover layout has to survive its own contents being a list.
+- **Some of Tistory's injected blocks are declared with `!important`.** The link
+  card (`data-ke-type="opengraph"`) is not, and yields to a rule pitched behind
+  `#quiet-main`. The place card (`data-ke-type="location"`) and the third
+  blockquote style are, and yield to nothing else: probed on a live post, a rule
+  at class level did not take, the same rule behind `#quiet-main` did not take,
+  and only `!important` moved them. Which of the two a block is cannot be read
+  off the page — every Tistory stylesheet is cross-origin, so `cssRules` throws
+  — and has to be established by trying.
 - **The share and manage flyouts (`.layer_post`) carry no border.** What looks
   like one is `box-shadow:0 0 0 1px rgba(0,0,0,.1)`, a fixed black alpha, so
   setting `border-color` does nothing and a dark page swallows the ring.

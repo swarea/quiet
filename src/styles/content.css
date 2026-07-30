@@ -341,3 +341,31 @@ body.quiet-lightbox-open{overflow:hidden;}
 #tt-body-page .quiet-article-body hr[data-ke-style="style8"]::after{
   transform:translate(-50%,-50%); border-radius:50%;
 }
+
+/* ---------- Two more of Tistory's own blocks ----------
+   The place card, `data-ke-type="location"`, and the third blockquote style,
+   the only one of the three that is a filled box rather than a bare rule.
+
+   Both are declared with `!important`, which the link card above is not. That
+   was established by probing the live page rather than assumed: at class level
+   nothing took, behind `#quiet-main` nothing took either, and only `!important`
+   moved them. So `!important` is what they get -- reluctantly, and only here,
+   where the alternative is leaving a white slab in the middle of a dark page. */
+
+/* The quote box kept `#fcfcfc` while the skin set its text to the dark theme's
+   ink: measured on a live post, 1.65 against its own ground. The two styles that
+   are not boxes have no fill of their own and were never affected. */
+#quiet-main .quiet-article-body blockquote[data-ke-style="style3"]{
+  background:var(--surface) !important;
+  border-color:var(--line) !important;
+}
+
+/* The place card is a plain anchor -- no iframe, no image -- carrying a white
+   fill, a near-black name and a slate address, all fixed. It reads on a light
+   page and turns into a lit rectangle on a dark one. */
+#quiet-main .quiet-article-body figure[data-ke-type="location"] a{
+  background:var(--surface) !important;
+  border-color:var(--line) !important;
+}
+#quiet-main .quiet-article-body .location-name{color:var(--ink) !important;}
+#quiet-main .quiet-article-body .location-address{color:var(--muted) !important;}
