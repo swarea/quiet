@@ -311,6 +311,32 @@ try {
   fail("syntax colours are ours", e.message);
 }
 
+// Nothing in index.xml is longer than the editor can show.
+//
+// Tistory gives each of these a fixed strip and does not scroll it. The skin
+// description ran to 446 characters and was cut off mid-word; the licence ran to
+// 243 and left its panel entirely, printing over the heading below. Both looked
+// fine in the file.
+//
+// 160 is a ceiling this project chose, not a limit Tistory documents: 96
+// characters displayed cleanly, 213 was truncated, 243 overflowed. Anything that
+// needs more room belongs in the README, which is what the homepage link is for.
+const XML_TEXT_LIMIT = 160;
+try {
+  const xml = await readFile(join(root, "src", "index.xml"), "utf8");
+  const long = [];
+  for (const m of xml.matchAll(/<(description|license)>\s*<!\[CDATA\[([\s\S]*?)\]\]>/g)) {
+    const value = m[2].replace(/\s+/g, " ").trim();
+    if (value.length > XML_TEXT_LIMIT) {
+      long.push(`<${m[1]}> is ${value.length}: "${value.slice(0, 40)}…"`);
+    }
+  }
+  if (long.length) fail("index.xml copy fits", long.slice(0, 3).join("; "));
+  else ok("index.xml copy fits");
+} catch (e) {
+  fail("index.xml copy fits", e.message);
+}
+
 // The thumbnail is drawn in the skin's own colours.
 //
 // `scripts/make-previews.html` is opened from disk and cannot fetch the token
