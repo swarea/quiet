@@ -54,7 +54,8 @@ loading.
 
 | Setting | Value | Why |
 | --- | --- | --- |
-| Menu bar | display | keeps the Tistory menu reachable |
+| Menu bar | hide | 꾸미기 → 설정. Everything in it belongs to Tistory — three links to Tistory, and a subscribe button this skin already builds in the author block. It is fixed to the corner of every page in colours that follow no theme |
+| Subscribe button | hide | the same page. This is Tistory's floating one; the skin's own sits in the author block and is unaffected |
 | Mobile web | off | the skin is responsive and handles narrow screens itself |
 | Covers | at least one | without any, Tistory serves the plain post list and the home page matches the category archive |
 

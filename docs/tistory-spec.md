@@ -127,6 +127,18 @@ comments beside the code that works around it.
   reader to the next, which is worth remembering before reasoning about any
   `onclick` token from its value on one page load.
 
+## Settings that change what a skin has to deal with
+
+- **The menu bar and the floating subscribe button are separate settings**, both
+  under 꾸미기 → 설정 (`/manage/design/setting`), each a plain show/hide. Hidden,
+  the fixed toolbar in the corner disappears entirely — with it the white pill
+  that kept its colour in both themes, its `…` menu, and the last contrast
+  failure on the blog.
+- **Neither of them affects `.container_postbtn`.** Verified by hiding both on a
+  live blog: the subscribe control inside the article survives, and so does the
+  button this skin builds from it in the author block. The article's own button
+  row is a third thing, governed by neither switch.
+
 ## Known limitations we have chosen to keep
 
 - **The pager renders outside `<main>`.** `<s_paging>` sits between the list
