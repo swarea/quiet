@@ -570,6 +570,17 @@
                 <p class="quiet-lede">[##_var_home-tagline_##]</p>
               </div>
             </s_if_var_home-headline>
+            <!-- What a blog with nothing configured opens on. "All posts" names
+                 a listing, which is right where a reader chose one and wrong at
+                 the front door: they did not navigate to a list, they arrived at
+                 a blog, and the blog has a name. The description Tistory already
+                 fills sits under it as the line it was written to be. On every
+                 other list page this is hidden and the listing's own name shows,
+                 which is where "All posts" belongs. -->
+            <div class="inner quiet-home-head">
+              <h1>[##_title_##]</h1>
+              <p class="quiet-lede">[##_desc_##]</p>
+            </div>
             <div class="inner quiet-list-head">
               <h1>[##_list_conform_##]</h1>
               <p class="quiet-lede">[##_list_description_##]</p>
