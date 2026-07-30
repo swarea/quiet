@@ -14,10 +14,15 @@
 // Read from there rather than from the sidebar tree. The tree is a different set
 // of links, a blog can turn it off, and it says nothing about any given post.
 //
-// Whichever shape arrives, one trail comes out, and it is written the way the
-// list token already writes it: `Engineering/Backend`. The wording is Tistory's,
-// not this skin's -- what the skin adds is that the leaf carries the weight, so
-// a reader can see which part is the category the post is actually in.
+// Whichever shape arrives, one comes out, written the way the list token
+// already writes it: `Engineering/Backend`. Every character of that is
+// Tistory's, including the slash. This adds no styling and no markup -- the
+// whole string is the category, and setting one part of it apart in weight was
+// a claim the skin had no standing to make.
+//
+// So on a list page it does nothing at all, which is the point: the two pages
+// agree because the cover was brought to the list's spelling, not because both
+// were brought to a third one of ours.
 //
 // Without scripting a reader sees what Tistory sent, which is never wrong --
 // only inconsistent between pages, and that was true before any of this.
@@ -50,53 +55,33 @@ function fromUrl(url: string): string[] {
   return parts;
 }
 
-// Both shapes, reduced to one. Null means leave the label exactly as it came.
-function trail(label: string, url: string): string[] | null {
-  const own = label
-    .split("/")
-    .map((s) => s.trim())
-    .filter(Boolean);
-  // A label that already carries the trail is the better source of its own
-  // wording, so it is split rather than looked up.
-  if (own.length > 1) return own;
-
-  const path = fromUrl(url);
-  if (path.length < 2) return null;
-  // A bare leaf is only extended when it still reads as the leaf its own url
-  // ends in. A category can be renamed without its url following, and a label
-  // that has parted company with its path is not one to build a trail out of.
-  //
-  // Compared without case, because a url is not obliged to carry the name's. The
-  // leaf then keeps the wording Tistory sent rather than the spelling in the
-  // url, or that comparison is how "TypeScript" would become "typescript".
-  if (!same(label, path[path.length - 1])) return null;
-  return [...path.slice(0, -1), label.trim()];
+// A label Tistory already sent as a path. This is the shape everything else is
+// being brought to, so there is nothing to do to it -- and nothing is done: on a
+// list page this module writes no text and touches no node.
+function alreadyATrail(label: string): boolean {
+  return label.includes("/");
 }
 
 export function initLineage(): void {
   for (const el of document.querySelectorAll<HTMLElement>(SOURCE)) {
     const label = (el.textContent ?? "").trim();
-    const parts = trail(label, el.dataset.quietCat ?? "");
-    if (!parts) continue;
+    if (alreadyATrail(label)) continue;
 
-    // Built as nodes, never as markup: some of these names come back off a url.
+    const path = fromUrl(el.dataset.quietCat ?? "");
+    if (path.length < 2) continue;
+    // A bare leaf is only extended when it still reads as the leaf its own url
+    // ends in. A category can be renamed without its url following, and a label
+    // that has parted company with its path is not one to build a trail out of.
     //
-    // The separator is a real character rather than a CSS ::after, so that it
-    // survives being copied and is spoken. Left to the stylesheet, selecting the
-    // label yielded "ProgrammingTypeScript".
-    //
-    // A slash, and no spaces around it, because that is how Tistory writes a
-    // category path itself -- `Engineering/Backend` is what the list token sends
-    // and what the blogger sees in their own settings. A prettier separator was
-    // tried and was ours alone; a label a reader meets on two pages should not
-    // be spelled the way this skin would have chosen.
-    el.textContent = "";
-    for (const name of parts.slice(0, -1)) {
-      const up = document.createElement("span");
-      up.className = "up";
-      up.textContent = name;
-      el.append(up, "/");
-    }
-    el.append(parts[parts.length - 1]);
+    // Compared without case, because a url is not obliged to carry the name's.
+    // The leaf then keeps the wording Tistory sent rather than the spelling in
+    // the url, or that comparison is how "TypeScript" would become "typescript".
+    if (!same(label, path[path.length - 1])) continue;
+
+    // Plain text, and a slash with no spaces around it, because that is exactly
+    // how Tistory writes a category path itself. Nothing is wrapped and nothing
+    // is styled: the whole string is the category, and setting one part of it
+    // apart was a claim this skin had no standing to make.
+    el.textContent = [...path.slice(0, -1), label].join("/");
   }
 }

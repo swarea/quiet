@@ -25,16 +25,6 @@ svg[fill="none"][stroke="currentColor"]{stroke-linecap:round; stroke-linejoin:ro
 .quiet-skip:focus{transform:none;}
 #quiet-main:focus{outline:none;}
 .quiet-eyebrow{font-family:var(--mono); font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); font-weight:600;}
-/* The branch a category hangs off. The wording and the slash between the parts
-   are Tistory's own -- `Engineering/Backend` is what its list token sends. All
-   this adds is weight, so the leaf reads as the category the post is in and the
-   branch reads as where that sits.
-
-   Weight rather than opacity or a paler colour: the label is already the accent,
-   and dimming it is how a measured contrast quietly stops being the one that was
-   measured. */
-.cat .up,.quiet-crumb .up{font-weight:400;}
-
 .quiet-section-tag{display:flex; align-items:baseline; gap:1rem; margin-bottom:1.15rem;}
 /* Section headings carry real Korean sentences on a live blog — a category
    name, "댓글 4", a cover title. Monospace with wide tracking pulls Hangul
