@@ -4,7 +4,7 @@ Kept from 0.2.0, the first release with an installable package. The work before
 it built the repository, the pipeline and the design, and produced nothing to
 install, so there is no 0.1.0 and nothing earlier to record.
 
-## Unreleased
+## 0.4.0
 
 Upgrading resets a blog's saved skin settings, as every change to `index.xml`
 does. Note your accent colours and home copy before uploading.

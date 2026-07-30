@@ -8,7 +8,7 @@
 <skin>
   <information>
     <name>Quiet</name>
-    <version>0.3.0</version>
+    <version>0.4.0</version>
     <!-- Kept short because the skin editor gives these a fixed strip and does
          not scroll it. At 446 characters the description was cut off mid-word;
          at 243 the licence ran straight out of its panel and over the heading
