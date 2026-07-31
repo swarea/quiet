@@ -157,6 +157,16 @@ stylesheet.
 Text placed on the accent colour is chosen by measurement — the skin compares
 the accent against black and white and uses whichever gives higher contrast.
 
+## The credit in the sidebar
+
+The bottom of the sidebar carries a small line — *Quiet by Isaac Lee*. The skin's
+name links to where the skin can be had, the author's name to the author.
+
+You are not required to keep it. It is a courtesy rather than a term, and
+deleting the `.quiet-colophon` block in `skin.html` removes it with nothing else
+attached. If you do keep it, it is how the next person finds the skin, and it is
+appreciated.
+
 ## Compiler targets
 
 Compiled for Chrome, Edge and Firefox 100+, Safari and iOS 15+, and Samsung
@@ -212,6 +222,5 @@ CSS and esbuild. Nunjucks builds the mock preview only. Rationale in
 
 ## License
 
-[MIT](LICENSE) for the skin. The bundled Latin typeface is a subset of
-Pretendard under the SIL Open Font License 1.1, renamed as that licence
-requires. See [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).
+[MIT](LICENSE) for the skin. The bundled typeface is a subset of Pretendard
+under the SIL Open Font License 1.1, renamed as that licence requires. See [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).
