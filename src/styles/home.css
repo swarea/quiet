@@ -252,3 +252,13 @@ body#tt-body-index :is(.quiet-intro,.quiet-home-head) .quiet-lede{max-width:52ch
   .quiet-masthead-item ~ .quiet-masthead-item{gap:1.6rem;}
   .quiet-masthead-item ~ .quiet-masthead-item > .shot{width:9rem;}
 }
+
+/* Where the blogger pointed the opening band somewhere, the headline is the
+   link and the band is not: a band that answers a click anywhere inside it is a
+   surface, and this one is meant to be read. Underlined only on the way in, so
+   the resting page is unchanged. */
+.quiet-masthead .quiet-display a{color:inherit; text-decoration:none;}
+.quiet-masthead .quiet-display a:hover,
+.quiet-masthead .quiet-display a:focus-visible{
+  text-decoration:underline; text-underline-offset:.16em; text-decoration-thickness:1px;
+}
