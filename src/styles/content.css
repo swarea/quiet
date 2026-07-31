@@ -63,6 +63,26 @@
    inside the border: measured 21px, which reads as the table having stopped
    short of its own frame. */
 #quiet-main .quiet-tbl-wrap > table{margin:0;}
+
+/* The border colour, again behind the id. Tistory paints a cell's border to match
+   whatever ground the author gave that cell -- `rgb(155,155,155)` on a header row
+   here. While the ground was there the border was invisible against it; once the
+   ground is cleared for failing contrast, the border is left standing alone, and
+   a mid-grey line on a dark page is the brightest thing in the table. */
+#quiet-main .quiet-article-body th,
+#quiet-main .quiet-article-body td{border-color:var(--line-strong);}
+
+/* Inside a frame the table draws no outer edge of its own. `.quiet-tbl-wrap`
+   already draws one, and with `border-collapse` the outermost cells draw theirs
+   a pixel inside it -- two 1px lines side by side, which reads as one thick or
+   doubled border. It only became visible when the grid moved to `--line-strong`;
+   at `--line` both were faint enough to blur into one. The frame is the frame
+   and the cells keep the grid. */
+#quiet-main .quiet-tbl-wrap > table{border:0;}
+#quiet-main .quiet-tbl-wrap tr > *:first-child{border-left:0;}
+#quiet-main .quiet-tbl-wrap tr > *:last-child{border-right:0;}
+#quiet-main .quiet-tbl-wrap tr:first-child > *{border-top:0;}
+#quiet-main .quiet-tbl-wrap tr:last-child > *{border-bottom:0;}
 /* `--line-strong`, not `--line`. A table's grid is structure, not the whisper a
    divider between list rows is, and at `--line` it was barely there: measured
    against the page, 1.15 in light and 1.30 in dark, and 1.04 against a cell the
