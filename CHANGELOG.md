@@ -8,6 +8,13 @@ install, so there is no 0.1.0 and nothing earlier to record.
 
 ### Fixed
 
+- The rule under the shortcut dialog's title follows the theme. It is a fixed
+  `#eee`, which is a hairline on a white panel and the brightest thing in the box
+  on a dark one: measured 1.16 against the dialog's ground in light and **15.02**
+  in dark. It survived the previous fix because that one moved the ground and the
+  words and this line is neither. The orange rule under each section heading is
+  left alone — that one is Tistory's own mark, and it reads at 3.32 and 5.24.
+
 - The ring that says which comment box you are typing in is visible. Blended at
   45% of the accent it measured **2.34** against the page in light and 3.10 in
   dark — under the 3:1 a focus indicator has to clear, and under it on the theme

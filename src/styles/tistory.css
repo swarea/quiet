@@ -382,6 +382,14 @@ body .doc_help kbd{
   color:var(--ink) !important; box-shadow:none !important;
 }
 body .doc_help .btn_doc_close{border-color:var(--line);}
+/* The rule under the dialog's title is a fixed `#eee`, which is a hairline on a
+   white panel and the brightest thing in the box on a dark one: measured 1.16
+   against the ground in light and **15.02** in dark. Reported from a screenshot
+   of the dialog open on a dark page, after the ground and the words had already
+   been fixed -- the ground moved and this line did not. The orange rule under
+   each section heading is left alone: that one is Tistory's own mark, and it
+   reads at 3.32 and 5.24. */
+body .doc_help .title{border-bottom-color:var(--line);}
 body .doc_help .info{color:var(--muted);}
 
 /* Tistory's hover tooltip is a fixed translucent black, which is the right
