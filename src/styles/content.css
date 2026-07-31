@@ -202,8 +202,25 @@
 #quiet-main .quiet-article-body figure[data-ke-type="opengraph"] a:focus-visible{border-color:var(--line-strong);}
 #quiet-main .quiet-article-body figure[data-ke-type="opengraph"] div.og-image{border-right-color:var(--line);}
 #quiet-main .quiet-article-body figure[data-ke-type="opengraph"] div.og-text p.og-title{color:var(--ink);}
+/* `!important`, unlike everything else about this card, because a card that was
+   pasted rather than typed carries Tistory's own #909090 inline on these two
+   lines, and inline outranks any selector. It is not a colour anyone chose: it
+   is Tistory's, on Tistory's component, copied along with the markup. Measured
+   on one post, 4 of 11 cards carried it, so the same card was drawn in two
+   different greys down a single article. The card is restyled whole; its text
+   should be ours throughout. */
 #quiet-main .quiet-article-body figure[data-ke-type="opengraph"] div.og-text p.og-desc,
-#quiet-main .quiet-article-body figure[data-ke-type="opengraph"] div.og-text p.og-host{color:var(--muted);}
+#quiet-main .quiet-article-body figure[data-ke-type="opengraph"] div.og-text p.og-host{color:var(--muted) !important;}
+
+/* A link to a page with no share image still gets the thumbnail's 200px, and
+   Tistory fills it with nothing -- an empty block down the side of the card,
+   with the text crowded into what is left. The card knows: it writes the
+   thumbnail as an inline background and, when there is none, writes `url()` with
+   nothing in it, which is a thing a selector can read. Both halves are
+   absolutely positioned at fixed offsets, so the text has to be told to take the
+   space as well as the block told to go. */
+#quiet-main .quiet-article-body figure[data-ke-type="opengraph"] div.og-image[style*="url()"]{display:none;}
+#quiet-main .quiet-article-body figure[data-ke-type="opengraph"] div.og-image[style*="url()"] ~ div.og-text{left:0; width:100%;}
 
 /* Tistory zeroes <p> margins inside .tt_article_useless_p_margin on purpose:
    the editor emits one paragraph per line and represents a blank line as its

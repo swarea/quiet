@@ -92,6 +92,15 @@ install, so there is no 0.1.0 and nothing earlier to record.
   colour were unreadable; now none are. What it costs is the few colours the
   author meant, which show as theme ink for that frame — 4 elements against 118
   on the post measured.
+- A link card is drawn one way, and a link with no share image uses the whole
+  card. Tistory reserves 200px for the thumbnail whether or not there is one and
+  fills it with nothing, leaving an empty block down the side and the text
+  crowded into what is left; the card says so itself, writing `url()` with
+  nothing in it, which a selector can read. And a card that was pasted rather
+  than typed carries Tistory's own #909090 inline on its description and host,
+  which outranks any selector — so on one post 4 of 11 cards were drawn in a
+  different grey from the other 7, down a single article.
+
 - Tistory's Korean is corrected in a background tab too. The article toolbar —
   like, share, subscribe — is relabelled once at boot and again whenever Tistory
   rewrites it, and that second pass waited for an animation frame. A hidden tab
