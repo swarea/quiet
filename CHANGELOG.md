@@ -92,6 +92,14 @@ install, so there is no 0.1.0 and nothing earlier to record.
   colour were unreadable; now none are. What it costs is the few colours the
   author meant, which show as theme ink for that frame — 4 elements against 118
   on the post measured.
+- The reading column is the same width on every page. Whether the window drew a
+  scrollbar depended on whether the page happened to be taller than it, and the
+  column was measured from what was left: on this blog the home and a category
+  came to 982px and an empty search and the guestbook to 992px, so every move
+  between them re-wrapped the text and shifted the page 10px sideways. The gutter
+  is reserved now, as the sidebar already reserved its own. Measured across four
+  page types after: 982 on all of them.
+
 - The page no longer grows under the reader as the bundle lands. A code block is
   a bare `<pre>` until the bundle wraps it in a frame with a header above it, and
   a table is bare until it is wrapped for scrolling — so every one of them got
