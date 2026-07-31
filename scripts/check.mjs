@@ -276,6 +276,49 @@ try {
   fail("copy is english", e.message);
 }
 
+// A field is called one thing, not two.
+//
+// Every text field here is labelled twice: a visually hidden <label> that is the
+// only thing a screen reader reads, and a placeholder that is the only thing a
+// sighted reader sees. Nothing keeps them in step, and they had drifted -- the
+// comment box announced "Write a comment" and displayed "Leave a comment", the
+// guestbook announced an "entry" and asked for a "message". Someone driving the
+// page by voice says what they can see, which was never what the field was
+// called. The mock templates carry their own copy of the same markup, so the
+// two can also drift from each other; both are scanned.
+try {
+  const pairs = (text) => {
+    const labels = new Map();
+    for (const m of text.matchAll(/<label[^>]*\bfor="([^"]+)"[^>]*>([\s\S]*?)<\/label>/g)) {
+      labels.set(m[1], m[2].replace(/<[^>]*>/g, "").trim());
+    }
+    const out = [];
+    for (const m of text.matchAll(/<(?:input|textarea)\b[^>]*>/g)) {
+      const id = /\bid="([^"]+)"/.exec(m[0])?.[1];
+      const ph = /\bplaceholder="([^"]*)"/.exec(m[0])?.[1];
+      if (id && ph && labels.has(id)) out.push([id, labels.get(id), ph]);
+    }
+    return out;
+  };
+  const offenders = [];
+  let seen = 0;
+  const files = ["src/skin.html"];
+  for (const entry of await readdir(join(root, "src", "templates", "views"))) {
+    files.push(`src/templates/views/${entry}`);
+  }
+  for (const file of files) {
+    for (const [id, label, ph] of pairs(await readFile(join(root, file), "utf8"))) {
+      seen++;
+      if (label !== ph) offenders.push(`${file} #${id}: "${label}" vs "${ph}"`);
+    }
+  }
+  if (!seen) fail("a field is called one thing", "no labelled field found to check");
+  else if (offenders.length) fail("a field is called one thing", offenders.slice(0, 3).join("; "));
+  else ok("a field is called one thing");
+} catch (e) {
+  fail("a field is called one thing", e.message);
+}
+
 // Every syntax colour on the page must be ours.
 //
 // Tistory injects highlight.js with the `atom-one-light` theme from a CDN, and

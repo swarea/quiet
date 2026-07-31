@@ -82,14 +82,14 @@ Four cover types are available:
 | Setting | Variable | Default | Effect |
 | --- | --- | --- | --- |
 | Blog language | `lang` | Korean | the language this blog is mostly written in, applied before scripts run. Individual pages then detect their own |
-| Home: small line | `home-eyebrow` | empty | a short line above the home headline. Requires a headline |
+| Home: line above the headline | `home-eyebrow` | empty | a short line above the home headline. Requires a headline |
 | Home: headline | `home-headline` | empty | the home page's opening line. Not used when covers are set, because a cover then supplies the top of the page |
-| Home: supporting line | `home-tagline` | empty | a line below the headline. Requires a headline |
+| Home: line below the headline | `home-tagline` | empty | a line below the headline. Requires a headline |
 | Accent colour (light) | `accent-light` | `#38548c` | links and emphasis on light backgrounds |
 | Accent colour (dark) | `accent-dark` | `#90a8e0` | the same for dark backgrounds |
 | Default theme | `default-theme` | match the visitor's system | the theme a first-time visitor sees |
 | Sidebar | `sidebar` | on | the navigation column on wide screens |
-| Contents rail | `toc` | on | the contents rail, and its panel on narrow screens |
+| Table of contents | `toc` | on | headings from the post, in a rail beside it and in a panel on narrow screens. The reader sees it titled *On this page* |
 | Reading progress | `reading-progress` | on | the line at the top of the window |
 | Related posts | `related-posts` | on | other posts from the same category, below an article |
 | Previous and next post | `prev-next` | off | links to adjacent posts. Off by default because it duplicates the related list on blogs with small categories |

@@ -8,6 +8,27 @@ install, so there is no 0.1.0 and nothing earlier to record.
 
 ### Changed
 
+- Every field is called one thing. A text box here is labelled twice — a hidden
+  `<label>` that is all a screen reader reads, and a placeholder that is all a
+  sighted reader sees — and the two had drifted apart. The comment box announced
+  "Write a comment" and displayed "Leave a comment"; the guestbook announced an
+  "entry" and asked for a "message". Someone driving the page by voice says the
+  words in front of them, which were never the words the field answered to. The
+  visible wording wins in both. A gate check now compares the pair on every
+  labelled field, in the skin and in the mock, so they cannot part again.
+- The table of contents has one name per audience instead of three. The setting
+  was **Contents rail**, the landmark a screen reader announced was **Contents**,
+  and the title on the page was **On this page**. The setting is now **Table of
+  contents**, which is the term a blogger looks for and the one the variable and
+  the module were already named after; the landmark takes the title's words, so
+  what is heard and what is read agree. The reader-facing title is unchanged.
+- The sidebar's notices section is **Notices** in both places. Its heading said
+  "Notice" while its landmark said "Notices" — the only pair among the sidebar's
+  six that disagreed on a word rather than expanding it.
+- The three home lines are named by where they sit: **Home: line above the
+  headline**, **Home: headline**, **Home: line below the headline**. The first
+  had been "Home: small line", describing a size where its siblings described a
+  role, so the set read as three unrelated settings.
 - The typeface carries Hangul as well, and nothing is fetched from another host.
   The skin had been paying both costs at once: the obligations of redistributing
   a font, and a jsDelivr request on every page load that the design still leaned

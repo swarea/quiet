@@ -16,7 +16,9 @@ export function initToc(): void {
 
   const nav = document.createElement("nav");
   nav.className = "quiet-toc";
-  nav.setAttribute("aria-label", "Contents");
+  // Same words as the heading below, so the landmark a screen reader announces
+  // and the title a sighted reader sees are one name rather than two.
+  nav.setAttribute("aria-label", "On this page");
 
   const used = new Set<string>();
   const items: string[] = [];

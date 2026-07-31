@@ -103,7 +103,10 @@
       </variable>
       <variable>
         <name>toc</name>
-        <label><![CDATA[Contents rail]]></label>
+        <!-- The reader sees "On this page"; the blogger looking for this
+             switch is looking for the term everyone else uses, which is also
+             the one the variable and the module are named after. -->
+        <label><![CDATA[Table of contents]]></label>
         <description><![CDATA[Shown beside an article that has headings, and as a panel on narrow screens.]]></description>
         <type>BOOL</type>
         <default>true</default>
@@ -125,7 +128,10 @@
       </variable>
       <variable>
         <name>home-eyebrow</name>
-        <label><![CDATA[Home: small line]]></label>
+        <!-- The three home lines are named by where they sit, not by how they
+             look: "small" described a size while its siblings described a
+             role, so the set read as three unrelated settings. -->
+        <label><![CDATA[Home: line above the headline]]></label>
         <description><![CDATA[A short line above the home headline. Shown only when the headline is set.]]></description>
         <type>STRING</type>
         <default><![CDATA[]]></default>
@@ -139,7 +145,7 @@
       </variable>
       <variable>
         <name>home-tagline</name>
-        <label><![CDATA[Home: supporting line]]></label>
+        <label><![CDATA[Home: line below the headline]]></label>
         <description><![CDATA[A line below the headline. Shown only when the headline is set.]]></description>
         <type>STRING</type>
         <default><![CDATA[]]></default>
