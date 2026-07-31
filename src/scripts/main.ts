@@ -19,6 +19,7 @@ import { initRelabel } from "./modules/relabel";
 import { initSubscribe } from "./modules/subscribe";
 import { initLang } from "./modules/lang";
 import { initLineage } from "./modules/lineage";
+import { initMasthead } from "./modules/masthead";
 
 // Two of these are load-bearing for the layout: the stylesheet folds the
 // category tree and slides the rail off the edge on the strength of the bundle
@@ -45,6 +46,7 @@ const STEPS: ReadonlyArray<readonly [() => void, boolean]> = [
   [initSubscribe, false],
   [initLang, false],
   [initLineage, false],
+  [initMasthead, false],
 ];
 
 const boot = (): void => {

@@ -72,7 +72,7 @@
       <!-- The editor cuts a cover description off around 150 characters, and
            this one has to carry an instruction, so it says the shape and
            leaves the mapping to the README. -->
-      <description><![CDATA[The opening band. Set Contents to Direct entry and add one item: a title, a line under it, and an image if you have one.]]></description>
+      <description><![CDATA[The opening band. Direct entry, one item: a title, a line under it, and an image and a link if you want them.]]></description>
     </item>
     <item>
       <name>list</name>

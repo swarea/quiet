@@ -67,6 +67,9 @@ const recent = [
 ];
 
 export const home = {
+  // The opening band's item may point somewhere; the mock sets one so the link
+  // the script builds is previewed rather than only described.
+  url: "/about",
   headline:
     "배우고 만든 것을, 오래 남기려 기록합니다.<br>기술과 데이터, 그리고 삶과 믿음에 대해.",
   subtitle:
