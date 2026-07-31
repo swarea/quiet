@@ -58,8 +58,13 @@
   font-size:.92rem; margin:1.8em 0;
 }
 .quiet-tbl-wrap > table{margin:0;}
+/* `--line-strong`, not `--line`. A table's grid is structure, not the whisper a
+   divider between list rows is, and at `--line` it was barely there: measured
+   against the page, 1.15 in light and 1.30 in dark, and 1.04 against a cell the
+   author had painted grey. The stronger token is what a tile's top rule already
+   uses for the same reason. */
 .quiet-article-body th,.quiet-article-body td{
-  text-align:left; padding:.62rem .9rem; border:1px solid var(--line);
+  text-align:left; padding:.62rem .9rem; border:1px solid var(--line-strong);
   overflow-wrap:anywhere;
 }
 .quiet-article-body th{
