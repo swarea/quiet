@@ -87,7 +87,11 @@ async function build() {
   // preview needs the same shape or it silently falls back to a system font and
   // stops previewing the typeface it exists to preview.
   await mkdir(join(outDir, "images"), { recursive: true });
-  await writeFile(join(outDir, "images", "quiet-sans.woff2"), (await buildFont()).data);
+  {
+    const f = await buildFont();
+    await writeFile(join(outDir, "images", "quiet-sans-latin.woff2"), f.latin.data);
+    await writeFile(join(outDir, "images", "quiet-sans-hangul.woff2"), f.hangul.data);
+  }
   for (const f of htmlFiles) await writeFile(join(outDir, f.name), f.content);
 
   const list = (await readdir(outDir)).sort();
@@ -113,7 +117,8 @@ async function buildSkinPackage() {
   // The Latin half of the typeface, cut from the full variable font so the
   // design does not rest on a third party staying up. See scripts/font.mjs.
   const font = await buildFont();
-  await writeFile(join(distDir, "images", "quiet-sans.woff2"), font.data);
+  await writeFile(join(distDir, "images", "quiet-sans-latin.woff2"), font.latin.data);
+  await writeFile(join(distDir, "images", "quiet-sans-hangul.woff2"), font.hangul.data);
   await writeFile(
     join(distDir, "images", "OFL.txt"),
     await readFile(join(root, "src", "fonts", "OFL.txt")),
@@ -135,7 +140,7 @@ async function buildSkinPackage() {
   }
 
   console.log("built tistory package → dist");
-  for (const f of ["skin.html", "index.xml", "style.css", "images/app.js", "images/quiet-sans.woff2", ...copied]) {
+  for (const f of ["skin.html", "index.xml", "style.css", "images/app.js", "images/quiet-sans-latin.woff2", "images/quiet-sans-hangul.woff2", ...copied]) {
     console.log(`  ${f}`);
   }
   const previews = ["preview256.jpg", "preview560.jpg", "preview1600.jpg"];

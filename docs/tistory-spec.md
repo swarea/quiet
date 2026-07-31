@@ -34,9 +34,9 @@ which are images — the name is Tistory's and predates skins carrying anything
 else. A skin cannot flatten the package or rename the folder, so `images/app.js`
 looking odd is worth knowing about rather than fixing.
 
-What the skin does choose is the names inside it. `quiet-sans.woff2` matches the
-family the licence obliged us to rename, and `OFL.txt` sits beside the font it
-covers because it has to travel with it.
+What the skin does choose is the names inside it. `quiet-sans-latin.woff2` and
+`quiet-sans-hangul.woff2` match the family the licence obliged us to rename, and
+`OFL.txt` sits beside the fonts it covers because it has to travel with them.
 
 ## index.xml — key facts
 

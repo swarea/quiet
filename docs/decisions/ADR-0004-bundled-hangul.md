@@ -50,6 +50,40 @@ stack and swaps when the file lands, so the page is readable immediately either
 way. What the reader pays is one 596 KB download, cached afterwards, on an
 audience that is 91% desktop.
 
+## Amended the same day: the axis was dead
+
+The first cut shipped one file at 596 KB and every weight on the page rendered
+the same. `subset-font`'s `variationAxes` option **instances** a variable font;
+it does not narrow its axis. Passing `{wght: {min: 300, max: 800}}` produced a
+file pinned at 400, which the stylesheet then declared as `font-weight: 300 800`
+— so the browser believed it held every weight, declined even to synthesise one,
+and a headline asking for 700 came out at 400.
+
+Measured on the live blog before the fix, ink at 80px:
+
+| | 300 | 400 | 700 | 800 |
+| --- | --- | --- | --- | --- |
+| the shipped file | 1312 | 1312 | **1312** | **1312** |
+| Pretendard itself | 1114 | 1354 | 2109 | 2340 |
+
+This had been true since ADR-0003 — Latin has never carried a live axis. It went
+unseen because Hangul came from the CDN, where the axis worked, and Hangul is
+most of the text on this blog.
+
+The axis is cheap for Latin and ruinous for Hangul:
+
+| | variable axis | static 400 |
+| --- | --- | --- |
+| Latin | **53 KB** | 27 KB |
+| Hangul | 1663 KB | **568 KB** |
+
+So the font ships as two files under one family, split by `unicode-range`: Latin
+with a live 300–800 axis, Hangul as one static instance at 400 with bold
+synthesised from it. The headings on this blog are mostly Latin, and a real bold
+Hangul would cost another 676 KB.
+
+A page with no Korean on it now loads 53 KB rather than 596.
+
 ## Consequences
 
 - No host outside Tistory is contacted for anything. The skin's design no longer
@@ -58,8 +92,8 @@ audience that is 91% desktop.
   no Latin from asking for the file, which saves nothing once the file covers the
   script the blog is mostly written in — and left as it was, it would have kept
   the browser from using the font for Hangul at all.
-- The package is 900 KB. A blogger uploads a 596 KB font by hand, which is slower
-  than a 51 KB one.
+- The package is 924 KB, and a blogger uploads two font files by hand rather than
+  one. A reader loads 53 KB on an English page and 621 KB on a Korean one.
 - Mobile readers, 8.6% here, pay the most for a fallback that was already good on
   their platform. That is the trade this decision makes deliberately: 8.6% pay so
   that 91.4% see the page as it was drawn.

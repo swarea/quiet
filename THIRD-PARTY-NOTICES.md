@@ -6,8 +6,9 @@ Copyright (c) 2021 Kil Hyung-jin, with Reserved Font Name Pretendard.
 Licensed under the SIL Open Font License 1.1 — <https://scripts.sil.org/OFL>.
 
 This skin ships **a subset of Pretendard under a different name**. It is cut at
-build time by `scripts/font.mjs` and shipped as `images/quiet-sans.woff2` under
-the family name **Quiet Sans**. The full licence travels with it as
+build time by `scripts/font.mjs` into two files under the family name
+**Quiet Sans** — `images/quiet-sans-latin.woff2` and
+`images/quiet-sans-hangul.woff2`. The full licence travels with them as
 `images/OFL.txt`, and the unmodified source font is in `src/fonts/source.woff2`.
 
 The rename is required rather than chosen. The OFL reserves the name
@@ -15,12 +16,22 @@ The rename is required rather than chosen. The OFL reserves the name
 carry the reserved name. "Quiet Sans" makes no claim to be Pretendard and
 points anyone asking at the licence beside it.
 
-Latin and Hangul are both included, at 596 KB against the source font's 2.0 MB.
-Hangul is taken entire — all 11,172 syllables — because there is no honest way to
-guess which of them a blog will use, and a subset guessed from today's posts is a
-gap in tomorrow's. Narrowing the weight axis makes the file larger rather than
-smaller: 400–700 measured 1152 KB, because a narrower range has to interpolate
-new masters where the wider one keeps the ones already in the file.
+Latin and Hangul are both included, split into two files because the weight axis
+costs almost nothing for one and almost everything for the other. Measured at
+build against the source font's 2.0 MB:
+
+| | variable axis | static 400 |
+| --- | --- | --- |
+| Latin | **53 KB** | 27 KB |
+| Hangul | 1663 KB | **568 KB** |
+
+So Latin keeps a live 300–800 axis and Hangul ships as one static instance at
+400, with bold synthesised from it. Hangul is taken entire — all 11,172
+syllables — because there is no honest way to guess which of them a blog will
+use, and a subset guessed from today's posts is a gap in tomorrow's.
+
+Each file carries a `unicode-range`, so a page with no Korean on it never asks
+for the 568 KB.
 
 **Nothing is fetched from another host.** Pretendard's dynamic subset was
 requested from jsDelivr until 0.5.0; see
