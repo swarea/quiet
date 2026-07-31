@@ -17,7 +17,9 @@
       <p class="quiet-lede">{{ site.tagline }}</p>
     </div>
     <div class="inner quiet-list-head">
-      <h1>{{ list.title }}</h1>
+      {# Both names, as the skin renders them: the stylesheet picks by the class
+         <head> sets from the path. #}
+      <h1><span class="quiet-listing-name">{{ list.title }}</span><span class="quiet-every-post">All posts</span></h1>
       <p class="quiet-lede">{{ list.count }} posts</p>
     </div>
   </header>

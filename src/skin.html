@@ -585,7 +585,14 @@
               <p class="quiet-lede">[##_desc_##]</p>
             </div>
             <div class="inner quiet-list-head">
-              <h1>[##_list_conform_##]</h1>
+              <!-- Both names are rendered and the stylesheet picks one, because
+                   on the complete listing Tistory names the page itself and the
+                   name it picks is not ours: "Categories" over every post the
+                   blog has, or the Korean equivalent. The right word is known
+                   before the page is drawn, so it is drawn right rather than
+                   corrected afterwards. Which one shows is decided by a class
+                   <head> sets from the path. -->
+              <h1><span class="quiet-listing-name">[##_list_conform_##]</span><span class="quiet-every-post">All posts</span></h1>
               <p class="quiet-lede">[##_list_description_##]</p>
             </div>
           </header>

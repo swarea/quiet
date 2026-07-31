@@ -92,24 +92,27 @@ install, so there is no 0.1.0 and nothing earlier to record.
   colour were unreadable; now none are. What it costs is the few colours the
   author meant, which show as theme ink for that frame — 4 elements against 118
   on the post measured.
-- The words Tistory wrote no longer change under the reader. Some of what the
-  page shows is Tistory's own wording, correctable only in script — there is no
-  token that returns it and no setting that changes it — and the bundle is
-  deferred, so the reader saw the first wording and then watched it become the
-  second. The sidebar's root row read *Categories* and became *All posts*, the
-  heading of the complete listing did the same, and a cover's category read
-  *Data* and became *Engineering/Data*. Those are now held until the word is the
-  right one, and shown with the space already reserved so nothing moves.
+- The complete listing is called *All posts* from the first frame, in the page's
+  heading and in the sidebar's row to it. Tistory names that one page itself —
+  *Categories*, over a list that is not categories at all — and no token or
+  setting reaches the word, so the bundle rewrote it; being deferred, it arrived
+  after the page was painted and the reader watched the word change. Both now
+  render right to begin with: the heading carries both names and the stylesheet
+  picks one, and the sidebar's row is drawn beside Tistory's own, which is
+  silenced only until the bundle has rewritten it for real.
 
   Found by diffing the HTML Tistory serves against the DOM once the bundle has
   run, across the home page, the complete listing and an article, rather than by
-  looking for them one at a time. That diff is the whole list: everything else
-  the bundle does is additive, which appears rather than changes.
+  looking for them one at a time. Extended to computed style as well as text —
+  colour, weight, spacing, borders, 21 properties over 715 paired elements —
+  which found nothing else changing on an article at all.
 
-  A list row's time is deliberately not held. Tistory prints a clock instead of a
-  date for a post published today and the bundle rewrites it to *Today*, but
-  which rows those are cannot be known before it runs, and holding every date on
-  every list page to catch the one published today costs more than it saves.
+  A cover's category still changes, from *Data* to *Engineering/Data*. It is
+  assembled from the category's url and no stylesheet can do that, and a word
+  changing is a smaller cost than a gap waiting to be filled. The same reasoning
+  leaves a list row's time alone: Tistory prints a clock rather than a date for a
+  post published today, and which rows those are is not knowable before the
+  bundle runs.
 - A pasted code block keeps its own frame through all of this. `<pre>` was
   already answered in the stylesheet, from first paint and with scripts off, and
   the hold introduced above outranked that answer — so a pasted block lost its

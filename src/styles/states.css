@@ -1,44 +1,52 @@
 /* Cross-screen states: empty results, pagination, protected post, generic page. */
 
-/* ---- labels Tistory wrote, held until the bundle can reword them ----------- */
+/* ---- the two names Tistory gives the complete listing ---------------------- */
 
-/* Some of what the reader sees is Tistory's wording, not ours and not the
-   author's, and the only place it can be corrected is script -- there is no
-   token that returns it and no setting that changes it. The bundle is deferred,
-   so it arrives after the page has been painted, and the reader watched the word
-   change under them: the sidebar's root row read "Categories" and became "All
-   posts", the same on the heading of the complete listing, and a cover's
-   category read "Data" and became "Engineering/Data".
+/* Tistory names one page itself: the listing of every post, which it heads
+   "Categories" -- or the Korean it uses when the blog is set that way -- over a
+   list that is not categories at all. The sidebar's row to the same page reads
+   the same word. Neither is the author's and neither can be reached by a token
+   or a setting, so the bundle rewords both, and it is deferred, so for a frame
+   the reader saw the first word and then watched it become the second.
 
-   Measured by diffing the HTML Tistory serves against the DOM once the bundle
-   has run, on the home page, the complete listing and an article. That diff is
-   the whole list -- everything else the bundle does is additive, which appears
-   rather than changes, and nothing else on the page is reworded at all.
+   These were held instead -- drawn only once the word was right -- and holding
+   was the wrong tool. A hold is for a first paint that is broken: text that
+   cannot be read, paper that swallows the page. A word that is merely Tistory's
+   is not broken, and hiding it traded a word changing for a gap filling in, on
+   the sidebar, which is on every page. Every click flickered. What follows draws
+   the right word from the first frame instead, and hides nothing.
 
-   So they are held: shown only once the word is the right one. `visibility`
-   rather than `display`, so the space is already the right size and nothing
-   moves when they arrive.
+   Only while the bundle is out. Once it has rewritten the DOM the rule stops
+   matching and the reader is reading real text, which is also why the text these
+   cover is no accessibility problem: a screen reader reaches the page after
+   load, by which time this is long released. If the bundle never arrives the
+   `load` handler in <head> takes `quiet-js` away and Tistory's own word stands,
+   which is what the reader would have had anyway.
 
-   The release is the marker the layout already runs on, and it holds in all
-   three directions. With no scripting `quiet-js` is never set and nothing is
-   ever held. When the bundle boots it sets `data-quiet-ready` and the hold ends
-   in the same frame the words are corrected. If the bundle never arrives, the
-   `load` handler in <head> takes `quiet-js` away and the labels appear in
-   Tistory's wording -- which is exactly what the reader would have had anyway.
+   Not covered: a cover's category, which reads "Data" and becomes
+   "Engineering/Data". That one is assembled from the category's url, and no
+   stylesheet can do it -- so it is left to change, because a word changing is
+   the smaller of the two costs. Nor a list row's time, for the same reason:
+   which rows say a clock rather than a date is not knowable before the bundle
+   runs. */
 
-   The complete listing is singled out by path, from <head>, because its heading
-   is the only one Tistory names itself. Every other list heading is a category
-   the author created or a search the reader typed, is already correct, and is
-   not held -- holding those would make a heading appear late to fix nothing.
+/* The heading. Both names are in the markup, so this only chooses -- no text is
+   conjured in CSS and none is covered up. */
+.quiet-list-head h1 .quiet-every-post{display:none;}
+:root.quiet-all-posts .quiet-list-head h1 .quiet-listing-name{display:none;}
+:root.quiet-all-posts .quiet-list-head h1 .quiet-every-post{display:inline;}
 
-   Not held: a list row's time. Tistory prints a clock rather than a date for a
-   post published today and the bundle rewrites it to "Today", but which rows
-   those are cannot be known before it runs. Holding every date on every list
-   page to catch the one published today costs more than it saves. */
-:root.quiet-js:not([data-quiet-ready]) .quiet-cat-tistory a[href="/category"],
-:root.quiet-js:not([data-quiet-ready]) [data-quiet-cat],
-:root.quiet-js.quiet-all-posts:not([data-quiet-ready]) .quiet-list-head h1{
-  visibility:hidden;
+/* The sidebar row is Tistory's whole element, label and count and icon in one
+   anchor, and the label is a bare text node no selector can reach. So the anchor
+   is silenced and the word drawn beside it, with the count given its size back
+   -- restated from `.quiet-cat-tistory .c_cnt`, which this would otherwise
+   collapse along with the label. */
+:root.quiet-js:not([data-quiet-ready]) .quiet-cat-tistory a[href="/category"]{font-size:0;}
+:root.quiet-js:not([data-quiet-ready]) .quiet-cat-tistory a[href="/category"]::before{
+  content:"All posts"; font-size:.9rem;
+}
+:root.quiet-js:not([data-quiet-ready]) .quiet-cat-tistory a[href="/category"] :is(.c_cnt,.cnt){
+  font-size:.72rem;
 }
 
 .quiet-empty{text-align:center; padding:4.5rem 1.25rem; color:var(--muted); max-width:32rem; margin:0 auto;}
