@@ -42,7 +42,10 @@ svg[fill="none"][stroke="currentColor"]{stroke-linecap:round; stroke-linejoin:ro
 /* The title is optional in the cover settings, and an empty one left the
    link hanging on its own against the right edge. */
 .quiet-section-tag h2:empty{display:none;}
-.quiet-section-tag a{margin-left:auto; font-size:.8rem; color:var(--accent); transition:opacity .15s; white-space:nowrap;}
+/* Measured at 44x22 on a 390px screen with the next target 18px away: two
+   pixels short of the 24 a target needs, and too close to a neighbour to be
+   excused by spacing. The line box decided the height; it is stated now. */
+.quiet-section-tag a{margin-left:auto; display:inline-flex; align-items:center; min-height:24px; font-size:.8rem; color:var(--accent); transition:opacity .15s; white-space:nowrap;}
 .quiet-section-tag a:hover{opacity:.7;}
 
 .quiet-wrap{max-width:var(--wide); margin:0 auto; padding:0 2rem;}
