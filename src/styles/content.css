@@ -66,6 +66,16 @@
   background:var(--surface-2); font-weight:600; font-size:.8rem;
   color:var(--ink-2); letter-spacing:.02em;
 }
+/* Tistory paints a cell ground of its own -- measured `rgb(240,244,247)` on a
+   live post, from its stylesheet rather than from anything the author wrote. On
+   a dark page that is a near-white slab under the theme's light ink: 1.10.
+   Cleared behind the page's id, where its rule cannot reach.
+
+   Without `!important`, deliberately. An inline background is the author's own
+   and beats any selector; only the ground nobody chose is taken away. Verified
+   on a post that has both: the stylesheet's cell cleared, the author's grey
+   cell untouched. */
+#quiet-main .quiet-article-body td{background:transparent;}
 
 /* ---- editor quote variants ------------------------------------------------ */
 .quiet-article-body blockquote p{margin:.4em 0;}
