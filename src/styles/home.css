@@ -177,7 +177,7 @@ body#tt-body-index .quiet-intro ~ .quiet-list-head{display:none;}
    centred inside a box that was not. Measured on the home page: the heading's
    own centre landed 133px left of the list beneath it, and the line under it
    165px left. The cap is a measure and stays; the box is centred as well. */
-body#tt-body-index :is(.quiet-intro,.quiet-home-head) h1{max-width:22ch; margin-inline:auto;}
+body#tt-body-index :is(.quiet-intro,.quiet-home-head) h1{max-width:28ch; margin-inline:auto;}
 body#tt-body-index :is(.quiet-intro,.quiet-home-head) .quiet-lede{max-width:52ch; margin-inline:auto;}
 
 /* A cover item entered by hand has no date, so it does not sit in the two
@@ -210,8 +210,14 @@ body#tt-body-index :is(.quiet-intro,.quiet-home-head) .quiet-lede{max-width:52ch
    than three settings in a panel. */
 .quiet-masthead .quiet-eyebrow{display:inline-block; margin-bottom:.95rem;}
 .quiet-masthead .quiet-eyebrow:empty{display:none;}
+/* 28ch, not 22. A display line is conventionally set between twenty and
+   thirty-five characters, and 22ch measured 26 of them here -- under the floor,
+   not inside the range. Ordinary headlines could not fit: "A developer who has
+   to know why" is 31 characters and broke after "who", the weakest split in the
+   sentence, because `text-wrap:balance` evens the lines out and has no opinion
+   about sense. The band is 918px wide and was holding its headline to 500. */
 .quiet-masthead .quiet-display{font-size:clamp(1.55rem,3.2vw,2.15rem); line-height:1.42;
-  font-weight:700; letter-spacing:-.015em; text-wrap:balance; max-width:22ch; color:var(--ink);}
+  font-weight:700; letter-spacing:-.015em; text-wrap:balance; max-width:28ch; color:var(--ink);}
 .quiet-masthead .quiet-lede{margin-top:.9rem; color:var(--muted); font-size:1rem; max-width:52ch;}
 .quiet-masthead .quiet-lede:empty{display:none;}
 
