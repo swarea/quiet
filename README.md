@@ -84,7 +84,7 @@ Four cover types are available:
 | Home: supporting line | `home-tagline` | empty | a line below the headline. Requires a headline |
 | Accent colour (light) | `accent-light` | `#38548c` | links and emphasis on light backgrounds |
 | Accent colour (dark) | `accent-dark` | `#90a8e0` | the same for dark backgrounds |
-| Default theme | `theme` | follow visitor | the theme a first-time visitor sees |
+| Default theme | `default-theme` | match the visitor's system | the theme a first-time visitor sees |
 | Sidebar | `sidebar` | on | the navigation column on wide screens |
 | Contents rail | `toc` | on | the contents rail, and its panel on narrow screens |
 | Reading progress | `reading-progress` | on | the line at the top of the window |
