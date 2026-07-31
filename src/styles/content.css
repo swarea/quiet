@@ -57,7 +57,12 @@
   border-collapse:collapse; width:100%; max-width:100%;
   font-size:.92rem; margin:1.8em 0;
 }
-.quiet-tbl-wrap > table{margin:0;}
+/* Behind the page's id, because Tistory gives a table a 20px bottom margin from
+   a rule this one loses to at class level. Inside a frame that margin is not
+   spacing between blocks, it is a band of empty page under the last row and
+   inside the border: measured 21px, which reads as the table having stopped
+   short of its own frame. */
+#quiet-main .quiet-tbl-wrap > table{margin:0;}
 /* `--line-strong`, not `--line`. A table's grid is structure, not the whisper a
    divider between list rows is, and at `--line` it was barely there: measured
    against the page, 1.15 in light and 1.30 in dark, and 1.04 against a cell the
