@@ -117,6 +117,16 @@ install, so there is no 0.1.0 and nothing earlier to record.
   table's spacing is pitched where Tistory's own 20px cannot reach it. Measured
   after: **0px** for both, against 46px with no reservation.
 
+- The outline around an attached file is the skin's, not Tistory's. Our rule for
+  that block reached its background and its padding but not its edge or its
+  corner: Tistory declares those two a second time behind `#tt-body-page`, which
+  a post carries, so what was left was a fixed `rgb(233,233,233)` — the same
+  near-white in both themes. Measured on a live post it sits at 1.17 against a
+  light page, which is why it went unnoticed, and at **15.44** against a dark
+  one, about fourteen times louder than every other border in the skin. It now
+  measures 1.30 there, the same as a code frame. The corner came from the same
+  rule and had been arriving at 1px.
+
 - A link card is drawn one way, and a link with no share image uses the whole
   card. Tistory reserves 200px for the thumbnail whether or not there is one and
   fills it with nothing, leaving an empty block down the side and the text

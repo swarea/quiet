@@ -207,6 +207,18 @@
   display:block; border:1px solid var(--line); border-radius:var(--r-md);
   background:var(--surface); padding:.9rem 1.1rem; margin:1.5em 0;
 }
+/* The edge and the corner, again behind the page's id. Tistory declares these
+   two twice -- the second time behind `#tt-body-page`, which a post carries --
+   so our rule above lost exactly them while its background and padding landed.
+   What was left was Tistory's fixed `rgb(233,233,233)`, the same near-white in
+   both themes: measured on a live post it sits at 1.17 against a light page,
+   which is why it went unnoticed, and at **15.44** against a dark one, roughly
+   fourteen times louder than every other border in the skin. The corner came
+   from the same rule and was arriving at 1px. */
+#quiet-main .quiet-article-body .link_wrap,
+#quiet-main .quiet-article-body figure.fileblock{
+  border-color:var(--line); border-radius:var(--r-md);
+}
 .quiet-article-body figure.fileblock a{text-decoration:none;}
 .quiet-article-body .link_title,.quiet-article-body figure.fileblock .name{font-weight:600; color:var(--ink);}
 .quiet-article-body .link_url,.quiet-article-body figure.fileblock .size{font-size:.82rem; color:var(--muted);}
