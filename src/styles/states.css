@@ -44,6 +44,11 @@
 :root.quiet-js:not([data-quiet-ready]) .quiet-cat-tistory a[href="/category"]{font-size:0;}
 :root.quiet-js:not([data-quiet-ready]) .quiet-cat-tistory a[href="/category"]::before{
   content:"All posts"; font-size:.9rem;
+  /* The row is a flex line and the label it replaces is still an item on it,
+     zero-wide but counted, so this box adds a second gap between the word and
+     the count -- measured as a 6px nudge sideways the moment the bundle landed.
+     One gap back, named from the same `.35rem` the row is built with. */
+  margin-inline-end:-.35rem;
 }
 :root.quiet-js:not([data-quiet-ready]) .quiet-cat-tistory a[href="/category"] :is(.c_cnt,.cnt){
   font-size:.72rem;

@@ -35,11 +35,11 @@
 .quiet-callout .head{display:flex; align-items:center; gap:.45rem; font-weight:700; font-size:.82rem; color:var(--accent); font-family:var(--mono); letter-spacing:.04em; text-transform:uppercase; margin-bottom:.45rem;}
 .quiet-callout p{margin:.35em 0!important; color:var(--ink-2)!important;}
 
-.quiet-code{margin:1.8em 0; border-radius:var(--r-md); overflow:hidden; border:1px solid var(--line); background:var(--code-bg);}
+.quiet-code{margin:var(--block-gap) 0; border-radius:var(--r-md); overflow:hidden; border:1px solid var(--line); background:var(--code-bg);}
 /* The bar was a pair of white alphas, which only ever meant anything on a dark
    block. Now that the block follows the theme they are tokens like everything
    else. */
-.quiet-code .bar{display:flex; align-items:center; justify-content:space-between; padding:.5rem .85rem; background:var(--code-bar); border-bottom:1px solid var(--code-edge);}
+.quiet-code .bar{display:flex; align-items:center; justify-content:space-between; height:var(--code-bar-h); box-sizing:border-box; padding:0 .85rem; background:var(--code-bar); border-bottom:1px solid var(--code-edge);}
 .quiet-code .lang{font-family:var(--mono); font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--code-faint);}
 .quiet-code .copy{display:flex; align-items:center; gap:.35rem; font-size:.72rem; color:var(--code-ink-2); padding:.24rem .55rem; border-radius:6px; font-family:var(--mono); transition:color .15s;}
 .quiet-code .copy:hover,.quiet-code .copy:focus-visible{color:var(--code-ink);}
@@ -50,7 +50,7 @@
 .quiet-code .t-f{color:var(--code-fn);} .quiet-code .t-n{color:var(--code-num);}
 
 /* The frame matches the grid inside it. */
-.quiet-tbl-wrap{margin:1.8em 0; overflow-x:auto; border:1px solid var(--line-strong); border-radius:var(--r-md);}
+.quiet-tbl-wrap{margin:var(--block-gap) 0; overflow-x:auto; border:1px solid var(--line-strong); border-radius:var(--r-md);}
 table.quiet-data{border-collapse:collapse; width:100%; font-size:.92rem; min-width:34rem;}
 table.quiet-data th,table.quiet-data td{text-align:left; padding:.62rem .9rem; border-bottom:1px solid var(--line);}
 table.quiet-data th{background:var(--surface-2); font-weight:600; font-size:.72rem; letter-spacing:.05em; color:var(--ink-2); font-family:var(--mono); text-transform:uppercase;}

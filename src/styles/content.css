@@ -22,12 +22,38 @@
    the frame. These rules cover the code text itself either way, and stand alone
    if the script never runs. */
 .quiet-article-body pre{
-  margin:1.8em 0; padding:1.05rem 1.15rem; overflow-x:auto;
+  margin:var(--block-gap) 0; padding:1.05rem 1.15rem; overflow-x:auto; border:1px solid var(--line);
   background:var(--code-bg); color:var(--code-ink); border-radius:var(--r-md);
   font-family:var(--mono); font-size:.86rem; line-height:1.74;
   -webkit-overflow-scrolling:touch;
 }
-.quiet-code pre{margin:0; border-radius:0;}
+.quiet-code pre{margin:0; border:0; border-radius:0;}
+
+/* Hold the bar's room before there is a bar.
+
+   A code block is a bare <pre> until the bundle wraps it, and the wrapper adds a
+   header — the language and a copy button — above it. That header has height, so
+   every block on the page grew by it the moment the bundle landed, and everything
+   below moved down. Measured on a live post with eight code blocks: the page grew
+   525px, in steps of 61 at each paragraph after a block.
+
+   So the room is held, and it is held by drawing the bar rather than by leaving a
+   gap: same height, same ground, same edge under it. What arrives a moment later
+   is the same band with words in it. `--code-bar-h` is stated on both, which is
+   the only reason the two can be relied on to agree.
+
+   The rest of the 61px was the frame and the block disagreeing about their own
+   edges: `1.8em` on the wrapper resolved against the article's size and `1.8em`
+   on the <pre> against its own smaller one, a 6.6px difference at each end, plus
+   the 1px border the wrapper had and the block did not. Both now take
+   `--block-gap`, and a bare block carries the border it will keep. */
+:root.quiet-js:not([data-quiet-ready]) #quiet-main .quiet-article-body pre::before{
+  content:""; display:block; box-sizing:border-box;
+  height:var(--code-bar-h);
+  margin:-1.05rem -1.15rem 1.05rem;
+  background:var(--code-bar);
+  border-bottom:1px solid var(--code-edge);
+}
 .quiet-article-body pre code{
   font-family:inherit; font-size:inherit; color:inherit;
   background:none; border:0; padding:0; white-space:pre;
@@ -55,13 +81,20 @@
    bare table presentable on its own and stop it forcing the page sideways. */
 .quiet-article-body table{
   border-collapse:collapse; width:100%; max-width:100%;
-  font-size:.92rem; margin:1.8em 0;
+  font-size:.92rem; margin:var(--block-gap) 0;
 }
 /* Behind the page's id, because Tistory gives a table a 20px bottom margin from
    a rule this one loses to at class level. Inside a frame that margin is not
    spacing between blocks, it is a band of empty page under the last row and
    inside the border: measured 21px, which reads as the table having stopped
-   short of its own frame. */
+   short of its own frame.
+
+   A table that has not been wrapped yet needs the same treatment for the
+   opposite reason. Losing to Tistory there meant a bare table sat on 20px while
+   the frame it was about to get sits on `--block-gap`, so the page moved when
+   the wrapper arrived. The first rule states our spacing where Tistory can
+   reach; the second clears it once the frame owns it. */
+#quiet-main .quiet-article-body table{margin:var(--block-gap) 0;}
 #quiet-main .quiet-tbl-wrap > table{margin:0;}
 
 /* The border colour, again behind the id. Tistory paints a cell's border to match

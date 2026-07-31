@@ -95,6 +95,9 @@
   --block-gap:2rem;
   --rail:288px; --rail-inset:.5rem; --read:50rem; --wide:64rem; --header-h:56px;
   --r-sm:6px; --r-md:10px; --r-lg:14px;
+  /* Stated rather than left to its contents, because the stylesheet holds
+     this much room for a bar the bundle has not built yet. */
+  --code-bar-h:2.875rem;
   --ease:cubic-bezier(.2,.7,.2,1);
 
   --sans:"Quiet Sans","Pretendard Variable","Pretendard",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Segoe UI",Roboto,"Malgun Gothic","Noto Sans KR",sans-serif;

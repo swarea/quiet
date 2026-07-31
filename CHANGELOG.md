@@ -92,6 +92,23 @@ install, so there is no 0.1.0 and nothing earlier to record.
   colour were unreadable; now none are. What it costs is the few colours the
   author meant, which show as theme ink for that frame — 4 elements against 118
   on the post measured.
+- The page no longer grows under the reader as the bundle lands. A code block is
+  a bare `<pre>` until the bundle wraps it in a frame with a header above it, and
+  a table is bare until it is wrapped for scrolling — so every one of them got
+  taller the moment the bundle ran, and everything below moved down. Measured on
+  a live post with eight code blocks: **the page grew 525px**, in steps of 61 at
+  each paragraph following a block.
+
+  The room is held now, and held by drawing the bar rather than by leaving a gap
+  — same height, same ground, same edge — so what arrives is the same band with
+  words in it. The rest of each 61px was the frame and the block disagreeing about
+  their own edges: `1.8em` resolved against the article's size on the wrapper and
+  against the smaller code size on the `<pre>`, plus a border one had and the
+  other did not. Both take `--block-gap` now, the bar's height is stated once in
+  `--code-bar-h` and read by both the bar and the room held for it, and a bare
+  table's spacing is pitched where Tistory's own 20px cannot reach it. Measured
+  after: **0px** for both, against 46px with no reservation.
+
 - A link card is drawn one way, and a link with no share image uses the whole
   card. Tistory reserves 200px for the thumbnail whether or not there is one and
   fills it with nothing, leaving an empty block down the side and the text
