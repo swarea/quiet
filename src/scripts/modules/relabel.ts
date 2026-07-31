@@ -238,7 +238,14 @@ export function initRelabel(): void {
     if (queued) return;
     queued = true;
     // Coalesce: Tistory replaces several nodes per interaction.
-    requestAnimationFrame(() => {
+    //
+    // A timer rather than a frame. This used to wait for the next animation
+    // frame, and a hidden tab never has one -- so a post opened in a background
+    // tab kept Tistory's Korean until the reader looked at it. Measured on a
+    // live post with the tab hidden: the bar still read 구독하기 and 공감 long
+    // after boot, and no frame had run at all. A frame is the right unit for
+    // something being drawn; this is not being drawn, it is being corrected.
+    setTimeout(() => {
       queued = false;
       observer.disconnect();
       relabel(bar);

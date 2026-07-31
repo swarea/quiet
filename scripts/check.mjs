@@ -319,6 +319,46 @@ try {
   fail("a field is called one thing", e.message);
 }
 
+// Correcting the page does not wait for a frame.
+//
+// A hidden tab never has one. `requestAnimationFrame` is right for something
+// being drawn -- a transition to release, a scroll position to read -- and wrong
+// for something being corrected, because the correction then never happens until
+// the reader looks at the tab. It cost us Tistory's Korean sitting in the article
+// toolbar of any post opened in a background tab: measured on a live post with
+// the tab hidden, the bar still read 구독하기 long after boot and no frame had run.
+//
+// A MutationObserver is the tell. It fires because the DOM changed, which is a
+// correction, so a frame inside one is this bug. Frames elsewhere are left alone.
+try {
+  const dir = join(root, "src", "scripts", "modules");
+  const offenders = [];
+  for (const entry of await readdir(dir)) {
+    const src = await readFile(join(dir, entry), "utf8");
+    let at = 0;
+    for (;;) {
+      const start = src.indexOf("new MutationObserver(", at);
+      if (start < 0) break;
+      let depth = 0;
+      let i = src.indexOf("(", start);
+      const from = i;
+      for (; i < src.length; i++) {
+        if (src[i] === "(") depth++;
+        else if (src[i] === ")" && --depth === 0) break;
+      }
+      const body = src.slice(from, i);
+      if (body.includes("requestAnimationFrame")) {
+        offenders.push(`${entry}: a frame gates a MutationObserver callback`);
+      }
+      at = i;
+    }
+  }
+  if (offenders.length) fail("correcting does not wait for a frame", offenders.join("; "));
+  else ok("correcting does not wait for a frame");
+} catch (e) {
+  fail("correcting does not wait for a frame", e.message);
+}
+
 // Anything the stylesheet holds back has three ways to be let go.
 //
 // The labels Tistory writes are hidden until the bundle can reword them, which

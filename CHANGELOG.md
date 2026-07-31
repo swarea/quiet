@@ -92,6 +92,16 @@ install, so there is no 0.1.0 and nothing earlier to record.
   colour were unreadable; now none are. What it costs is the few colours the
   author meant, which show as theme ink for that frame — 4 elements against 118
   on the post measured.
+- Tistory's Korean is corrected in a background tab too. The article toolbar —
+  like, share, subscribe — is relabelled once at boot and again whenever Tistory
+  rewrites it, and that second pass waited for an animation frame. A hidden tab
+  never has one, so a post opened in a background tab kept 구독하기 and 공감 until
+  the reader looked at it. Measured on a live post with the tab hidden: no frame
+  had run at all, long after boot. It is a timer now. A frame is the right unit
+  for something being drawn; this is a correction, and a correction cannot wait
+  to be looked at. A gate check now refuses a frame inside a MutationObserver,
+  which is the shape this bug takes.
+
 - The complete listing is called *All posts* from the first frame, in the page's
   heading and in the sidebar's row to it. Tistory names that one page itself —
   *Categories*, over a list that is not categories at all — and no token or
