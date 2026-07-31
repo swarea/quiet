@@ -87,7 +87,13 @@ function addPanelToggle(nav: HTMLElement, links: Map<string, HTMLElement>): void
   btn.type = "button";
   btn.className = "toc-btn";
   btn.innerHTML = LIST_ICON;
-  btn.setAttribute("aria-label", "Show contents");
+  // One name, and `aria-expanded` carries the state. It used to say "Show
+  // contents" and become "Hide contents", which announces the state twice --
+  // "Hide contents, expanded" -- and is the thing the disclosure pattern asks
+  // you not to do. The drawer's button next to it already worked this way, so
+  // the two buttons in the same dock behaved differently. The name is the one
+  // this thing is called everywhere else: the panel's heading and its landmark.
+  btn.setAttribute("aria-label", "On this page");
   btn.setAttribute("aria-expanded", "false");
   // Below back-to-top, above the theme toggle: only back-to-top comes and goes
   // during a read, so it stays at the head of the column.
@@ -98,7 +104,6 @@ function addPanelToggle(nav: HTMLElement, links: Map<string, HTMLElement>): void
   const setOpen = (open: boolean): void => {
     nav.classList.toggle("open", open);
     btn.setAttribute("aria-expanded", String(open));
-    btn.setAttribute("aria-label", open ? "Hide contents" : "Show contents");
     if (open) nav.querySelector<HTMLElement>("a")?.focus();
   };
 

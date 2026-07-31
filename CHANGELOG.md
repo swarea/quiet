@@ -8,6 +8,14 @@ install, so there is no 0.1.0 and nothing earlier to record.
 
 ### Fixed
 
+- The contents button has one name. It said *Show contents* and became *Hide
+  contents* while also carrying `aria-expanded`, so a screen reader heard the
+  state twice — "Hide contents, expanded" — which is the thing the disclosure
+  pattern asks you not to do. The drawer's button beside it in the same dock
+  already worked the other way, so two buttons an inch apart behaved
+  differently. It is now *On this page*, which is what the panel's heading and
+  its landmark already say, and `aria-expanded` carries the state alone.
+
 - The rule under the shortcut dialog's title follows the theme. It is a fixed
   `#eee`, which is a hairline on a white panel and the brightest thing in the box
   on a dark one: measured 1.16 against the dialog's ground in light and **15.02**
