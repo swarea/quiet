@@ -31,9 +31,6 @@ const GROUND = "quietGround";
 // At or below this saturation the author was not choosing a colour, they were
 // choosing "paper, one shade off". The theme has its own answer to that.
 const NEUTRAL = 0.12;
-// Between these bounds a tint reads on either ground, so it is left alone.
-const LIGHT = 0.62;
-const DARK = 0.38;
 
 // Did the author build a box here, or is this paint that came along for the
 // ride? Both arrive as the same declaration, and telling them apart is the whole
@@ -122,12 +119,24 @@ function paper(): number[] {
   return token("--paper") ?? parse(getComputedStyle(document.body).backgroundColor) ?? [255, 255, 255];
 }
 
+// The ink a word inherits when it carries no colour of its own, which is what
+// most of the words on a painted ground do.
+function ink(): number[] {
+  return token("--ink") ?? parse(getComputedStyle(document.body).color) ?? [0, 0, 0];
+}
+
 // A ground the author painted, moved to the side of the scale the page is on.
 // Null means it already belongs there, which is the common case and the one
 // where leaving it alone is the entire point.
+// A ground is left alone when the words on it will read, and that is a question
+// about contrast rather than about lightness. Bounded lightness bands were the
+// first answer and they let a mid-grey through: `rgb(155,155,155)` sits at 0.61,
+// under the 0.62 a dark page allowed, and measured 2.29 against the theme's ink.
+// The number that matters was already in this file, used for ink and not for the
+// ground it sits on.
 function retone(ground: number[], pageIsDark: boolean, isBox: boolean): string | null {
   const [h, s, l] = toHsl(ground);
-  if (pageIsDark ? l < LIGHT : l > DARK) return null;
+  if (contrast(ground, ink()) >= THRESHOLD) return null;
   if (s <= NEUTRAL) {
     // Carried paper is removed rather than translated. Turning it into this
     // theme's paper would be just as wrong: the page already paints the ground,
