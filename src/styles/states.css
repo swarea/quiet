@@ -1,5 +1,46 @@
 /* Cross-screen states: empty results, pagination, protected post, generic page. */
 
+/* ---- labels Tistory wrote, held until the bundle can reword them ----------- */
+
+/* Some of what the reader sees is Tistory's wording, not ours and not the
+   author's, and the only place it can be corrected is script -- there is no
+   token that returns it and no setting that changes it. The bundle is deferred,
+   so it arrives after the page has been painted, and the reader watched the word
+   change under them: the sidebar's root row read "Categories" and became "All
+   posts", the same on the heading of the complete listing, and a cover's
+   category read "Data" and became "Engineering/Data".
+
+   Measured by diffing the HTML Tistory serves against the DOM once the bundle
+   has run, on the home page, the complete listing and an article. That diff is
+   the whole list -- everything else the bundle does is additive, which appears
+   rather than changes, and nothing else on the page is reworded at all.
+
+   So they are held: shown only once the word is the right one. `visibility`
+   rather than `display`, so the space is already the right size and nothing
+   moves when they arrive.
+
+   The release is the marker the layout already runs on, and it holds in all
+   three directions. With no scripting `quiet-js` is never set and nothing is
+   ever held. When the bundle boots it sets `data-quiet-ready` and the hold ends
+   in the same frame the words are corrected. If the bundle never arrives, the
+   `load` handler in <head> takes `quiet-js` away and the labels appear in
+   Tistory's wording -- which is exactly what the reader would have had anyway.
+
+   The complete listing is singled out by path, from <head>, because its heading
+   is the only one Tistory names itself. Every other list heading is a category
+   the author created or a search the reader typed, is already correct, and is
+   not held -- holding those would make a heading appear late to fix nothing.
+
+   Not held: a list row's time. Tistory prints a clock rather than a date for a
+   post published today and the bundle rewrites it to "Today", but which rows
+   those are cannot be known before it runs. Holding every date on every list
+   page to catch the one published today costs more than it saves. */
+:root.quiet-js:not([data-quiet-ready]) .quiet-cat-tistory a[href="/category"],
+:root.quiet-js:not([data-quiet-ready]) [data-quiet-cat],
+:root.quiet-js.quiet-all-posts:not([data-quiet-ready]) .quiet-list-head h1{
+  visibility:hidden;
+}
+
 .quiet-empty{text-align:center; padding:4.5rem 1.25rem; color:var(--muted); max-width:32rem; margin:0 auto;}
 .quiet-empty .glyph{width:46px; height:46px; border-radius:13px; background:var(--surface-2); border:1px solid var(--line); display:grid; place-items:center; color:var(--faint); margin:0 auto 1.1rem;}
 .quiet-empty h2{font-size:.98rem; font-weight:600; color:var(--ink-2); margin-bottom:.4rem;}

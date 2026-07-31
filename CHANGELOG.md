@@ -92,6 +92,24 @@ install, so there is no 0.1.0 and nothing earlier to record.
   colour were unreadable; now none are. What it costs is the few colours the
   author meant, which show as theme ink for that frame — 4 elements against 118
   on the post measured.
+- The words Tistory wrote no longer change under the reader. Some of what the
+  page shows is Tistory's own wording, correctable only in script — there is no
+  token that returns it and no setting that changes it — and the bundle is
+  deferred, so the reader saw the first wording and then watched it become the
+  second. The sidebar's root row read *Categories* and became *All posts*, the
+  heading of the complete listing did the same, and a cover's category read
+  *Data* and became *Engineering/Data*. Those are now held until the word is the
+  right one, and shown with the space already reserved so nothing moves.
+
+  Found by diffing the HTML Tistory serves against the DOM once the bundle has
+  run, across the home page, the complete listing and an article, rather than by
+  looking for them one at a time. That diff is the whole list: everything else
+  the bundle does is additive, which appears rather than changes.
+
+  A list row's time is deliberately not held. Tistory prints a clock instead of a
+  date for a post published today and the bundle rewrites it to *Today*, but
+  which rows those are cannot be known before it runs, and holding every date on
+  every list page to catch the one published today costs more than it saves.
 - A pasted code block keeps its own frame through all of this. `<pre>` was
   already answered in the stylesheet, from first paint and with scripts off, and
   the hold introduced above outranked that answer — so a pasted block lost its

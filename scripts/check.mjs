@@ -319,6 +319,74 @@ try {
   fail("a field is called one thing", e.message);
 }
 
+// Anything the stylesheet holds back has three ways to be let go.
+//
+// The labels Tistory writes are hidden until the bundle can reword them, which
+// is only safe while every exit is open: the bundle setting `data-quiet-ready`
+// when it boots, the `load` handler dropping `quiet-js` when it never arrives,
+// and `quiet-js` never being set at all when scripting is off. Lose any one of
+// them and a reader is left looking at a blank where a label should be, with
+// nothing on the page able to bring it back. The markers live in three files
+// that have no reason to be edited together, so the tie is asserted here.
+try {
+  const css = await readFile(join(root, "dist", "style.css"), "utf8").catch(() => null);
+  if (!css) skip("a held label can be let go", "dist/style.css not built");
+  else if (!css.includes("[data-quiet-ready]")) ok("a held label can be let go");
+  else {
+    const skin = await readFile(join(root, "src", "skin.html"), "utf8");
+    const main = await readFile(join(root, "src", "scripts", "main.ts"), "utf8");
+    const missing = [];
+    if (!/setAttribute\(\s*["']data-quiet-ready["']/.test(main)) {
+      missing.push("main.ts never sets data-quiet-ready");
+    }
+    if (!/addEventListener\(\s*["']load["'][\s\S]{0,400}?classList\.remove\(\s*["']quiet-js["']/.test(skin)) {
+      missing.push("skin.html has no load handler dropping quiet-js");
+    }
+    if (!/classList\.add\(\s*["']quiet-js["']/.test(skin)) {
+      missing.push("skin.html never sets quiet-js");
+    }
+    // A hold keyed on a marker nobody sets never lifts, and the two kinds of
+    // marker are set in different places. One arms a hold and has to be there
+    // before the first paint, so it comes from the inline script in <head>. The
+    // other releases one and is written by whichever module finished the work,
+    // so it comes from the bundle. Told apart by which side of `:not()` the
+    // stylesheet reads them on.
+    // Read only the compound bolted onto `:root` -- everything from it up to the
+    // first space, which is where a marker can live and where a component class
+    // cannot. Scanned as one string rather than by what precedes each dot,
+    // because markers sit flush against each other: `.quiet-js.quiet-all-posts`
+    // gave up its second half to a rule that wanted a character before the dot.
+    const releases = new Set();
+    const arms = new Set();
+    for (const m of css.matchAll(/:root([^\s,{]*)/g)) {
+      const compound = m[1];
+      for (const n of compound.matchAll(/:not\(\s*\.(quiet-[a-z-]+)\s*\)/g)) releases.add(n[1]);
+      const armed = compound.replace(/:not\([^)]*\)/g, "");
+      for (const a of armed.matchAll(/\.(quiet-[a-z-]+)/g)) arms.add(a[1]);
+    }
+    const bundle = (
+      await Promise.all(
+        (await readdir(join(root, "src", "scripts", "modules"))).map((f) =>
+          readFile(join(root, "src", "scripts", "modules", f), "utf8"),
+        ),
+      )
+    ).join("\n");
+    const sets = (text, marker) =>
+      new RegExp(`classList\\.add\\(\\s*["']${marker}["']`).test(text);
+    for (const marker of arms) {
+      if (marker === "quiet-js") continue;
+      if (!sets(skin, marker)) missing.push(`<head> never sets .${marker}, which arms a hold`);
+    }
+    for (const marker of releases) {
+      if (!sets(bundle, marker)) missing.push(`no module sets .${marker}, which releases a hold`);
+    }
+    if (missing.length) fail("a held label can be let go", missing.join("; "));
+    else ok("a held label can be let go");
+  }
+} catch (e) {
+  fail("a held label can be let go", e.message);
+}
+
 // Every syntax colour on the page must be ours.
 //
 // Tistory injects highlight.js with the `atom-one-light` theme from a CDN, and

@@ -19,6 +19,15 @@
     (function () {
       var root = document.documentElement;
       root.classList.add("quiet-js");
+
+      /* The complete listing is the one page whose heading Tistory names itself
+         -- "Categories", or the Korean it uses when the blog is set that way --
+         and so the one heading the bundle has to reword. Marked here because the
+         stylesheet cannot read a path, and marked on this exact path only: a
+         category the author happened to name "Categories" has a heading of its
+         own, and that one is theirs. */
+      if (/^\/category\/?$/.test(location.pathname)) root.classList.add("quiet-all-posts");
+
       try {
         /* Order of authority: what this reader chose, then what the blogger set
            as the blog's default, then what the reader's system asks for. */
