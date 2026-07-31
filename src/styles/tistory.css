@@ -60,8 +60,14 @@
 .quiet-comment .who img{display:none;}
 
 /* Secret-comment toggle pairs a checkbox with a visible label. */
-.quiet-secret{display:inline-flex; align-items:center; gap:.35rem; font-size:.78rem; color:var(--muted); cursor:pointer;}
-.quiet-secret input{accent-color:var(--accent);}
+/* The label is the target -- it wraps the box -- and at the size the text set it
+   it came to 64x21 on a 390px screen, with the next control 14px away. Under the
+   24px a target has to reach, and too close to anything else to be excused by
+   the spacing allowance instead. The height is stated rather than left to the
+   line box, and the box itself is given a size, because a 13px default is small
+   to hit whatever surrounds it. */
+.quiet-secret{display:inline-flex; align-items:center; gap:.4rem; min-height:24px; font-size:.78rem; color:var(--muted); cursor:pointer;}
+.quiet-secret input{accent-color:var(--accent); width:16px; height:16px; margin:0;}
 
 /* Compact sidebar lists (notices, popular, recent posts, recent comments). */
 /* Titles only. These lists exist to surface something worth opening, so the
@@ -377,6 +383,17 @@ body .doc_help kbd{
 }
 body .doc_help .btn_doc_close{border-color:var(--line);}
 body .doc_help .info{color:var(--muted);}
+
+/* Tistory's hover tooltip is a fixed translucent black, which is the right
+   answer on a white page and no answer at all on a dark one: measured, its fill
+   separates from the page at 19.67 in light and 1.09 in dark, where the chip and
+   the page are the same colour and only the white text says a chip is there.
+   An edge is added on the dark side alone, because in light there is nothing to
+   fix and a hairline between black and white would only soften an edge that is
+   already the strongest on the page. `--faint` is the quietest token that clears
+   the 3:1 a boundary needs: 5.48, against 1.30 for `--line` and 1.59 for
+   `--line-strong`, neither of which is visible there at all. */
+:root[data-theme="dark"] .layer_tooltip{border:1px solid var(--faint); border-radius:var(--r-sm);}
 
 /* Tistory grades tag popularity with cloud1..cloud5 classes. We keep the chips
    a uniform size for scanability, so carry the signal in weight instead. */

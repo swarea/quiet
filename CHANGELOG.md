@@ -4,6 +4,28 @@ Kept from 0.2.0, the first release with an installable package. The work before
 it built the repository, the pipeline and the design, and produced nothing to
 install, so there is no 0.1.0 and nothing earlier to record.
 
+## Unreleased
+
+### Fixed
+
+- The ring that says which comment box you are typing in is visible. Blended at
+  45% of the accent it measured **2.34** against the page in light and 3.10 in
+  dark — under the 3:1 a focus indicator has to clear, and under it on the theme
+  most readers use. At 75% it measures 4.18 and 5.33. The blend is kept rather
+  than swapped for the accent outright, because the box is large and a full
+  accent edge around it shouts.
+- Two controls are big enough to hit. Measured on a 390px screen: the
+  secret-comment toggle came to 64x21 around a 13px box with the next control
+  14px away, and a section's *More* link to 44x22 with a neighbour 18px away —
+  both under the 24px a target needs and both too crowded to be excused by the
+  spacing allowance instead. They are 24px now. The category crumb above an
+  article is 148x14 and is left alone: nothing else is within 104px of it, which
+  is what the spacing allowance is for.
+- Tistory's hover tooltip has an edge on a dark page. Its fill is a fixed
+  translucent black, which separates from a light page at 19.67 and from a dark
+  one at 1.09 — the chip and the page the same colour, with only the white text
+  saying a chip is there. Light is left alone, where there is nothing to fix.
+
 ## 0.5.0
 
 Upgrading resets a blog's saved skin settings, as every change to `index.xml`
