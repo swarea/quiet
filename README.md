@@ -4,8 +4,8 @@ A Tistory skin for long-form reading, in Korean and English.
 
 The reading column is 50rem. Light and dark are drawn as two separate palettes
 rather than one derived from the other. The Latin typeface ships inside the
-package, so Latin renders as designed without reaching a CDN; Hangul falls back
-to the reader's system font when that CDN is blocked. Reading, navigation, paging
+package, so the page renders as designed without reaching any other host.
+Reading, navigation, paging
 and existing comments work with JavaScript disabled. Search, posting a comment
 and replying to one are driven by Tistory's own scripts and do not.
 
@@ -31,7 +31,8 @@ of their respective owners.
 - Colours written into a post are preserved wherever they still read. Where they
   do not, they are reconciled with the theme — see
   [What the skin changes in your posts](#what-the-skin-changes-in-your-posts).
-- The Latin typeface is bundled (51 KB). Hangul uses the reader's system font.
+- The typeface is bundled (596 KB), Latin and Hangul both. Nothing is fetched
+  from another host.
 
 ## Install
 
@@ -48,7 +49,7 @@ loading.
 | `style.css` | compiled stylesheet |
 | `index.xml` | skin metadata, cover types, and settings |
 | `images/app.js` | the script bundle |
-| `images/quiet-latin.woff2` | the bundled Latin typeface |
+| `images/quiet-sans.woff2` | the bundled typeface |
 | `images/OFL.txt` | the typeface licence |
 | `preview.gif`, `preview*.jpg` | thumbnails shown in the skin list |
 

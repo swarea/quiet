@@ -2,6 +2,10 @@
 
 ## Status
 
+Superseded in part by [ADR-0004](ADR-0004-bundled-hangul.md), 2026-07-31:
+Hangul is bundled too and the jsDelivr request is gone. The rename and the
+licence handling decided here still stand, under the name Quiet Sans.
+
 Accepted. Supersedes the delivery decision in
 [ADR-0002](ADR-0002-typeface.md); the typeface choice there stands.
 

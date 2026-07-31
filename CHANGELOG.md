@@ -8,6 +8,18 @@ install, so there is no 0.1.0 and nothing earlier to record.
 
 ### Changed
 
+- The typeface carries Hangul as well, and nothing is fetched from another host.
+  The skin had been paying both costs at once: the obligations of redistributing
+  a font, and a jsDelivr request on every page load that the design still leaned
+  on. Latin-only rested on a mostly-mobile audience, which was assumed rather
+  than measured -- on the live blog **91.4% of readers are on a desktop**, which
+  in Korea means Malgun Gothic for nearly all of the text. Cut at build time the
+  file is 596 KB rather than the 821 KB recorded, and the package goes from
+  338 KB to 900 KB. See [ADR-0004](docs/decisions/ADR-0004-bundled-hangul.md).
+- The family is **Quiet Sans**, not Quiet Latin. A file holding 11,172 Hangul
+  syllables is not a Latin subset and should not be named as one. The rename the
+  OFL requires is satisfied either way.
+
 - The grid cover is called **Grid**. It was called Topics, which promises the
   posts under it are grouped by one — and the description had already stopped
   promising that, because Tistory repeats a cover item and offers no way to

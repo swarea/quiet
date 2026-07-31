@@ -4,10 +4,9 @@
 
 Quiet is a Tistory skin: an HTML template, a stylesheet, a small script bundle
 and a font, uploaded to a blog and served by Tistory. It has no server, no
-database, no accounts and no build-time network access. At runtime one
-third-party host is contacted — jsDelivr, for the Hangul half of the typeface —
-and the skin works with it blocked. It stores nothing about
-a reader except one value in `localStorage` — which of the two themes they chose.
+database, no accounts, and no network access at build time or at run time: every
+file a page needs is in the package Tistory serves. It stores nothing about a
+reader except one value in `localStorage` — which of the two themes they chose.
 
 Almost everything on a page carrying this skin is Tistory's: the comment system,
 the search, the login, the post toolbar, the analytics. **A vulnerability in any
