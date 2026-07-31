@@ -16,6 +16,16 @@ install, so there is no 0.1.0 and nothing earlier to record.
   in Korea means Malgun Gothic for nearly all of the text. Cut at build time the
   file is 596 KB rather than the 821 KB recorded, and the package goes from
   338 KB to 900 KB. See [ADR-0004](docs/decisions/ADR-0004-bundled-hangul.md).
+- Bold is bold again. The font was cut with `subset-font`'s `variationAxes`
+  option, which instances a variable font rather than narrowing its axis, so the
+  file was pinned at 400 while the stylesheet declared `font-weight: 300 800` —
+  the browser believed the declaration, declined even to synthesise a bold, and
+  every weight on the page rendered at 400. Measured before the fix, a headline
+  asking for 700 carried exactly the ink of one asking for 300. It had been true
+  since the typeface was first bundled, and went unseen because Hangul came from
+  the CDN where the axis worked. The typeface now ships as two files split by
+  `unicode-range`: Latin with a live axis at 53 KB, Hangul as one static instance
+  at 568 KB. A page with no Korean on it loads only the first.
 - The family is **Quiet Sans**, not Quiet Latin. A file holding 11,172 Hangul
   syllables is not a Latin subset and should not be named as one. The rename the
   OFL requires is satisfied either way.

@@ -31,8 +31,9 @@ of their respective owners.
 - Colours written into a post are preserved wherever they still read. Where they
   do not, they are reconciled with the theme — see
   [What the skin changes in your posts](#what-the-skin-changes-in-your-posts).
-- The typeface is bundled (596 KB), Latin and Hangul both. Nothing is fetched
-  from another host.
+- The typeface is bundled, Latin and Hangul both. A page with no Korean on it
+  loads 53 KB of it; one with Korean loads 621 KB. Nothing is fetched from
+  another host.
 
 ## Install
 
@@ -49,7 +50,8 @@ loading.
 | `style.css` | compiled stylesheet |
 | `index.xml` | skin metadata, cover types, and settings |
 | `images/app.js` | the script bundle |
-| `images/quiet-sans.woff2` | the bundled typeface |
+| `images/quiet-sans-latin.woff2` | the bundled typeface, Latin |
+| `images/quiet-sans-hangul.woff2` | the bundled typeface, Hangul |
 | `images/OFL.txt` | the typeface licence |
 | `preview.gif`, `preview*.jpg` | thumbnails shown in the skin list |
 
