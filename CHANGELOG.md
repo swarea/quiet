@@ -117,6 +117,22 @@ install, so there is no 0.1.0 and nothing earlier to record.
   table's spacing is pitched where Tistory's own 20px cannot reach it. Measured
   after: **0px** for both, against 46px with no reservation.
 
+- Tistory's own components are themed even where this skin normally hides them,
+  because hiding them is a thing the bundle does and the fallback is a promise.
+  The subscribe button in the article's tool row is taken out of the layout only
+  once the replacement beside the author exists — so on the path where the bundle
+  never arrives, what the reader gets is Tistory's, with a fixed
+  `rgba(185,185,185,.5)` around it measuring **9.56** on a dark page. It now
+  measures 1.30, the same as the like control beside it.
+
+  The keyboard-shortcut dialog is the same fault, further along: it owns its
+  ground and inherits its ink, so a fixed `#ffffff` sat under this skin's light
+  grey at **1.21** — text present, sized, laid out and unreadable. It opens on a
+  keypress on every page, and does not fire on a custom domain, which is why it
+  went unseen here while every blog still on a `tistory.com` address can open it.
+  Measured after: 14.35 in dark, and the line under the table from 2.35 to 6.84
+  in light, where it had been under the floor too.
+
 - The outline around an attached file is the skin's, not Tistory's. Our rule for
   that block reached its background and its padding but not its edge or its
   corner: Tistory declares those two a second time behind `#tt-body-page`, which

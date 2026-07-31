@@ -141,6 +141,16 @@
   background:none; box-shadow:none;
 }
 .quiet-article-body .container_postbtn .postbtn_like .ico_bar{display:none;}
+
+/* Subscribe is moved out of this row, but it is only hidden once the button
+   that replaces it exists -- so on the path where the bundle never arrives this
+   one is what the reader gets, at 80x32 with Tistory's own fixed
+   `rgba(185,185,185,.5)` around it. That measures 1.89 against a light page and
+   **9.56** against a dark one, which is the loudest thing in the article footer
+   on exactly the path that has nothing else to fall back on. Its edge is drawn
+   here for the same reason its neighbour's is, whether or not it is on screen
+   today: the fallback is a promise, not a leftover. */
+.quiet-article-body .container_postbtn .btn_menu_toolbar{border-color:var(--line);}
 /* The like control nests its icon and count inside another div, so the gap
    declared on the button lands between one child and nothing. Space them where
    they actually sit. */
@@ -340,6 +350,33 @@
    the clearance is measured in layout.ts, so with the bar gone the dock
    settles back to its own margin on its own. */
 body#tt-body-page .menu_toolbar.toolbar_rb{display:none;}
+
+/* Tistory's keyboard-shortcut dialog, `.doc_help`, sits at the end of <body> on
+   every page and opens on a keypress. It is drawn for a white page and nothing
+   else: its ground is a fixed `#ffffff`, while the words inside it inherit the
+   theme's ink. On a dark page that is this skin's light grey on white, measured
+   at **1.21** -- text that is present, sized, laid out, and cannot be read.
+   Nothing here made that happen; it is what happens when a component owns its
+   ground and inherits its ink.
+   The shortcuts do not fire on a custom domain, so it cannot be opened on this
+   blog, which is why it went unseen. Every blogger still on a `tistory.com`
+   address can open it.
+   `kbd` needs `!important` because Tistory declares it at id strength: probed on
+   a live page, a rule at `body .doc_help kbd` lost and the same rule with an id's
+   weight took. Light is left looking as Tistory drew it -- `--surface` is white
+   there -- and only the two colours that were under the floor in both themes
+   move. Measured after: 14.35 in dark, and the standing line under the table
+   from 2.35 to 6.84 in light. */
+body .doc_help{
+  background:var(--surface); border:1px solid var(--line);
+  box-shadow:0 10px 30px -14px rgba(0,0,0,.55);
+}
+body .doc_help kbd{
+  background:var(--surface-2) !important; border-color:var(--line-strong) !important;
+  color:var(--ink) !important; box-shadow:none !important;
+}
+body .doc_help .btn_doc_close{border-color:var(--line);}
+body .doc_help .info{color:var(--muted);}
 
 /* Tistory grades tag popularity with cloud1..cloud5 classes. We keep the chips
    a uniform size for scanability, so carry the signal in weight instead. */

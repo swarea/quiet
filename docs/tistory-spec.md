@@ -133,6 +133,17 @@ comments beside the code that works around it.
   and only `!important` moved them. Which of the two a block is cannot be read
   off the page — every Tistory stylesheet is cross-origin, so `cssRules` throws
   — and has to be established by trying.
+- **Some of Tistory's own components own their ground and inherit their ink**,
+  which is the worst of both: the ground does not follow the theme and the words
+  on it do. The keyboard-shortcut dialog `.doc_help` is the clearest case — a
+  fixed `#ffffff` under text that inherits the skin's, measured at **1.21** on a
+  dark page. It is at the end of `<body>` on every page, opens on a keypress, and
+  does not fire on a custom domain, so a blog on its own address cannot see it
+  while every `tistory.com` address can. Anything of Tistory's that is hidden
+  today has to be checked in both themes anyway: the article toolbar's subscribe
+  button is hidden only once this skin's replacement exists, so its fixed
+  `rgba(185,185,185,.5)` border — 9.56 on a dark page — is exactly what a reader
+  gets on the path where the bundle failed.
 - **The share and manage flyouts (`.layer_post`) carry no border.** What looks
   like one is `box-shadow:0 0 0 1px rgba(0,0,0,.1)`, a fixed black alpha, so
   setting `border-color` does nothing and a dark page swallows the ring.
