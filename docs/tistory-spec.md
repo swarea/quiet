@@ -5,6 +5,10 @@ Decisions and constraints that drive implementation. Source: official skin guide
 Anything *not* confirmed against the official guide is marked **unverified** and
 must be validated on the test blog before release.
 
+Most of what follows was established by measuring a live blog. How to do that
+without measuring the instrument instead is in [measuring.md](measuring.md);
+several entries there cost a false alarm before they were understood.
+
 ## Clean-room principle
 
 An existing third-party skin was examined **only** to establish what features a
