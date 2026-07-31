@@ -80,10 +80,22 @@ install, so there is no 0.1.0 and nothing earlier to record.
   that clears those grounds cannot run before the page is painted — the theme is
   settled by a blocking script in `<head>`, while the module rides a deferred
   bundle that waits for the whole document, and on a long post the browser paints
-  in between. The stylesheet now draws no author ground at all on a dark page
-  until the module has judged them, and puts back whatever survives. Light mode
+  in between. The stylesheet now draws no author colour at all on a dark page
+  until the module has judged it, and puts back whatever survives. Light mode
   is untouched: there the carried white matches the page and was never visible,
   so suppressing it would have invented a flash instead of removing one.
+- The words the paste carried in are held too, not just the paper under them.
+  Holding only the ground made this worse before it made it better: the white
+  had been hiding the black, so taking it away a frame early left the author's
+  copied-in text alone on a dark page, where it is not dark text, it is no text.
+  Measured at first paint on a live post, 118 of 129 elements carrying an inline
+  colour were unreadable; now none are. What it costs is the few colours the
+  author meant, which show as theme ink for that frame — 4 elements against 118
+  on the post measured.
+- A pasted code block keeps its own frame through all of this. `<pre>` was
+  already answered in the stylesheet, from first paint and with scripts off, and
+  the hold introduced above outranked that answer — so a pasted block lost its
+  ground for exactly the frame the hold exists to protect. It is now excluded.
 
 ## 0.4.0
 

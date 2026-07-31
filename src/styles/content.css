@@ -107,7 +107,7 @@
    cell untouched. */
 #quiet-main .quiet-article-body td{background:transparent;}
 
-/* Hold the author's paint until it has been judged.
+/* Hold the author's paint -- ground and ink both -- until it has been judged.
 
    `ink.ts` decides which of these grounds still work on this theme and clears
    the rest, but it cannot run before the page is painted: the theme is settled
@@ -128,11 +128,40 @@
    was never visible, so suppressing it there would invent a flash rather than
    remove one -- every legitimate pale callout would blink on each load.
 
-   If the bundle never arrives, the class never lands and author grounds stay
+   The ink needs the same hold, and holding only the ground made that worse
+   rather than better. Carried paper and carried text arrive together, and the
+   white was hiding the black: taking the ground away a frame early left the
+   words the author copied in -- `rgb(13,13,13)` on 99 elements of one post,
+   plain black on 18 more -- alone on a dark page, where they are not dark text,
+   they are no text. Measured on a live post: 140 elements carry an inline
+   colour and 134 of them are too dark to read on this page.
+
+   The cost is the few the author meant. A word deliberately coloured shows as
+   theme ink for that frame and then turns; on the post measured that is 4
+   elements against 134. On a light page the trade reverses -- nearly every
+   carried colour is already readable there, and only a deliberate one would
+   move -- which is the second reason this stays dark-only.
+
+   A <pre> is excluded because it is already answered above, in CSS, from first
+   paint and with scripts off. Its inner spans are not excluded and need not be:
+   what this rule does to them is exactly what that one does. Without the
+   exclusion the frame here outranks it and a pasted code block loses its own
+   ground for the same frame this is meant to protect.
+
+   If the bundle never arrives, the class never lands and author colour stays
    suppressed on a dark page. That is the readable outcome: theme ink on theme
    paper, which is what the post falls back to anyway. */
-:root[data-theme="dark"]:not(.quiet-ink-settled) #quiet-main .quiet-article-body [style*="background"]{
+:root[data-theme="dark"]:not(.quiet-ink-settled) #quiet-main .quiet-article-body [style*="background"]:not(pre){
   background-color:transparent !important;
+}
+/* `color` is a substring of `background-color`, so this also catches elements
+   that painted a ground and no text. Those inherit what they would have
+   inherited anyway -- colour is inherited by default -- so the reach is wider
+   than the wording and the effect is not. Measured on a live post, no anchor
+   carries either declaration, so nothing whose colour the stylesheet owns is
+   caught by the overlap. */
+:root[data-theme="dark"]:not(.quiet-ink-settled) #quiet-main .quiet-article-body [style*="color"]:not(pre){
+  color:inherit !important;
 }
 
 /* ---- editor quote variants ------------------------------------------------ */
