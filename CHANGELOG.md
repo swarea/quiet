@@ -8,6 +8,14 @@ install, so there is no 0.1.0 and nothing earlier to record.
 
 ### Changed
 
+- The grid cover is called **Grid**. It was called Topics, which promises the
+  posts under it are grouped by one — and the description had already stopped
+  promising that, because Tistory repeats a cover item and offers no way to
+  divide them. The label was the last place the old promise survived. Its
+  classes followed: a `lane` was a column of a category and is a post now.
+- The default-theme option reads "Match the visitor's system" rather than
+  "Follow visitor", which never said what was being followed.
+
 - The description a stranger reads in the skin editor says what the skin is for
   rather than what it is proud of. It had been three facts about how the thing
   was built -- light and dark drawn separately, a bundled typeface, no
