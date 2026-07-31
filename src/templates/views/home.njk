@@ -43,11 +43,11 @@
   {# Flattened, because Tistory repeats a cover item and has no way to group
      them: the fixture's lanes are only a convenient way to give each post a
      category. One tile per post is what the skin renders. #}
-  <section class="quiet-wrap quiet-cover quiet-topics quiet-reveal" aria-label="Topics">
+  <section class="quiet-wrap quiet-cover quiet-grid quiet-reveal" aria-label="Topics">
     <div class="quiet-section-tag"><h2>Topics</h2><a href="/">More &rarr;</a></div>
-    <div class="quiet-lanes">
+    <div class="quiet-tiles">
       {% for lane in home.topics %}{% for item in lane.items %}
-      <a class="quiet-lane" href="{{ item.url }}">
+      <a class="quiet-tile" href="{{ item.url }}">
         <span class="cat" data-quiet-cat="{{ lane.url }}">{{ lane.title }}</span>
         <h3>{{ item.title }}</h3>
         <time>{{ item.date }}</time>

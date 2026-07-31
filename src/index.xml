@@ -86,7 +86,7 @@
     </item>
     <item>
       <name>grid</name>
-      <label><![CDATA[Topics]]></label>
+      <label><![CDATA[Grid]]></label>
       <!-- Not "grouped by category": Tistory repeats a cover item and offers no
            way to group them, so the promise could not be kept. -->
       <description><![CDATA[Posts in a grid, three across.]]></description>
@@ -163,7 +163,7 @@
         <label><![CDATA[Default theme]]></label>
         <description><![CDATA[The theme a first-time visitor sees. Their own choice takes over once they make one.]]></description>
         <type>SELECT</type>
-        <option>[{"name":"system","label":"Follow visitor","value":"system"},{"name":"light","label":"Light","value":"light"},{"name":"dark","label":"Dark","value":"dark"}]</option>
+        <option>[{"name":"system","label":"Match the visitor's system","value":"system"},{"name":"light","label":"Light","value":"light"},{"name":"dark","label":"Dark","value":"dark"}]</option>
         <default>system</default>
       </variable>
       <variable>

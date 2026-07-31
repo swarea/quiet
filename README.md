@@ -72,7 +72,7 @@ Four cover types are available:
 | Introduction | the opening band. The cover's own title becomes the small line above it; a single hand-entered item supplies the headline, the line below, and an image if you attach one. Pointed at a post list instead, it keeps the treatment for the first item and steps the rest down |
 | List | posts in one column |
 | Featured | one post with its image beside it |
-| Topics | posts in a grid, three across. Not grouped: Tistory repeats a cover item and offers no way to divide them |
+| Grid | posts in a grid, three across. Not grouped by anything: Tistory repeats a cover item and offers no way to divide them |
 
 ### Settings
 
