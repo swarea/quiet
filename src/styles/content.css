@@ -107,6 +107,34 @@
    cell untouched. */
 #quiet-main .quiet-article-body td{background:transparent;}
 
+/* Hold the author's paint until it has been judged.
+
+   `ink.ts` decides which of these grounds still work on this theme and clears
+   the rest, but it cannot run before the page is painted: the theme is settled
+   by a blocking script in <head>, while the module arrives with a deferred
+   bundle that waits for the whole document. On a long post the browser paints in
+   between, so a dark page showed its carried white paper for a frame or two
+   before the module took it away. Reported from a real post, and visible on
+   every reload and every navigation.
+
+   CSS is the only thing that runs early enough, and it cannot measure contrast,
+   so it does the one thing that is safe without measuring: on a dark page, no
+   author ground is drawn until the module has settled them. What survives the
+   judgement is put back a frame later. Appearing late is quieter than a white
+   slab disappearing, and on this blog a thousand-odd paragraphs carry paper they
+   never asked for against a handful of real boxes.
+
+   Dark only. In light mode the carried white is the same colour as the page and
+   was never visible, so suppressing it there would invent a flash rather than
+   remove one -- every legitimate pale callout would blink on each load.
+
+   If the bundle never arrives, the class never lands and author grounds stay
+   suppressed on a dark page. That is the readable outcome: theme ink on theme
+   paper, which is what the post falls back to anyway. */
+:root[data-theme="dark"]:not(.quiet-ink-settled) #quiet-main .quiet-article-body [style*="background"]{
+  background-color:transparent !important;
+}
+
 /* ---- editor quote variants ------------------------------------------------ */
 .quiet-article-body blockquote p{margin:.4em 0;}
 .quiet-article-body blockquote cite{display:block; margin-top:.5em; font-size:.85rem; font-style:normal; color:var(--muted); font-family:var(--sans);}

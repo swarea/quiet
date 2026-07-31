@@ -74,6 +74,17 @@ install, so there is no 0.1.0 and nothing earlier to record.
   the home headline is not used. Three variables and a cover competed for the
   same place and only the code said which one won.
 
+### Fixed
+
+- A dark page no longer flashes the white paper a paste carried in. The module
+  that clears those grounds cannot run before the page is painted — the theme is
+  settled by a blocking script in `<head>`, while the module rides a deferred
+  bundle that waits for the whole document, and on a long post the browser paints
+  in between. The stylesheet now draws no author ground at all on a dark page
+  until the module has judged them, and puts back whatever survives. Light mode
+  is untouched: there the carried white matches the page and was never visible,
+  so suppressing it would have invented a flash instead of removing one.
+
 ## 0.4.0
 
 Upgrading resets a blog's saved skin settings, as every change to `index.xml`

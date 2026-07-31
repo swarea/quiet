@@ -178,7 +178,25 @@ function styled(root: ParentNode, property: RegExp): HTMLElement[] {
   );
 }
 
+// Release the stylesheet's hold on author grounds.
+//
+// Until this lands, a dark page draws none of them, which is what keeps the
+// carried white paper from showing in the frames between the theme being settled
+// in <head> and this bundle arriving.
+//
+// It has to go first, before anything here reads a colour, and the reason is not
+// obvious: the rule it lifts is `!important`, so while it applies every author
+// ground computes as transparent -- and this module learns what the author
+// painted by reading exactly that. Released afterwards, every measurement below
+// would come back empty and nothing would ever be retoned. Nothing paints
+// between here and the end of `apply()`; it is one synchronous run.
+function settle(): void {
+  document.documentElement.classList.add("quiet-ink-settled");
+}
+
 export function initInk(): void {
+  settle();
+
   const body = document.querySelector<HTMLElement>(".quiet-article-body");
   if (!body) return;
 
