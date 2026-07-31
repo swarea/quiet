@@ -44,6 +44,11 @@ const PHRASES: ReadonlyArray<readonly [string, string]> = [
   ["신고", "Report"],
   ["관리메뉴열기", "Open menu"],
   ["공감", "Like"],
+  // Both are names only a screen reader hears, and both were the last Korean
+  // left on an English page: found by walking Tistory's own blocks for Hangul
+  // once everything visible had been translated.
+  ["새창열림", "opens in a new window"],
+  ["티스토리툴바", "Tistory toolbar"],
 ];
 
 // Where Tistory's own markup lives. Everything outside these roots is either

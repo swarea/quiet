@@ -126,6 +126,12 @@ install, so there is no 0.1.0 and nothing earlier to record.
   which outranks any selector — so on one post 4 of 11 cards were drawn in a
   different grey from the other 7, down a single article.
 
+- The last two Korean strings on an English page are translated: the "opens in a
+  new window" hint on Tistory's share links and the name of its floating toolbar.
+  Neither is visible — both are names only a screen reader hears — and they were
+  found by walking Tistory's own blocks for Hangul once everything on screen had
+  already been translated.
+
 - Tistory's Korean is corrected in a background tab too. The article toolbar —
   like, share, subscribe — is relabelled once at boot and again whenever Tistory
   rewrites it, and that second pass waited for an animation frame. A hidden tab
