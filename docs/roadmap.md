@@ -10,8 +10,8 @@ not implementation specs — details live in issues.
 | 0.2.0 | released 2026-07-27 |
 | 0.3.0 | released 2026-07-28 |
 | 0.4.0 | released 2026-07-30 |
-| 0.5.0 | next |
-| 1.0.0 | planned |
+| 0.5.0 | released 2026-07-31 |
+| 1.0.0 | next |
 
 ## 0.1.0 — Foundation
 
@@ -66,17 +66,43 @@ known faults in it.
 
 ## 0.5.0 — Beta
 
+Planned as the feature milestone; what it became was the release that stopped
+the page moving. Reading a live blog rather than a preview turned up a class of
+defect a preview cannot show: everything the skin has to correct *after* the
+page has been painted, because the correction rides a deferred bundle.
+
 - dark mode, auto TOC, reading progress, code copy, related posts
-- responsive & accessibility refinement; performance budget measured and set
-- visual regression tests; browser matrix pass
-- **Done when:** KR/EN mixed content, keyboard nav, mobile screens, and dark
-  mode verified on the test blog; known limitations documented.
+- nothing the reader sees changes under them once the page is drawn: the
+  author's carried colours, Tistory's own wording, and the room a code block or
+  a table is about to need are all settled before the first paint
+- the reading column is one width on every page, whatever the scrollbar does
+- Tistory's own components are read in both themes even where this skin hides
+  them, because hiding them is something the bundle does and the fallback is a
+  promise
+- one name per thing, in the words the reader uses
+- **Done when:** KR/EN mixed content and dark mode verified on the test blog;
+  known limitations documented. **Met.** Dark mode was reviewed by the blog
+  owner on live posts, not only measured.
+
+**Not met, and deliberately carried to 1.0.0** rather than quietly dropped:
+keyboard navigation, mobile screens, the browser matrix and visual regression.
+Three of those need real browsers on real hardware; none of them is a feature,
+and none was going to be finished by holding this release. A version that
+claims stability should be the one that has them.
 
 ## 1.0.0 — Stable
 
 - GitHub Release with ZIP, checksums, final preview images
 - README install/config/upgrade/rollback guides; changelog; license +
   third-party notices
+- keyboard navigation, mobile screens, the browser matrix and visual
+  regression, carried here from 0.5.0
 - **Done when:** installable from the release ZIP alone; test-blog
   verification complete; production-switch checklist (including revert path)
   written; no secrets; no known critical defects.
+
+The version number is the thing being decided here, not the feature list. 1.0.0
+says the settings surface is frozen — a variable renamed after it is a breaking
+change. Three labels were renamed in 0.5.0, which is exactly the kind of thing
+one more round of real use tends to turn up, so the freeze waits for that round
+rather than being declared alongside it.

@@ -4,7 +4,17 @@ Kept from 0.2.0, the first release with an installable package. The work before
 it built the repository, the pipeline and the design, and produced nothing to
 install, so there is no 0.1.0 and nothing earlier to record.
 
-## Unreleased
+## 0.5.0
+
+Upgrading resets a blog's saved skin settings, as every change to `index.xml`
+does — and this release renames three of them, so the reset is certain rather
+than incidental. Note your accent colours and home copy before uploading.
+**Contents rail** is now **Table of contents**, and the three home lines are
+named by where they sit rather than by how they look.
+
+Two files to upload rather than one, unchanged from 0.4.0: the typeface ships as
+`images/quiet-sans-latin.woff2` and `images/quiet-sans-hangul.woff2`.
+
 
 ### Changed
 
