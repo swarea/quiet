@@ -34,9 +34,9 @@ which are images — the name is Tistory's and predates skins carrying anything
 else. A skin cannot flatten the package or rename the folder, so `images/app.js`
 looking odd is worth knowing about rather than fixing.
 
-What the skin does choose is the names inside it. `quiet-latin.woff2` matches
-the family the licence obliged us to rename, and `OFL.txt` sits beside the font
-it covers because it has to travel with it.
+What the skin does choose is the names inside it. `quiet-sans.woff2` matches the
+family the licence obliged us to rename, and `OFL.txt` sits beside the font it
+covers because it has to travel with it.
 
 ## index.xml — key facts
 
@@ -216,5 +216,6 @@ Requirements this skin holds itself to, stated as its own rather than as
 anyone else's shortcomings: an article is readable before any script runs and
 stays readable if one fails; no full-screen loader; nothing the design needs to
 be correct is fetched from another host; every HTML id on a page is unique;
-navigation is real links rather than click handlers; and no credit to the
-skin's author is written into a blogger's sidebar.
+navigation is real links rather than click handlers; and a credit to the skin's
+author is a line the blogger can delete, said plainly in the readme rather than
+left for them to discover.
