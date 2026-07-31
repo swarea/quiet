@@ -15,6 +15,9 @@ install, so there is no 0.1.0 and nothing earlier to record.
   classes followed: a `lane` was a column of a category and is a post now.
 - The default-theme option reads "Match the visitor's system" rather than
   "Follow visitor", which never said what was being followed.
+- The skin variable is `default-theme`. It was `theme`, and six lines from where
+  it is read the same word names a different thing: `data-theme` on the root is
+  the theme in force, while the variable is only the preset a blog starts from.
 
 - The description a stranger reads in the skin editor says what the skin is for
   rather than what it is proud of. It had been three facts about how the thing

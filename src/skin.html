@@ -30,7 +30,7 @@
         /* Order of authority: what this reader chose, then what the blogger set
            as the blog's default, then what the reader's system asks for. */
         var stored = localStorage.getItem("quiet-theme");
-        var preset = "[##_var_theme_##]";
+        var preset = "[##_var_default-theme_##]";
         var dark = stored
           ? stored === "dark"
           : preset === "dark" || preset === "light"

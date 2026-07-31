@@ -159,7 +159,7 @@
         <default>#90a8e0</default>
       </variable>
       <variable>
-        <name>theme</name>
+        <name>default-theme</name>
         <label><![CDATA[Default theme]]></label>
         <description><![CDATA[The theme a first-time visitor sees. Their own choice takes over once they make one.]]></description>
         <type>SELECT</type>
