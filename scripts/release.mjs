@@ -215,7 +215,13 @@ console.log(`  sha256  ${sha}`);
 // and this repository already writes the second answer by hand.
 const LF = String.fromCharCode(10);
 const notesPath = join(root, "release", `notes-${version}.md`);
-const changelog = await readFile(join(root, "CHANGELOG.md"), "utf8");
+// Line endings are normalised before anything is matched against them. The
+// repository stores LF, but a checkout on Windows hands this file back with
+// CRLF, and every test below asks about a newline: the version heading was
+// looked for as `0.5.0` followed by LF, found `0.5.0` followed by CR, and
+// reported a changelog with no section for the release being cut. Releases are
+// tagged and built in CI, on LF, which is why it went unseen there.
+const changelog = (await readFile(join(root, "CHANGELOG.md"), "utf8")).replace(/\r\n/g, LF);
 const section = changelog.split(/^## /m).find((s) => s.startsWith(version + LF));
 if (!section) {
   console.error(`${LF}CHANGELOG.md has no section for ${version}. Add one before releasing.`);
