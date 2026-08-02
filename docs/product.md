@@ -49,9 +49,10 @@ them.
    against, not a conformance claim. Contrast is checked by the gate; the rest
    is checked by hand.
 7. **Performance** — no runtime framework, and no external dependency the design
-   needs to be correct. The Latin typeface is bundled; the CDN copy of the same
-   family covers Hangul and is optional. Defer what the first screen does not
-   need.
+   needs to be correct. The typeface is bundled, Latin and Hangul both, and
+   nothing is fetched from another host
+   ([ADR-0004](decisions/ADR-0004-bundled-hangul.md)). Defer what the first
+   screen does not need.
 8. **Configurability** — meaningful options via Tistory skin variables only;
    every option must earn its place.
 9. **Honest validation** — mock-preview pass and real-Tistory pass are reported
