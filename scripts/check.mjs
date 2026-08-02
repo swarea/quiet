@@ -319,6 +319,42 @@ try {
   fail("a field is called one thing", e.message);
 }
 
+// The licence travels with the copies.
+//
+// MIT asks for the copyright and permission notice in "all copies or
+// substantial portions of the Software", which is the files rather than the page
+// they render. A blogger's upload is a copy and Tistory serves the stylesheet
+// and the bundle to every reader verbatim, so the notice has to survive the
+// build -- a minifier that drops comments would take it out silently. The
+// package shipped the font's OFL licence, because that licence demands it, and
+// none of its own.
+//
+// The visible credit in the sidebar is a different thing and is not checked
+// here: MIT does not ask for attribution in a running product.
+try {
+  const holder = (await readFile(join(root, "LICENSE"), "utf8")).match(
+    /Copyright \(c\) (\d{4}) (.+)/,
+  );
+  const missing = [];
+  if (!holder) missing.push("LICENSE has no copyright line");
+  else {
+    for (const file of ["style.css", "images/app.js"]) {
+      const text = await readFile(join(root, "dist", ...file.split("/")), "utf8").catch(() => null);
+      if (text === null) missing.push(`${file} not built`);
+      else if (!text.includes(`Copyright (c) ${holder[1]} ${holder[2].trim()}`)) {
+        missing.push(`${file} carries no copyright notice`);
+      }
+    }
+    const shipped = await readFile(join(root, "dist", "images", "LICENSE.txt"), "utf8").catch(() => null);
+    if (shipped === null) missing.push("images/LICENSE.txt is not in the package");
+    else if (!shipped.includes("Copyright (c)")) missing.push("images/LICENSE.txt is not the licence");
+  }
+  if (missing.length) fail("the licence travels with the copies", missing.join("; "));
+  else ok("the licence travels with the copies");
+} catch (e) {
+  fail("the licence travels with the copies", e.message);
+}
+
 // Correcting the page does not wait for a frame.
 //
 // A hidden tab never has one. `requestAnimationFrame` is right for something

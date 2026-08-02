@@ -37,6 +37,13 @@ for the 568 KB.
 requested from jsDelivr until 0.5.0; see
 [ADR-0004](docs/decisions/ADR-0004-bundled-hangul.md) for why that stopped.
 
+## This skin's own licence
+
+MIT, and it ships with the package rather than only living in the repository:
+`images/LICENSE.txt`, beside the typeface's. `style.css` and `images/app.js`
+each open with a one-line notice, because Tistory serves both to readers as they
+are.
+
 ## Build tools
 
 esbuild, Lightning CSS, Nunjucks and subset-font are development dependencies.

@@ -54,6 +54,7 @@ loading.
 | `images/quiet-sans-latin.woff2` | the bundled typeface, Latin |
 | `images/quiet-sans-hangul.woff2` | the bundled typeface, Hangul |
 | `images/OFL.txt` | the typeface licence |
+| `images/LICENSE.txt` | this skin's licence |
 | `preview.gif`, `preview*.jpg` | thumbnails shown in the skin list |
 
 > **Updating resets your skin settings.** Tistory clears them whenever
@@ -199,6 +200,14 @@ You are not required to keep it. It is a courtesy rather than a term, and
 deleting the `.quiet-colophon` block in `skin.html` removes it with nothing else
 attached. If you do keep it, it is how the next person finds the skin, and it is
 appreciated.
+
+The MIT licence asks for something else, and asks it of the files rather than of
+the page: the copyright and permission notice has to travel with copies of the
+software. That is why `style.css` and `images/app.js` open with a one-line
+notice and `images/LICENSE.txt` ships beside the typeface's own licence — keep
+those. Nothing in the licence requires a visible credit in a running blog, which
+is why the line in the sidebar is yours to delete and the notice in the files is
+not.
 
 ## Compiler targets
 

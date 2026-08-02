@@ -33,6 +33,25 @@ const TARGETS = {
   samsung: 16 << 16,
 };
 
+// MIT asks that the copyright and permission notice travel with "all copies or
+// substantial portions of the Software" -- which is the files, not the page they
+// render. A blogger's upload is a copy, and Tistory serves the stylesheet and
+// the bundle to every reader as-is, so the notice belongs in both. It was
+// missing from all of them: the package carried the font's OFL licence, because
+// that licence demands it, and none of its own.
+//
+// Short, and pointing at the full text that ships beside it. The visible credit
+// in the sidebar is a different thing and stays optional -- MIT does not ask for
+// attribution in a running product, only in the copies.
+// Read from LICENSE rather than written here, so the year and the holder cannot
+// come to disagree with the file the notice points at.
+const licence = await readFile(join(root, "LICENSE"), "utf8");
+const held = licence.match(/Copyright \(c\) (\d{4}) (.+)/);
+if (!held) throw new Error("LICENSE has no copyright line to build a notice from");
+const NOTICE =
+  `Quiet -- a Tistory skin. Copyright (c) ${held[1]} ${held[2].trim()}. ` +
+  `MIT licence; full text in images/LICENSE.txt.`;
+
 async function buildCss() {
   const parts = [];
   for (const name of STYLE_ORDER) {
@@ -44,7 +63,8 @@ async function buildCss() {
     minify: true,
     targets: TARGETS,
   });
-  return code;
+  return Buffer.concat([Buffer.from(`/*! ${NOTICE} */
+`), code]);
 }
 
 async function buildJs() {
@@ -55,6 +75,7 @@ async function buildJs() {
     format: "iife",
     target: ["es2020"],
     write: false,
+    banner: { js: `/*! ${NOTICE} */` },
   });
   return result.outputFiles[0].text;
 }
@@ -122,6 +143,12 @@ async function buildSkinPackage() {
   await writeFile(
     join(distDir, "images", "OFL.txt"),
     await readFile(join(root, "src", "fonts", "OFL.txt")),
+  );
+  // Ours, beside theirs. `images/` because Tistory reads the package's top level
+  // by name and everything else it carries goes under that folder.
+  await writeFile(
+    join(distDir, "images", "LICENSE.txt"),
+    await readFile(join(root, "LICENSE")),
   );
 
   // Static assets (preview thumbnails, icons) ship alongside. Generate the
