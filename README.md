@@ -3,11 +3,11 @@
 A Tistory skin for long-form reading, in Korean and English.
 
 The reading column is 50rem. Light and dark are drawn as two separate palettes
-rather than one derived from the other. The Latin typeface ships inside the
-package, so the page renders as designed without reaching any other host.
-Reading, navigation, paging
-and existing comments work with JavaScript disabled. Search, posting a comment
-and replying to one are driven by Tistory's own scripts and do not.
+rather than one derived from the other. The typeface ships inside the package,
+Latin and Hangul both, so the page renders as designed without reaching any
+other host. Reading, navigation, paging and existing comments work with
+JavaScript disabled. Search, posting a comment and replying to one are driven by
+Tistory's own scripts and do not.
 
 Built from scratch by [swarea](https://github.com/swarea), and not a derivative
 of any existing skin. It is a third-party skin *for* Tistory: it is not
@@ -15,9 +15,11 @@ published, reviewed or endorsed by Tistory or Kakao. "Tistory" and "Kakao" are
 used only to identify the platform this skin is built for, and are the trademarks
 of their respective owners.
 
-> **0.4.0.** Every page type verified on a live Tistory blog in both themes, in
-> Chrome and Safari. The home page's covers are verified in the preview but not
-> yet on a live blog. See [CHANGELOG.md](CHANGELOG.md) for what changed and
+> **1.0.0.** Every page type verified on a live Tistory blog in both themes,
+> covers included, by measurement and by eye. Checked by hand in Chrome and
+> Safari; there is no wider browser matrix behind that. The settings are frozen
+> from here — a variable renamed after this is a breaking change. See
+> [CHANGELOG.md](CHANGELOG.md) for what changed and
 > [Known limitations](#known-limitations) for what the skin cannot do.
 
 ## Features
@@ -58,6 +60,30 @@ loading.
 > **Updating resets your skin settings.** Tistory clears them whenever
 > `index.xml` changes, which every release does. Note your accent colours and
 > home copy before uploading. Posts, comments and categories are not affected.
+
+### Updating from an earlier version
+
+1. Write down your accent colours and your three home lines. Uploading a new
+   `index.xml` clears them, and every release changes that file.
+2. Upload the new files over the old ones, the whole list above. A release that
+   changes the typeface changes files under `images/` as well, so upload those
+   too rather than only the three at the top.
+3. Set your settings back and check one article and the home page in both
+   themes.
+
+### Going back
+
+Tistory keeps the skin you were using before, so the fastest revert is not this
+skin at all: 꾸미기 → 스킨 변경 and pick the previous one. Nothing in a post is
+touched by a skin change.
+
+To return to an earlier release of *this* skin, download that version's archive
+from the releases page and upload it the same way. Skin settings do not travel
+backwards — an older `index.xml` will clear them again, so keep the note from
+step 1.
+
+The one thing a rollback cannot undo is a post you edited while the newer skin
+was up. Skins do not write to posts; the editor does.
 
 ### Blog settings this skin expects
 
@@ -140,6 +166,14 @@ exactly as written.
   phrase is Tistory's own, but the document title is what search engines index.
 - **Replying to a comment opens a Tistory window.** The reply control calls
   Tistory's own function, which opens a page this skin does not style.
+- **A cover's category fills in after the page is drawn.** Tistory gives a cover
+  the leaf name only — `Data` — and the full path is assembled from the
+  category's url, which no stylesheet can do. It is left to change rather than
+  held back, because a word changing reads better than a gap waiting to be
+  filled.
+- **Tistory's own help is left in Korean.** The keyboard-shortcut dialog is made
+  readable in both themes but not reworded: it is Tistory's help for Tistory's
+  shortcuts, and it can change without notice.
 
 ## Customising beyond the settings
 
@@ -209,6 +243,7 @@ browser; place the resulting files in `src/assets/`.
 | --- | --- |
 | [docs/product.md](docs/product.md) | what the skin is for, and the rules the design follows |
 | [docs/tistory-spec.md](docs/tistory-spec.md) | Tistory platform behaviour: what has been verified, and what is still open |
+| [docs/measuring.md](docs/measuring.md) | how to measure a live blog without measuring the tool instead |
 | [docs/roadmap.md](docs/roadmap.md) | release milestones |
 | [docs/decisions/](docs/decisions/) | architecture decision records |
 | [CHANGELOG.md](CHANGELOG.md) | what changed, by release |

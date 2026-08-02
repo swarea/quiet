@@ -1,6 +1,8 @@
-# ADR-0004 — Bundle Hangul too, and stop calling the CDN
+# ADR-0004: Bundle Hangul too, and stop calling the CDN
 
-**Status:** accepted, 2026-07-31. Supersedes the Latin-only half of
+## Status
+
+Accepted, 2026-07-31. Supersedes the Latin-only half of
 [ADR-0003](ADR-0003-bundled-latin.md); the rename and the licence handling it
 decided still stand.
 

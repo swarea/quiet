@@ -1,6 +1,6 @@
 {
   "name": "quiet",
-  "version": "0.5.0",
+  "version": "1.0.0",
   "description": "A Tistory skin with separately designed light and dark themes.",
   "private": true,
   "type": "module",
