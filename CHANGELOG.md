@@ -4,7 +4,20 @@ Kept from 0.2.0, the first release with an installable package. The work before
 it built the repository, the pipeline and the design, and produced nothing to
 install, so there is no 0.1.0 and nothing earlier to record.
 
-## Unreleased
+## 1.0.0
+
+The settings are frozen from here: a variable or a label renamed after this is a
+breaking change, and this release renames none. Upgrading from 0.5.0 still
+clears saved settings, as every change to `index.xml` does — note your accent
+colours and home copy first. The readme now says how to update and how to go
+back.
+
+What 1.0.0 asserts is narrower than "stable", and the roadmap says it exactly:
+the settings surface is frozen, the package installs from its archive alone, and
+the way back out is written down. The browser matrix and visual-regression
+suite that 0.5.0 carried here are dropped as conditions rather than deferred
+again — neither can be done without hardware this project does not have, and the
+readme says plainly what was checked instead.
 
 ### Fixed
 
@@ -51,7 +64,6 @@ named by where they sit rather than by how they look.
 
 Two files to upload rather than one, unchanged from 0.4.0: the typeface ships as
 `images/quiet-sans-latin.woff2` and `images/quiet-sans-hangul.woff2`.
-
 
 ### Changed
 

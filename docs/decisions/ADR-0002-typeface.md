@@ -2,9 +2,10 @@
 
 ## Status
 
-Accepted. The typeface choice stands; the delivery decision is superseded by
-[ADR-0003](ADR-0003-bundled-latin.md), which ships the Latin half in the
-package and leaves only Hangul to the CDN.
+Accepted. The typeface choice stands; the delivery decision is superseded, first
+by [ADR-0003](ADR-0003-bundled-latin.md) and then by
+[ADR-0004](ADR-0004-bundled-hangul.md), which bundles both scripts and removes
+the CDN request entirely. Nothing is fetched from another host.
 
 ## Context
 

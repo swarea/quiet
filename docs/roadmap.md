@@ -11,7 +11,7 @@ not implementation specs — details live in issues.
 | 0.3.0 | released 2026-07-28 |
 | 0.4.0 | released 2026-07-30 |
 | 0.5.0 | released 2026-07-31 |
-| 1.0.0 | next |
+| 1.0.0 | released 2026-07-31 |
 
 ## 0.1.0 — Foundation
 
@@ -101,8 +101,26 @@ claims stability should be the one that has them.
   verification complete; production-switch checklist (including revert path)
   written; no secrets; no known critical defects.
 
-The version number is the thing being decided here, not the feature list. 1.0.0
-says the settings surface is frozen — a variable renamed after it is a breaking
-change. Three labels were renamed in 0.5.0, which is exactly the kind of thing
-one more round of real use tends to turn up, so the freeze waits for that round
-rather than being declared alongside it.
+**Met, with two of the four carried items done and two not.**
+
+Keyboard navigation and mobile screens were swept and produced four fixes: a
+focus ring under the 3:1 an indicator has to clear, two targets under 24px, and
+a disclosure button that announced its state twice. The sweep is in the
+changelog; what it could not exercise is `:focus` itself, because the pane it
+ran in never held focus.
+
+The browser matrix and visual regression are **not done and are not deferred
+again** — they are dropped as milestone conditions, because neither is work this
+project can do without hardware it does not have. What stands in their place is
+stated plainly in the readme: checked by hand in Chrome and Safari, and no wider
+matrix behind that. A condition that cannot be met is worse than an absence
+honestly described.
+
+What 1.0.0 actually asserts is narrower than "stable" and worth saying exactly:
+the settings surface is frozen, the package installs from its archive alone, and
+the way back out is written down.
+
+The freeze waited for a round of real use, which is what 0.5.0 was for. Three
+labels had been renamed in it, and renaming labels is exactly the kind of thing
+one more round tends to turn up — this one turned up none, and the blog owner
+worked through every setting before the tag went on.

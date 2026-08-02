@@ -8,7 +8,7 @@
 <skin>
   <information>
     <name>Quiet</name>
-    <version>0.5.0</version>
+    <version>1.0.0</version>
     <!-- Kept short because the skin editor gives these a fixed strip and does
          not scroll it. The panel wraps to two lines and cuts at about 128
          characters: at 141 the description lost its last sentence, at 446 it was
