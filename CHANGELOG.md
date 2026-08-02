@@ -4,6 +4,47 @@ Kept from 0.2.0, the first release with an installable package. The work before
 it built the repository, the pipeline and the design, and produced nothing to
 install, so there is no 0.1.0 and nothing earlier to record.
 
+## 1.0.1
+
+**This upgrade does not reset your settings.** `index.xml` is untouched since
+1.0.0, which is the first time that has been true of any release here. Upload the
+files and everything you had set stays set.
+
+**One new file to upload:** `images/LICENSE.txt`.
+
+### Fixed
+
+- The licence ships with the copies it belongs to. MIT asks for the copyright
+  and permission notice in "all copies or substantial portions of the Software"
+  — which is the files, not the page they render — and no file in the package
+  carried either. The package did ship the typeface's OFL licence, because that
+  licence demands it, and none of its own. `style.css` and `images/app.js` now
+  open with a one-line notice, `images/LICENSE.txt` sits beside `images/OFL.txt`,
+  and a gate check refuses a package that loses either.
+
+  The credit line in the sidebar is unchanged and still optional. Nothing in MIT
+  asks for attribution in a running blog; what it asks for is the notice in the
+  files, which is the part that had been missing.
+
+### Changed
+
+- Four documents said things the code had stopped doing. `product.md` and the
+  design-direction record still had the Latin face bundled with Hangul left to a
+  CDN, which ADR-0004 ended; `SECURITY.md` said the relabel table matches
+  exactly, where most of it is applied by substring, and named `lang.ts` as
+  rewriting text when it only reads; `CONTRIBUTING.md` miscounted the releases
+  that went out without a milestone. Found by resolving every file path, CSS
+  custom property and npm script the documents name against the tree, and by
+  scanning the whole set for names this project has retired.
+- The readme is in the order someone reads it in — install, configure, update,
+  go back — and no longer carries a version badge. That badge was the one line
+  that had to be updated by hand every release, nothing checked it, and it spent
+  all of 0.5.0 reading 0.4.0. What it said that was worth keeping is kept
+  without a number in front of it.
+- The readme gained the two guides 1.0.0 asked for and did not have: how to
+  update, and how to get back out — including that the fastest revert is
+  Tistory's own skin switcher rather than anything this project ships.
+
 ## 1.0.0
 
 The settings are frozen from here: a variable or a label renamed after this is a
