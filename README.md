@@ -12,8 +12,8 @@ Tistory's own scripts and do not.
 Built from scratch by [swarea](https://github.com/swarea), and not a derivative
 of any existing skin. It is a third-party skin *for* Tistory: it is not
 published, reviewed or endorsed by Tistory or Kakao. "Tistory" and "Kakao" are
-used only to identify the platform this skin is built for, and are the trademarks
-of their respective owners.
+used only to identify the platform this skin is built for, and are the
+trademarks of their respective owners.
 
 > **1.0.0.** Every page type verified on a live Tistory blog in both themes,
 > covers included, by measurement and by eye. Checked by hand in Chrome and
@@ -26,8 +26,8 @@ of their respective owners.
 
 - Light and dark themes, each designed separately. The visitor's system setting
   applies until they choose, after which their choice is remembered.
-- A contents rail beside articles, a collapsible category tree, copy buttons on
-  code blocks, and click-to-zoom on images.
+- A table of contents beside articles, a collapsible category tree, copy
+  buttons on code blocks, and click-to-zoom on images.
 - Tistory's injected markup — the comment box, the post toolbar, the share and
   manage panels — restyled to match the rest of the page.
 - Colours written into a post are preserved wherever they still read. Where they
@@ -60,30 +60,6 @@ loading.
 > **Updating resets your skin settings.** Tistory clears them whenever
 > `index.xml` changes, which every release does. Note your accent colours and
 > home copy before uploading. Posts, comments and categories are not affected.
-
-### Updating from an earlier version
-
-1. Write down your accent colours and your three home lines. Uploading a new
-   `index.xml` clears them, and every release changes that file.
-2. Upload the new files over the old ones, the whole list above. A release that
-   changes the typeface changes files under `images/` as well, so upload those
-   too rather than only the three at the top.
-3. Set your settings back and check one article and the home page in both
-   themes.
-
-### Going back
-
-Tistory keeps the skin you were using before, so the fastest revert is not this
-skin at all: 꾸미기 → 스킨 변경 and pick the previous one. Nothing in a post is
-touched by a skin change.
-
-To return to an earlier release of *this* skin, download that version's archive
-from the releases page and upload it the same way. Skin settings do not travel
-backwards — an older `index.xml` will clear them again, so keep the note from
-step 1.
-
-The one thing a rollback cannot undo is a post you edited while the newer skin
-was up. Skins do not write to posts; the editor does.
 
 ### Blog settings this skin expects
 
@@ -122,6 +98,27 @@ Four cover types are available:
 
 Settings left empty are hidden rather than rendered blank.
 
+## Updating
+
+1. Upload the new files over the old ones — the whole list above, not only the
+   three at the top. A release that changes the typeface changes files under
+   `images/` too.
+2. Put your settings back, using the note the warning above asked you to make.
+3. Check one article and the home page in both themes.
+
+## Going back
+
+Tistory keeps the skin you were using before, so the fastest revert is not this
+skin at all: 꾸미기 → 스킨 변경 and pick the previous one. Nothing in a post is
+touched by a skin change.
+
+To return to an earlier release of *this* skin, download that version's archive
+from the releases page and upload it the same way. Settings do not travel
+backwards either — an older `index.xml` clears them just the same.
+
+The one thing a rollback cannot undo is a post you edited while the newer skin
+was up. Skins do not write to posts; the editor does.
+
 ## What the skin changes in your posts
 
 Your posts are never edited. What follows happens in the browser, at display
@@ -130,8 +127,8 @@ time only, and only inside the article body.
 The Tistory editor writes colour onto the element, so text pasted from another
 page arrives carrying that page's palette as inline style — which outranks any
 stylesheet and therefore follows no theme. On a dark page that shows up as white
-slabs behind paragraphs, callout boxes that stayed white, and code blocks wearing
-a light syntax theme inside the dark frame.
+slabs behind paragraphs, callout boxes that stayed white, and code blocks
+wearing a light syntax theme inside the dark frame.
 
 So, per element:
 
@@ -195,8 +192,9 @@ the accent against black and white and uses whichever gives higher contrast.
 
 ## The credit in the sidebar
 
-The bottom of the sidebar carries a small line — *Quiet by Isaac Lee*. The skin's
-name links to where the skin can be had, the author's name to the author.
+The bottom of the sidebar carries a small line — *Quiet by Isaac Lee*. The
+skin's name links to where the skin can be had, the author's name to the
+author.
 
 You are not required to keep it. It is a courtesy rather than a term, and
 deleting the `.quiet-colophon` block in `skin.html` removes it with nothing else
@@ -260,4 +258,5 @@ CSS and esbuild. Nunjucks builds the mock preview only. Rationale in
 ## License
 
 [MIT](LICENSE) for the skin. The bundled typeface is a subset of Pretendard
-under the SIL Open Font License 1.1, renamed as that licence requires. See [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).
+under the SIL Open Font License 1.1, renamed as that licence requires. See
+[THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).
