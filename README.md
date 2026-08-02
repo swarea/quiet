@@ -15,12 +15,11 @@ published, reviewed or endorsed by Tistory or Kakao. "Tistory" and "Kakao" are
 used only to identify the platform this skin is built for, and are the
 trademarks of their respective owners.
 
-> **1.0.0.** Every page type verified on a live Tistory blog in both themes,
-> covers included, by measurement and by eye. Checked by hand in Chrome and
-> Safari; there is no wider browser matrix behind that. The settings are frozen
-> from here — a variable renamed after this is a breaking change. See
-> [CHANGELOG.md](CHANGELOG.md) for what changed and
-> [Known limitations](#known-limitations) for what the skin cannot do.
+Every page type is verified on a live Tistory blog in both themes, covers
+included, by measurement and by eye. The settings surface is frozen: a variable
+or a label renamed from here is a breaking change. See
+[CHANGELOG.md](CHANGELOG.md) for what changed in each release and
+[Known limitations](#known-limitations) for what the skin cannot do.
 
 ## Features
 

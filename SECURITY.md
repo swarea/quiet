@@ -51,14 +51,24 @@ Two places take text the skin did not write and put it back into the page.
 post. Heading text is escaped before it is interpolated, and heading ids are
 derived rather than copied.
 
-`src/scripts/modules/relabel.ts` and `lang.ts` rewrite text Tistory generates —
-button labels, a category name, a comment marked private. They match exactly and
-write through `textContent` rather than `innerHTML`, so these paths are not
-intended to be able to introduce markup.
+`src/scripts/modules/relabel.ts` rewrites text Tistory generates — button
+labels, a category name, a comment marked private. Most of its table is applied
+by substring rather than by exact match, so a phrase it does not know can be cut
+into; that is a correctness risk and it is bounded to Tistory's own blocks, which
+the module names. Every write goes to a text node's value, to `textContent`, or
+to an `aria-label` or `title` attribute. None of them parses markup.
+
+`lang.ts` only reads: it counts Hangul against Latin to decide what a page is
+written in, and sets a `lang` attribute. It writes no text.
 
 Both operate on content the blog's own author or Tistory produced. On a
 single-author blog neither crosses a privilege boundary, but they are the places
 to look first.
+
+Three other places build markup with `innerHTML` — the contents list, the
+lightbox, and the empty-list notice. The lightbox interpolates nothing; the
+notice interpolates only strings this project wrote, escaped anyway; the
+contents list escapes every heading it takes from a post.
 
 ## Dependencies
 

@@ -77,8 +77,8 @@ Rules:
   long-lived
 - the release an issue is committed to is recorded in
   [docs/roadmap.md](docs/roadmap.md), not on the issue. GitHub milestones are
-  not in use: three releases went out without one being created, which is the
-  honest answer to whether a solo project of this size needs them. Reach for
+  not in use: every release so far went out without one being created, which is
+  the honest answer to whether a solo project of this size needs them. Reach for
   them when the roadmap file stops being able to say what is in a release.
 
 ## Pull requests

@@ -64,7 +64,7 @@ file.
 
 ## Validation
 
-- `scripts/check` asserts: required dist files exist, tokens preserved,
+- `scripts/check.mjs` asserts: required dist files exist, tokens preserved,
   no duplicate static IDs, XML well-formed, budgets (once set).
 - Real verification happens on a test Tistory blog per docs/tistory-spec.md.
 
