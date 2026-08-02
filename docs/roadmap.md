@@ -12,6 +12,7 @@ not implementation specs — details live in issues.
 | 0.4.0 | released 2026-07-30 |
 | 0.5.0 | released 2026-07-31 |
 | 1.0.0 | released 2026-07-31 |
+| 1.0.1 | released 2026-07-31 |
 
 ## 0.1.0 — Foundation
 
