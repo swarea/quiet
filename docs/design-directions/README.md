@@ -15,14 +15,16 @@ restraint instead of dashboard density.
 - **Color:** a cool off-white ("paper") ground with a single deep ink-blue
   slate accent; a warm counter-neutral held in reserve. Deliberately *not* the
   warm-cream/serif/terracotta look, and not neon developer aesthetics.
-- **Type:** superseded by [ADR-0003](../decisions/ADR-0003-bundled-latin.md).
-  This direction was set with system fonts only; the Latin face is now bundled
-  with the package and Hangul comes from the reader's system font. The rest
-  holds: a precise scale, monospace reserved for metadata, dates, and code so
-  structure reads at a glance.
+- **Type:** superseded by [ADR-0004](../decisions/ADR-0004-bundled-hangul.md).
+  This direction was set with system fonts only; the face is now bundled with
+  the package, Latin and Hangul both, and nothing is fetched from another host.
+  The rest holds: a precise scale, monospace reserved for metadata, dates, and
+  code so structure reads at a glance.
 - **Layout:** hairlines and whitespace carry the hierarchy; cards are used
-  sparingly. Home is a quiet intro → one featured piece → recent list → topic
-  lanes (topic axes drawn from the blog's own categories, never hard-coded).
+  sparingly. Home is a quiet intro → one featured piece → recent list → a grid
+  of posts (every label drawn from the blog's own categories, never hard-coded).
+  The grid was designed as lanes, one per category, until a live blog showed
+  Tistory repeats a cover item and offers no way to group them.
 - **Motion:** a restrained page-load rise for the hero, scroll-reveal for
   sections, hover micro-interactions; all disabled under
   `prefers-reduced-motion`.
