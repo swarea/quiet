@@ -355,6 +355,56 @@ try {
   fail("the licence travels with the copies", e.message);
 }
 
+// The shipped typeface does not answer to the name it is not allowed to use.
+//
+// Pretendard is OFL 1.1 with a Reserved Font Name, and clause 3 bars a modified
+// version from carrying that name as the one it presents to users. A subset is
+// a modified version.
+//
+// This check exists because the project believed it had done this and had not.
+// `scripts/font.mjs` held a `FAMILY = "Quiet Sans"` constant, the notices said
+// the rename was required and done, and the stylesheet declared the new name --
+// but the only rename was in the stylesheet, which names the file rather than
+// the font. `subset-font` has no option to rename anything, so the family, the
+// full name, the PostScript name and the unique id inside every shipped subset
+// still said "Pretendard Variable". Three releases went out that way.
+//
+// The name is read back out of the built files, because a constant in the
+// script is exactly the evidence that was trusted last time. The copyright and
+// the licence records are expected to keep naming Pretendard: the restriction
+// is on the name the font presents, not on the credit it carries, and OFL asks
+// for that credit to travel.
+try {
+  const { readNames } = await import("./font-rename.mjs");
+  const { convert } = await import("fontverter");
+  const { FAMILY } = await import("./font.mjs");
+  const RESERVED = "Pretendard";
+  const problems = [];
+  for (const file of ["quiet-sans-latin.woff2", "quiet-sans-hangul.woff2"]) {
+    const woff2 = await readFile(join(root, "dist", "images", file)).catch(() => null);
+    if (!woff2) {
+      problems.push(`${file} is not in the package`);
+      continue;
+    }
+    const names = readNames(await convert(woff2, "truetype"));
+    const offending = names.filter((n) => n.identifying && n.text.includes(RESERVED));
+    if (offending.length) {
+      problems.push(`${file} still presents "${offending[0].text}" (name id ${offending[0].nameID})`);
+    }
+    const family = names.find((n) => n.nameID === 1);
+    if (!family) problems.push(`${file} declares no family name`);
+    else if (family.text !== FAMILY) problems.push(`${file} is family "${family.text}", not "${FAMILY}"`);
+    // The other half of the same licence: the credit has to survive too.
+    if (!names.some((n) => n.nameID === 0 && n.text.includes("Kil Hyung-jin"))) {
+      problems.push(`${file} lost the typeface's copyright notice`);
+    }
+  }
+  if (problems.length) fail("the typeface ships under its own name", problems.slice(0, 3).join("; "));
+  else ok("the typeface ships under its own name");
+} catch (e) {
+  fail("the typeface ships under its own name", e.message);
+}
+
 // Correcting the page does not wait for a frame.
 //
 // A hidden tab never has one. `requestAnimationFrame` is right for something
