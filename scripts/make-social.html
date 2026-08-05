@@ -1,0 +1,216 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Quiet — social preview generator</title>
+<!--
+  GitHub has no per-repository icon. What it does have is a 1280x640 social
+  preview, shown whenever a link to the repository is unfurled — in a chat, a
+  post, a search result. That single image is the only place this project gets
+  to look like itself outside its own page, so it is drawn here rather than
+  screenshotted or assembled by hand.
+
+  The composition is the skin's own front matter: the mark, an eyebrow in the
+  monospace, the name, and the sentence the README opens with. Every colour is a
+  token from the light palette, and the type is the face the skin ships, so the
+  card and the product are the same object.
+
+  **Serve this file, do not open it from disk.** Two things break under file://:
+  the bundled face is refused, and the mark cannot be drawn into a canvas the
+  page is then allowed to read back. Both fail quietly and produce a card that
+  looks finished, so the button refuses to generate unless it has them. Any
+  static server over the repository root will do:
+
+      npx serve .        then open /scripts/make-social.html
+
+  Put the download in docs/assets/, replacing the file that is there. Re-run
+  whenever the palette, the mark or the README's opening sentence changes.
+-->
+<style>
+  @font-face{
+    font-family:"Quiet Preview";
+    src:url("../src/fonts/source.woff2") format("woff2");
+    font-weight:100 900;
+    font-display:block;
+  }
+  body{font:15px/1.6 "Quiet Preview",system-ui,sans-serif;margin:2rem;color:#191b1f;background:#fbfbfa}
+  button{font:inherit;font-weight:600;background:#38548c;color:#fff;border:0;border-radius:6px;padding:.6rem 1.1rem;cursor:pointer}
+  button:hover{background:#2a4170}
+  #out{display:grid;gap:1rem;margin-top:1rem;justify-items:start}
+  canvas{border:1px solid #ebebe8;max-width:100%}
+</style>
+<h1>Social preview</h1>
+<p>Generates the 1280&times;640 card GitHub unfurls. Save it into <code>docs/assets/</code>.</p>
+<button id="go" type="button">Generate and download</button>
+<div id="out"></div>
+<script>
+  // Copied from src/styles/tokens.css, keyed by the token they come from. The
+  // validation gate asserts they still match: a hand-copied palette drifts, and
+  // this card is the first thing anyone sees of the project.
+  const TOKENS = {
+    "--light-paper": "#fbfbfa",
+    "--light-ink": "#191b1f",
+    "--light-muted": "#565b62",
+    "--light-faint": "#6a6f77",
+    "--light-line": "#ebebe8",
+    "--light-accent": "#38548c",
+  };
+  const C = {
+    paper: TOKENS["--light-paper"],
+    ink: TOKENS["--light-ink"],
+    muted: TOKENS["--light-muted"],
+    faint: TOKENS["--light-faint"],
+    line: TOKENS["--light-line"],
+    accent: TOKENS["--light-accent"],
+  };
+
+  const W = 1280, H = 640;
+  const INSET = 104;          // the margin the card breathes in
+  // The mark is a square tile with about a sixth of its width as margin inside
+  // it, so the drawn box has to be larger than the artwork is meant to look.
+  // At 224 the building stood barely taller than the word beside it.
+  const MARK = 300;
+  const GAP = 52;             // mark to words
+  const TEXT_LEFT = INSET + MARK + GAP;
+  const TEXT_WIDTH = W - TEXT_LEFT - INSET;
+
+  function type(x, size, weight, mono) {
+    x.font = mono
+      ? `${weight || 400} ${size}px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace`
+      : `${weight || 400} ${size}px "Quiet Preview", system-ui, sans-serif`;
+    x.textBaseline = "top";
+  }
+
+  function text(x, value, left, top, size, colour, weight, mono) {
+    type(x, size, weight, mono);
+    x.fillStyle = colour;
+    x.fillText(value, left, top);
+  }
+
+  // The eyebrow is `.quiet-eyebrow`: monospace, uppercase, .18em of tracking.
+  // Canvas has no letter-spacing in every engine that matters, so the tracking
+  // is applied a glyph at a time.
+  function tracked(x, value, left, top, size, colour, tracking) {
+    type(x, size, 600, true);
+    x.fillStyle = colour;
+    let at = left;
+    for (const ch of value) {
+      x.fillText(ch, at, top);
+      at += x.measureText(ch).width + size * tracking;
+    }
+  }
+
+  // The sentence is given as the phrases it should break into, because a
+  // measured wrap breaks wherever the width runs out: it put "English." alone
+  // on a line, which is the weakest split the sentence has. Each phrase is
+  // still wrapped in case one outgrows the column, so editing the words above
+  // cannot push a line off the edge of the card.
+  function wrap(x, phrases, size, weight, width) {
+    type(x, size, weight);
+    const lines = [];
+    for (const phrase of phrases) {
+      let line = "";
+      for (const word of phrase.split(" ")) {
+        const next = line ? `${line} ${word}` : word;
+        if (line && x.measureText(next).width > width) {
+          lines.push(line);
+          line = word;
+        } else {
+          line = next;
+        }
+      }
+      if (line) lines.push(line);
+    }
+    return lines;
+  }
+
+  function draw(mark) {
+    const canvas = document.createElement("canvas");
+    canvas.width = W;
+    canvas.height = H;
+    const x = canvas.getContext("2d");
+
+    x.fillStyle = C.paper;
+    x.fillRect(0, 0, W, H);
+
+    x.drawImage(mark, INSET, (H - MARK) / 2, MARK, MARK);
+
+    // The block is centred on the mark rather than on the canvas, so the two
+    // read as one object however the sentence wraps.
+    const TITLE = 104, LEDE = 30, LEDE_STEP = 44, EYEBROW = 20;
+    const lede = wrap(x, ["A Tistory skin for long-form reading,", "in Korean and English."],
+      LEDE, 400, TEXT_WIDTH);
+    const blockHeight = EYEBROW + 26 + TITLE + 22 + lede.length * LEDE_STEP + 34 + 22;
+    let top = (H - blockHeight) / 2;
+
+    tracked(x, "TISTORY SKIN", TEXT_LEFT, top, EYEBROW, C.accent, 0.18);
+    top += EYEBROW + 26;
+
+    text(x, "Quiet", TEXT_LEFT, top, TITLE, C.ink, 700);
+    top += TITLE + 22;
+
+    // The widest line is what the rule under it is measured against. Drawn at
+    // the full column instead, it ran 170px past the longest sentence above it
+    // and pulled the whole block off to the right.
+    let widest = 0;
+    for (const line of lede) {
+      text(x, line, TEXT_LEFT, top, LEDE, C.muted, 400);
+      widest = Math.max(widest, x.measureText(line).width);
+      top += LEDE_STEP;
+    }
+    top += 34;
+
+    x.beginPath();
+    x.moveTo(TEXT_LEFT, top - 17);
+    x.lineTo(TEXT_LEFT + widest, top - 17);
+    x.strokeStyle = C.line;
+    x.lineWidth = 2;
+    x.stroke();
+
+    text(x, "github.com/swarea/quiet", TEXT_LEFT, top, 22, C.faint, 400, true);
+
+    return canvas;
+  }
+
+  function download(blob, name) {
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = name;
+    link.click();
+    setTimeout(() => URL.revokeObjectURL(link.href), 5000);
+  }
+
+  document.getElementById("go").addEventListener("click", async () => {
+    const out = document.getElementById("out");
+    out.textContent = "";
+    out.style.color = "";
+
+    try {
+      await document.fonts.load('400 104px "Quiet Preview"');
+      await document.fonts.load('700 104px "Quiet Preview"');
+      await document.fonts.ready;
+    } catch (e) {
+      /* reported by the check below */
+    }
+    if (!document.fonts.check('700 104px "Quiet Preview"')) {
+      out.textContent =
+        "The bundled typeface did not load, so the card would be drawn in a " +
+        "fallback face. Serve the repository over http rather than opening this " +
+        "file from disk, then try again.";
+      out.style.color = "#a3202f";
+      return;
+    }
+
+    const mark = new Image();
+    mark.src = "../docs/assets/mark.png";
+    try {
+      await mark.decode();
+    } catch (e) {
+      out.textContent = "docs/assets/mark.png could not be loaded: " + e.message;
+      out.style.color = "#a3202f";
+      return;
+    }
+
+    const canvas = draw(mark);
+    canvas.toBlob((blob) => download(blob, "social1280.png"), "image/png");
+    out.appendChild(canvas);
+  });
+</script>

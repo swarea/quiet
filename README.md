@@ -1,9 +1,6 @@
 <div align="center">
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/mark-dark.svg">
-  <img src="docs/assets/mark-light.svg" alt="" width="72" height="72">
-</picture>
+<img src="docs/assets/mark.png" alt="" width="96" height="96">
 
 # Quiet
 
