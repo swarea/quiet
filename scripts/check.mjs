@@ -529,34 +529,45 @@ try {
   fail("index.xml copy fits", e.message);
 }
 
-// The thumbnail is drawn in the skin's own colours.
+// The artwork is drawn in the skin's own colours.
 //
-// `scripts/make-previews.html` is opened from disk and cannot fetch the token
-// sheet, so its palette is copied by hand — and a hand-copied palette drifts.
-// Both the first generator and a replacement drafted for it had drifted before
-// this check existed: lines up to 24 steps darker than the skin's and secondary
-// text 32 lighter, which put the picture's own body text below the contrast
-// floor the skin holds itself to. A thumbnail is the first thing anyone sees of
-// this project, and it was advertising colours it does not use.
+// The generators under `scripts/` are opened from disk and cannot fetch the
+// token sheet, so their palettes are copied by hand — and a hand-copied palette
+// drifts. Both the first thumbnail generator and a replacement drafted for it
+// had drifted before this check existed: lines up to 24 steps darker than the
+// skin's and secondary text 32 lighter, which put the picture's own body text
+// below the contrast floor the skin holds itself to. A thumbnail is the first
+// thing anyone sees of this project, and it was advertising colours it does not
+// use.
+//
+// Every `make-*.html` is checked rather than the one that existed when this was
+// written. The social card was added later and copied the same palette; naming
+// its predecessor by hand would have let the new file drift unwatched.
 try {
-  const [generator, tokens] = await Promise.all([
-    readFile(join(root, "scripts", "make-previews.html"), "utf8"),
-    readFile(join(root, "src", "styles", "tokens.css"), "utf8"),
-  ]);
+  const tokens = await readFile(join(root, "src", "styles", "tokens.css"), "utf8");
   const real = new Map();
   for (const m of tokens.matchAll(/--light-([a-z0-9-]+)\s*:\s*(#[0-9a-f]{3,8})/gi)) {
     real.set(`--light-${m[1]}`, m[2].toLowerCase());
   }
-  const declared = [...generator.matchAll(/"(--light-[a-z0-9-]+)"\s*:\s*"(#[0-9a-f]{3,8})"/gi)];
+  const generators = (await readdir(join(root, "scripts")))
+    .filter((name) => /^make-.+\.html$/.test(name))
+    .sort();
   const problems = [];
-  if (!declared.length) problems.push("no --light-* palette found in the generator");
-  for (const [, token, value] of declared) {
-    const expected = real.get(token);
-    if (expected === undefined) problems.push(`${token} is not in tokens.css`);
-    else if (expected !== value.toLowerCase()) problems.push(`${token} is ${value}, tokens.css says ${expected}`);
+  if (!generators.length) problems.push("no scripts/make-*.html to check");
+  for (const name of generators) {
+    const source = await readFile(join(root, "scripts", name), "utf8");
+    const declared = [...source.matchAll(/"(--light-[a-z0-9-]+)"\s*:\s*"(#[0-9a-f]{3,8})"/gi)];
+    if (!declared.length) problems.push(`${name} declares no --light-* palette`);
+    for (const [, token, value] of declared) {
+      const expected = real.get(token);
+      if (expected === undefined) problems.push(`${name}: ${token} is not in tokens.css`);
+      else if (expected !== value.toLowerCase()) {
+        problems.push(`${name}: ${token} is ${value}, tokens.css says ${expected}`);
+      }
+    }
   }
   if (problems.length) fail("preview palette", problems.slice(0, 3).join("; "));
-  else ok("preview palette");
+  else ok(`preview palette (${generators.length} generators)`);
 } catch (e) {
   fail("preview palette", e.message);
 }
