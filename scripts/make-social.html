@@ -59,7 +59,12 @@
   // it, so the drawn box has to be larger than the artwork is meant to look.
   // At 224 the building stood barely taller than the word beside it.
   const MARK = 372;
-  const GAP = 64;             // mark to word
+  // Mark to word. Measured from the tile's edge, not from the building inside
+  // it: the tile carries about a sixth of its own width as margin, so the
+  // building stands 60px further in again -- but the tile is a visible face
+  // against the paper, and the eye takes its edge as the edge. At 64 the "Q"
+  // read as stuck to it. Past about 130 the two stop being one object.
+  const GAP = 104;
   const TITLE = 176;
 
   function draw(mark) {
