@@ -125,3 +125,32 @@ The freeze waited for a round of real use, which is what 0.5.0 was for. Three
 labels had been renamed in it, and renaming labels is exactly the kind of thing
 one more round tends to turn up — this one turned up none, and the blog owner
 worked through every setting before the tag went on.
+
+## 1.0.1 — Patch
+
+Not planned, and not a milestone. This file records what a release contained,
+so a released version with no entry here is a hole in the record rather than a
+release that needed no plan.
+
+- the MIT notice carried in the files it applies to, which none of them had
+- four documents corrected where they described behaviour the code had stopped
+  having
+- the readme put in the order it is read in, and the version badge dropped
+
+It is the first release that leaves `index.xml` alone, so it is also the first
+that does not reset a blogger's settings when they upload it. The contents are
+in [CHANGELOG.md](../CHANGELOG.md); what belongs here is that the freeze 1.0.0
+declared held — nothing in this release touched the settings surface.
+
+## After 1.0.1
+
+Nothing is planned, and that is the state rather than an omission.
+
+The settings surface is frozen, the package installs from its archive alone,
+and there are no known defects. Every fault this project has fixed was found by
+opening the blog and looking, not by reading the source — so the next release
+is waiting on use, not on a plan. Work that arrives before a reason to do it is
+how something stable stops being stable.
+
+The three things that would justify a release: a defect found in use, a Tistory
+change the skin has to answer, or a request from someone running it.
