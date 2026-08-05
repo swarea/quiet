@@ -24,10 +24,15 @@ the repository is shared. Both had to be built.
 - **The mark is `docs/assets/mark.png`**, derived from
   `swarea-blue-mid-38548c` in the set: 512×512, corners rounded by the
   proportion `--r-lg` gives a card at the 96px the README displays it.
-- **The card ground is `#fbfbfa`**, which is `--light-paper` — the colour of the
-  blog page behind the frame the mark sits in. The set shipped 18 slightly
-  different warm whites; flattening them to a token rather than to their own
-  average means the value belongs to something.
+- **The card ground is `#f2f2f0`**, which is `--light-surface-2` — what the skin
+  puts behind a thumbnail. The set shipped 18 slightly different warm whites;
+  flattening them to a token rather than to their own average means the value
+  belongs to something.
+
+  It was `--light-paper` `#fbfbfa` first, which is the page the mark's frame
+  sits on, so the tile dissolved into the page and left only the building. One
+  step down makes it a tile instead — and a tile that stops short of white sits
+  more comfortably on a dark GitHub theme, where near-white glares.
 - **The social card is generated, not assembled**, by
   `scripts/make-social.html`, in the skin's palette and the typeface the skin
   ships. It follows `scripts/make-previews.html`: a served page, a canvas, a
@@ -67,7 +72,8 @@ that separates a project from its organisation. It was chosen anyway:
 - The README carries one mark rather than a `<picture>` pair, so on a dark GitHub
   theme it reads as a light tile rather than adapting. The set has no dark
   variant at this accent, and inventing one would put drawn-here artwork back
-  beside the real thing — the situation this decision exists to end.
+  beside the real thing — the situation this decision exists to end. The grey
+  ground is as far as this goes towards meeting a dark theme halfway.
 - `docs/assets/mark.png` is now an input to a generator, not just a picture in a
   document. Replacing it changes the social card too, and the card has to be
   regenerated when it does.
@@ -79,3 +85,9 @@ that separates a project from its organisation. It was chosen anyway:
 by name; the social card would have drifted unwatched. Proved to fail by moving
 `--light-muted` two steps in the new file — the gate named the file and the
 token.
+
+The ground itself is checked by reading it: a strip across the mark's margin is
+one value, `#f2f2f0`, and the card the generator draws is `#fbfbfa` with that
+tile on it. Both were measured from the files rather than assumed, because the
+first attempt at the grey left 4% of the old white in every pixel of a field
+that is supposed to be flat, and it is not visible.
