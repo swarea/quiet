@@ -1,6 +1,29 @@
+<div align="center">
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/mark-dark.svg">
+  <img src="docs/assets/mark-light.svg" alt="" width="72" height="72">
+</picture>
+
 # Quiet
 
-A Tistory skin for long-form reading, in Korean and English.
+**A Tistory skin for long-form reading, in Korean and English.**
+
+[**See it running**](https://blog.swarea.com) ·
+[Download](https://github.com/swarea/quiet/releases/latest) ·
+[Install](#install) ·
+[Settings](#settings)
+
+![MIT](https://img.shields.io/badge/licence-MIT-1c1e22)
+![Tistory](https://img.shields.io/badge/for-Tistory-38548c)
+![No runtime dependencies](https://img.shields.io/badge/runtime%20dependencies-none-1c1e22)
+
+<img src="src/assets/preview1600.jpg" alt="The home page: a sidebar with the category tree, a headline, a featured post and a list of recent posts" width="820">
+
+*The skin's own preview artwork, drawn from its palette. For the real thing with
+real writing in it, [open the blog](https://blog.swarea.com).*
+
+</div>
 
 The reading column is 50rem. Light and dark are drawn as two separate palettes
 rather than one derived from the other. The typeface ships inside the package,
