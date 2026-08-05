@@ -16,6 +16,19 @@ The rename is required rather than chosen. The OFL reserves the name
 carry the reserved name. "Quiet Sans" makes no claim to be Pretendard and
 points anyone asking at the licence beside it.
 
+The rename is in the files, not only in the stylesheet — the family, the full
+name, the PostScript name and the unique id inside each `.woff2` all read
+"Quiet Sans". It was not always so: up to 1.0.1 the only rename was the
+`@font-face` declaration, which names the file rather than the font, and the
+shipped subsets still identified themselves as "Pretendard Variable". A gate
+check now reads the built files back and refuses a package whose typeface
+presents the reserved name.
+
+What is *not* renamed is the credit. The copyright record still names Kil
+Hyung-jin, and the licence and its url now travel inside the font as well as
+beside it. The restriction is on the name the font presents; the attribution is
+the part the licence asks to keep.
+
 Latin and Hangul are both included, split into two files because the weight axis
 costs almost nothing for one and almost everything for the other. Measured at
 build against the source font's 2.0 MB:

@@ -22,14 +22,37 @@
 // The family is renamed. Pretendard is OFL 1.1 with a Reserved Font Name, and a
 // subset is a modified version; shipping a modification under the reserved name
 // is the one thing that licence asks you not to do.
+//
+// That rename has to happen in the file. Declaring `font-family: Quiet Sans` in
+// the stylesheet only says what CSS calls the file; the name the font presents
+// is in its own `name` table, and `subset-font` cannot touch it -- there is no
+// option for it, only one for which name ids to keep. For three releases this
+// constant was a label on a return value and nothing else, and every shipped
+// subset still called itself "Pretendard Variable".
+//
+// So the subset comes out uncompressed, `renameFont` rewrites the table, and
+// `fontverter` -- which subset-font uses internally for exactly this -- puts it
+// back into woff2.
 import subsetFont from "subset-font";
+import { convert } from "fontverter";
 import { readFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { renameFont } from "./font-rename.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 
 export const FAMILY = "Quiet Sans";
+// Applied in order: the spaced form has to be tried first, or the unspaced rule
+// would match inside it and leave "Quiet Sans Variable" behind.
+const RENAME = [
+  ["Pretendard Variable", FAMILY],
+  ["PretendardVariable", FAMILY.replace(/ /g, "")],
+  ["Pretendard", FAMILY],
+];
+// 13 and 14 are the licence and the link to it. harfbuzz drops both by default,
+// which left the shipped files carrying a copyright with no licence beside it.
+const KEEP_NAME_IDS = [13, 14];
 const SOURCE = join(root, "src", "fonts", "source.woff2");
 
 
@@ -54,20 +77,35 @@ const HANGUL =
   range(0x3130, 0x318f) + // compatibility jamo
   range(0x1100, 0x11ff); // jamo, for text that arrives decomposed
 
+// Subset, rename, compress. The subset is asked for uncompressed because the
+// rename reads and rewrites the table directory, which woff2 does not expose.
+async function cut(source, text, options) {
+  const sfnt = await subsetFont(source, text, {
+    ...options,
+    targetFormat: "truetype",
+    preserveNameIds: KEEP_NAME_IDS,
+  });
+  const { font, renamed } = renameFont(sfnt, RENAME);
+  if (!renamed) {
+    // The source is what it is: if nothing matched, either the upstream font
+    // changed its name or the rename silently stopped working. Both need
+    // looking at before a package goes out under a name that is not ours.
+    throw new Error("no name record was renamed -- the subset would ship under the reserved name");
+  }
+  return { data: await convert(font, "woff2"), renamed };
+}
+
 export async function buildFont() {
   const source = await readFile(SOURCE);
   // No variationAxes: that option instances rather than narrows, and an instanced
   // file under a range declaration is what flattened every weight on the page.
-  const latin = await subsetFont(source, LATIN, { targetFormat: "woff2" });
-  const hangul = await subsetFont(source, HANGUL, {
-    targetFormat: "woff2",
-    variationAxes: { wght: 400 },
-  });
+  const latin = await cut(source, LATIN, {});
+  const hangul = await cut(source, HANGUL, { variationAxes: { wght: 400 } });
   return {
     family: FAMILY,
     sourceBytes: source.length,
-    latin: { data: latin, bytes: latin.length, codepoints: new Set([...LATIN]).size },
-    hangul: { data: hangul, bytes: hangul.length, codepoints: new Set([...HANGUL]).size },
+    latin: { data: latin.data, bytes: latin.data.length, codepoints: new Set([...LATIN]).size },
+    hangul: { data: hangul.data, bytes: hangul.data.length, codepoints: new Set([...HANGUL]).size },
   };
 }
 

@@ -5,8 +5,10 @@
 Quiet is a Tistory skin: an HTML template, a stylesheet, a small script bundle
 and a font, uploaded to a blog and served by Tistory. It has no server, no
 database, no accounts, and no network access at build time or at run time: every
-file a page needs is in the package Tistory serves. It stores nothing about a
-reader except one value in `localStorage` — which of the two themes they chose.
+file a page needs is in the package Tistory serves. It stores two values about a
+reader, both in `localStorage` and neither leaving the browser: `quiet-theme`,
+which of the two themes they chose, and `quiet-cat-open`, which category folds
+they left open in the sidebar.
 
 Almost everything on a page carrying this skin is Tistory's: the comment system,
 the search, the login, the post toolbar, the analytics. **A vulnerability in any
@@ -48,8 +50,14 @@ Out of scope:
 Two places take text the skin did not write and put it back into the page.
 
 `src/scripts/modules/toc.ts` builds the contents list from the headings in a
-post. Heading text is escaped before it is interpolated, and heading ids are
-derived rather than copied.
+post. Heading text is escaped before it is interpolated. Heading ids are
+derived — slugified down to word characters and Hangul, so nothing that could
+close an attribute survives — **except where the heading already carries one**.
+An id written into the post by hand is used as it stands, and reaches the
+contents list inside an `href` without being escaped. On a single-author blog
+that is the author writing markup into their own page, which is why it has not
+been changed; it is the one place here where post content is trusted, and it is
+worth knowing before that stops being true.
 
 `src/scripts/modules/relabel.ts` rewrites text Tistory generates — button
 labels, a category name, a comment marked private. Most of its table is applied
