@@ -77,9 +77,10 @@ loading.
 | `images/LICENSE.txt` | this skin's licence |
 | `preview.gif`, `preview*.jpg` | thumbnails shown in the skin list |
 
-> **Updating resets your skin settings.** Tistory clears them whenever
-> `index.xml` changes, which every release does. Note your accent colours and
-> home copy before uploading. Posts, comments and categories are not affected.
+> **Updating can reset your skin settings.** Tistory clears them whenever
+> `index.xml` changes — which is not every release, and every release says which
+> it is at the top of its notes. Where it does, note your accent colours and home
+> copy before uploading. Posts, comments and categories are never affected.
 
 ### Blog settings this skin expects
 

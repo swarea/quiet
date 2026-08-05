@@ -59,5 +59,5 @@ are.
 
 ## Build tools
 
-esbuild, Lightning CSS, Nunjucks and subset-font are development dependencies.
-None of them ships in the skin package.
+esbuild, Lightning CSS, Nunjucks, subset-font and fontverter are development
+dependencies. None of them ships in the skin package.

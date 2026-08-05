@@ -59,6 +59,9 @@ file.
   component reuse across skin and preview.
 - esbuild + Lightning CSS + Nunjucks are the only build dependencies; all are
   removable individually (plain CSS concat, plain JS) if abandoned upstream.
+  Two were added later for the typeface, which this decision predates:
+  subset-font in [ADR-0003](ADR-0003-bundled-latin.md), and fontverter beside it
+  once the subset had to be renamed before it was compressed.
 - Browser targets and size budgets are set after first real builds (0.5.0),
   recorded in this file's follow-ups or the quality gate.
 

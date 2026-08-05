@@ -80,6 +80,11 @@ contents list escapes every heading it takes from a post.
 
 ## Dependencies
 
-Four development dependencies — esbuild, Lightning CSS, Nunjucks and
-subset-font — and none of them ships in the package. `package-lock.json` is
+Five development dependencies — esbuild, Lightning CSS, Nunjucks, subset-font
+and fontverter — and none of them ships in the package. `package-lock.json` is
 committed, so an install resolves to the same versions that were tested.
+
+fontverter is not a fifth supply chain: subset-font already used it to convert
+between font formats, and the build now calls it directly to put a renamed
+subset back into woff2. It is declared rather than reached through subset-font's
+own tree, so a hoisting change cannot silently take it away.
