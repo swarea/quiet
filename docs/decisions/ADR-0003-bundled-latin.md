@@ -84,3 +84,23 @@ single self-hosted file cannot do that.
   differs from the generic sans-serif, so the file is the one rendering.
 - Hangul measured through the same stack matches neither, so it falls through
   as intended.
+
+## Amended: two things above are no longer true
+
+**The file is `images/quiet-sans-latin.woff2`.** It was `quiet-latin.woff2` here
+because Latin was all this decision shipped; [ADR-0004](ADR-0004-bundled-hangul.md)
+added Hangul and the pair was renamed together. The changelog and the 0.3.0
+release notes keep the old name, which is what 0.3.0 actually carried.
+
+**The rename to a family of our own did not happen in the file.** It happened in
+the `@font-face` declaration, which is the name CSS calls a file by; the name the
+font presents lives in its own `name` table, and there it still read "Pretendard
+Variable" until 1.0.2. Three releases went out that way, under the one clause of
+the OFL this decision set out to honour.
+
+The validation line above is why it lasted. `document.fonts` answers with the
+`@font-face` family, so a page loading a font named after the reserved name still
+reports the family the stylesheet asked for. The check looked like proof of the
+rename and was proof only that the stylesheet had been written correctly. It is
+recorded in [measuring.md](../measuring.md); the gate now reads the name out of
+the built files.

@@ -213,8 +213,9 @@ comments beside the code that works around it.
 ## Known open questions
 
 - Whether `index.xml` *additions* (new variables) also reset settings, or only
-  modifications and renames. Every release so far has changed existing values,
-  so the distinction has not had to be settled.
+  modifications and renames. Every release that touched the file at all changed
+  existing values, so the distinction has not had to be settled — and since
+  1.0.0 the file has not been touched, so it has not come up again.
 - Search URL format and `[##_search_..._##]` behaviour on list pages.
 
 ## Feature inventory

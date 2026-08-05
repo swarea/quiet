@@ -96,3 +96,30 @@ Rewriting a file with Python on Windows makes it CRLF. `.gitattributes` says
 built in between packages the CRLF version. It cost a release archive whose
 checksum did not match the one CI produced, differing in `index.xml` by exactly
 one byte per line.
+
+## Asking a page what typeface it has
+
+`document.fonts` reports the **`@font-face` family**, which is the name the
+stylesheet gives a file — not the name inside the file. So a page can report
+
+    Quiet Sans / 300 800 / loaded
+
+while the `.woff2` it just loaded calls itself something else entirely in its
+own `name` table. That is not a subtle failure: it is how a subset shipped for
+three releases still identifying as "Pretendard Variable", under a licence whose
+one restriction is on that name, with an ADR recording the rename as verified.
+
+To see what a font is called, read the font: convert the woff2 to sfnt and parse
+its `name` table. `scripts/font-rename.mjs` exports `readNames` for exactly this,
+and the gate uses it against the built files rather than against any constant in
+the build.
+
+Two more from the same family:
+
+- **A width measurement on a block element measures the block.** `div` fills its
+  container, so `getBoundingClientRect().width` is the same number whatever the
+  typeface. Put a `Range` around the text node instead.
+- **Synthesised bold need not be wider.** The browser thickens strokes without
+  changing advances, so comparing widths at 400 and 700 can suggest the
+  synthesis failed when it did not. Draw both to a canvas and count dark pixels:
+  measured here, bold Hangul carries 1.57× the ink at the same width.
