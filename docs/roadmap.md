@@ -13,6 +13,7 @@ not implementation specs — details live in issues.
 | 0.5.0 | released 2026-07-31 |
 | 1.0.0 | released 2026-07-31 |
 | 1.0.1 | released 2026-07-31 |
+| 1.0.2 | released 2026-08-06 |
 
 ## 0.1.0 — Foundation
 
@@ -137,12 +138,32 @@ release that needed no plan.
   having
 - the readme put in the order it is read in, and the version badge dropped
 
-It is the first release that leaves `index.xml` alone, so it is also the first
-that does not reset a blogger's settings when they upload it. The contents are
-in [CHANGELOG.md](../CHANGELOG.md); what belongs here is that the freeze 1.0.0
-declared held — nothing in this release touched the settings surface.
+The contents are in [CHANGELOG.md](../CHANGELOG.md); what belongs here is that
+the freeze 1.0.0 declared held — nothing in this release touched the settings
+surface. It was written up at the time as the first release to leave `index.xml`
+alone, which was not so: the version number in it changed, as it does in every
+release. No *setting* changed, which is the part that was meant and the part
+that matters.
 
-## After 1.0.1
+## 1.0.2 — Patch
+
+Not planned. It exists because an audit of the package — rather than of the
+source that produces it — found the bundled typeface still presenting the name
+its licence reserves, in every release since 0.5.0.
+
+- the subset renamed inside the file, not only in the stylesheet
+- the licence records kept in the font rather than dropped by the subsetter
+- a gate check that reads the built files back instead of trusting the build
+- four documents corrected, one of which had been telling bloggers to expect
+  their settings cleared on every upgrade
+
+**Found by looking at the artefact.** Every check this project had ran against
+the source or against a page, and both said the rename had happened. The one
+thing nobody had done was open the file that ships and ask what it called
+itself. That is the lesson worth carrying, and it is in
+[measuring.md](measuring.md).
+
+## After 1.0.2
 
 Nothing is planned, and that is the state rather than an omission.
 
