@@ -24,15 +24,21 @@ the repository is shared. Both had to be built.
 - **The mark is `docs/assets/mark.png`**, derived from
   `swarea-blue-mid-38548c` in the set: 512×512, corners rounded by the
   proportion `--r-lg` gives a card at the 96px the README displays it.
-- **The card ground is `#f2f2f0`**, which is `--light-surface-2` — what the skin
-  puts behind a thumbnail. The set shipped 18 slightly different warm whites;
-  flattening them to a token rather than to their own average means the value
-  belongs to something.
+- **The tile behind the mark is `#f7f7f6`.** The set shipped 18 slightly
+  different warm whites and they had to become one value.
 
-  It was `--light-paper` `#fbfbfa` first, which is the page the mark's frame
-  sits on, so the tile dissolved into the page and left only the building. One
-  step down makes it a tile instead — and a tile that stops short of white sits
-  more comfortably on a dark GitHub theme, where near-white glares.
+  This is the one number here that is not a token, and it is worth saying why.
+  `--light-paper` `#fbfbfa` was tried first: too close to the page it sits on,
+  so the tile dissolved and left only the building. `--light-surface-2`
+  `#f2f2f0` was next and read as a grey slab against a white page. `#f7f7f6`
+  sits between them — light enough to stop being a slab, dark enough to stay a
+  tile.
+
+- **The social card behind it is `--light-surface` `#ffffff`.** It began as
+  `--light-paper`, which is the colour of a *page*; a card is not a page, and
+  the skin's own cards are `--light-surface`. Correcting it also bought the room
+  the lighter tile needed: measured, the tile separates from paper by 1.035 and
+  from surface by 1.072, against 1.083 for the arrangement this replaced.
 - **The social card is generated, not assembled**, by
   `scripts/make-social.html`, in the skin's palette and the typeface the skin
   ships. It follows `scripts/make-previews.html`: a served page, a canvas, a
@@ -86,8 +92,8 @@ by name; the social card would have drifted unwatched. Proved to fail by moving
 `--light-muted` two steps in the new file — the gate named the file and the
 token.
 
-The ground itself is checked by reading it: a strip across the mark's margin is
-one value, `#f2f2f0`, and the card the generator draws is `#fbfbfa` with that
+The colours are checked by reading them back: a strip across the mark's margin
+is one value, `#f7f7f6`, and the card the generator draws is `#ffffff` with that
 tile on it. Both were measured from the files rather than assumed, because the
-first attempt at the grey left 4% of the old white in every pixel of a field
+first attempt at flattening left 4% of the old white in every pixel of a field
 that is supposed to be flat, and it is not visible.
