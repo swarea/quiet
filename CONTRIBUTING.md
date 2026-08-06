@@ -116,6 +116,13 @@ production build → ZIP → ZIP content validation → GitHub Release with note
 No automated upload to any Tistory blog — production skin changes are always a
 manual, owner-approved step.
 
+The changelog entry is the release note, and it is written for someone deciding
+whether to upgrade: **which files to upload, what happens to their settings, and
+what they will notice.** Corrections to this repository's own documents are not
+that. They belong in the commit that makes them, where anyone looking for them
+will find them, and 1.0.2's note carried four bullets of them before this was
+written down.
+
 ## Bootstrap exception
 
 The initial foundation commits landed directly on `main` (empty repository, no
