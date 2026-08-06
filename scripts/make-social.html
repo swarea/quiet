@@ -46,11 +46,15 @@
   // validation gate asserts they still match: a hand-copied palette drifts, and
   // this card is the first thing anyone sees of the project.
   const TOKENS = {
-    "--light-paper": "#fbfbfa",
+    "--light-surface": "#ffffff",
     "--light-ink": "#191b1f",
   };
   const C = {
-    paper: TOKENS["--light-paper"],
+    // The card is a card, so it takes the token the skin gives one. It was
+    // `--light-paper` at first, which is the colour of a *page*; that put it
+    // within a step or two of the mark's own tile and the tile stopped reading
+    // as one. Measured: tile against paper 1.035, against surface 1.072.
+    surface: TOKENS["--light-surface"],
     ink: TOKENS["--light-ink"],
   };
 
@@ -62,7 +66,7 @@
   // Mark to word. Measured from the tile's edge, not from the building inside
   // it: the tile carries about a sixth of its own width as margin, so the
   // building stands 60px further in again -- but the tile is a visible face
-  // against the paper, and the eye takes its edge as the edge. At 64 the "Q"
+  // against the card, and the eye takes its edge as the edge. At 64 the "Q"
   // read as stuck to it. Past about 130 the two stop being one object.
   const GAP = 104;
   const TITLE = 176;
@@ -73,7 +77,7 @@
     canvas.height = H;
     const x = canvas.getContext("2d");
 
-    x.fillStyle = C.paper;
+    x.fillStyle = C.surface;
     x.fillRect(0, 0, W, H);
 
     // The mark and the name, and nothing else.
