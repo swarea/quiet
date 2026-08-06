@@ -94,8 +94,9 @@ A page with no Korean on it now loads 53 KB rather than 596.
   no Latin from asking for the file, which saves nothing once the file covers the
   script the blog is mostly written in — and left as it was, it would have kept
   the browser from using the font for Hangul at all.
-- The package is 924 KB, and a blogger uploads two font files by hand rather than
-  one. A reader loads 53 KB on an English page and 621 KB on a Korean one.
+- The package was 924 KB when this was decided, and a blogger uploads two font
+  files by hand rather than one. A reader loads 53 KB on an English page and
+  621 KB on a Korean one.
 - Mobile readers, 8.6% here, pay the most for a fallback that was already good on
   their platform. That is the trade this decision makes deliberately: 8.6% pay so
   that 91.4% see the page as it was drawn.

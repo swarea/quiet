@@ -636,6 +636,39 @@ try {
   fail("one version", e.message);
 }
 
+// A size quoted in the README is a promise about what a reader downloads, and
+// the package is the thing that keeps changing. A number written into prose is
+// right on the day it is written and silently wrong afterwards, because nobody
+// re-reads a sentence that looks like background. So every KB the README states
+// has to be a size the built package actually has. Reads `dist/`: the source
+// cannot say what a reader downloads.
+try {
+  const bytes = async (...p) => (await stat(join(root, "dist", ...p))).size;
+  const latin = await bytes("images", "quiet-sans-latin.woff2");
+  const hangul = await bytes("images", "quiet-sans-hangul.woff2");
+  let whole = 0;
+  for (const file of await walk(join(root, "dist"))) whole += (await stat(file)).size;
+  const kb = (n) => Math.round(n / 1024);
+  const known = new Map([
+    [kb(latin), "the Latin subset"],
+    [kb(hangul), "the Hangul subset"],
+    [kb(latin + hangul), "both subsets"],
+    [kb(whole), "the whole package"],
+  ]);
+  const readme = await readFile(join(root, "README.md"), "utf8");
+  const stated = [...readme.matchAll(/(\d[\d,]*)\s*KB\b/gi)].map((m) => Number(m[1].replace(/,/g, "")));
+  const unmatched = [...new Set(stated.filter((n) => !known.has(n)))];
+  if (!stated.length) {
+    fail("readme sizes match the package", "the README states no size, so nothing was checked");
+  } else if (unmatched.length) {
+    fail("readme sizes match the package",
+      `${unmatched.join(" KB, ")} KB matches nothing built — the package has ` +
+      [...known].map(([n, what]) => `${n} KB (${what})`).join(", "));
+  } else ok(`readme sizes match the package (${stated.length})`);
+} catch (e) {
+  fail("readme sizes match the package", e.message);
+}
+
 // Nothing reader-facing or contributor-facing may depend on a link that expires
 // or that points at a tool used to build this, rather than at the work itself.
 try {
