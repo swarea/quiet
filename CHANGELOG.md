@@ -6,56 +6,25 @@ install, so there is no 0.1.0 and nothing earlier to record.
 
 ## 1.0.2
 
-**`index.xml` changes by one line: the version number.** Nothing else in it
-moves — no setting is added, renamed or retyped. Whether Tistory treats a change
-that small as a reason to clear a skin's settings is not something this project
-has established, so note your accent colours and home copy before uploading. It
-takes a minute and the alternative is retyping them.
+**Re-upload two files:** `images/quiet-sans-latin.woff2` and
+`images/quiet-sans-hangul.woff2`. Nothing on the page changes — the letters in
+the new files are identical to the ones they replace.
 
-**Two files to re-upload:** `images/quiet-sans-latin.woff2` and
-`images/quiet-sans-hangul.woff2`. The thumbnails changed too, but nobody sees
-those on a blog.
+**`index.xml` changes by one line: the version number.** No setting is added,
+renamed or retyped. Whether Tistory clears a skin's settings for a change that
+small is not something this project has established, so note your accent colours
+and home copy before uploading. 1.0.1's note said this file was untouched since
+1.0.0; it was not, in this same one-line way.
 
 ### Fixed
 
-- The bundled typeface ships under its own name. Pretendard is OFL 1.1 with a
-  Reserved Font Name, and that licence bars a modified version — a subset is a
-  modified version — from presenting the reserved name to users. The rename to
-  "Quiet Sans" had only ever happened in the `@font-face` declaration, which is
-  the name CSS calls a file by; inside every shipped `.woff2` the family, full
-  name, PostScript name and unique id all still read "Pretendard Variable".
-  0.5.0, 1.0.0 and 1.0.1 went out that way.
-
-  The subset is now renamed in the file, between subsetting and compression. The
-  typeface's copyright is untouched and its licence now travels inside the font
-  as well as beside it — the restriction is on the name presented, not on the
-  credit carried. A gate check reads the name back out of the built files, since
-  a constant in the build script is exactly the evidence that was trusted
-  before.
-
-  **Nothing about the rendering changes.** Old and new subsets compared table by
-  table are byte-identical everywhere except the name, and a checksum field that
-  follows from it.
-
-- The theme toggle is drawn where the skin actually puts it in the four preview
-  thumbnails the skin editor shows.
-
-### Corrected in the documentation
-
-- The readme told you every release resets your skin settings. It does not:
-  `index.xml` did not change at all between 1.0.1 and this release's version
-  bump. Each release now says what it does to that file, at the top.
-- **1.0.1's note here was wrong.** It said `index.xml` was "untouched since
-  1.0.0". The file did change — by one line, the version number, exactly as this
-  release changes it. Whether settings survived it is not recorded either way.
-  The claim is left standing above as it was published, with this correction
+- The bundled typeface names itself inside its own files, not only in the
+  stylesheet. Pretendard is OFL 1.1 with a Reserved Font Name, and a subset of it
+  may not present that name; every release since 0.5.0 did. The typeface's
+  copyright is untouched, and its licence now travels inside the font as well as
   beside it.
-- `SECURITY.md` undercounted what the skin stores about a reader (two
-  `localStorage` values, not one) and described heading ids as always derived
-  when a heading that carries its own keeps it.
-- ADR-0003 recorded the family rename as verified on a live blog. What it
-  verified was the stylesheet; `document.fonts` answers with the `@font-face`
-  family, not the name inside the file.
+- The theme toggle is drawn where the skin actually puts it, in the four preview
+  thumbnails the skin editor shows.
 
 ## 1.0.1
 
