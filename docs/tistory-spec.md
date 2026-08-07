@@ -212,11 +212,69 @@ comments beside the code that works around it.
 
 ## Known open questions
 
+- **Whether a `<version>`-only change resets settings.** This is the one that
+  costs something. Every release edits that line and nothing else in the file —
+  1.0.1 and 1.0.2 both did — so every release makes a blogger choose between a
+  version number only they can see and the configuration they set. Untested, and
+  [settleable on the test blog](#settling-the-reset-question) without risking a
+  live one.
 - Whether `index.xml` *additions* (new variables) also reset settings, or only
-  modifications and renames. Every release that touched the file at all changed
-  existing values, so the distinction has not had to be settled — and since
-  1.0.0 the file has not been touched, so it has not come up again.
+  modifications and renames. No release has added a variable, so the
+  distinction has not had to be settled.
 - Search URL format and `[##_search_..._##]` behaviour on list pages.
+
+An earlier version of this section said the file had not been touched since
+1.0.0. It has, twice, by exactly one line each time.
+
+## Settling the reset question
+
+The test blog exists for this. Nothing below touches a live blog.
+
+**What makes it answerable is that every setting is readable from the served
+page**, so the answer does not depend on remembering what the admin panel looked
+like before.
+
+| setting | read it from | means |
+| --- | --- | --- |
+| `sidebar` | `id="quiet-sidebar-off"` | present = off |
+| `toc` | `id="quiet-toc-off"` | present = off |
+| `reading-progress` | `id="quiet-progress"` | present = on |
+| `lang` | `<html lang="...">` | the value |
+| `accent-light` / `accent-dark` | inline `:root{--light-accent:…}` in `<head>` | the value |
+| `default-theme` | `var preset = "…"` in the pre-paint script | the value |
+| `home-eyebrow` / `home-headline` / `home-tagline` | the home masthead | the text, empty if unset |
+| `related-posts` | `class="quiet-related"` on an article | see below |
+| `prev-next` | `class="quiet-adjacent"` on an article | see below |
+
+**The last two do not read cleanly, and this is the trap.** Each sits behind two
+gates: the setting, and a Tistory block — `<s_article_related>`,
+`<s_article_prev>` — that renders only when there is something to show. Absence
+proves the setting is off *only* on an article that has a neighbour and a
+category sibling. On a notice, or a lone post, absence proves nothing. Pick the
+article before reading the result.
+
+### The run
+
+1. Install the current package on the test blog.
+2. Set every one of the twelve settings to something distinguishable from its
+   default in `src/index.xml` — a different accent, a non-empty headline, at
+   least one boolean flipped. A setting left at its default cannot show whether
+   it was reset or merely unchanged.
+3. Record the served pages: the home page, and an article that has both a
+   neighbour and a category sibling.
+4. Upload **only** `index.xml`, with nothing changed in it but `<version>`.
+5. Read the same pages again and compare against step 3.
+
+### What either answer buys
+
+- **Settings survive** — a release stops having to weigh the version display
+  against a blogger's configuration, and this question closes.
+- **Settings reset** — the cost of a version bump is known and can be stated in
+  the release notes, so a blogger reads it before upgrading rather than
+  afterwards.
+
+Record the result here either way, with the date and the version tested. An
+answer that is not written down has to be paid for twice.
 
 ## Feature inventory
 
