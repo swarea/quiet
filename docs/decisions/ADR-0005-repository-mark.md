@@ -23,7 +23,16 @@ the repository is shared. Both had to be built.
 
 - **The mark is `docs/assets/mark.png`**, derived from
   `swarea-blue-mid-38548c` in the set: 512×512, corners rounded by the
-  proportion `--r-lg` gives a card at the 96px the README displays it.
+  proportion `--r-lg` gives a card at the 96px the README displays it. The
+  card itself is kept beside it as `mark-source.png`, so the mark can be rebuilt
+  here rather than from a folder that is in no repository.
+
+  **This shape is no longer a decision of this project.** It was written down
+  here because here is where it was decided, and the next repository to want a
+  mark did not find it and built a different one. The rule and the generator now
+  live at
+  [swarea/.github `docs/repository-mark.md`](https://github.com/swarea/.github/blob/main/docs/repository-mark.md);
+  what stays below is why *this* project chose the colour it did.
 - **The tile behind the mark is `#f7f7f6`.** The set shipped 18 slightly
   different warm whites and they had to become one value.
 
