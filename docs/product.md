@@ -1,10 +1,28 @@
 # Product
 
-An original Tistory skin, designed and built from scratch for a long-term personal blog.
+An original Tistory skin, designed and built from scratch: a calm reading
+experience for blogs where the content comes first.
 
 ## Who this is for
 
-The blog records, over years, in Korean and English:
+Any Tistory blog whose writing matters more than its chrome: technical articles,
+essays, notes, records, short posts, and posts that are mostly pictures. The skin
+assumes no topic, profession or purpose.
+
+Korean and English are the languages it is built for: the bundled typeface covers
+Latin and Hangul, and each page declares the language it is actually in. That is a
+property of the build, not the purpose. The skin's own interface is English and is
+not translated.
+
+The skin is **Quiet**; the author is **swarea**. No menu name, category name,
+blog title, or tagline belongs in the skin. Every one of them is the blogger's
+to choose, and the skin reads them from Tistory categories, covers, and skin
+variables. A skin that ships one blogger's words makes every other blogger wear
+them.
+
+## Where it started
+
+The first requirement was one blog, kept over years in Korean and English:
 
 - development and technical learning
 - personal projects and their trial-and-error
@@ -14,17 +32,17 @@ The blog records, over years, in Korean and English:
 - faith and scripture meditation
 - data-driven analysis and records
 
-The skin is **Quiet**; the author is **swarea**. No menu name, category name,
-blog title, or tagline belongs in the skin. Every one of them is the blogger's
-to choose, and the skin reads them from Tistory categories, covers, and skin
-variables. A skin that ships one blogger's words makes every other blogger wear
-them.
+That blog is where the design was first tried, and the reason for the mixed
+Korean and English typeface and for asking one layout to carry posts as unlike as
+a technical document and a diary entry. It records where the requirements came
+from; it is not a limit on who the skin is for.
 
 ## Design impression (non-negotiable)
 
 - quiet, modern, professional; does not tire the eye over years
-- a developer blog that does not lean on hacker/neon aesthetics
-- carries faith content without looking like a typical religious site
+- carries any subject without taking on its genre's look: not hacker/neon for a
+  developer blog, not a typical religious site for faith writing, the two the
+  original blog needed
 - personal writing and technical documents coexist naturally
 - no wall-to-wall cards or dashboard layouts
 - the reading experience outranks visual decoration
