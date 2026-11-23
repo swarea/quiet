@@ -121,6 +121,19 @@ comments beside the code that works around it.
 - **A category url does not have to carry the name's capitalisation.** They match
   on this blog; treating that as a rule rather than a courtesy is how a label
   gets rewritten in the url's spelling.
+- **A parent category's count is not always a total.** `[##_category_list_##]`
+  writes `(n)` after every row, and Tistory usually makes a parent's `n` cover its
+  sub-categories: of 64 parents surveyed across 12 blogs, 40 were exactly the sum
+  of the rows beneath them, 21 were above it, and 3 were *below* it. A total
+  cannot be smaller than its parts, so those three are a direct count — their own
+  posts and nothing from beneath. On this blog `Engineering` read 9 over
+  sub-categories holding 359 while `/category/Engineering` listed 368 (9 direct,
+  and 93, 120, 118, 8 and 20 under it, counted by paging through it). Checked on
+  a second blog, where a parent read 1 over 11 and its listing held 12. Four
+  other parents here had no posts of their own and read the sum of their children
+  exactly, which is why adding the two figures for every parent is wrong: it
+  turns `Projects` from 10 into 20. What cannot be told apart from the markup is
+  a direct count that reaches the children's sum, which looks like a total.
 - **`<s_cover_item>` repeats; it does not group.** There is no token, block tag
   or setting that divides a cover's items into sections, so a layout that prints
   a category heading per item prints the same heading once per post. Measured on
