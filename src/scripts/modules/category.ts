@@ -96,11 +96,66 @@ function initMockTree(): void {
   });
 }
 
+// Tistory's own entry for the complete listing, the only <li> at the top of
+// the tree.
+function isRootEntry(li: HTMLElement, topList: HTMLElement): boolean {
+  const href = li.querySelector<HTMLElement>(":scope > a")?.getAttribute("href") ?? "";
+  return li.parentElement === topList && /\/category\/?$/.test(href);
+}
+
+// A parent's number is meant to cover everything under it, and Tistory usually
+// writes it that way: across 64 parents on 12 blogs, 61 were equal to the sum of
+// their sub-categories or above it. Not always. On this blog one read 9 over
+// sub-categories holding 359, and opened a page of 368 -- its own 9 posts and
+// nothing from beneath. Folded, which is how the rail starts, it was the only
+// number on screen, so nothing beside it explained the gap.
+//
+// A total cannot be smaller than the parts it contains, so a parent below its
+// children's sum is a direct count, and only that one is completed. One at or
+// above the sum is left as written: adding to it would double-count the very
+// parents Tistory got right (Projects, 10 over 0+5+5, would read 20). What this
+// cannot catch is a direct count that happens to reach the sum, which looks
+// exactly like a total; there is nothing on the page to tell them apart.
+//
+// Bottom-up, so a branch is compared against rows that are already totals and
+// the result does not depend on how deep the tree goes. A row with no readable
+// count leaves itself and everything above it alone, since a sum with a hole in
+// it would be a wrong number rather than a missing one.
+function rollUpCount(li: HTMLElement, rewrite: boolean): number | null {
+  const label = li.querySelector<HTMLElement>(":scope > a .c_cnt, :scope > a .cnt");
+  const own = /^(\D*)(\d+)(\D*)$/.exec(label?.textContent ?? "");
+  if (!label || !own) return null;
+  const shown = Number(own[2]);
+
+  const children = Array.from(li.querySelectorAll<HTMLElement>(":scope > ul > li"));
+  if (children.length === 0) return shown;
+
+  let under = 0;
+  let readable = true;
+  for (const child of children) {
+    const total = rollUpCount(child, true);
+    if (total === null) readable = false;
+    else under += total;
+  }
+  if (!readable) return null;
+
+  if (shown >= under) return shown;
+  const total = shown + under;
+  if (rewrite) label.textContent = `${own[1]}${total}${own[3]}`;
+  return total;
+}
+
 // Tistory's generated tree.
 function initTistoryTree(): void {
   const root = document.querySelector<HTMLElement>(".quiet-cat-tistory");
   const topList = root?.querySelector<HTMLElement>(":scope > ul");
   if (!root || !topList) return;
+
+  // The complete listing already counts every post, so its own figure stands;
+  // it is only walked for the categories under it.
+  topList.querySelectorAll<HTMLElement>(":scope > li").forEach((li) => {
+    rollUpCount(li, !isRootEntry(li, topList));
+  });
 
   const expanded = loadExpanded();
   const here = decodeURIComponent(location.pathname);
