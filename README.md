@@ -4,7 +4,7 @@
 
 # Quiet
 
-**A Tistory skin for long-form reading, in Korean and English.**
+**A calm Tistory skin that puts content first.**
 
 [**See it running**](https://blog.swarea.com) ·
 [Download](https://github.com/swarea/quiet/releases/latest) ·
@@ -21,6 +21,12 @@
 real writing in it, [open the blog](https://blog.swarea.com).*
 
 </div>
+
+Quiet is built for reading. Navigation, cards and decoration stay behind the
+writing, so the same column holds a long technical article, an essay, a short
+note or a post that is mostly pictures. Long posts get the most from it — a
+contents rail sits beside them — and it is set up for Korean and English
+writing.
 
 The reading column is 50rem. Light and dark are drawn as two separate palettes
 rather than one derived from the other. The typeface ships inside the package,
@@ -52,6 +58,13 @@ or a label renamed from here is a breaking change. See
 - Colours written into a post are preserved wherever they still read. Where they
   do not, they are reconciled with the theme — see
   [What the skin changes in your posts](#what-the-skin-changes-in-your-posts).
+- Korean and English writing. The blog language setting says which one the blog
+  is mostly written in, and each page then checks its own text, so an English
+  post on a Korean blog is marked as English.
+- Keyboard users get a skip link and a visible focus ring, and animation stops
+  for visitors who ask for reduced motion. Text contrast in both palettes is
+  checked against 4.5:1 by the validation gate. WCAG 2.2 AA is the target the
+  design is measured against, not a conformance claim.
 - The typeface is bundled, Latin and Hangul both. A page with no Korean on it
   loads 53 KB of it; one with Korean loads 621 KB. Nothing is fetched from
   another host.
@@ -179,6 +192,11 @@ exactly as written.
 
 - **The home page requires covers.** Without them Tistory serves the plain post
   list, which a skin cannot override.
+- **The skin's own interface is in English.** Labels such as *On this page* and
+  *All posts* stay English whatever the blog language is. That setting offers
+  Korean and English and declares the language of the writing; it does not
+  switch the interface or translate anything. Characters the bundled typeface
+  does not cover, other scripts for one, are set in the reader's system font.
 - **Search and posting a comment require JavaScript.** Tistory implements both.
 - **`<title>` keeps Tistory's wording.** Headings are translated where the
   phrase is Tistory's own, but the document title is what search engines index.
