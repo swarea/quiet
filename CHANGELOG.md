@@ -4,6 +4,32 @@ Kept from 0.2.0, the first release with an installable package. The work before
 it built the repository, the pipeline and the design, and produced nothing to
 install, so there is no 0.1.0 and nothing earlier to record.
 
+## 1.0.3
+
+**Re-upload one file:** `images/app.js`. The stylesheet, the template and every
+other file are unchanged.
+
+**`index.xml` changes by one line: the version number.** No setting is added,
+renamed or retyped. As with 1.0.2, whether Tistory clears a skin's settings for
+a change that small is not something this project has established, so note your
+accent colours and home copy before uploading.
+
+**What you will notice:** in the sidebar, a category that has sub-categories can
+show a larger number than before. Nothing else on the page changes.
+
+### Fixed
+
+- A parent category's count in the sidebar now matches the page it opens.
+  Tistory sometimes writes only the posts filed in the parent itself, so
+  `Engineering` read 9 above sub-categories holding 359 and opened a list of 368.
+  A parent that reads less than the sum of its sub-categories is now completed
+  with them, and reads 368. A parent that already counts its sub-categories is
+  left as Tistory wrote it, as is a category with none.
+
+  One case is not caught: a parent whose own posts alone reach the total of its
+  sub-categories looks the same as a parent that already counts them, and keeps
+  the number Tistory gave it.
+
 ## 1.0.2
 
 **Re-upload two files:** `images/quiet-sans-latin.woff2` and

@@ -14,6 +14,7 @@ not implementation specs — details live in issues.
 | 1.0.0 | released 2026-07-31 |
 | 1.0.1 | released 2026-07-31 |
 | 1.0.2 | released 2026-08-06 |
+| 1.0.3 | released 2026-11-23 |
 
 ## 0.1.0 — Foundation
 
@@ -163,7 +164,25 @@ thing nobody had done was open the file that ships and ask what it called
 itself. That is the lesson worth carrying, and it is in
 [measuring.md](measuring.md).
 
-## After 1.0.2
+## 1.0.3 — Patch
+
+Not planned. It exists because a defect turned up in use: a parent category in
+the sidebar read 9 over sub-categories holding 359, and opened a list of 368.
+
+- a parent whose count covers only its own posts is completed with the posts
+  under its sub-categories
+- a parent Tistory already totals is left alone, which a plain sum for every
+  parent would have broken — it turned a correct 10 into 20 before it was
+  caught
+- Tistory's behaviour recorded in [tistory-spec.md](tistory-spec.md), from 64
+  parents on 12 blogs rather than from the one that showed the fault
+
+**Found by opening the blog and looking**, as every fault before it was, and the
+fix was shaped by the data rather than the first reading of it. The first reading
+was that Tistory counts a parent's own posts only, which four of the five parents
+on that blog contradicted.
+
+## After 1.0.3
 
 Nothing is planned, and that is the state rather than an omission.
 
